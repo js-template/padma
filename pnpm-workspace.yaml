@@ -1,4 +1,4 @@
 packages:
   - 'apps/site'
-  # - 'apps/backend'
+  - 'apps/backend'
   - 'packages/*'
