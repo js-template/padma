@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_block_profiles",
+  "info": {
+    "displayName": "Profile",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {}
+}

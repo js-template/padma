@@ -1,0 +1,53 @@
+{
+  "collectionName": "components_block_manage_companies",
+  "info": {
+    "displayName": "Manage Companies",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "enableSearch": {
+      "type": "boolean",
+      "default": true
+    },
+    "tableHead": {
+      "type": "component",
+      "repeatable": true,
+      "component": "config.header-field",
+      "max": 4,
+      "min": 4,
+      "required": true
+    },
+    "enableDelete": {
+      "type": "boolean"
+    },
+    "enableEdit": {
+      "type": "boolean"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    },
+    "form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::form.form"
+    },
+    "addButtonText": {
+      "type": "string"
+    }
+  }
+}

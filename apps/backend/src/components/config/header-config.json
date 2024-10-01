@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_config_header_configs",
+  "info": {
+    "displayName": "headerConfig",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "enableEdit": {
+      "type": "boolean"
+    },
+    "enableDelete": {
+      "type": "boolean"
+    },
+    "tableHeader": {
+      "type": "customField",
+      "options": [
+        "title",
+        "description",
+        "salary",
+        "createdAt",
+        "updatedAt",
+        "publishedAt",
+        "tags",
+        "vacancy",
+        "slug",
+        "startDate",
+        "endDate"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    }
+  }
+}

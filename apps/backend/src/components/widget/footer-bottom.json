@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_widget_footer_bottoms",
+  "info": {
+    "displayName": "FooterBottom",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "social_link": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.link"
+    },
+    "brand_name": {
+      "type": "string"
+    }
+  }
+}

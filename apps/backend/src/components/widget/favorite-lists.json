@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_widget_favorite_lists",
+  "info": {
+    "displayName": "Favorite Lists",
+    "icon": "arrowRight"
+  },
+  "options": {},
+  "attributes": {
+    "details": {
+      "type": "component",
+      "repeatable": false,
+      "component": "widget.count-card"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    }
+  }
+}

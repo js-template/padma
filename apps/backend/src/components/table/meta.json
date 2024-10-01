@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_table_metas",
+  "info": {
+    "displayName": "meta",
+    "icon": "arrowRight"
+  },
+  "options": {},
+  "attributes": {
+    "key": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

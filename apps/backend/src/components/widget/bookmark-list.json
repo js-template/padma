@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_widget_bookmark_lists",
+  "info": {
+    "displayName": "bookmarkList"
+  },
+  "options": {},
+  "attributes": {
+    "details": {
+      "type": "component",
+      "repeatable": false,
+      "component": "widget.count-card"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_block_bookmark_lists",
+  "info": {
+    "displayName": "Recent Bookmarks",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    },
+    "column_1": {
+      "type": "string",
+      "required": true,
+      "default": "Title"
+    },
+    "column_2": {
+      "type": "string",
+      "default": "Type",
+      "required": true
+    },
+    "empty": {
+      "displayName": "empty",
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    }
+  }
+}

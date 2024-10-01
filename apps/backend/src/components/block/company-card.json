@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_block_company_cards",
+  "info": {
+    "displayName": "CompanyCard"
+  },
+  "options": {},
+  "attributes": {
+    "companies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::company.company"
+    }
+  }
+}

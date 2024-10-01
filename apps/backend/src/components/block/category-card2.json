@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_block_category_card2s",
+  "info": {
+    "displayName": "CategoryCard2"
+  },
+  "options": {},
+  "attributes": {
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    }
+  }
+}

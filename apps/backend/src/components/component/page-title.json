@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_component_page_titles",
+  "info": {
+    "displayName": "pageTitle",
+    "icon": "arrowRight"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

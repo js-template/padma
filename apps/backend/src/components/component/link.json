@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_component_links",
+  "info": {
+    "displayName": "Link",
+    "icon": "cursor",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "External",
+        "Internal"
+      ]
+    },
+    "target": {
+      "type": "enumeration",
+      "enum": [
+        "_blank",
+        "_self"
+      ]
+    },
+    "icon": {
+      "type": "string",
+      "unique": false,
+      "required": false,
+      "default": "bx:smile"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

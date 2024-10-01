@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_block_review_cards",
+  "info": {
+    "displayName": "ReviewCard",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review"
+    }
+  }
+}

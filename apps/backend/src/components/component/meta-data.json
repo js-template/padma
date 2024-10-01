@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_component_meta_data",
+  "info": {
+    "displayName": "MetaData",
+    "icon": "chartBubble",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "key": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

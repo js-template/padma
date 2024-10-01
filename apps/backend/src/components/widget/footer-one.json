@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_widget_footer_ones",
+  "info": {
+    "displayName": "FooterOne",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "location": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.icon-with-label"
+    },
+    "phone": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.icon-with-label"
+    },
+    "email": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.icon-with-label"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_forms_google_maps",
+  "info": {
+    "displayName": "Google Map",
+    "icon": "pinMap"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "inputStep": {
+      "type": "integer",
+      "default": 1,
+      "required": true,
+      "max": 5,
+      "min": 1
+    },
+    "noteText": {
+      "type": "string"
+    },
+    "errorText": {
+      "type": "string"
+    }
+  }
+}

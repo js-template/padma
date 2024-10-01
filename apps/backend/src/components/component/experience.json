@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_component_experiences",
+  "info": {
+    "displayName": "Experience / Education",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "institution": {
+      "type": "string"
+    }
+  }
+}

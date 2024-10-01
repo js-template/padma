@@ -1,0 +1,54 @@
+{
+  "collectionName": "components_forms_job_filters",
+  "info": {
+    "displayName": "JobFilter",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    },
+    "job_type": {
+      "type": "customField",
+      "options": [
+        "Full Time:Full Time",
+        "Part Time:Part Time",
+        "Freelance:Freelance",
+        "Internship:Internship",
+        "Contract Based:Contract Based"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "sort": {
+      "type": "customField",
+      "options": [
+        "Hight to Low:price-desc",
+        "Low to High:price-asc",
+        "A to Z:title-desc",
+        "Z to A:title-asc",
+        "New to Old:date-desc",
+        "Old to New:date-asc"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    },
+    "search": {
+      "type": "component",
+      "repeatable": false,
+      "component": "forms.seaech-form"
+    }
+  }
+}

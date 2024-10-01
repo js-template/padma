@@ -1,0 +1,77 @@
+{
+  "kind": "singleType",
+  "collectionName": "blog_details",
+  "info": {
+    "singularName": "blog-detail",
+    "pluralName": "blog-details",
+    "displayName": "Blog Details",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "sidebar": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "Left Sidebar",
+        "Right Sidebar",
+        "Both Sidebar",
+        "No Sidebar"
+      ]
+    },
+    "blocks": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "shared.spacing",
+        "component.page-title"
+      ]
+    },
+    "leftSidebar": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "shared.empty",
+        "shared.spacing"
+      ]
+    },
+    "rightSidebar": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "shared.spacing"
+      ]
+    }
+  }
+}

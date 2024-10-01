@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_table_pricings",
+  "info": {
+    "displayName": "Pricing",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    },
+    "price": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "table": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.meta-data"
+    }
+  }
+}

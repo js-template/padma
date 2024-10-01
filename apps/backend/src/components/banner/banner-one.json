@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_banner_banner_ones",
+  "info": {
+    "displayName": "BannerOne",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "search": {
+      "type": "component",
+      "repeatable": false,
+      "component": "forms.seaech-form"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "style": {
+      "type": "json"
+    }
+  }
+}

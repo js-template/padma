@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_widget_footer_twos",
+  "info": {
+    "displayName": "FooterTwo",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "FooterMenu": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.link"
+    }
+  }
+}

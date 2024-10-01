@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_block_blog_cards",
+  "info": {
+    "displayName": "BlogCard",
+    "icon": "collapse"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post.post"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    }
+  }
+}

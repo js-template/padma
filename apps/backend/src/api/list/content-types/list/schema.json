@@ -1,0 +1,77 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lists",
+  "info": {
+    "singularName": "list",
+    "pluralName": "lists",
+    "displayName": "Lists",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
+    },
+    "type": {
+      "type": "customField",
+      "options": [
+        "Full Time",
+        "Part Time",
+        "Contract Base",
+        "Freelance",
+        "Remote"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "vacancy": {
+      "type": "integer"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "open",
+        "closed",
+        "draft"
+      ]
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
+    }
+  }
+}

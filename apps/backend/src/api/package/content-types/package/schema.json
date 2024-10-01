@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "packages",
+  "info": {
+    "singularName": "package",
+    "pluralName": "packages",
+    "displayName": "Package",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "feature": {
+      "type": "component",
+      "repeatable": true,
+      "component": "table.meta"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "frequency": {
+      "type": "enumeration",
+      "enum": [
+        "Monthly",
+        "Yearly",
+        "One Time"
+      ]
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    },
+    "create_ads_limit": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "ads_boost_limit": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_block_contacts",
+  "info": {
+    "displayName": "Contact",
+    "icon": "phone",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "friendlyAddress": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "map": {
+      "type": "customField",
+      "customField": "plugin::google-maps.location-picker"
+    }
+  }
+}

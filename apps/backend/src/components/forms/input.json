@@ -1,0 +1,83 @@
+{
+  "collectionName": "components_forms_inputs",
+  "info": {
+    "displayName": "Input",
+    "icon": "puzzle",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "fullWidth": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "errorText": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "text",
+        "date",
+        "email",
+        "number",
+        "password",
+        "textarea",
+        "tel",
+        "url"
+      ],
+      "default": "text",
+      "required": true
+    },
+    "mobileGrid": {
+      "type": "integer",
+      "required": true,
+      "default": 12,
+      "min": 1,
+      "max": 12
+    },
+    "tabGrid": {
+      "type": "integer",
+      "default": 12,
+      "required": true,
+      "max": 12,
+      "min": 1
+    },
+    "desktopGrid": {
+      "type": "integer",
+      "required": true,
+      "max": 12,
+      "min": 1,
+      "default": 12
+    },
+    "inputStep": {
+      "type": "integer",
+      "required": true,
+      "default": 1,
+      "max": 5,
+      "min": 1
+    },
+    "noteText": {
+      "type": "string"
+    },
+    "defaultValue": {
+      "type": "string"
+    }
+  }
+}

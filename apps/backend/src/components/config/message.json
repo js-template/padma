@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_config_messages",
+  "info": {
+    "displayName": "message",
+    "icon": "arrowRight"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "enableSearch": {
+      "type": "boolean"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    }
+  }
+}

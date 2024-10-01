@@ -1,0 +1,80 @@
+{
+  "collectionName": "components_forms_file_inputs",
+  "info": {
+    "displayName": "File Input",
+    "icon": "landscape",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "fullWidth": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "errorText": {
+      "type": "string"
+    },
+    "noteText": {
+      "type": "string"
+    },
+    "accept": {
+      "type": "customField",
+      "options": [
+        ".jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg",
+        ".doc, .docx, .pdf, .txt, .odt, .rtf",
+        ".xls, .xlsx, .csv, .ppt, .pptx",
+        ".mp3, .wav, .mp4, .mov, .avi, .mkv",
+        ".zip, .rar, .7z, .tar, .gz, ",
+        ".json, .xml, .html, .css, .js"
+      ],
+      "customField": "plugin::multi-select.multi-select",
+      "required": true
+    },
+    "multiple": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "mobileGrid": {
+      "type": "integer",
+      "max": 12,
+      "default": 12,
+      "required": true,
+      "min": 1
+    },
+    "tabGrid": {
+      "type": "integer",
+      "default": 6,
+      "required": true,
+      "max": 12,
+      "min": 1
+    },
+    "desktopGrid": {
+      "type": "integer",
+      "required": true,
+      "max": 12,
+      "default": 6,
+      "min": 1
+    },
+    "inputStep": {
+      "type": "integer",
+      "default": 1,
+      "required": true,
+      "max": 5,
+      "min": 1
+    }
+  }
+}

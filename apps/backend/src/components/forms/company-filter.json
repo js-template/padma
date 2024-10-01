@@ -1,0 +1,74 @@
+{
+  "collectionName": "components_forms_company_filters",
+  "info": {
+    "displayName": "CompanyFilter",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "search": {
+      "type": "string"
+    },
+    "industry": {
+      "type": "customField",
+      "options": [
+        "Accounting/Finance",
+        "Design/Creative",
+        "Automotive Jobs",
+        "Bank/Non-Bank Finance",
+        "Commercial/Supply",
+        "Construction/Facilities",
+        "Education/Training",
+        "Electrician/Repair",
+        "Engineer/Architects",
+        "Hospitality/Travel",
+        "IT/Telecommunication",
+        "Marketing/Sales"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "company_size": {
+      "type": "customField",
+      "options": [
+        "1-24",
+        "25-49",
+        "50-99",
+        "100-199",
+        "200-500"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "average_salary": {
+      "type": "customField",
+      "options": [
+        "10k-20k",
+        "21k-30k",
+        "31k-50k",
+        "51k-100k"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "revenue": {
+      "type": "customField",
+      "options": [
+        "0-50,000",
+        "50,001-100,000"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "showFilter": {
+      "type": "boolean"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    }
+  }
+}

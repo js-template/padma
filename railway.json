@@ -1,0 +1,9 @@
+{
+  "build": {
+    "cmd": "turbo run build --filter=backend",
+    "context": "."
+  },
+  "start": {
+    "cmd": "turbo run start --filter=backend"
+  }
+}

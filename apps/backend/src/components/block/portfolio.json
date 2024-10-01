@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_block_portfolios",
+  "info": {
+    "displayName": "portfolio",
+    "icon": "clock"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    }
+  }
+}

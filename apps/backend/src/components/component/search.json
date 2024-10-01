@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_component_searches",
+  "info": {
+    "displayName": "search",
+    "icon": "arrowRight"
+  },
+  "options": {},
+  "attributes": {
+    "test": {
+      "type": "string"
+    }
+  }
+}

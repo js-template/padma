@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_empties",
+  "info": {
+    "displayName": "empty",
+    "icon": "archive",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

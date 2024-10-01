@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_block_manage_lists",
+  "info": {
+    "displayName": "Manage Lists",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "enableSearch": {
+      "type": "boolean"
+    },
+    "tableConfig": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.header-config"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    },
+    "tableHead": {
+      "type": "component",
+      "repeatable": true,
+      "component": "config.header-field",
+      "max": 6,
+      "min": 4
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_widget_count_cards",
+  "info": {
+    "displayName": "countCard",
+    "icon": "apps",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "count": {
+      "type": "biginteger"
+    },
+    "dynamicCount": {
+      "type": "boolean"
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "enableStats": {
+      "type": "boolean"
+    },
+    "model": {
+      "type": "string"
+    },
+    "isLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "link": {
+      "type": "string"
+    },
+    "target": {
+      "type": "enumeration",
+      "enum": [
+        "_self",
+        "_blank",
+        "_parent",
+        "_top"
+      ],
+      "default": "_self"
+    }
+  }
+}

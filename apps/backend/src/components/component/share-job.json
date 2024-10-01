@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_component_share_jobs",
+  "info": {
+    "displayName": "ShareJob"
+  },
+  "options": {},
+  "attributes": {
+    "facebook": {
+      "type": "string"
+    },
+    "twitter": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "linkedin": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}

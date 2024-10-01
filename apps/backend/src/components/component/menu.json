@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_component_menus",
+  "info": {
+    "displayName": "Menu",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["External", "Internal"]
+    },
+    "target": {
+      "type": "enumeration",
+      "enum": ["_blank", "_self"]
+    },
+    "icon": {
+      "type": "string",
+      "default": "bx:smile"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "child": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.link"
+    }
+  }
+}

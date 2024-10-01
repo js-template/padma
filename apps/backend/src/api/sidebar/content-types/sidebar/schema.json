@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "sidebars",
+  "info": {
+    "singularName": "sidebar",
+    "pluralName": "sidebars",
+    "displayName": "Sidebar",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "adsSidebar": {
+      "type": "dynamiczone",
+      "components": [
+        "widget.contact-form",
+        "widget.safety-tips"
+      ]
+    },
+    "blogSIdebar": {
+      "type": "dynamiczone",
+      "components": [
+        "widget.contact-form",
+        "widget.safety-tips"
+      ]
+    }
+  }
+}
