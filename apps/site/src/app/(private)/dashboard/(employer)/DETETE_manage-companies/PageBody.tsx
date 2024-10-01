@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography"
 import _ from "lodash"
 import Link from "next/link"
 import { Fragment, useState } from "react"
-import { Button, CIcon, ManageCompaniesTable } from "ui"
+import { Button, CIcon, ManageCompaniesTable } from "@padma/metajob-ui"
 import { boxHeaderData, headCells, rows } from "./data"
 
 export default function CompanyPageBody() {

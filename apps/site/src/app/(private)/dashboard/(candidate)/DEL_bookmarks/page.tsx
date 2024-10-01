@@ -3,7 +3,7 @@
 import { Paper } from "@mui/material"
 import { Metadata } from "next"
 import { find } from "@/lib/strapi"
-import { BookmarkTable } from "ui"
+import { BookmarkTable } from "@padma/metajob-ui"
 export const metadata: Metadata = {
    title: "Bookmark- MetaJob",
    description: "Bookmark  Page"

@@ -4,7 +4,7 @@ import { SignOut } from "@/lib/user"
 import useThemeToggle from "@/next-theme/useThemeToggle"
 import { getLanguageValue } from "@/utils/common"
 import { signOut, useSession } from "next-auth/react"
-import { NavBar } from "ui"
+import { NavBar } from "@padma/metajob-ui"
 
 export default function NavbarBody() {
    // NOTE: This is the NavbarBody component and session need to pass as propos

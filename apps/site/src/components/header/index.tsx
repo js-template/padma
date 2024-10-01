@@ -22,7 +22,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import * as React from "react"
 import toast from "react-hot-toast"
-import { CIcon } from "ui"
+import { CIcon } from "@padma/metajob-ui"
 import { useGlobalContext } from "@/context/store"
 import { getLanguageValue } from "@/utils/common"
 

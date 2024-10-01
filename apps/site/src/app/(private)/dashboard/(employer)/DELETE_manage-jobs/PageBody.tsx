@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography"
 import _ from "lodash"
 import Link from "next/link"
 import { Fragment, useState } from "react"
-import { Button, CIcon, ManageJobsTable } from "ui"
+import { Button, CIcon, ManageJobsTable } from "@padma/metajob-ui"
 import { boxHeaderData, headCells, rows } from "./data"
 
 const ManageJobPageBody = () => {

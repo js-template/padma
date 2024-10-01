@@ -1,7 +1,7 @@
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { Metadata, ResolvingMetadata } from "next"
-import { JobDetails } from "ui"
+import { JobDetails } from "@padma/metajob-ui"
 // *** generate metadata type
 type Props = {
    params: { slug: string }

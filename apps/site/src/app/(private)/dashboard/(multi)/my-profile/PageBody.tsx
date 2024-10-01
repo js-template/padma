@@ -2,7 +2,7 @@
 
 import { Stack } from "@mui/material"
 import { useSession } from "next-auth/react"
-import { MyProfile } from "ui"
+import { MyProfile } from "@padma/metajob-ui"
 
 export default function ProfilePageBody() {
    const { data: session } = useSession()

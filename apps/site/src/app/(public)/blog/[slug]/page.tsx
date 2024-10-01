@@ -4,7 +4,7 @@ import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
 import { Metadata, ResolvingMetadata } from "next"
 import Script from "next/script"
-import { BlogDetails } from "ui"
+import { BlogDetails } from "@padma/metajob-ui"
 // *** generate metadata type
 type Props = {
    params: { slug: string }

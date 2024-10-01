@@ -4,7 +4,7 @@ import { getLanguageFromCookie } from "@/utils/language"
 import { Metadata, ResolvingMetadata } from "next"
 import Script from "next/script"
 import React from "react"
-import { CompanyProfilePage } from "ui"
+import { CompanyProfilePage } from "@padma/metajob-ui"
 // *** generate metadata type
 type Props = {
    params: { slug: string }

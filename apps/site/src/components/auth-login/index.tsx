@@ -7,7 +7,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
-import { CIcon } from "ui"
+import { CIcon } from "@padma/metajob-ui"
 const AuthLogin = ({ callbackUrl, error }: { error: string | undefined; callbackUrl: string | undefined }) => {
    const [loading, setLoading] = useState(false)
    useEffect(() => {

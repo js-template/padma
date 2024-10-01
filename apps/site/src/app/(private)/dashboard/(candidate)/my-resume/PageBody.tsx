@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { Paper } from "@mui/material";
-import React from "react";
-import { AddResumeForm } from "ui";
+import { Paper } from "@mui/material"
+import React from "react"
+import { AddResumeForm } from "@padma/metajob-ui"
 
 type Props = {
-   session: () => { data: any; status: string };
-};
+   session: () => { data: any; status: string }
+}
 const PageBody = ({ session }: Props) => {
    return (
       <Paper
@@ -19,7 +19,7 @@ const PageBody = ({ session }: Props) => {
          }}>
          <AddResumeForm useSession={session} />
       </Paper>
-   );
-};
+   )
+}
 
-export default PageBody;
+export default PageBody

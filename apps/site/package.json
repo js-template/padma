@@ -39,7 +39,7 @@
       "react-slick": "^0.30.2",
       "slick-carousel": "^1.8.1",
       "swr": "^2.2.5",
-      "ui": "workspace:*",
+      "@padma/metajob-ui": "workspace:*",
       "yet-another-react-lightbox": "^3.21.4",
       "eslint": "8.36.0",
       "eslint-config-next": "^14.1.0"

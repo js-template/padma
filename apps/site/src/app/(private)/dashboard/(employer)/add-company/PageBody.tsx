@@ -1,7 +1,7 @@
 "use client"
 import { useGlobalContext } from "@/context/store"
 import { Box } from "@mui/material"
-import { AddCompanyForm } from "ui"
+import { AddCompanyForm } from "@padma/metajob-ui"
 
 const AddCompanyPageBody = () => {
    const { direction } = useGlobalContext()

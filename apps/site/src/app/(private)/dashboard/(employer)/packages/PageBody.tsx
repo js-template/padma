@@ -2,7 +2,7 @@
 import { Box, Grid, Typography } from "@mui/material"
 import toast from "react-hot-toast"
 import { membershipMonthlyPlanData } from "./data"
-import { PricePlanWithFeatures } from "ui"
+import { PricePlanWithFeatures } from "@padma/metajob-ui"
 import { useState } from "react"
 
 const PackagesPageBody = () => {

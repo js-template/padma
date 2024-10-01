@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
 import React from "react"
-import { DrawerHeader } from "ui"
+import { DrawerHeader } from "@padma/metajob-ui"
 import NavbarBody from "./NavbarBody"
 
 export default function PrivateLayout(props: { children: React.ReactNode }) {

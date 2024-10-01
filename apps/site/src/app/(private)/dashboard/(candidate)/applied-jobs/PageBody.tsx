@@ -5,7 +5,7 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import _ from "lodash"
 import { Fragment, useState } from "react"
-import { AllAppliedJobsTable, CIcon } from "ui"
+import { AllAppliedJobsTable, CIcon } from "@padma/metajob-ui"
 import { boxHeaderData, headCells } from "./data"
 export type IAppliedJobsData = {
    data: {

@@ -1,10 +1,10 @@
 "use client"
 import NextLink from "next/link"
 import { Box, Button, Container, Paper, Typography } from "@mui/material"
-import { GoBackBtn } from "ui"
+import { GoBackBtn } from "@padma/metajob-ui"
 import Header from "@/components/header"
 import { useGlobalContext } from "@/context/store"
-import { Footer } from "ui/block"
+import { Footer } from "@padma/metajob-ui/block"
 
 const NotFoundBody = () => {
    const { layoutData } = useGlobalContext()

@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material"
 import type { Metadata } from "next"
-import { PostJobForm } from "ui"
+import { PostJobForm } from "@padma/metajob-ui"
 
 export const metadata: Metadata = {
    title: "Post New Job | MetaJobs",

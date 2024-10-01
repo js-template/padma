@@ -10,7 +10,7 @@ import {
    AppliedList,
    FavoriteList,
    MatchedList
-} from "ui"
+} from "@padma/metajob-ui"
 
 import {
    LatestNotifications,
@@ -26,7 +26,7 @@ import {
    ReviewCard,
    ListCard,
    CandidateFilter
-} from "ui/block"
+} from "@padma/metajob-ui/block"
 
 interface WidgetConfig {
    component: React.FC<any>

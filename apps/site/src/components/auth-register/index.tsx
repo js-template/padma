@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
-import { Button, Card, CIcon, TextFieldWithLabel } from "ui"
+import { Button, Card, CIcon, TextFieldWithLabel } from "@padma/metajob-ui"
 
 export default function RegistrationPage() {
    const [selectedButton, setSelectedButton] = useState("candidate")
