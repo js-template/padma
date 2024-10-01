@@ -1,4 +1,4 @@
-# Job Portal Solution Using Nextjs & Strapi
+# Padma- Multipurpose Listing Solution 
 
 ## License and Usage
 This project includes a premium theme that is governed by the [End-User License Agreement (EULA)](LICENSE.md). By using or installing the premium theme, you agree to the terms of the EULA.
