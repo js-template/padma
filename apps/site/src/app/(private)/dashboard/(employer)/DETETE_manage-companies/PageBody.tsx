@@ -1,12 +1,12 @@
 "use client"
 import { useGlobalContext } from "@/context/store"
-import { FormControl, MenuItem, Pagination, Select, TextField, useTheme } from "@mui/material"
+import { Button, FormControl, MenuItem, Pagination, Select, TextField, useTheme } from "@mui/material"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import _ from "lodash"
 import Link from "next/link"
 import { Fragment, useState } from "react"
-import { Button, CIcon, ManageCompaniesTable } from "@padma/metajob-ui"
+import { CIcon, ManageCompaniesTable } from "@padma/metajob-ui"
 import { boxHeaderData, headCells, rows } from "./data"
 
 export default function CompanyPageBody() {

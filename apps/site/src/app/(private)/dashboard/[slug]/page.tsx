@@ -8,7 +8,7 @@ import Body from "./body"
 import { auth } from "@/context/auth"
 import { notFound, redirect } from "next/navigation"
 export const dynamicParams = false // true | false,
-
+import React from "react"
 // *** generate metadata type
 type Props = {
    params: { slug: string }
@@ -35,14 +35,18 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
       "no-store"
    )
    // FIXME: Format is not looking good
-   if (!product?.data?.data[0]?.attributes?.seo) {
-      return {
-         title: product?.data?.data[0]?.attributes?.title || "Title not found",
-         description: product?.data?.data[0]?.attributes?.description || "Description not found"
-      }
-   }
+   // if (!product?.data?.data[0]?.attributes?.seo) {
+   //    return {
+   //       title: product?.data?.data[0]?.attributes?.title || "Title not found",
+   //       description: product?.data?.data[0]?.attributes?.description || "Description not found"
+   //    }
+   // }
+   // StrapiSeoFormate(product?.data?.data[0]?.attributes?.seo, pageSlug)
 
-   return StrapiSeoFormate(product?.data?.data[0]?.attributes?.seo, pageSlug)
+   return {
+      title: "hello",
+      description: "hello"
+   }
 }
 
 export default async function DynamicPrivatePages({

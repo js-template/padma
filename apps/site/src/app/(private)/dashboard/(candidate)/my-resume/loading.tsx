@@ -1,7 +1,7 @@
 "use client"
 import { Box, Paper } from "@mui/material"
-import ResumePreviewBox from "ui/src/components/candidate/forms/resume/ResumePreviewBox"
-
+// import ResumePreviewBox from "ui/src/components/candidate/forms/resume/ResumePreviewBox"
+// FIXME: Loading should not be here
 export default function MyResumeLoading() {
    // Or a custom loading skeleton component
    return (
@@ -14,12 +14,12 @@ export default function MyResumeLoading() {
             mb: 5
          }}>
          <Box>
-            <ResumePreviewBox
+            {/* <ResumePreviewBox
                handleEdit={() => {}}
                // @ts-ignore
                data={null}
                isLoading={true}
-            />
+            /> */}
          </Box>
       </Paper>
    )

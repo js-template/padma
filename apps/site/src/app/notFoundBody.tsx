@@ -69,7 +69,7 @@ const NotFoundBody = () => {
                </Paper>
             </Box>
          </Container>
-         <Footer data={layoutData} />
+         {layoutData && <Footer data={layoutData} />}
       </main>
    )
 }
