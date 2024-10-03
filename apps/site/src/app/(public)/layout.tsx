@@ -3,8 +3,7 @@ import { cookies } from "next/headers"
 import { Box } from "@mui/material"
 import { find } from "@/lib/strapi"
 import Header from "@/components/header"
-// import Footer from "@/components/footer"
-import { Footer } from "@padma/metajob-ui/block"
+import { Footer } from "@padma/metajob-ui"
 
 export default async function PublicLayout(props: { children: React.ReactNode }) {
    const cookieStore = cookies()
