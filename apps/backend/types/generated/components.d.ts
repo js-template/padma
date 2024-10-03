@@ -184,6 +184,7 @@ export interface BlockManageCompanies extends Schema.Component {
       'api::form.form'
     >;
     addButtonText: Attribute.String;
+    editButtonText: Attribute.String;
   };
 }
 

@@ -1047,8 +1047,8 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
     location: Attribute.JSON &
       Attribute.CustomField<'plugin::google-maps.location-picker'>;
     social_links: Attribute.Component<'shared.social-medias', true>;
-    avg_price: Attribute.Decimal;
     about: Attribute.RichText;
+    avg_price: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
