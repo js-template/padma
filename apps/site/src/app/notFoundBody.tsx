@@ -4,7 +4,7 @@ import { Box, Button, Container, Paper, Typography } from "@mui/material"
 import { GoBackBtn } from "@padma/metajob-ui"
 import Header from "@/components/header"
 import { useGlobalContext } from "@/context/store"
-import { Footer } from "@padma/metajob-ui/block"
+import { Footer } from "@padma/metajob-ui"
 
 const NotFoundBody = () => {
    const { layoutData } = useGlobalContext()

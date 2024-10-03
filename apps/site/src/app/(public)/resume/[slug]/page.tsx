@@ -3,7 +3,7 @@ import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { Metadata, ResolvingMetadata } from "next"
 import Script from "next/script"
-import { CandidateProfile } from "@padma/metajob-ui/block"
+import { CandidateProfile } from "@padma/metajob-ui"
 
 // *** generate metadata type
 type Props = {
