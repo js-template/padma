@@ -1,7 +1,8 @@
-import { subscriptionItemProps } from "ui/src/components/pricing/types"
+// import { subscriptionItemProps } from "ui/src/components/pricing/types"
 
+// FIXME: fix type issue
 // *** Membership Monthly plan data
-export const membershipMonthlyPlanData: subscriptionItemProps[] = [
+export const membershipMonthlyPlanData: any[] = [
    {
       id: 1,
       title: "Basic Plan",

@@ -2,7 +2,7 @@
 import { hexToRGBA } from "@/lib/hex-to-rgba"
 import { SignUp } from "@/lib/user"
 import { LoadingButton } from "@mui/lab"
-import { Box, Container, Divider, Grid, IconButton, Stack, Typography } from "@mui/material"
+import { Button, Box, Container, Divider, Grid, IconButton, Stack, Typography } from "@mui/material"
 import { signIn } from "next-auth/react"
 import { useTheme } from "next-themes"
 import Link from "next/link"
@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
-import { Button, Card, CIcon, TextFieldWithLabel } from "@padma/metajob-ui"
+import { Card, CIcon, TextFieldWithLabel } from "@padma/metajob-ui"
 
 export default function RegistrationPage() {
    const [selectedButton, setSelectedButton] = useState("candidate")

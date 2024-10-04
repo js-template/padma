@@ -26,7 +26,7 @@ import {
    ReviewCard,
    ListCard,
    CandidateFilter
-} from "@padma/metajob-ui/block"
+} from "@padma/metajob-ui"
 
 interface WidgetConfig {
    component: React.FC<any>
