@@ -60,6 +60,12 @@
     "short_description": {
       "type": "text",
       "required": true
+    },
+    "post_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::post-category.post-category",
+      "inversedBy": "posts"
     }
   }
 }
