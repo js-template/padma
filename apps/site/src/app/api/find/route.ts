@@ -1,7 +1,7 @@
 // app/api/find/route.ts
 
+import { find } from "@/lib/strapi"
 import { NextRequest, NextResponse } from "next/server"
-import qs from "qs"
 
 export async function GET(request: NextRequest) {
    const { searchParams } = new URL(request.url)
@@ -13,6 +13,9 @@ export async function GET(request: NextRequest) {
       ? parseInt(searchParams.get("revalidate") as string, 10)
       : undefined
 
+   // Define the expected type of the result
+   type FindResult = { data: any; error: null } | { data: null; error: any }
+
    // console.log("Model", model, "query", query, "cache", cache)
    const result = await find(model, query, cache, revalidate)
 
@@ -21,54 +24,4 @@ export async function GET(request: NextRequest) {
    }
 
    return NextResponse.json({ data: result.data })
-}
-
-/**
- * Function to get data
- */
-export const find = async (
-   model: string,
-   query: any = {},
-   cache: "force-cache" | "no-cache" | "no-store" = "force-cache",
-   revalidate?: number
-) => {
-   const queryString = qs.stringify(query, {
-      arrayFormat: "indices",
-      encode: false,
-      indices: false
-   })
-
-   try {
-      const response = await fetch(`${process.env.STRAPI_ENDPOINT}/${model}/?${queryString}`, {
-         method: "GET",
-         headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.STRAPI_AUTH_TOKEN}`
-         },
-         ...{
-            ...(revalidate ? {} : { cache }),
-            ...(revalidate
-               ? {
-                    next: {
-                       revalidate: revalidate
-                    }
-                 }
-               : {})
-         }
-      })
-
-      if (!response.ok) {
-         throw new Error(`Failed to fetch data: ${response.statusText}`)
-      }
-
-      const data = await response.json()
-
-      return { data, error: null }
-   } catch (error: any) {
-      console.error(`Error during API call: ${error.message}`)
-      return {
-         data: null,
-         error: error.message || "An error occurred during data fetch"
-      }
-   }
 }
