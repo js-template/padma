@@ -43,6 +43,7 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 export default async function Page({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
    const language = getLanguageFromCookie()
+
    // *** get blogs data from strapi ***
    const { data, error } = await find(
       "api/posts",
@@ -54,7 +55,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
          },
          populate: "deep",
          publicationState: "live",
-         locale: [language]
+         locale: language ? [language] : ["en"]
       },
       "force-cache"
    )
@@ -78,13 +79,50 @@ export default async function Page({ params }: { params: { slug: string } }) {
       "force-cache"
    )
 
+   // *** get  blogs-details page data from strapi ***
+   const { data: blogPageData, error: blogPageError } = await find(
+      "api/blog-detail",
+      {
+         populate: "deep",
+         locale: language ? [language] : ["en"]
+      },
+      "no-store"
+   )
+
+   // *** get  blogs-category data from strapi ***
+   const { data: blogCategoryData, error: blogCategoryError } = await find(
+      "api/post-categories",
+      {
+         populate: {
+            image: {
+               fields: ["url"]
+            },
+            posts: {
+               count: true
+            }
+         },
+         fields: ["title", "slug"],
+         pagination: {
+            pageSize: 10, //fetch 10 blog-categories
+            page: 1
+         },
+         locale: language ? [language] : ["en"]
+      },
+      "no-store"
+   )
+
    if (error) {
       return <div>Something went wrong</div>
    }
 
    return (
       <>
-         <BlogDetails data={data?.data} recentBlogs={recentBlogs?.data} />
+         <BlogDetails
+            data={data?.data}
+            recentBlogs={recentBlogs?.data}
+            blogPageData={blogPageData?.data?.attributes}
+            blogCategories={blogCategoryData?.data}
+         />
          {data?.data[0]?.attributes?.seo?.structuredData && (
             <Script
                id='json-ld-structured-data'

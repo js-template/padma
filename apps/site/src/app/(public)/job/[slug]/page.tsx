@@ -2,6 +2,8 @@ import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { Metadata, ResolvingMetadata } from "next"
 import { JobDetails } from "@padma/metajob-ui"
+import { getLanguageFromCookie } from "@/utils/language"
+
 // *** generate metadata type
 type Props = {
    params: { slug: string }
@@ -40,7 +42,8 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 }
 export default async function JobDetailsPage({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
-   //const language = getLanguageFromCookie();
+   const language = getLanguageFromCookie()
+
    // *** get jobs data from strapi ***
    const { data, error } = await find(
       "api/lists",
@@ -52,18 +55,27 @@ export default async function JobDetailsPage({ params }: { params: { slug: strin
          },
          populate: "deep",
          publicationState: "live",
-         locale: ["en"]
+         locale: language ? [language] : ["en"]
       },
       "no-store"
    )
 
-   console.log("JobDetailsPage", data, "Error", error)
+   // *** get  blogs-details page data from strapi ***
+   const { data: listDetailsPageData, error: listPageError } = await find(
+      "api/list-detail",
+      {
+         populate: "deep",
+         locale: language ? [language] : ["en"]
+      },
+      "no-store"
+   )
+
    if (error) {
       return <div>Something went wrong</div>
    }
    return (
       <>
-         <JobDetails data={data?.data} />{" "}
+         <JobDetails data={data?.data} listPageData={listDetailsPageData?.data?.attributes} language={language} />
       </>
    )
 }
