@@ -992,17 +992,25 @@ export interface ApiChatChat extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    employer: Attribute.Relation<
+    sender: Attribute.Relation<
       'api::chat.chat',
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    candidate: Attribute.Relation<
+    receiver: Attribute.Relation<
       'api::chat.chat',
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    chats: Attribute.Component<'widget.chat', true>;
+    list: Attribute.Relation<'api::chat.chat', 'oneToOne', 'api::list.list'>;
+    chat_blocked: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    messages: Attribute.Relation<
+      'api::chat.chat',
+      'oneToMany',
+      'api::message.message'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1047,8 +1055,8 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
     location: Attribute.JSON &
       Attribute.CustomField<'plugin::google-maps.location-picker'>;
     social_links: Attribute.Component<'shared.social-medias', true>;
-    avg_price: Attribute.Decimal;
     about: Attribute.RichText;
+    avg_price: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1586,6 +1594,57 @@ export interface ApiMembershipMembership extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::membership.membership',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMessageMessage extends Schema.CollectionType {
+  collectionName: 'messages';
+  info: {
+    singularName: 'message';
+    pluralName: 'messages';
+    displayName: 'Messages';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    sender: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    receiver: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    message: Attribute.RichText & Attribute.Required;
+    medias: Attribute.Media;
+    chat_session: Attribute.Relation<
+      'api::message.message',
+      'manyToOne',
+      'api::chat.chat'
+    >;
+    read: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    send_notification: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::message.message',
       'oneToOne',
       'admin::user'
     > &
@@ -2138,6 +2197,7 @@ declare module '@strapi/types' {
       'api::list.list': ApiListList;
       'api::list-detail.list-detail': ApiListDetailListDetail;
       'api::membership.membership': ApiMembershipMembership;
+      'api::message.message': ApiMessageMessage;
       'api::package.package': ApiPackagePackage;
       'api::page.page': ApiPagePage;
       'api::post.post': ApiPostPost;
