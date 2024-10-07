@@ -34,6 +34,17 @@
       "component": "config.header-field",
       "max": 6,
       "min": 4
+    },
+    "form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::form.form"
+    },
+    "addButtonText": {
+      "type": "string"
+    },
+    "editButtonText": {
+      "type": "string"
     }
   }
 }

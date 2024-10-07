@@ -206,6 +206,13 @@ export interface BlockManageLists extends Schema.Component {
         min: 4;
         max: 6;
       }>;
+    form: Attribute.Relation<
+      'block.manage-lists',
+      'oneToOne',
+      'api::form.form'
+    >;
+    addButtonText: Attribute.String;
+    editButtonText: Attribute.String;
   };
 }
 
@@ -557,13 +564,37 @@ export interface ConfigHeaderField extends Schema.Component {
 export interface ConfigMessage extends Schema.Component {
   collectionName: 'components_config_messages';
   info: {
-    displayName: 'message';
+    displayName: 'Message';
     icon: 'arrowRight';
+    description: '';
   };
   attributes: {
-    title: Attribute.String;
-    enableSearch: Attribute.Boolean;
-    style: Attribute.Component<'component.style-section'>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Messages'>;
+    enableSearch: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    empty_messages: Attribute.Component<'shared.empty'> & Attribute.Required;
+    empty_chat: Attribute.Component<'shared.empty'> & Attribute.Required;
+    saveButtonText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Save'>;
+    editActionText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Edit'>;
+    copyActionText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Copy'>;
+    searchPlaceholder: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Search'>;
+    sendMessagePlaceholder: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Type Something'>;
+    cancelButtonText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Cancel'>;
   };
 }
 
@@ -1133,8 +1164,10 @@ export interface SharedEmpty extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
+    title: Attribute.String & Attribute.Required & Attribute.DefaultTo<'Title'>;
+    description: Attribute.Text &
+      Attribute.Required &
+      Attribute.DefaultTo<'Description'>;
   };
 }
 

@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
    type FindResult = { data: any; error: null } | { data: null; error: any }
 
    // console.log("Model", model, "query", query, "cache", cache)
-   const result = await find(model, query, cache, revalidate)
+   const result: FindResult = await find(model, query, cache, revalidate)
 
    if (result.error) {
       return NextResponse.json({ error: result.error }, { status: 500 })
