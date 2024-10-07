@@ -12,20 +12,31 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "employer": {
+    "sender": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
     },
-    "candidate": {
+    "receiver": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
     },
-    "chats": {
-      "type": "component",
-      "repeatable": true,
-      "component": "widget.chat"
+    "list": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::list.list"
+    },
+    "chat_blocked": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "messages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::message.message",
+      "mappedBy": "chat_session"
     }
   }
 }

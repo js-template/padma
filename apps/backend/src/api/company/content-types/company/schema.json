@@ -66,11 +66,11 @@
       "repeatable": true,
       "component": "shared.social-medias"
     },
-    "avg_price": {
-      "type": "decimal"
-    },
     "about": {
       "type": "richtext"
+    },
+    "avg_price": {
+      "type": "string"
     }
   }
 }
