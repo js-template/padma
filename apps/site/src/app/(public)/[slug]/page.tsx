@@ -17,35 +17,45 @@ type Props = {
 // *** generate metadata for the page
 export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
    const pageSlug = params?.slug
-   //const language = getLanguageFromCookie()
-   // fetch data
-   // const product = await find(
-   //    "api/pages",
-   //    {
-   //       filters: {
-   //          slug: {
-   //             $eq: pageSlug
-   //          }
-   //       },
-   //       populate: "deep",
-   //       publicationState: "live",
-   //       locale: [language]
-   //    },
-   //    "no-store"
-   // )
+   const language = getLanguageFromCookie()
 
-   // if (!product?.data?.data[0]?.attributes?.seo) {
-   //    return {
-   //       title: product?.data?.data[0]?.attributes?.title || "Title not found",
-   //       description: product?.data?.data[0]?.attributes?.description || "Description not found"
-   //    }
-   // }
-   // StrapiSeoFormate(product?.data?.data[0]?.attributes?.seo, pageSlug)
+   // ***fetch seo data
+   const product = await find(
+      "api/pages",
+      {
+         filters: {
+            slug: {
+               $eq: pageSlug
+            }
+         },
+         populate: {
+            seo: {
+               fields: [
+                  "metaTitle",
+                  "metaDescription",
+                  "metaImage",
+                  "metaSocial",
+                  "keywords",
+                  "metaRobots",
+                  "structuredData",
+                  "metaViewport",
+                  "canonicalURL"
+               ]
+            }
+         },
+         publicationState: "live",
+         locale: language ? [language] : ["en"]
+      },
+      "no-store"
+   )
 
-   return {
-      title: "Title not found",
-      description: "Description not found"
+   if (!product?.data?.data?.[0]?.attributes?.seo) {
+      return {
+         title: product?.data?.data?.[0]?.attributes?.title || "Title not found",
+         description: `Description ${product?.data?.data[0]?.attributes?.title}` || "Description not found"
+      }
    }
+   return StrapiSeoFormate(product?.data?.data?.[0]?.attributes?.seo, `/${pageSlug}`)
 }
 
 export default async function DynamicPages({
