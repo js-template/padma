@@ -1033,7 +1033,7 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
+    name: Attribute.String & Attribute.Required;
     tagline: Attribute.String;
     email: Attribute.String;
     phone: Attribute.String;
@@ -1046,7 +1046,7 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
       'oneToOne',
       'api::category.category'
     >;
-    slug: Attribute.UID;
+    slug: Attribute.UID & Attribute.Required;
     owner: Attribute.Relation<
       'api::company.company',
       'oneToOne',
@@ -1490,9 +1490,9 @@ export interface ApiListList extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String;
-    startDate: Attribute.Date;
-    price: Attribute.Decimal;
+    title: Attribute.String & Attribute.Required;
+    startDate: Attribute.Date & Attribute.Required;
+    price: Attribute.Decimal & Attribute.Required;
     description: Attribute.RichText;
     category: Attribute.Relation<
       'api::list.list',
@@ -1505,19 +1505,23 @@ export interface ApiListList extends Schema.CollectionType {
         ['Full Time', 'Part Time', 'Contract Base', 'Freelance', 'Remote']
       >;
     vacancy: Attribute.Integer;
-    slug: Attribute.UID<'api::list.list', 'title'>;
+    slug: Attribute.UID<'api::list.list', 'title'> & Attribute.Required;
     company: Attribute.Relation<
       'api::list.list',
       'oneToOne',
       'api::company.company'
     >;
-    status: Attribute.Enumeration<['open', 'closed', 'draft']>;
-    endDate: Attribute.Date;
+    status: Attribute.Enumeration<['open', 'closed', 'draft']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'draft'>;
+    endDate: Attribute.Date & Attribute.Required;
     owner: Attribute.Relation<
       'api::list.list',
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    location: Attribute.JSON &
+      Attribute.CustomField<'plugin::google-maps.location-picker'>;
     tags: Attribute.Relation<'api::list.list', 'oneToMany', 'api::tag.tag'>;
     seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
@@ -2152,13 +2156,14 @@ export interface ApiTagTag extends Schema.CollectionType {
     singularName: 'tag';
     pluralName: 'tags';
     displayName: 'Tags';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String;
-    value: Attribute.UID<'api::tag.tag', 'title'>;
+    value: Attribute.UID<'api::tag.tag', 'title'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

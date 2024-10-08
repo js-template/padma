@@ -8,10 +8,14 @@
   "options": {},
   "attributes": {
     "enableEdit": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": true,
+      "required": true
     },
     "enableDelete": {
-      "type": "boolean"
+      "type": "boolean",
+      "required": true,
+      "default": true
     },
     "tableHeader": {
       "type": "customField",
