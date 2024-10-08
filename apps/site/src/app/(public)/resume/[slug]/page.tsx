@@ -1,4 +1,5 @@
 import React from "react"
+import { notFound } from "next/navigation"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { Metadata, ResolvingMetadata } from "next"
@@ -60,6 +61,12 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 
 export default async function page({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
+
+   // redirect to 404 page if no pageSlug found
+   if (!pageSlug || pageSlug === "null") {
+      notFound()
+   }
+
    const language = getLanguageFromCookie()
 
    // *** get candidates data from strapi ***
@@ -78,9 +85,10 @@ export default async function page({ params }: { params: { slug: string } }) {
       },
       "force-cache"
    )
-   if (error) {
-      return <div>Something went wrong</div>
-   }
+
+   // if (error) {
+   //    return <div>Something went wrong</div>
+   // }
    return (
       <>
          <CandidateProfile data={data?.data} language={language} />

@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { Metadata, ResolvingMetadata } from "next"
@@ -59,11 +60,14 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 
 export default async function JobDetailsPage({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
+
+   // redirect to 404 page if no pageSlug found
+   if (!pageSlug || pageSlug === "null") {
+      notFound()
+   }
+
    const language = getLanguageFromCookie()
-
    const session = await auth()
-
-   console.log("session1", session)
 
    // *** get jobs data from strapi ***
    const { data, error } = await find(

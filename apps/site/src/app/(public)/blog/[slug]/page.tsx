@@ -1,10 +1,12 @@
 import React from "react"
+import { notFound } from "next/navigation"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
 import { Metadata, ResolvingMetadata } from "next"
 import Script from "next/script"
 import { BlogDetails } from "@padma/metajob-ui"
+
 // *** generate metadata type
 type Props = {
    params: { slug: string }
@@ -58,6 +60,12 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 }
 export default async function Page({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
+
+   // redirect to 404 page if no pageSlug found
+   if (!pageSlug || pageSlug === "null") {
+      notFound()
+   }
+
    const language = getLanguageFromCookie()
 
    // *** get blogs data from strapi ***
