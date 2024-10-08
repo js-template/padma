@@ -13,38 +13,48 @@ type Props = {
 
 // *** generate metadata for the page
 export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-   // const pageSlug = params?.slug
-   //const language = getLanguageFromCookie()
-   // fetch data
-   // const { data } = await find(
-   //    "api/companies",
-   //    {
-   //       filters: {
-   //          slug: {
-   //             $eq: pageSlug
-   //          }
-   //       },
-   //       populate: "deep",
-   //       publicationState: "live",
-   //       locale: [language]
-   //    },
-   //    "no-cache"
-   // )
+   const pageSlug = params?.slug
+   const language = getLanguageFromCookie()
 
-   // // if data?.data?.attributes?.seo is not available, return default data
-   // if (!data?.data[0]?.attributes?.seo) {
-   //    return {
-   //       title: data?.data[0]?.attributes?.title || "Title not found",
-   //       description: data?.data[0]?.attributes?.description || "Description not found"
-   //    }
-   // }
+   // *** fetch seo data
+   const { data } = await find(
+      "api/companies",
+      {
+         filters: {
+            slug: {
+               $eq: pageSlug
+            }
+         },
+         populate: {
+            seo: {
+               fields: [
+                  "metaTitle",
+                  "metaDescription",
+                  "metaImage",
+                  "metaSocial",
+                  "keywords",
+                  "metaRobots",
+                  "structuredData",
+                  "metaViewport",
+                  "canonicalURL"
+               ]
+            }
+         },
+         publicationState: "live",
+         locale: language ? [language] : ["en"]
+      },
+      "no-cache"
+   )
 
-   // return StrapiSeoFormate(data?.data[0]?.attributes?.seo, `/companies/${pageSlug}`)
-
-   return {
-      title: "Title not found",
-      description: "Description not found"
+   // if seo is not available, return default data
+   if (!data?.data?.[0]?.attributes?.seo) {
+      return {
+         title: data?.data[0]?.attributes?.title || "Title not found",
+         description: data?.data[0]?.attributes?.description || "Description not found"
+      }
    }
+
+   return StrapiSeoFormate(data?.data?.[0]?.attributes?.seo, `/company/${pageSlug}`)
 }
 export default async function Page({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
