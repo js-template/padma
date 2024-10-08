@@ -56,6 +56,7 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 
    return StrapiSeoFormate(data?.data?.[0]?.attributes?.seo, `/company/${pageSlug}`)
 }
+
 export default async function Page({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
    const language = getLanguageFromCookie()
@@ -70,12 +71,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
          },
          populate: "deep",
          publicationState: "live",
-         locale: [language]
+         locale: language ? [language] : ["en"]
       },
       "force-cache"
    )
    if (error) {
       return <div>Something went wrong</div>
    }
-   return <CompanyProfilePage data={data?.data} />
+   return <CompanyProfilePage data={data?.data} language={language} />
 }

@@ -69,7 +69,6 @@ export const blockComponentMapping = {
    "block.category-card2": {
       component: AllCategory
    },
-   // FIXME: "job-card should be list-card"
    "block.job-card": {
       component: ListCard
    },

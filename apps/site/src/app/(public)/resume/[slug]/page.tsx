@@ -60,8 +60,8 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 
 export default async function page({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
+   const language = getLanguageFromCookie()
 
-   // const language = getLanguageFromCookie();
    // *** get candidates data from strapi ***
    const { data, error } = await find(
       // "api/candidates",
@@ -74,7 +74,7 @@ export default async function page({ params }: { params: { slug: string } }) {
          },
          populate: "deep",
          publicationState: "live",
-         locale: ["en"]
+         locale: language ? [language] : ["en"]
       },
       "force-cache"
    )
@@ -83,7 +83,7 @@ export default async function page({ params }: { params: { slug: string } }) {
    }
    return (
       <>
-         <CandidateProfile data={data?.data} />
+         <CandidateProfile data={data?.data} language={language} />
          {data?.data[0]?.attributes?.seo?.structuredData && (
             <Script
                id='json-ld-structured-data'

@@ -37,12 +37,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
+   const language = getLanguageFromCookie()
+
    const { data, error } = await find(
       "api/home-page",
       {
          populate: "deep",
          publicationState: "live",
-         locale: ["en"]
+         locale: language ? [language] : ["en"]
       },
       "no-store"
    )
@@ -53,7 +55,7 @@ export default async function Home() {
 
    return (
       <>
-         <DynamicBlockRenderer initialData={data} />
+         <DynamicBlockRenderer initialData={data} language={language} />
 
          {/* JSON_LD for SEO */}
          {/* {data?.data?.attributes?.seo?.structuredData && (

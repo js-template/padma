@@ -75,6 +75,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       },
       "force-cache"
    )
+
    // *** get recent blogs data from strapi ***
    const { data: recentBlogs, error: recentBlogsError } = await find(
       "api/posts",
@@ -90,7 +91,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             page: 1
          },
          publicationState: "live",
-         locale: [language]
+         locale: language ? [language] : ["en"]
       },
       "force-cache"
    )
@@ -138,6 +139,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             recentBlogs={recentBlogs?.data}
             blogPageData={blogPageData?.data?.attributes}
             blogCategories={blogCategoryData?.data}
+            language={language}
          />
          {data?.data[0]?.attributes?.seo?.structuredData && (
             <Script
