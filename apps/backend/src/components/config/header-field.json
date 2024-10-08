@@ -7,11 +7,13 @@
   "options": {},
   "attributes": {
     "label": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "default": "Name"
     },
     "sort": {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "align": {
       "type": "enumeration",
@@ -20,7 +22,8 @@
         "right",
         "center"
       ],
-      "default": "left"
+      "default": "left",
+      "required": true
     }
   }
 }

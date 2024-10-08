@@ -51,6 +51,17 @@
     },
     "editButtonText": {
       "type": "string"
+    },
+    "perPageText": {
+      "type": "string",
+      "required": true,
+      "default": "Showing per page"
+    },
+    "tableConfig": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.header-config",
+      "required": true
     }
   }
 }

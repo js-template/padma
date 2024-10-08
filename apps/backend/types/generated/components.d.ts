@@ -185,6 +185,11 @@ export interface BlockManageCompanies extends Schema.Component {
     >;
     addButtonText: Attribute.String;
     editButtonText: Attribute.String;
+    perPageText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Showing per page'>;
+    tableConfig: Attribute.Component<'config.header-config'> &
+      Attribute.Required;
   };
 }
 
@@ -196,14 +201,19 @@ export interface BlockManageLists extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    enableSearch: Attribute.Boolean;
-    tableConfig: Attribute.Component<'config.header-config'>;
-    empty: Attribute.Component<'shared.empty'>;
-    style: Attribute.Component<'component.style-section'>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Manage Lists'>;
+    enableSearch: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    tableConfig: Attribute.Component<'config.header-config'> &
+      Attribute.Required;
+    empty: Attribute.Component<'shared.empty'> & Attribute.Required;
     tableHead: Attribute.Component<'config.header-field', true> &
+      Attribute.Required &
       Attribute.SetMinMax<{
-        min: 4;
+        min: 6;
         max: 6;
       }>;
     form: Attribute.Relation<
@@ -213,6 +223,9 @@ export interface BlockManageLists extends Schema.Component {
     >;
     addButtonText: Attribute.String;
     editButtonText: Attribute.String;
+    perPageText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Showing per page'>;
   };
 }
 
@@ -525,8 +538,12 @@ export interface ConfigHeaderConfig extends Schema.Component {
     description: '';
   };
   attributes: {
-    enableEdit: Attribute.Boolean;
-    enableDelete: Attribute.Boolean;
+    enableEdit: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    enableDelete: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
     tableHeader: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -554,9 +571,10 @@ export interface ConfigHeaderField extends Schema.Component {
     description: '';
   };
   attributes: {
-    label: Attribute.String;
-    sort: Attribute.Boolean & Attribute.DefaultTo<true>;
+    label: Attribute.String & Attribute.Required & Attribute.DefaultTo<'Name'>;
+    sort: Attribute.Boolean & Attribute.DefaultTo<false>;
     align: Attribute.Enumeration<['left', 'right', 'center']> &
+      Attribute.Required &
       Attribute.DefaultTo<'left'>;
   };
 }
