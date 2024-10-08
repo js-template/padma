@@ -3,10 +3,11 @@ import { blockComponentMapping } from "../../lib/component.map"
 
 interface DynamicBlockRendererProps {
    initialData: any
+   language?: string
 }
 
-export default function DynamicBlockRenderer({ initialData }: DynamicBlockRendererProps) {
-   // // Get blocks from the data
+export default function DynamicBlockRenderer({ initialData, language }: DynamicBlockRendererProps) {
+   // Get blocks from the data
    const blocks = initialData?.data?.attributes?.blocks || []
 
    return (
@@ -16,7 +17,7 @@ export default function DynamicBlockRenderer({ initialData }: DynamicBlockRender
             const BlockConfig = blockComponentMapping[block.__component]
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
-               return <ComponentToRender key={index} data={block} {...block} />
+               return <ComponentToRender key={index} data={block} language={language} {...block} />
             }
             return null // Handle case where component mapping is missing
          })}

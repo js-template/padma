@@ -1057,6 +1057,7 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
     social_links: Attribute.Component<'shared.social-medias', true>;
     about: Attribute.RichText;
     avg_price: Attribute.String;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1518,6 +1519,7 @@ export interface ApiListList extends Schema.CollectionType {
       'plugin::users-permissions.user'
     >;
     tags: Attribute.Relation<'api::list.list', 'oneToMany', 'api::tag.tag'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -2055,6 +2057,7 @@ export interface ApiResumeResume extends Schema.CollectionType {
       ]
     >;
     slug: Attribute.UID<'api::resume.resume', 'name'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

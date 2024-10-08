@@ -1,10 +1,12 @@
 import React from "react"
+import { notFound } from "next/navigation"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
 import { Metadata, ResolvingMetadata } from "next"
 import Script from "next/script"
 import { BlogDetails } from "@padma/metajob-ui"
+
 // *** generate metadata type
 type Props = {
    params: { slug: string }
@@ -15,7 +17,8 @@ type Props = {
 export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
    const pageSlug = params?.slug
    const language = getLanguageFromCookie()
-   // fetch data
+
+   // *** fetch seo data
    const { data } = await find(
       "api/posts",
       {
@@ -24,24 +27,45 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
                $eq: pageSlug
             }
          },
-         populate: "deep",
+         populate: {
+            seo: {
+               fields: [
+                  "metaTitle",
+                  "metaDescription",
+                  "metaImage",
+                  "metaSocial",
+                  "keywords",
+                  "metaRobots",
+                  "structuredData",
+                  "metaViewport",
+                  "canonicalURL"
+               ]
+            }
+         },
          publicationState: "live",
-         locale: [language]
+         locale: language ? [language] : ["en"]
       },
       "no-cache"
    )
-   // if data?.data?.attributes?.seo is not available, return default data
-   if (!data?.data[0]?.attributes?.seo) {
+
+   // if seo is not available, return default data
+   if (!data?.data?.[0]?.attributes?.seo) {
       return {
          title: data?.data[0]?.attributes?.title || "Title not found",
          description: data?.data[0]?.attributes?.description || "Description not found"
       }
    }
 
-   return StrapiSeoFormate(data?.data[0]?.attributes?.seo, `/posts/${pageSlug}`)
+   return StrapiSeoFormate(data?.data?.[0]?.attributes?.seo, `/blog/${pageSlug}`)
 }
 export default async function Page({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
+
+   // redirect to 404 page if no pageSlug found
+   if (!pageSlug || pageSlug === "null") {
+      notFound()
+   }
+
    const language = getLanguageFromCookie()
 
    // *** get blogs data from strapi ***
@@ -59,6 +83,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       },
       "force-cache"
    )
+
    // *** get recent blogs data from strapi ***
    const { data: recentBlogs, error: recentBlogsError } = await find(
       "api/posts",
@@ -74,7 +99,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             page: 1
          },
          publicationState: "live",
-         locale: [language]
+         locale: language ? [language] : ["en"]
       },
       "force-cache"
    )
@@ -122,6 +147,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             recentBlogs={recentBlogs?.data}
             blogPageData={blogPageData?.data?.attributes}
             blogCategories={blogCategoryData?.data}
+            language={language}
          />
          {data?.data[0]?.attributes?.seo?.structuredData && (
             <Script
