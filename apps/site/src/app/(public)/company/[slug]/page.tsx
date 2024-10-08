@@ -79,8 +79,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
       },
       "force-cache"
    )
-   if (error) {
-      return <div>Something went wrong</div>
-   }
+
+   // if (error) {
+   //    return <div>Something went wrong</div>
+   // }
+
    return <CompanyProfilePage data={data?.data} language={language} session={session} />
 }
