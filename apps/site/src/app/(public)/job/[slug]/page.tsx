@@ -3,6 +3,7 @@ import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { Metadata, ResolvingMetadata } from "next"
 import { JobDetails } from "@padma/metajob-ui"
 import { getLanguageFromCookie } from "@/utils/language"
+import { auth } from "@/context/auth"
 
 // *** generate metadata type
 type Props = {
@@ -55,9 +56,14 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 
    return StrapiSeoFormate(data?.data?.[0]?.attributes?.seo, `/job/${pageSlug}`)
 }
+
 export default async function JobDetailsPage({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
    const language = getLanguageFromCookie()
+
+   const session = await auth()
+
+   console.log("session1", session)
 
    // *** get jobs data from strapi ***
    const { data, error } = await find(
@@ -90,7 +96,12 @@ export default async function JobDetailsPage({ params }: { params: { slug: strin
    }
    return (
       <>
-         <JobDetails data={data?.data} listPageData={listDetailsPageData?.data?.attributes} language={language} />
+         <JobDetails
+            data={data?.data}
+            listPageData={listDetailsPageData?.data?.attributes}
+            language={language}
+            session={session}
+         />
       </>
    )
 }

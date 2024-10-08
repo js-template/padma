@@ -5,6 +5,8 @@ import { Metadata, ResolvingMetadata } from "next"
 import Script from "next/script"
 import React from "react"
 import { CompanyProfilePage } from "@padma/metajob-ui"
+import { auth } from "@/context/auth"
+
 // *** generate metadata type
 type Props = {
    params: { slug: string }
@@ -60,6 +62,8 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 export default async function Page({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
    const language = getLanguageFromCookie()
+   const session = await auth()
+
    // *** get manage-ads data from strapi ***
    const { data, error } = await find(
       "api/companies",
@@ -78,5 +82,5 @@ export default async function Page({ params }: { params: { slug: string } }) {
    if (error) {
       return <div>Something went wrong</div>
    }
-   return <CompanyProfilePage data={data?.data} language={language} />
+   return <CompanyProfilePage data={data?.data} language={language} session={session} />
 }
