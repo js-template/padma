@@ -182,6 +182,11 @@
       "type": "uid",
       "targetField": "name",
       "required": false
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }
