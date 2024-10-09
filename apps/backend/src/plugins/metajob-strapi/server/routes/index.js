@@ -7,4 +7,5 @@ module.exports = {
   message: require("./message"),
   company: require("./company"),
   "job-detail": require("./job-detail"),
+  "applied-job": require("./applied-job"),
 };

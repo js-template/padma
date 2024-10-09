@@ -6,8 +6,9 @@ const bookmarkController = require("./bookmark");
 const chatController = require("./chat");
 const messageController = require("./message");
 const companyController = require("./company");
-
 const jobDetails = require("./job-detail");
+
+const appliedJob = require("./applied-job");
 module.exports = {
   job: jobController,
   bookmark: bookmarkController,
@@ -15,4 +16,5 @@ module.exports = {
   message: messageController,
   company: companyController,
   "job-detail": jobDetails,
+  "applied-job": appliedJob,
 };

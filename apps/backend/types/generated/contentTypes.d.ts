@@ -960,6 +960,48 @@ export interface PluginMetajobStrapiJobDetail extends Schema.SingleType {
   };
 }
 
+export interface PluginMetajobStrapiAppliedJob extends Schema.CollectionType {
+  collectionName: 'applied_jobs';
+  info: {
+    singularName: 'applied-job';
+    pluralName: 'applied-jobs';
+    displayName: 'Applied Job';
+  };
+  options: {
+    draftAndPublish: true;
+    comment: '';
+  };
+  attributes: {
+    status: Attribute.Enumeration<['Shortlisted', 'Pending', 'Rejected']>;
+    cover_letter: Attribute.String;
+    owner: Attribute.Relation<
+      'plugin::metajob-strapi.applied-job',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    list: Attribute.Relation<
+      'plugin::metajob-strapi.applied-job',
+      'oneToOne',
+      'plugin::metajob-strapi.job'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.applied-job',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.applied-job',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginGoogleMapsConfig extends Schema.SingleType {
   collectionName: 'google_maps_configs';
   info: {
@@ -2307,6 +2349,7 @@ declare module '@strapi/types' {
       'plugin::metajob-strapi.message': PluginMetajobStrapiMessage;
       'plugin::metajob-strapi.company': PluginMetajobStrapiCompany;
       'plugin::metajob-strapi.job-detail': PluginMetajobStrapiJobDetail;
+      'plugin::metajob-strapi.applied-job': PluginMetajobStrapiAppliedJob;
       'plugin::google-maps.config': PluginGoogleMapsConfig;
       'plugin::react-icons.iconlibrary': PluginReactIconsIconlibrary;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -6,7 +6,7 @@ const chatService = require("./chat");
 const messageService = require("./message");
 const companyService = require("./company");
 const jobDetailsService = require("./job-detail");
-
+const appliedJobService = require("./applied-job");
 module.exports = {
   job: jobService,
   bookmark: bookmarkService,
@@ -14,4 +14,5 @@ module.exports = {
   message: messageService,
   company: companyService,
   "job-detail": jobDetailsService,
+  "applied-job": appliedJobService,
 };
