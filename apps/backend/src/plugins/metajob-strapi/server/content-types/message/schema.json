@@ -4,13 +4,12 @@
   "info": {
     "singularName": "message",
     "pluralName": "messages",
-    "displayName": "Messages",
-    "description": ""
+    "displayName": "Messages"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": true,
+    "comment": ""
   },
-  "pluginOptions": {},
   "attributes": {
     "sender": {
       "type": "relation",
@@ -30,19 +29,9 @@
       "type": "media",
       "multiple": true,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
-    "chat_session": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::chat.chat",
-      "inversedBy": "messages"
-    },
+
     "read": {
       "type": "boolean",
       "default": false,

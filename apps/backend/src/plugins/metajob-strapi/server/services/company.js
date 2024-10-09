@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * chat service
+ *  service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::chat.chat');
+module.exports = createCoreService('plugin::metajob-strapi.company');

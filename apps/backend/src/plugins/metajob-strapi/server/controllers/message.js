@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * chat controller
+ *  controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::chat.chat');
+module.exports = createCoreController('plugin::metajob-strapi.message');

@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * chat router
+ *  router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::chat.chat');
+module.exports = createCoreRouter('plugin::metajob-strapi.chat');

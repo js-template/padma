@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * bookmark service
+ *  service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::bookmark.bookmark');
+module.exports = createCoreService('plugin::metajob-strapi.chat');

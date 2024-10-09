@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * bookmark controller
+ *  controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::bookmark.bookmark');
+module.exports = createCoreController('plugin::metajob-strapi.company');

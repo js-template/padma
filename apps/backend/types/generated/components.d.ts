@@ -92,7 +92,7 @@ export interface BlockCompanyCard extends Schema.Component {
     companies: Attribute.Relation<
       'block.company-card',
       'oneToMany',
-      'api::company.company'
+      'plugin::metajob-strapi.company'
     >;
   };
 }

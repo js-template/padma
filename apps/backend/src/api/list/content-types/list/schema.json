@@ -54,15 +54,11 @@
     "company": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::company.company"
+      "target": "plugin::metajob-strapi.company"
     },
     "status": {
       "type": "enumeration",
-      "enum": [
-        "open",
-        "closed",
-        "draft"
-      ],
+      "enum": ["open", "closed", "draft"],
       "default": "draft",
       "required": true
     },

@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * message service
+ *  service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::message.message');
+module.exports = createCoreService('plugin::metajob-strapi.message');

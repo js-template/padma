@@ -679,7 +679,7 @@ export interface PluginMetajobStrapiJob extends Schema.CollectionType {
     company: Attribute.Relation<
       'plugin::metajob-strapi.job',
       'oneToOne',
-      'api::company.company'
+      'plugin::metajob-strapi.company'
     >;
     status: Attribute.Enumeration<['open', 'closed', 'draft']> &
       Attribute.Required &
@@ -709,6 +709,209 @@ export interface PluginMetajobStrapiJob extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::metajob-strapi.job',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginMetajobStrapiBookmark extends Schema.CollectionType {
+  collectionName: 'bookmarks';
+  info: {
+    singularName: 'bookmark';
+    pluralName: 'bookmarks';
+    displayName: 'Bookmark';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    company: Attribute.Relation<
+      'plugin::metajob-strapi.bookmark',
+      'oneToOne',
+      'plugin::metajob-strapi.company'
+    >;
+    owner: Attribute.Relation<
+      'plugin::metajob-strapi.bookmark',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    type: Attribute.Enumeration<['resume', 'list', 'company']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'resume'>;
+    resume: Attribute.Relation<
+      'plugin::metajob-strapi.bookmark',
+      'oneToOne',
+      'api::resume.resume'
+    >;
+    note: Attribute.Text;
+    list: Attribute.Relation<
+      'plugin::metajob-strapi.bookmark',
+      'oneToOne',
+      'api::list.list'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.bookmark',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.bookmark',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginMetajobStrapiChat extends Schema.CollectionType {
+  collectionName: 'chats';
+  info: {
+    singularName: 'chat';
+    pluralName: 'chats';
+    displayName: 'Chat';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    sender: Attribute.Relation<
+      'plugin::metajob-strapi.chat',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    receiver: Attribute.Relation<
+      'plugin::metajob-strapi.chat',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    list: Attribute.Relation<
+      'plugin::metajob-strapi.chat',
+      'oneToOne',
+      'api::list.list'
+    >;
+    chat_blocked: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.chat',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.chat',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginMetajobStrapiMessage extends Schema.CollectionType {
+  collectionName: 'messages';
+  info: {
+    singularName: 'message';
+    pluralName: 'messages';
+    displayName: 'Messages';
+  };
+  options: {
+    draftAndPublish: true;
+    comment: '';
+  };
+  attributes: {
+    sender: Attribute.Relation<
+      'plugin::metajob-strapi.message',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    receiver: Attribute.Relation<
+      'plugin::metajob-strapi.message',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    message: Attribute.RichText & Attribute.Required;
+    medias: Attribute.Media;
+    read: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    send_notification: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginMetajobStrapiCompany extends Schema.CollectionType {
+  collectionName: 'companies';
+  info: {
+    singularName: 'company';
+    pluralName: 'companies';
+    displayName: 'Companies';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    tagline: Attribute.String;
+    email: Attribute.String;
+    phone: Attribute.String;
+    website: Attribute.String;
+    company_size: Attribute.String;
+    revenue: Attribute.String;
+    logo: Attribute.Media;
+    industry: Attribute.Relation<
+      'plugin::metajob-strapi.company',
+      'oneToOne',
+      'api::category.category'
+    >;
+    slug: Attribute.UID & Attribute.Required;
+    owner: Attribute.Relation<
+      'plugin::metajob-strapi.company',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    location: Attribute.JSON &
+      Attribute.CustomField<'plugin::google-maps.location-picker'>;
+    social_links: Attribute.Component<'shared.social-medias', true>;
+    about: Attribute.RichText;
+    avg_price: Attribute.String;
+    seo: Attribute.Component<'shared.seo'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.company',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.company',
       'oneToOne',
       'admin::user'
     > &
@@ -918,60 +1121,6 @@ export interface ApiBlogDetailBlogDetail extends Schema.SingleType {
   };
 }
 
-export interface ApiBookmarkBookmark extends Schema.CollectionType {
-  collectionName: 'bookmarks';
-  info: {
-    singularName: 'bookmark';
-    pluralName: 'bookmarks';
-    displayName: 'Bookmark';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    company: Attribute.Relation<
-      'api::bookmark.bookmark',
-      'oneToOne',
-      'api::company.company'
-    >;
-    owner: Attribute.Relation<
-      'api::bookmark.bookmark',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    type: Attribute.Enumeration<['resume', 'list', 'company']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'resume'>;
-    resume: Attribute.Relation<
-      'api::bookmark.bookmark',
-      'oneToOne',
-      'api::resume.resume'
-    >;
-    note: Attribute.Text;
-    list: Attribute.Relation<
-      'api::bookmark.bookmark',
-      'oneToOne',
-      'api::list.list'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::bookmark.bookmark',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::bookmark.bookmark',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
@@ -1046,102 +1195,6 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'api::category.category'
     >;
     locale: Attribute.String;
-  };
-}
-
-export interface ApiChatChat extends Schema.CollectionType {
-  collectionName: 'chats';
-  info: {
-    singularName: 'chat';
-    pluralName: 'chats';
-    displayName: 'Chat';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    sender: Attribute.Relation<
-      'api::chat.chat',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    receiver: Attribute.Relation<
-      'api::chat.chat',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    list: Attribute.Relation<'api::chat.chat', 'oneToOne', 'api::list.list'>;
-    chat_blocked: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    messages: Attribute.Relation<
-      'api::chat.chat',
-      'oneToMany',
-      'api::message.message'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::chat.chat', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::chat.chat', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCompanyCompany extends Schema.CollectionType {
-  collectionName: 'companies';
-  info: {
-    singularName: 'company';
-    pluralName: 'companies';
-    displayName: 'Companies';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    tagline: Attribute.String;
-    email: Attribute.String;
-    phone: Attribute.String;
-    website: Attribute.String;
-    company_size: Attribute.String;
-    revenue: Attribute.String;
-    logo: Attribute.Media;
-    industry: Attribute.Relation<
-      'api::company.company',
-      'oneToOne',
-      'api::category.category'
-    >;
-    slug: Attribute.UID & Attribute.Required;
-    owner: Attribute.Relation<
-      'api::company.company',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    location: Attribute.JSON &
-      Attribute.CustomField<'plugin::google-maps.location-picker'>;
-    social_links: Attribute.Component<'shared.social-medias', true>;
-    about: Attribute.RichText;
-    avg_price: Attribute.String;
-    seo: Attribute.Component<'shared.seo'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::company.company',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::company.company',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
   };
 }
 
@@ -1578,7 +1631,7 @@ export interface ApiListList extends Schema.CollectionType {
     company: Attribute.Relation<
       'api::list.list',
       'oneToOne',
-      'api::company.company'
+      'plugin::metajob-strapi.company'
     >;
     status: Attribute.Enumeration<['open', 'closed', 'draft']> &
       Attribute.Required &
@@ -1669,57 +1722,6 @@ export interface ApiMembershipMembership extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::membership.membership',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiMessageMessage extends Schema.CollectionType {
-  collectionName: 'messages';
-  info: {
-    singularName: 'message';
-    pluralName: 'messages';
-    displayName: 'Messages';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    sender: Attribute.Relation<
-      'api::message.message',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    receiver: Attribute.Relation<
-      'api::message.message',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    message: Attribute.RichText & Attribute.Required;
-    medias: Attribute.Media;
-    chat_session: Attribute.Relation<
-      'api::message.message',
-      'manyToOne',
-      'api::chat.chat'
-    >;
-    read: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    send_notification: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::message.message',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::message.message',
       'oneToOne',
       'admin::user'
     > &
@@ -2259,14 +2261,15 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::metajob-strapi.job': PluginMetajobStrapiJob;
+      'plugin::metajob-strapi.bookmark': PluginMetajobStrapiBookmark;
+      'plugin::metajob-strapi.chat': PluginMetajobStrapiChat;
+      'plugin::metajob-strapi.message': PluginMetajobStrapiMessage;
+      'plugin::metajob-strapi.company': PluginMetajobStrapiCompany;
       'plugin::google-maps.config': PluginGoogleMapsConfig;
       'plugin::react-icons.iconlibrary': PluginReactIconsIconlibrary;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::blog-detail.blog-detail': ApiBlogDetailBlogDetail;
-      'api::bookmark.bookmark': ApiBookmarkBookmark;
       'api::category.category': ApiCategoryCategory;
-      'api::chat.chat': ApiChatChat;
-      'api::company.company': ApiCompanyCompany;
       'api::contact-list.contact-list': ApiContactListContactList;
       'api::dashboard-home.dashboard-home': ApiDashboardHomeDashboardHome;
       'api::form.form': ApiFormForm;
@@ -2275,7 +2278,6 @@ declare module '@strapi/types' {
       'api::list.list': ApiListList;
       'api::list-detail.list-detail': ApiListDetailListDetail;
       'api::membership.membership': ApiMembershipMembership;
-      'api::message.message': ApiMessageMessage;
       'api::package.package': ApiPackagePackage;
       'api::page.page': ApiPagePage;
       'api::post.post': ApiPostPost;

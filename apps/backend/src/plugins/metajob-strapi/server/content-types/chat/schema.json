@@ -31,12 +31,6 @@
       "type": "boolean",
       "default": false,
       "required": true
-    },
-    "messages": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::message.message",
-      "mappedBy": "chat_session"
     }
   }
 }

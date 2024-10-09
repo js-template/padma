@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * bookmark router
+ *  router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::bookmark.bookmark');
+module.exports = createCoreRouter('plugin::metajob-strapi.company');
