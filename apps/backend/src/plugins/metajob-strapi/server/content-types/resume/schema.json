@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resumes",
+  "info": {
+    "singularName": "resume",
+    "pluralName": "resumes",
+    "displayName": "Resume"
+  },
+  "options": {
+    "draftAndPublish": true,
+    "comment": ""
+  },
+  "attributes": {
+    "description": {
+      "type": "richtext"
+    }
+  }
+}

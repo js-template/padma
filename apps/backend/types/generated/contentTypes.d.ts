@@ -979,7 +979,7 @@ export interface PluginMetajobStrapiAppliedJob extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    list: Attribute.Relation<
+    job: Attribute.Relation<
       'plugin::metajob-strapi.applied-job',
       'oneToOne',
       'plugin::metajob-strapi.job'
