@@ -1,7 +1,7 @@
-import RegistrationPage from "@/components/auth-register"
-import { auth } from "@/context/auth"
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
+import { auth } from "@/context/auth"
+import RegisterBody from "./body"
 
 export const metadata: Metadata = {
    title: "Register - MetaJobs",
@@ -16,6 +16,6 @@ const Register = async () => {
       redirect("/dashboard/")
    }
 
-   return <RegistrationPage />
+   return <RegisterBody />
 }
 export default Register
