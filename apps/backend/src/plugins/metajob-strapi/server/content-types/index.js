@@ -7,6 +7,8 @@ const chatSchema = require("./chat/schema.json");
 const messageSchema = require("./message/schema.json");
 
 const companySchema = require("./company/schema.json");
+const jobDetailsSchema = require("./job-detail/schema.json");
+
 module.exports = {
   job: {
     schema: jobSchema,
@@ -22,5 +24,8 @@ module.exports = {
   },
   company: {
     schema: companySchema,
+  },
+  "job-detail": {
+    schema: jobDetailsSchema,
   },
 };

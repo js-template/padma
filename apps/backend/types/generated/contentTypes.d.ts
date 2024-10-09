@@ -919,6 +919,47 @@ export interface PluginMetajobStrapiCompany extends Schema.CollectionType {
   };
 }
 
+export interface PluginMetajobStrapiJobDetail extends Schema.SingleType {
+  collectionName: 'job_details';
+  info: {
+    singularName: 'job-detail';
+    pluralName: 'job-details';
+    displayName: 'Job Details';
+  };
+  options: {
+    draftAndPublish: true;
+    comment: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    blocks: Attribute.DynamicZone<
+      ['shared.spacing', 'shared.empty', 'component.page-title']
+    >;
+    sidebar: Attribute.Enumeration<
+      ['Left Sidebar', 'Right Sidebar', 'No Sidebar', 'Both Sidebar']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'Right Sidebar'>;
+    leftSidebar: Attribute.DynamicZone<['component.page-title']>;
+    relatedLists: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.job-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.job-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginGoogleMapsConfig extends Schema.SingleType {
   collectionName: 'google_maps_configs';
   info: {
@@ -2265,6 +2306,7 @@ declare module '@strapi/types' {
       'plugin::metajob-strapi.chat': PluginMetajobStrapiChat;
       'plugin::metajob-strapi.message': PluginMetajobStrapiMessage;
       'plugin::metajob-strapi.company': PluginMetajobStrapiCompany;
+      'plugin::metajob-strapi.job-detail': PluginMetajobStrapiJobDetail;
       'plugin::google-maps.config': PluginGoogleMapsConfig;
       'plugin::react-icons.iconlibrary': PluginReactIconsIconlibrary;
       'plugin::i18n.locale': PluginI18NLocale;
