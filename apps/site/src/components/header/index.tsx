@@ -1,7 +1,7 @@
 "use client"
 import MenuIcon from "@mui/icons-material/Menu"
 import { LoadingButton } from "@mui/lab"
-import { Avatar, Divider, Stack, Tooltip, useTheme } from "@mui/material"
+import { Avatar, Collapse, List, ListItem, Popover, Stack, Tooltip, useTheme } from "@mui/material"
 import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
@@ -43,6 +43,43 @@ const Header = () => {
    // *** Language Menu ***
    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
    const openLang = Boolean(anchorEl)
+
+   // submenu -stated
+   const [anchorElSub, setAnchorElSub] = React.useState<null | HTMLElement>(null)
+   const [activeMenu, setActiveMenu] = React.useState<number | null>(null)
+   const [activeMobileMenu, setActiveMobileMenu] = React.useState<number | null>(null)
+
+   //===start submenu functions
+   // Handle opening the menu on hover
+   const handleSubMenuOpen = (event: React.MouseEvent<HTMLElement>, index: number) => {
+      setAnchorElSub(event.currentTarget)
+      setActiveMenu(index)
+   }
+   // Close the menu when mouse leaves both parent and child
+   const handleSubMenuClose = () => {
+      setAnchorElSub(null)
+      setActiveMenu(null)
+   }
+   // Only keep the menu open when the user hovers over the popover
+   const handleSubPopoverEnter = () => {
+      // Keep the menu open by resetting state
+      setActiveMenu(activeMenu)
+   }
+   // Close when the mouse leaves the Popover
+   const handleSubPopoverLeave = () => {
+      setAnchorElSub(null)
+      setActiveMenu(null)
+   }
+   // Toggle submenu for mobile view
+   const handleMenuMobileClick = (index: number) => {
+      setActiveMobileMenu((prev) => (prev === index ? null : index)) // Toggle submenu
+   }
+   // Close submenu for mobile view
+   const handleMenuMobileClose = () => {
+      setActiveMobileMenu(null)
+   }
+   //===close submenu functions
+
    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       setAnchorEl(event.currentTarget)
    }
@@ -101,7 +138,7 @@ const Header = () => {
                      <Image src={logo} alt='logo' width={140} height={38} />
                   </Box>
                )}
-
+               {/* mobile menu  */}
                <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                   <IconButton
                      size='large'
@@ -125,35 +162,99 @@ const Header = () => {
                         horizontal: "left"
                      }}
                      open={Boolean(anchorElNav)}
-                     onClose={handleCloseNavMenu}
+                     onClose={() => {
+                        handleCloseNavMenu()
+                        handleMenuMobileClose()
+                     }}
                      sx={{
                         display: { xs: "block", md: "none" }
                      }}>
                      {_.map(layoutData?.MainMenu, (menuItem, index) => (
-                        <MenuItem key={index} onClick={handleCloseNavMenu}>
-                           <Typography
-                              key={index}
-                              onClick={handleCloseNavMenu}
-                              display={"block"}
-                              component={NextLink}
-                              href={menuItem?.link ?? "/"}
-                              target={menuItem?.target ?? "_self"}
-                              //  color={currentPath === menu?.link ? 'primary.main' : 'text.disabled'}
-                              sx={{
-                                 textDecoration: "none",
-                                 fontSize: 16,
-                                 fontWeight: 500,
-                                 "&:hover": {
-                                    color: "primary.main"
-                                 },
-                                 color:
-                                    currentPath === menuItem?.link
-                                       ? (theme) => theme.palette.primary.main
-                                       : (theme) => hexToRGBA(theme.palette.text.primary, 0.9)
+                        <Box key={index}>
+                           <MenuItem
+                              onClick={() => {
+                                 if (menuItem?.child && menuItem?.child?.length) {
+                                    handleMenuMobileClick(index)
+                                 } else {
+                                    handleCloseNavMenu()
+                                 }
                               }}>
-                              {menuItem?.label ?? "No title"}
-                           </Typography>
-                        </MenuItem>
+                              <Typography
+                                 display={"block"}
+                                 component={menuItem?.child && menuItem?.child?.length > 0 ? "div" : NextLink} // Use "div" if child items are present
+                                 href={
+                                    menuItem?.child && menuItem?.child?.length > 0 ? undefined : (menuItem?.link ?? "/")
+                                 }
+                                 target={
+                                    menuItem?.child && menuItem?.child?.length > 0
+                                       ? undefined
+                                       : (menuItem?.target ?? "_self")
+                                 }
+                                 sx={{
+                                    textDecoration: "none",
+                                    fontSize: 16,
+                                    fontWeight: 500,
+                                    "&:hover": {
+                                       color: "primary.main"
+                                    },
+                                    color:
+                                       currentPath === menuItem?.link
+                                          ? (theme) => theme.palette.primary.main
+                                          : (theme) => hexToRGBA(theme.palette.text.primary, 0.9),
+                                    display: "flex",
+                                    alignItems: "center"
+                                 }}>
+                                 {menuItem?.label ?? "No title"}
+                                 {menuItem?.child && menuItem?.child?.length > 0 && (
+                                    <CIcon
+                                       icon='ri:arrow-down-s-line'
+                                       sx={{
+                                          color: theme.palette.text.secondary,
+                                          transform: activeMobileMenu === index ? "rotate(180deg)" : "rotate(0deg)",
+                                          transition: theme.transitions.create("transform", {
+                                             duration: theme.transitions.duration.shortest
+                                          })
+                                       }}
+                                    />
+                                 )}
+                              </Typography>
+                           </MenuItem>
+                           {/* Submenu: Only display if there are child items */}
+                           {menuItem?.child && menuItem?.child?.length > 0 && (
+                              <Collapse in={activeMobileMenu === index} timeout='auto' unmountOnExit>
+                                 <List component='div' disablePadding>
+                                    {menuItem?.child?.map((childItem, childIndex) => (
+                                       <ListItem
+                                          key={childIndex}
+                                          onClick={() => {
+                                             handleCloseNavMenu()
+                                             handleMenuMobileClose()
+                                          }}
+                                          component={NextLink}
+                                          href={childItem?.link}
+                                          target={childItem?.target ?? "_self"}
+                                          sx={{
+                                             display: "flex",
+                                             justifyContent: "center",
+                                             color: theme.palette.text.secondary,
+                                             ":hover": {
+                                                background: theme.palette.background.default,
+                                                color: theme.palette.primary.main
+                                             }
+                                          }}>
+                                          <Typography
+                                             sx={{
+                                                fontSize: "16px",
+                                                fontWeight: 400
+                                             }}>
+                                             {childItem?.label ?? "No title"}
+                                          </Typography>
+                                       </ListItem>
+                                    ))}
+                                 </List>
+                              </Collapse>
+                           )}
+                        </Box>
                      ))}
                   </Menu>
                </Box>
@@ -168,6 +269,7 @@ const Header = () => {
                      <Image src={logo} alt='logo' width={140} height={38} />
                   </Box>
                )}
+               {/* desktop menu  */}
                <Box
                   sx={{
                      flexGrow: 1,
@@ -175,33 +277,83 @@ const Header = () => {
                      justifyContent: "center"
                   }}>
                   <Stack direction={"row"} gap={3}>
-                     {_.map(layoutData?.MainMenu, (item, index) => (
-                        <Typography
-                           key={index}
-                           onClick={handleCloseNavMenu}
-                           display={"block"}
-                           component={NextLink}
-                           href={item?.link ?? "/"}
-                           target={item?.target ?? "_self"}
-                           //   color={currentPath === page?.link ? 'primary.main' : 'text.disabled'}
-                           sx={{
-                              textDecoration: "none",
-                              fontSize: 16,
-                              fontWeight: 500,
-                              "&:hover": {
-                                 color: "primary.main"
-                              },
-                              color:
-                                 currentPath === item?.link
-                                    ? (theme) => theme.palette.primary.main
-                                    : (theme) => hexToRGBA(theme.palette.text.primary, 0.9)
-                           }}>
-                           {item?.label ?? "No title"}
-                        </Typography>
+                     {layoutData?.MainMenu?.map((item, index) => (
+                        <Box key={index} sx={{ position: "relative" }} onMouseLeave={handleSubMenuClose}>
+                           {/* Main Menu Item */}
+                           <Typography
+                              // onMouseEnter={(event) => item?.child?.length && handleSubMenuOpen(event, index)}
+                              onClick={(event: any) => item?.child?.length && handleSubMenuOpen(event, index)}
+                              component={item?.child && item?.child?.length > 0 ? "div" : NextLink}
+                              href={item?.child && item?.child?.length > 0 ? undefined : (item?.link ?? "/")}
+                              target={item?.child && item?.child?.length > 0 ? undefined : (item?.target ?? "_self")}
+                              sx={{
+                                 textDecoration: "none",
+                                 fontSize: 16,
+                                 fontWeight: 500,
+                                 "&:hover": { color: "primary.main" },
+                                 color: (theme) => theme.palette.text.primary,
+                                 display: "flex",
+                                 alignItems: "center",
+                                 cursor: "pointer"
+                              }}>
+                              {item?.label ?? "No title"}
+                              {item?.child && item?.child?.length > 0 && (
+                                 <CIcon
+                                    icon='ri:arrow-down-s-line'
+                                    sx={{
+                                       color: theme.palette.text.secondary,
+                                       transform:
+                                          anchorElSub && activeMenu === index ? "rotate(180deg)" : "rotate(0deg)",
+                                       transition: theme.transitions.create("transform", {
+                                          duration: theme.transitions.duration.shortest
+                                       })
+                                    }}
+                                 />
+                              )}
+                           </Typography>
+
+                           {/* Submenu - Only show if there are child items */}
+                           {item?.child && item?.child?.length > 0 && (
+                              <Popover
+                                 open={activeMenu === index}
+                                 anchorEl={anchorElSub}
+                                 onClose={handleSubMenuClose}
+                                 anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                                 transformOrigin={{ vertical: "top", horizontal: "left" }}
+                                 onMouseEnter={handleSubPopoverEnter} // Keep the popover open when hovering
+                                 onMouseLeave={handleSubPopoverLeave} // Close when mouse leaves popover
+                                 sx={{
+                                    mt: 1,
+                                    p: 1,
+                                    boxShadow: 3
+                                 }}>
+                                 <List sx={{ minWidth: "180px" }}>
+                                    {item.child.map((child, childIndex) => (
+                                       <ListItem
+                                          onClick={handleSubMenuClose}
+                                          key={childIndex}
+                                          component={NextLink}
+                                          href={child?.link}
+                                          target={child?.target ?? "_self"}
+                                          sx={{
+                                             fontSize: "16px",
+                                             fontWeight: 400,
+                                             color: theme.palette.text.primary,
+                                             ":hover": {
+                                                background: theme.palette.background.default,
+                                                color: theme.palette.primary.main
+                                             }
+                                          }}>
+                                          {child.label ?? "No title"}
+                                       </ListItem>
+                                    ))}
+                                 </List>
+                              </Popover>
+                           )}
+                        </Box>
                      ))}
                   </Stack>
                </Box>
-
                <Box sx={{ flexGrow: 0 }}>
                   {status === "loading" && <LoadingButton loading variant='text'></LoadingButton>}
                   {status === "unauthenticated" && (
