@@ -25,8 +25,13 @@ import toast from "react-hot-toast"
 import { CIcon } from "@padma/metajob-ui"
 import { useGlobalContext } from "@/context/store"
 import { getLanguageValue } from "@/utils/common"
+import useSWR from "swr"
+import { fetcher } from "@/lib/swr-fetcher"
 
-const Header = () => {
+type Props = {
+   language?: string
+}
+const Header = ({ language }: Props) => {
    const theme = useTheme()
 
    const [loading, setLoading] = React.useState(false)
@@ -34,6 +39,7 @@ const Header = () => {
    const { lang, changeLang, changeDirection, layoutData } = useGlobalContext()
    const currentPath = usePathname()
    const { data, status } = useSession()
+
    const logo =
       mode === "light"
          ? layoutData?.light_logo?.logo?.data?.attributes?.url
@@ -114,6 +120,26 @@ const Header = () => {
          })
       })
    }
+
+   const queryParams = {
+      populate: {
+         avatar: {
+            fields: ["url"]
+         }
+      },
+      fields: ["id"],
+      publicationState: "live",
+      locale: language ? [language] : ["en"]
+   }
+
+   // fetch user avatar data
+   const userId = data?.user?.id
+   const queryString = encodeURIComponent(JSON.stringify(queryParams))
+   const apiUrl = userId ? `/api/find?model=api/users/${userId}&query=${queryString}&cache=no-store` : null
+
+   const { data: userData } = useSWR(apiUrl, fetcher)
+   const userAvatar = userData?.avatar?.url || ""
+   const userName = data?.user?.name || ""
 
    return (
       <AppBar
@@ -580,9 +606,14 @@ const Header = () => {
                                     sx={{ display: "flex", alignItems: "center", gap: 1, cursor: "pointer" }}>
                                     <IconButton sx={{ p: 0 }}>
                                        <Avatar
-                                          alt={data.user.name ?? "user-avatar"}
-                                          src={data?.user?.image ?? "https://placehold.co/40"}
-                                       />
+                                          src={userAvatar ?? "https://placehold.co/40"}
+                                          alt={userName ?? "user-avatar"}
+                                          sx={{
+                                             width: 40,
+                                             height: 40
+                                          }}>
+                                          {userName?.charAt(0) || ""}
+                                       </Avatar>
                                     </IconButton>
                                     {/* drop-menu-indicator icon  */}
                                     <Box
@@ -652,10 +683,16 @@ const Header = () => {
                            {_.map(layoutData?.userMenu, (setting, index) => (
                               <MenuItem
                                  key={index}
-                                 onClick={handleCloseUserMenu}
-                                 component={NextLink}
-                                 href={setting?.link}
-                                 target={setting?.target ?? "_self"}
+                                 onClick={() => {
+                                    if (setting?.label === "Logout") {
+                                       LogOutHandler()
+                                    } else {
+                                       handleCloseUserMenu()
+                                    }
+                                 }}
+                                 component={setting?.label === "Logout" ? "div" : NextLink}
+                                 href={setting?.label === "Logout" ? undefined : setting?.link}
+                                 target={setting?.label === "Logout" ? undefined : (setting?.target ?? "_self")}
                                  sx={{
                                     gap: 1,
                                     color: theme.palette.text.primary,
@@ -673,15 +710,7 @@ const Header = () => {
                                  {setting?.icon && (
                                     <CIcon icon={setting?.icon} sx={{ color: theme.palette.text.primary + "60" }} />
                                  )}
-                                 <Typography
-                                    variant='body1'
-                                    onClick={() => {
-                                       if (setting?.label === "Logout") {
-                                          LogOutHandler()
-                                       }
-                                    }}>
-                                    {setting?.label}
-                                 </Typography>
+                                 <Typography variant='body1'>{setting?.label}</Typography>
                               </MenuItem>
                            ))}
                         </Menu>
