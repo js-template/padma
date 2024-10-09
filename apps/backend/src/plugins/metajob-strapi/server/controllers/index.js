@@ -1,9 +1,8 @@
 "use strict";
 
-const myController = require("./my-controller");
-const statsController = require("./stats-controller");
+// Import the job controller
+const jobController = require("./job");
 
 module.exports = {
-  myController,
-  statsController,
+  job: jobController,
 };

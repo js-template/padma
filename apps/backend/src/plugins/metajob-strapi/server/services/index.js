@@ -1,9 +1,8 @@
 "use strict";
 
-const myService = require("./my-service");
-const jobStats = require("./stats-service");
+// Import the job service
+const jobService = require("./job");
 
 module.exports = {
-  myService,
-  jobStats,
+  job: jobService,
 };

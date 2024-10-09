@@ -647,6 +647,75 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface PluginMetajobStrapiJob extends Schema.CollectionType {
+  collectionName: 'jobs';
+  info: {
+    singularName: 'job';
+    pluralName: 'jobs';
+    displayName: 'Jobs';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    startDate: Attribute.Date & Attribute.Required;
+    price: Attribute.Decimal & Attribute.Required;
+    description: Attribute.RichText;
+    category: Attribute.Relation<
+      'plugin::metajob-strapi.job',
+      'oneToOne',
+      'api::category.category'
+    >;
+    type: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        ['Full Time', 'Part Time', 'Contract Base', 'Freelance', 'Remote']
+      >;
+    vacancy: Attribute.Integer;
+    slug: Attribute.UID<'plugin::metajob-strapi.job', 'title'> &
+      Attribute.Required;
+    company: Attribute.Relation<
+      'plugin::metajob-strapi.job',
+      'oneToOne',
+      'api::company.company'
+    >;
+    status: Attribute.Enumeration<['open', 'closed', 'draft']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'draft'>;
+    endDate: Attribute.Date & Attribute.Required;
+    owner: Attribute.Relation<
+      'plugin::metajob-strapi.job',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    location: Attribute.JSON &
+      Attribute.CustomField<'plugin::google-maps.location-picker'>;
+    tags: Attribute.Relation<
+      'plugin::metajob-strapi.job',
+      'oneToMany',
+      'api::tag.tag'
+    >;
+    seo: Attribute.Component<'shared.seo'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.job',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.job',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginGoogleMapsConfig extends Schema.SingleType {
   collectionName: 'google_maps_configs';
   info: {
@@ -2189,6 +2258,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'plugin::metajob-strapi.job': PluginMetajobStrapiJob;
       'plugin::google-maps.config': PluginGoogleMapsConfig;
       'plugin::react-icons.iconlibrary': PluginReactIconsIconlibrary;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -1,5 +1,5 @@
-'use strict';
+"use strict";
 
 module.exports = ({ strapi }) => {
-  // register phase
+  strapi.log.info("Metajob-strapi plugin loaded");
 };
