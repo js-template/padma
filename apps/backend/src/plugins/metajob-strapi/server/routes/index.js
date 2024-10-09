@@ -8,4 +8,7 @@ module.exports = {
   company: require("./company"),
   "job-detail": require("./job-detail"),
   "applied-job": require("./applied-job"),
+  resume: require("./resume"),
+  skill: require("./skill"),
+  "job-category": require("./job-category"),
 };

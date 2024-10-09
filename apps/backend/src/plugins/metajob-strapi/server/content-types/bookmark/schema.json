@@ -31,15 +31,15 @@
     "resume": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::resume.resume"
+      "target": "plugin::metajob-strapi.resume"
     },
     "note": {
       "type": "text"
     },
-    "list": {
+    "job": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::list.list"
+      "target": "plugin::metajob-strapi.job"
     }
   }
 }

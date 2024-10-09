@@ -628,7 +628,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     resume: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToOne',
-      'api::resume.resume'
+      'plugin::metajob-strapi.resume'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -744,13 +744,13 @@ export interface PluginMetajobStrapiBookmark extends Schema.CollectionType {
     resume: Attribute.Relation<
       'plugin::metajob-strapi.bookmark',
       'oneToOne',
-      'api::resume.resume'
+      'plugin::metajob-strapi.resume'
     >;
     note: Attribute.Text;
-    list: Attribute.Relation<
+    job: Attribute.Relation<
       'plugin::metajob-strapi.bookmark',
       'oneToOne',
-      'api::list.list'
+      'plugin::metajob-strapi.job'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -999,6 +999,282 @@ export interface PluginMetajobStrapiAppliedJob extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+  };
+}
+
+export interface PluginMetajobStrapiResume extends Schema.CollectionType {
+  collectionName: 'resumes';
+  info: {
+    singularName: 'resume';
+    pluralName: 'resumes';
+    displayName: 'Resume';
+  };
+  options: {
+    draftAndPublish: true;
+    comment: '';
+  };
+  attributes: {
+    education: Attribute.Component<'component.experience', true>;
+    experience: Attribute.Component<'component.experience', true>;
+    description: Attribute.RichText;
+    user: Attribute.Relation<
+      'plugin::metajob-strapi.resume',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    portfolio: Attribute.Component<'block.portfolio', true>;
+    contact: Attribute.Component<'block.contact'>;
+    name: Attribute.String;
+    tagline: Attribute.Text;
+    about: Attribute.RichText;
+    showProfile: Attribute.Enumeration<['Show', 'Hide']>;
+    category: Attribute.Relation<
+      'plugin::metajob-strapi.resume',
+      'oneToOne',
+      'api::category.category'
+    >;
+    salary: Attribute.BigInteger;
+    salaryType: Attribute.Enumeration<
+      [
+        'Monthly',
+        'Weekly',
+        'Hourly',
+        'Daily',
+        'Annually',
+        'Per Project',
+        'Commission-based'
+      ]
+    >;
+    language: Attribute.Enumeration<
+      [
+        'Arabic',
+        'Bengali',
+        'Bulgarian',
+        'Catalan',
+        'Chinese (Simplified)',
+        'Chinese (Traditional)',
+        'Croatian',
+        'Czech',
+        'Danish',
+        'Dutch',
+        'English',
+        'Estonian',
+        'Filipino',
+        'Finnish',
+        'French',
+        'Galician',
+        'Georgian',
+        'German',
+        'Greek',
+        'Gujarati',
+        'Hebrew',
+        'Hindi',
+        'Hungarian',
+        'Icelandic',
+        'Indonesian',
+        'Irish',
+        'Italian',
+        'Japanese',
+        'Javanese',
+        'Kannada',
+        'Kazakh',
+        'Korean',
+        'Kurdish (Kurmanji)',
+        'Kyrgyz',
+        'Lao',
+        'Latin',
+        'Latvian',
+        'Lithuanian',
+        'Macedonian',
+        'Malay',
+        'Malayalam',
+        'Maltese',
+        'Maori',
+        'Marathi',
+        'Mongolian',
+        'Nepali',
+        'Norwegian',
+        'Pashto',
+        'Persian',
+        'Polish',
+        'Portuguese',
+        'Punjabi',
+        'Romanian',
+        'Russian',
+        'Serbian',
+        'Slovak',
+        'Slovenian',
+        'Somali',
+        'Spanish',
+        'Sundanese',
+        'Swahili',
+        'Swedish',
+        'Tamil',
+        'Telugu',
+        'Thai',
+        'Turkish',
+        'Ukrainian',
+        'Urdu',
+        'Uzbek',
+        'Vietnamese',
+        'Welsh',
+        'Xhosa',
+        'Yiddish',
+        'Yoruba',
+        'Zulu'
+      ]
+    >;
+    experienceTime: Attribute.Enumeration<
+      ['Freshers', 'Junior', 'Mid-Level', 'Senior', 'Lead']
+    >;
+    qualification: Attribute.Enumeration<
+      [
+        'Bachelor\u2019s Degree',
+        'Master\u2019s Degree',
+        'Doctoral Degree (Ph.D.)',
+        'Associate Degree',
+        'Diploma',
+        'Certificate'
+      ]
+    >;
+    slug: Attribute.UID<'plugin::metajob-strapi.resume', 'name'>;
+    seo: Attribute.Component<'shared.seo'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.resume',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.resume',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginMetajobStrapiSkill extends Schema.CollectionType {
+  collectionName: 'skills';
+  info: {
+    singularName: 'skill';
+    pluralName: 'skills';
+    displayName: 'Skill';
+  };
+  options: {
+    draftAndPublish: true;
+    comment: '';
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String;
+    value: Attribute.UID<'plugin::metajob-strapi.skill', 'title'> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.skill',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.skill',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'plugin::metajob-strapi.skill',
+      'oneToMany',
+      'plugin::metajob-strapi.skill'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface PluginMetajobStrapiJobCategory extends Schema.CollectionType {
+  collectionName: 'job_categories';
+  info: {
+    singularName: 'job-category';
+    pluralName: 'job-categories';
+    displayName: 'Job Category';
+  };
+  options: {
+    draftAndPublish: true;
+    comment: '';
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    image: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    link: Attribute.Component<'component.link'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Attribute.UID &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    seo: Attribute.Component<'shared.seo'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.job-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.job-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'plugin::metajob-strapi.job-category',
+      'oneToMany',
+      'plugin::metajob-strapi.job-category'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -2079,161 +2355,6 @@ export interface ApiPrivatePagePrivatePage extends Schema.CollectionType {
   };
 }
 
-export interface ApiResumeResume extends Schema.CollectionType {
-  collectionName: 'resumes';
-  info: {
-    singularName: 'resume';
-    pluralName: 'resumes';
-    displayName: 'Resume';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    education: Attribute.Component<'component.experience', true>;
-    experience: Attribute.Component<'component.experience', true>;
-    description: Attribute.RichText;
-    user: Attribute.Relation<
-      'api::resume.resume',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    portfolio: Attribute.Component<'block.portfolio', true>;
-    contact: Attribute.Component<'block.contact'>;
-    name: Attribute.String;
-    tagline: Attribute.Text;
-    about: Attribute.RichText;
-    showProfile: Attribute.Enumeration<['Show', 'Hide']>;
-    category: Attribute.Relation<
-      'api::resume.resume',
-      'oneToOne',
-      'api::category.category'
-    >;
-    salary: Attribute.BigInteger;
-    salaryType: Attribute.Enumeration<
-      [
-        'Monthly',
-        'Weekly',
-        'Hourly',
-        'Daily',
-        'Annually',
-        'Per Project',
-        'Commission-based'
-      ]
-    >;
-    language: Attribute.Enumeration<
-      [
-        'Arabic',
-        'Bengali',
-        'Bulgarian',
-        'Catalan',
-        'Chinese (Simplified)',
-        'Chinese (Traditional)',
-        'Croatian',
-        'Czech',
-        'Danish',
-        'Dutch',
-        'English',
-        'Estonian',
-        'Filipino',
-        'Finnish',
-        'French',
-        'Galician',
-        'Georgian',
-        'German',
-        'Greek',
-        'Gujarati',
-        'Hebrew',
-        'Hindi',
-        'Hungarian',
-        'Icelandic',
-        'Indonesian',
-        'Irish',
-        'Italian',
-        'Japanese',
-        'Javanese',
-        'Kannada',
-        'Kazakh',
-        'Korean',
-        'Kurdish (Kurmanji)',
-        'Kyrgyz',
-        'Lao',
-        'Latin',
-        'Latvian',
-        'Lithuanian',
-        'Macedonian',
-        'Malay',
-        'Malayalam',
-        'Maltese',
-        'Maori',
-        'Marathi',
-        'Mongolian',
-        'Nepali',
-        'Norwegian',
-        'Pashto',
-        'Persian',
-        'Polish',
-        'Portuguese',
-        'Punjabi',
-        'Romanian',
-        'Russian',
-        'Serbian',
-        'Slovak',
-        'Slovenian',
-        'Somali',
-        'Spanish',
-        'Sundanese',
-        'Swahili',
-        'Swedish',
-        'Tamil',
-        'Telugu',
-        'Thai',
-        'Turkish',
-        'Ukrainian',
-        'Urdu',
-        'Uzbek',
-        'Vietnamese',
-        'Welsh',
-        'Xhosa',
-        'Yiddish',
-        'Yoruba',
-        'Zulu'
-      ]
-    >;
-    experienceTime: Attribute.Enumeration<
-      ['Freshers', 'Junior', 'Mid-Level', 'Senior', 'Lead']
-    >;
-    qualification: Attribute.Enumeration<
-      [
-        'Bachelor\u2019s Degree',
-        'Master\u2019s Degree',
-        'Doctoral Degree (Ph.D.)',
-        'Associate Degree',
-        'Diploma',
-        'Certificate'
-      ]
-    >;
-    slug: Attribute.UID<'api::resume.resume', 'name'>;
-    seo: Attribute.Component<'shared.seo'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::resume.resume',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::resume.resume',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiReviewReview extends Schema.CollectionType {
   collectionName: 'reviews';
   info: {
@@ -2350,6 +2471,9 @@ declare module '@strapi/types' {
       'plugin::metajob-strapi.company': PluginMetajobStrapiCompany;
       'plugin::metajob-strapi.job-detail': PluginMetajobStrapiJobDetail;
       'plugin::metajob-strapi.applied-job': PluginMetajobStrapiAppliedJob;
+      'plugin::metajob-strapi.resume': PluginMetajobStrapiResume;
+      'plugin::metajob-strapi.skill': PluginMetajobStrapiSkill;
+      'plugin::metajob-strapi.job-category': PluginMetajobStrapiJobCategory;
       'plugin::google-maps.config': PluginGoogleMapsConfig;
       'plugin::react-icons.iconlibrary': PluginReactIconsIconlibrary;
       'plugin::i18n.locale': PluginI18NLocale;
@@ -2368,7 +2492,6 @@ declare module '@strapi/types' {
       'api::post.post': ApiPostPost;
       'api::post-category.post-category': ApiPostCategoryPostCategory;
       'api::private-page.private-page': ApiPrivatePagePrivatePage;
-      'api::resume.resume': ApiResumeResume;
       'api::review.review': ApiReviewReview;
       'api::sidebar.sidebar': ApiSidebarSidebar;
       'api::tag.tag': ApiTagTag;

@@ -9,6 +9,11 @@ const companyController = require("./company");
 const jobDetails = require("./job-detail");
 
 const appliedJob = require("./applied-job");
+const resumeController = require("./resume");
+
+const skillController = require("./skill");
+const jobCategory = require("./job-category");
+
 module.exports = {
   job: jobController,
   bookmark: bookmarkController,
@@ -17,4 +22,7 @@ module.exports = {
   company: companyController,
   "job-detail": jobDetails,
   "applied-job": appliedJob,
+  resume: resumeController,
+  skill: skillController,
+  "job-category": jobCategory,
 };

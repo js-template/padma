@@ -9,6 +9,12 @@ const messageSchema = require("./message/schema.json");
 const companySchema = require("./company/schema.json");
 const jobDetailsSchema = require("./job-detail/schema.json");
 const jobAppliedSchema = require("./applied-job/schema.json");
+
+const resumeSchema = require("./resume/schema.json");
+
+const skillSchema = require("./skill/schema.json");
+const jobCategorySchema = require("./job-category/schema.json");
+
 module.exports = {
   job: {
     schema: jobSchema,
@@ -30,5 +36,14 @@ module.exports = {
   },
   "applied-job": {
     schema: jobAppliedSchema,
+  },
+  resume: {
+    schema: resumeSchema,
+  },
+  skill: {
+    schema: skillSchema,
+  },
+  "job-category": {
+    schema: jobCategorySchema,
   },
 };

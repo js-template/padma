@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * resume service
+ *  service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::resume.resume');
+module.exports = createCoreService('plugin::metajob-strapi.job-category');
