@@ -15,13 +15,31 @@ Padma is a comprehensive full-stack listing solution designed to be flexible and
 
 ---
 
-## **Project Goal**
+<h2>Project Goal</h2>
 
-| Theme Name       | Type                        | Status      |
-|------------------|-----------------------------|-------------|
-| **Metajob**      | [Job Board Solution ]()        | Released    |
-| **Metaads**      | Classified Ads Listing       | In Plan     |
-| **Metaproperty** | Property Listing Solution    | In Plan     |
+<table style="width:100%;">
+    <tr>
+        <th>Theme Name</th>
+        <th>Type</th>
+        <th>Status</th>
+    </tr>
+    <tr>
+        <td><strong>Metajob</strong></td>
+        <td><a href="#">Job Board Solution</a></td>
+        <td>Released</td>
+    </tr>
+    <tr>
+        <td><strong>Metaads</strong></td>
+        <td>Classified Ads Listing</td>
+        <td>In Plan</td>
+    </tr>
+    <tr>
+        <td><strong>Metaproperty</strong></td>
+        <td>Property Listing Solution</td>
+        <td>In Plan</td>
+    </tr>
+</table>
+
 
 ---
 

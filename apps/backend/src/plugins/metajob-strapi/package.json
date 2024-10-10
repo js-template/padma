@@ -6,19 +6,17 @@
     "name": "metajob-strapi",
     "description": "Description of Metajob Strapi plugin",
     "kind": "plugin",
-    "displayName": "Metajob Strapi"
+    "displayName": "Metajob"
   },
   "dependencies": {
     "@strapi/design-system": "^1.6.3",
     "@strapi/helper-plugin": "^4.6.0",
     "@strapi/icons": "^1.6.3",
-    "prop-types": "^15.7.2"
-  },
-  "devDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "prop-types": "^15.7.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-router-dom": "^5.3.4",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.11"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",

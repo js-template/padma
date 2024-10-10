@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_table_applied_jobs",
+  "info": {
+    "displayName": "Applied Jobs",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "enableSearch": {
+      "type": "boolean"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    }
+  }
+}

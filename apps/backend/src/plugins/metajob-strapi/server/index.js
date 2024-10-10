@@ -11,15 +11,15 @@ const middlewares = require("./middlewares");
 const policies = require("./policies");
 const services = require("./services");
 
-module.exports = {
+module.exports = () => ({
   register,
   bootstrap,
   destroy,
   config,
-  controllers,
   routes,
+  controllers,
   services,
   contentTypes,
   policies,
   middlewares,
-};
+});

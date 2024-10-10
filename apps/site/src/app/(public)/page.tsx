@@ -3,18 +3,32 @@ import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import type { Metadata } from "next"
 import DynamicBlockRenderer from "./body"
 import React from "react"
+import { getLanguageFromCookie } from "@/utils/language"
 
 // *** generate metadata for the page
 export async function generateMetadata(): Promise<Metadata> {
-   // const language = getLanguageFromCookie();
-   // fetch data
-   // FIXME: Need only poplate seo not full data
+   const language = getLanguageFromCookie()
+   // *** fetch seo data
    const product = await find(
       "api/home-page",
       {
-         populate: "deep",
-         publicationState: "live"
-         //locale: [language]
+         populate: {
+            seo: {
+               fields: [
+                  "metaTitle",
+                  "metaDescription",
+                  "metaImage",
+                  "metaSocial",
+                  "keywords",
+                  "metaRobots",
+                  "structuredData",
+                  "metaViewport",
+                  "canonicalURL"
+               ]
+            }
+         },
+         publicationState: "live",
+         locale: language ? [language] : ["en"]
       },
       "force-cache"
    )
@@ -23,12 +37,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
+   const language = getLanguageFromCookie()
+
    const { data, error } = await find(
       "api/home-page",
       {
          populate: "deep",
          publicationState: "live",
-         locale: ["en"]
+         locale: language ? [language] : ["en"]
       },
       "no-store"
    )
@@ -39,7 +55,7 @@ export default async function Home() {
 
    return (
       <>
-         <DynamicBlockRenderer initialData={data} />
+         <DynamicBlockRenderer initialData={data} language={language} />
 
          {/* JSON_LD for SEO */}
          {/* {data?.data?.attributes?.seo?.structuredData && (

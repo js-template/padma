@@ -92,7 +92,7 @@ export interface BlockCompanyCard extends Schema.Component {
     companies: Attribute.Relation<
       'block.company-card',
       'oneToMany',
-      'api::company.company'
+      'plugin::metajob-strapi.company'
     >;
   };
 }
@@ -184,6 +184,12 @@ export interface BlockManageCompanies extends Schema.Component {
       'api::form.form'
     >;
     addButtonText: Attribute.String;
+    editButtonText: Attribute.String;
+    perPageText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Showing per page'>;
+    tableConfig: Attribute.Component<'config.header-config'> &
+      Attribute.Required;
   };
 }
 
@@ -195,16 +201,31 @@ export interface BlockManageLists extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    enableSearch: Attribute.Boolean;
-    tableConfig: Attribute.Component<'config.header-config'>;
-    empty: Attribute.Component<'shared.empty'>;
-    style: Attribute.Component<'component.style-section'>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Manage Lists'>;
+    enableSearch: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    tableConfig: Attribute.Component<'config.header-config'> &
+      Attribute.Required;
+    empty: Attribute.Component<'shared.empty'> & Attribute.Required;
     tableHead: Attribute.Component<'config.header-field', true> &
+      Attribute.Required &
       Attribute.SetMinMax<{
-        min: 4;
+        min: 6;
         max: 6;
       }>;
+    form: Attribute.Relation<
+      'block.manage-lists',
+      'oneToOne',
+      'api::form.form'
+    >;
+    addButtonText: Attribute.String;
+    editButtonText: Attribute.String;
+    perPageText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Showing per page'>;
   };
 }
 
@@ -517,8 +538,12 @@ export interface ConfigHeaderConfig extends Schema.Component {
     description: '';
   };
   attributes: {
-    enableEdit: Attribute.Boolean;
-    enableDelete: Attribute.Boolean;
+    enableEdit: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    enableDelete: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
     tableHeader: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -546,9 +571,10 @@ export interface ConfigHeaderField extends Schema.Component {
     description: '';
   };
   attributes: {
-    label: Attribute.String;
-    sort: Attribute.Boolean & Attribute.DefaultTo<true>;
+    label: Attribute.String & Attribute.Required & Attribute.DefaultTo<'Name'>;
+    sort: Attribute.Boolean & Attribute.DefaultTo<false>;
     align: Attribute.Enumeration<['left', 'right', 'center']> &
+      Attribute.Required &
       Attribute.DefaultTo<'left'>;
   };
 }
@@ -556,13 +582,37 @@ export interface ConfigHeaderField extends Schema.Component {
 export interface ConfigMessage extends Schema.Component {
   collectionName: 'components_config_messages';
   info: {
-    displayName: 'message';
+    displayName: 'Message';
     icon: 'arrowRight';
+    description: '';
   };
   attributes: {
-    title: Attribute.String;
-    enableSearch: Attribute.Boolean;
-    style: Attribute.Component<'component.style-section'>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Messages'>;
+    enableSearch: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    empty_messages: Attribute.Component<'shared.empty'> & Attribute.Required;
+    empty_chat: Attribute.Component<'shared.empty'> & Attribute.Required;
+    saveButtonText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Save'>;
+    editActionText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Edit'>;
+    copyActionText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Copy'>;
+    searchPlaceholder: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Search'>;
+    sendMessagePlaceholder: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Type Something'>;
+    cancelButtonText: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Cancel'>;
   };
 }
 
@@ -1132,8 +1182,10 @@ export interface SharedEmpty extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
+    title: Attribute.String & Attribute.Required & Attribute.DefaultTo<'Title'>;
+    description: Attribute.Text &
+      Attribute.Required &
+      Attribute.DefaultTo<'Description'>;
   };
 }
 
@@ -1233,6 +1285,20 @@ export interface SharedSpacing extends Schema.Component {
       Attribute.SetMinMax<{
         min: 0;
       }>;
+  };
+}
+
+export interface TableAppliedJobs extends Schema.Component {
+  collectionName: 'components_table_applied_jobs';
+  info: {
+    displayName: 'Applied Jobs';
+    icon: 'bulletList';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    enableSearch: Attribute.Boolean;
+    style: Attribute.Component<'component.style-section'>;
   };
 }
 
@@ -1542,6 +1608,7 @@ declare module '@strapi/types' {
       'shared.seo': SharedSeo;
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
+      'table.applied-jobs': TableAppliedJobs;
       'table.bookmark': TableBookmark;
       'table.meta': TableMeta;
       'table.pricing': TablePricing;

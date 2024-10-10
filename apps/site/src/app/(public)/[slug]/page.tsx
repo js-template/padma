@@ -1,11 +1,10 @@
+import { Fragment } from "react"
+import { notFound } from "next/navigation"
+import { Metadata, ResolvingMetadata } from "next"
 import { blockComponentMapping } from "@/lib/component.map"
 import { find } from "@/lib/strapi"
-import { notFound } from "next/navigation"
-
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
-import { Metadata, ResolvingMetadata } from "next"
-import { Fragment } from "react"
 export const dynamicParams = false // true | false,
 
 // *** generate metadata type
@@ -17,35 +16,45 @@ type Props = {
 // *** generate metadata for the page
 export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
    const pageSlug = params?.slug
-   //const language = getLanguageFromCookie()
-   // fetch data
-   // const product = await find(
-   //    "api/pages",
-   //    {
-   //       filters: {
-   //          slug: {
-   //             $eq: pageSlug
-   //          }
-   //       },
-   //       populate: "deep",
-   //       publicationState: "live",
-   //       locale: [language]
-   //    },
-   //    "no-store"
-   // )
+   const language = getLanguageFromCookie()
 
-   // if (!product?.data?.data[0]?.attributes?.seo) {
-   //    return {
-   //       title: product?.data?.data[0]?.attributes?.title || "Title not found",
-   //       description: product?.data?.data[0]?.attributes?.description || "Description not found"
-   //    }
-   // }
-   // StrapiSeoFormate(product?.data?.data[0]?.attributes?.seo, pageSlug)
+   // ***fetch seo data
+   const product = await find(
+      "api/pages",
+      {
+         filters: {
+            slug: {
+               $eq: pageSlug
+            }
+         },
+         populate: {
+            seo: {
+               fields: [
+                  "metaTitle",
+                  "metaDescription",
+                  "metaImage",
+                  "metaSocial",
+                  "keywords",
+                  "metaRobots",
+                  "structuredData",
+                  "metaViewport",
+                  "canonicalURL"
+               ]
+            }
+         },
+         publicationState: "live",
+         locale: language ? [language] : ["en"]
+      },
+      "no-store"
+   )
 
-   return {
-      title: "Title not found",
-      description: "Description not found"
+   if (!product?.data?.data?.[0]?.attributes?.seo) {
+      return {
+         title: product?.data?.data?.[0]?.attributes?.title || "Title not found",
+         description: `Description ${product?.data?.data[0]?.attributes?.title}` || "Description not found"
+      }
    }
+   return StrapiSeoFormate(product?.data?.data?.[0]?.attributes?.seo, `/${pageSlug}`)
 }
 
 export default async function DynamicPages({
@@ -56,7 +65,7 @@ export default async function DynamicPages({
 }) {
    const pageSlug = params?.slug
 
-   // const language = getLanguageFromCookie();
+   const language = getLanguageFromCookie()
 
    const { data, error } = await find(
       "api/pages",
@@ -68,7 +77,7 @@ export default async function DynamicPages({
          },
          populate: "deep",
          publicationState: "live",
-         locale: ["en"]
+         locale: language ? [language] : ["en"]
       },
       "no-store"
    )
@@ -93,7 +102,7 @@ export default async function DynamicPages({
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
 
-               return <ComponentToRender key={index} data={block} {...block} />
+               return <ComponentToRender key={index} data={block} language={language} {...block} />
             }
             return null // Handle the case where the component mapping is missing
          })}

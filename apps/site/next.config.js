@@ -1,4 +1,6 @@
-/** @type {import("next").NextConfig} */
+/**
+ * @type {import("next").NextConfig}
+ */
 module.exports = {
    images: {
       remotePatterns: [
@@ -22,12 +24,5 @@ module.exports = {
       // removeConsole: {
       //   exclude: ["error"],
       // },
-   },
-   typescript: {
-      // !! WARN !!
-      // Dangerously allow production builds to successfully complete even if
-      // your project has type errors.
-      // !! WARN !!
-      ignoreBuildErrors: true
    }
 }

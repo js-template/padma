@@ -17,14 +17,14 @@ export default async function PublicLayout(props: { children: React.ReactNode })
       {
          populate: "deep",
          publicationState: "live",
-         locale: [language]
+         locale: language ? [language] : ["en"]
       },
       "no-store"
    )
 
    return (
       <main>
-         <Header />
+         <Header language={language} />
          <Box
             sx={
                {

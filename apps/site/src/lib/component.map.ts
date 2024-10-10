@@ -9,7 +9,8 @@ import {
    Spacing,
    AppliedList,
    FavoriteList,
-   MatchedList
+   MatchedList,
+   AppliedLists
 } from "@padma/metajob-ui"
 
 import {
@@ -69,7 +70,6 @@ export const blockComponentMapping = {
    "block.category-card2": {
       component: AllCategory
    },
-   // FIXME: "job-card should be list-card"
    "block.job-card": {
       component: ListCard
    },
@@ -123,5 +123,8 @@ export const dashboardBlocksMapping = {
    },
    "block.manage-companies": {
       component: ManageCompanies
+   },
+   "table.applied-jobs": {
+      component: AppliedLists
    }
 } as any

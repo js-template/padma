@@ -8,32 +8,50 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "default": "Manage Lists"
     },
     "enableSearch": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": true,
+      "required": true
     },
     "tableConfig": {
       "type": "component",
       "repeatable": false,
-      "component": "config.header-config"
+      "component": "config.header-config",
+      "required": true
     },
     "empty": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.empty"
-    },
-    "style": {
-      "type": "component",
-      "repeatable": false,
-      "component": "component.style-section"
+      "component": "shared.empty",
+      "required": true
     },
     "tableHead": {
       "type": "component",
       "repeatable": true,
       "component": "config.header-field",
       "max": 6,
-      "min": 4
+      "min": 6,
+      "required": true
+    },
+    "form": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::form.form"
+    },
+    "addButtonText": {
+      "type": "string"
+    },
+    "editButtonText": {
+      "type": "string"
+    },
+    "perPageText": {
+      "type": "string",
+      "required": true,
+      "default": "Showing per page"
     }
   }
 }
