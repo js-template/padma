@@ -1,6 +1,3 @@
-> **Important Note:**  
-> The products are still in the experimental phase and will be officially released soon. Please use with caution.
-
 
 # Padma- Multipurpose Listing Solution 
 
