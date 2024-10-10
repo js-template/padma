@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bookmarks",
+  "info": {
+    "singularName": "bookmark",
+    "pluralName": "bookmarks",
+    "displayName": "Bookmark",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::metajob-strapi.company"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["resume", "list", "company"],
+      "default": "resume",
+      "required": true
+    },
+    "resume": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::metajob-strapi.resume"
+    },
+    "note": {
+      "type": "text"
+    },
+    "job": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::metajob-strapi.job"
+    }
+  }
+}
