@@ -1,6 +1,4 @@
-import { auth } from "auth"
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
 import LoginBody from "./body"
 
 export const metadata: Metadata = {
@@ -13,12 +11,6 @@ type Props = {
 }
 
 const LoginPage = async ({ searchParams }: Props) => {
-   const session = await auth()
-
-   if (session) {
-      redirect("/dashboard")
-   }
-
    return <LoginBody error={searchParams?.error} callbackUrl={searchParams?.callbackUrl} />
 }
 
