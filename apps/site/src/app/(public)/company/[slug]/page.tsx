@@ -71,7 +71,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
    const language = getLanguageFromCookie()
    const session = await auth()
 
-   // *** get manage-ads data from strapi ***
+   // *** get company-details data from strapi ***
    const { data, error } = await find(
       "api/companies",
       {
