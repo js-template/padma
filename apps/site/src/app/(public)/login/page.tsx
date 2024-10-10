@@ -1,7 +1,7 @@
 import { auth } from "auth"
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-import AuthLogin from "@/components/auth-login"
+import LoginBody from "./body"
 
 export const metadata: Metadata = {
    title: "Login | MUI Next.js Boilerplate",
@@ -19,7 +19,7 @@ const LoginPage = async ({ searchParams }: Props) => {
       redirect("/dashboard")
    }
 
-   return <AuthLogin error={searchParams?.error} callbackUrl={searchParams?.callbackUrl} />
+   return <LoginBody error={searchParams?.error} callbackUrl={searchParams?.callbackUrl} />
 }
 
 export default LoginPage
