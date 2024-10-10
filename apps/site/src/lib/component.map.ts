@@ -9,7 +9,8 @@ import {
    Spacing,
    AppliedList,
    FavoriteList,
-   MatchedList
+   MatchedList,
+   AppliedLists
 } from "@padma/metajob-ui"
 
 import {
@@ -122,5 +123,8 @@ export const dashboardBlocksMapping = {
    },
    "block.manage-companies": {
       component: ManageCompanies
+   },
+   "table.applied-jobs": {
+      component: AppliedLists
    }
 } as any

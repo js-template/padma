@@ -984,6 +984,11 @@ export interface PluginMetajobStrapiAppliedJob extends Schema.CollectionType {
       'plugin::metajob-strapi.job'
     >;
     cover_letter: Attribute.RichText;
+    list: Attribute.Relation<
+      'plugin::metajob-strapi.applied-job',
+      'oneToOne',
+      'api::list.list'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

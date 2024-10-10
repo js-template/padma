@@ -1,10 +1,14 @@
 "use client"
 import { useEffect, useState } from "react"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import toast from "react-hot-toast"
-import { LoginCard } from "@padma/metajob-ui"
+import { LoginCard, PageLoader } from "@padma/metajob-ui"
+import { useRouter } from "next/navigation"
 
 const LoginBody = ({ callbackUrl, error }: { error: string | undefined; callbackUrl: string | undefined }) => {
+   const { status } = useSession()
+   const router = useRouter()
+
    const [loading, setLoading] = useState(false)
 
    useEffect(() => {
@@ -72,6 +76,12 @@ const LoginBody = ({ callbackUrl, error }: { error: string | undefined; callback
          clearTimeout(closeId)
       }
    }, [error])
+
+   // redirect after login
+   if (status === "authenticated") {
+      router.push("/dashboard")
+      return <PageLoader />
+   }
 
    // *** email,password login handler
    const loginHandler = async (data: { username: string; password: string }) => {

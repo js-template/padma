@@ -1,15 +1,22 @@
 "use client"
 import React from "react"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { SignUp } from "@/lib/user"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
-import { SignUpCard } from "@padma/metajob-ui"
+import { PageLoader, SignUpCard } from "@padma/metajob-ui"
 
 const RegisterBody = () => {
    const router = useRouter()
+   const { status } = useSession()
 
    const [loading, setLoading] = React.useState(false)
+
+   // redirect after login
+   if (status === "authenticated") {
+      router.push("/dashboard")
+      return <PageLoader />
+   }
 
    // *** email,password signUp  handler
    const handleSignUp = async (data: any) => {
