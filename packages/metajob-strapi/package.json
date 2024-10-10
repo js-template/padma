@@ -6,7 +6,7 @@
     "name": "metajob-strapi",
     "description": "Description of Metajob Strapi plugin",
     "kind": "plugin",
-    "displayName": "Metajob Strapi"
+    "displayName": "Metajob"
   },
   "dependencies": {
     "@strapi/design-system": "^1.6.3",

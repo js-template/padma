@@ -966,14 +966,13 @@ export interface PluginMetajobStrapiAppliedJob extends Schema.CollectionType {
     singularName: 'applied-job';
     pluralName: 'applied-jobs';
     displayName: 'Applied Job';
+    description: '';
   };
   options: {
     draftAndPublish: true;
-    comment: '';
   };
   attributes: {
     status: Attribute.Enumeration<['Shortlisted', 'Pending', 'Rejected']>;
-    cover_letter: Attribute.String;
     owner: Attribute.Relation<
       'plugin::metajob-strapi.applied-job',
       'oneToOne',
@@ -984,6 +983,7 @@ export interface PluginMetajobStrapiAppliedJob extends Schema.CollectionType {
       'oneToOne',
       'plugin::metajob-strapi.job'
     >;
+    cover_letter: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -2299,7 +2299,8 @@ export interface ApiPrivatePagePrivatePage extends Schema.CollectionType {
         'widget.favorite-lists',
         'block.latest-applied',
         'block.manage-lists',
-        'block.manage-companies'
+        'block.manage-companies',
+        'table.applied-jobs'
       ]
     > &
       Attribute.SetPluginOptions<{
