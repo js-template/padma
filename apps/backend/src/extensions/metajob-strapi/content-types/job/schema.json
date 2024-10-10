@@ -1,16 +1,15 @@
 {
   "kind": "collectionType",
-  "collectionName": "lists",
+  "collectionName": "jobs",
   "info": {
-    "singularName": "list",
-    "pluralName": "lists",
-    "displayName": "Lists",
+    "singularName": "job",
+    "pluralName": "jobs",
+    "displayName": "Jobs",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string",

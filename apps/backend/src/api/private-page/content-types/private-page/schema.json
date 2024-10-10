@@ -61,7 +61,8 @@
         "widget.favorite-lists",
         "block.latest-applied",
         "block.manage-lists",
-        "block.manage-companies"
+        "block.manage-companies",
+        "table.applied-jobs"
       ],
       "pluginOptions": {
         "i18n": {

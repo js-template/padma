@@ -8,7 +8,7 @@
     "companies": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::company.company"
+      "target": "plugin::metajob-strapi.company"
     }
   }
 }

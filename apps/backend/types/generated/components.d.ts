@@ -92,7 +92,7 @@ export interface BlockCompanyCard extends Schema.Component {
     companies: Attribute.Relation<
       'block.company-card',
       'oneToMany',
-      'api::company.company'
+      'plugin::metajob-strapi.company'
     >;
   };
 }
@@ -1288,6 +1288,20 @@ export interface SharedSpacing extends Schema.Component {
   };
 }
 
+export interface TableAppliedJobs extends Schema.Component {
+  collectionName: 'components_table_applied_jobs';
+  info: {
+    displayName: 'Applied Jobs';
+    icon: 'bulletList';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    enableSearch: Attribute.Boolean;
+    style: Attribute.Component<'component.style-section'>;
+  };
+}
+
 export interface TableBookmark extends Schema.Component {
   collectionName: 'components_table_bookmarks';
   info: {
@@ -1594,6 +1608,7 @@ declare module '@strapi/types' {
       'shared.seo': SharedSeo;
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
+      'table.applied-jobs': TableAppliedJobs;
       'table.bookmark': TableBookmark;
       'table.meta': TableMeta;
       'table.pricing': TablePricing;
