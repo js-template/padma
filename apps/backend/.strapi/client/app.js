@@ -7,6 +7,7 @@ import colorPicker from "@strapi/plugin-color-picker/strapi-admin";
 import i18N from "@strapi/plugin-i18n/strapi-admin";
 import seo from "@strapi/plugin-seo/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
+import metajobStrapi from "metajob-strapi/strapi-admin";
 import locationField from "strapi-location-field-plugin/strapi-admin";
 import multiSelect from "strapi-plugin-multi-select/strapi-admin";
 import reactIcons from "strapi-plugin-react-icons/strapi-admin";
@@ -19,6 +20,7 @@ renderAdmin(document.getElementById("strapi"), {
     i18n: i18N,
     seo: seo,
     "users-permissions": usersPermissions,
+    "metajob-strapi": metajobStrapi,
     "location-field": locationField,
     "multi-select": multiSelect,
     "react-icons": reactIcons,

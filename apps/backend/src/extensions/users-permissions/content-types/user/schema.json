@@ -69,12 +69,7 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "membership": {
       "type": "relation",
@@ -96,7 +91,7 @@
     "resume": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::resume.resume",
+      "target": "plugin::metajob-strapi.resume",
       "mappedBy": "user"
     }
   }

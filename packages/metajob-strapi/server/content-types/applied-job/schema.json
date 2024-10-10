@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "applied_jobs",
+  "info": {
+    "singularName": "applied-job",
+    "pluralName": "applied-jobs",
+    "displayName": "Applied Job"
+  },
+  "options": {
+    "draftAndPublish": true,
+    "comment": ""
+  },
+  "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": ["Shortlisted", "Pending", "Rejected"]
+    },
+    "cover_letter": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "job": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::metajob-strapi.job"
+    }
+  }
+}
