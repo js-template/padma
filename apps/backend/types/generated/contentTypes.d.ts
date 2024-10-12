@@ -728,11 +728,6 @@ export interface PluginMetajobStrapiBookmark extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    company: Attribute.Relation<
-      'plugin::metajob-strapi.bookmark',
-      'oneToOne',
-      'plugin::metajob-strapi.company'
-    >;
     owner: Attribute.Relation<
       'plugin::metajob-strapi.bookmark',
       'oneToOne',
@@ -747,6 +742,11 @@ export interface PluginMetajobStrapiBookmark extends Schema.CollectionType {
       'plugin::metajob-strapi.resume'
     >;
     note: Attribute.Text;
+    company: Attribute.Relation<
+      'plugin::metajob-strapi.bookmark',
+      'oneToOne',
+      'plugin::metajob-strapi.company'
+    >;
     job: Attribute.Relation<
       'plugin::metajob-strapi.bookmark',
       'oneToOne',
@@ -800,6 +800,11 @@ export interface PluginMetajobStrapiChat extends Schema.CollectionType {
     chat_blocked: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    job: Attribute.Relation<
+      'plugin::metajob-strapi.chat',
+      'oneToOne',
+      'plugin::metajob-strapi.job'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -824,10 +829,10 @@ export interface PluginMetajobStrapiMessage extends Schema.CollectionType {
     singularName: 'message';
     pluralName: 'messages';
     displayName: 'Messages';
+    description: '';
   };
   options: {
     draftAndPublish: true;
-    comment: '';
   };
   attributes: {
     sender: Attribute.Relation<
@@ -846,6 +851,11 @@ export interface PluginMetajobStrapiMessage extends Schema.CollectionType {
     send_notification: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    chat_session: Attribute.Relation<
+      'plugin::metajob-strapi.message',
+      'oneToOne',
+      'plugin::metajob-strapi.chat'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -2335,6 +2345,12 @@ export interface ApiPrivatePagePrivatePage extends Schema.CollectionType {
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
+        };
+      }>;
+    seo: Attribute.Component<'shared.seo'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
         };
       }>;
     createdAt: Attribute.DateTime;
