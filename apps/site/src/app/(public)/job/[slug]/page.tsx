@@ -19,7 +19,7 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 
    // *** fetch seo data
    const { data } = await find(
-      "api/lists",
+      "api/metajob-strapi/jobs",
       {
          filters: {
             slug: {
@@ -71,7 +71,7 @@ export default async function JobDetailsPage({ params }: { params: { slug: strin
 
    // *** get jobs data from strapi ***
    const { data, error } = await find(
-      "api/lists",
+      "api/metajob-strapi/jobs",
       {
          filters: {
             slug: {
