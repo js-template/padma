@@ -123,6 +123,11 @@ export interface BlockJobCard extends Schema.Component {
     description: Attribute.String;
     button: Attribute.Component<'component.link'>;
     lists: Attribute.Relation<'block.job-card', 'oneToMany', 'api::list.list'>;
+    jobs: Attribute.Relation<
+      'block.job-card',
+      'oneToOne',
+      'plugin::metajob-strapi.job'
+    >;
   };
 }
 
