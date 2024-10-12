@@ -21,6 +21,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::list.list"
+    },
+    "jobs": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::metajob-strapi.job"
     }
   }
 }
