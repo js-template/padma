@@ -2,7 +2,8 @@
   "collectionName": "components_table_applied_jobs",
   "info": {
     "displayName": "Applied Jobs",
-    "icon": "bulletList"
+    "icon": "bulletList",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -12,13 +13,20 @@
     "description": {
       "type": "text"
     },
-    "enableSearch": {
-      "type": "boolean"
-    },
-    "style": {
+    "tableConfig": {
       "type": "component",
       "repeatable": false,
-      "component": "component.style-section"
+      "component": "config.header-config"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "tableHead": {
+      "type": "component",
+      "repeatable": true,
+      "component": "config.header-field"
     }
   }
 }

@@ -10,7 +10,7 @@ import {
    AppliedList,
    FavoriteList,
    MatchedList,
-   AppliedLists
+   AppliedJobs
 } from "@padma/metajob-ui"
 
 import {
@@ -125,6 +125,6 @@ export const dashboardBlocksMapping = {
       component: ManageCompanies
    },
    "table.applied-jobs": {
-      component: AppliedLists
+      component: AppliedJobs
    }
 } as any

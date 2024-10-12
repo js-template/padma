@@ -1,9 +1,10 @@
+// FIXME: Should Delete this static page
 import { find } from "@/lib/strapi"
 import { Paper } from "@mui/material"
 import { Metadata } from "next"
 import AppliedJobsPageBody from "./PageBody"
 export const metadata: Metadata = {
-   title: "Applied Jobs- MetaJob",
+   title: "Applied Jobs",
    description: "Applied Jobs Page"
 }
 

@@ -16,6 +16,7 @@ type Props = {
 }
 
 // *** generate metadata for the page
+// @ts-ignore
 export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
    const pageSlug = params?.slug
    const language = getLanguageFromCookie()
@@ -35,18 +36,13 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
       "no-store"
    )
    // FIXME: Format is not looking good
-   // if (!product?.data?.data[0]?.attributes?.seo) {
-   //    return {
-   //       title: product?.data?.data[0]?.attributes?.title || "Title not found",
-   //       description: product?.data?.data[0]?.attributes?.description || "Description not found"
-   //    }
-   // }
-   // StrapiSeoFormate(product?.data?.data[0]?.attributes?.seo, pageSlug)
-
-   return {
-      title: "hello",
-      description: "hello"
+   if (!product?.data?.data[0]?.attributes?.seo) {
+      return {
+         title: product?.data?.data[0]?.attributes?.title || "Title not found",
+         description: product?.data?.data[0]?.attributes?.description || "Description not found"
+      }
    }
+   StrapiSeoFormate(product?.data?.data[0]?.attributes?.seo, pageSlug)
 }
 
 export default async function DynamicPrivatePages({

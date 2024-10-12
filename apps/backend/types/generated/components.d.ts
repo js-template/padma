@@ -1298,12 +1298,14 @@ export interface TableAppliedJobs extends Schema.Component {
   info: {
     displayName: 'Applied Jobs';
     icon: 'bulletList';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
-    enableSearch: Attribute.Boolean;
-    style: Attribute.Component<'component.style-section'>;
+    tableConfig: Attribute.Component<'config.header-config'>;
+    empty: Attribute.Component<'shared.empty'>;
+    tableHead: Attribute.Component<'config.header-field', true>;
   };
 }
 
