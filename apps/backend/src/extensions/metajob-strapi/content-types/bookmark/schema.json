@@ -22,6 +22,7 @@
       "enum": [
         "resume",
         "list",
+        "job",
         "company"
       ],
       "default": "resume",

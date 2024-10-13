@@ -733,7 +733,7 @@ export interface PluginMetajobStrapiBookmark extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    type: Attribute.Enumeration<['resume', 'list', 'company']> &
+    type: Attribute.Enumeration<['resume', 'list', 'job', 'company']> &
       Attribute.Required &
       Attribute.DefaultTo<'resume'>;
     resume: Attribute.Relation<

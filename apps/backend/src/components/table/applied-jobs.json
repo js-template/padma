@@ -27,6 +27,11 @@
       "type": "component",
       "repeatable": true,
       "component": "config.header-field"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
     }
   }
 }

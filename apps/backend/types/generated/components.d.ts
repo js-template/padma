@@ -125,7 +125,7 @@ export interface BlockJobCard extends Schema.Component {
     lists: Attribute.Relation<'block.job-card', 'oneToMany', 'api::list.list'>;
     jobs: Attribute.Relation<
       'block.job-card',
-      'oneToOne',
+      'oneToMany',
       'plugin::metajob-strapi.job'
     >;
   };
@@ -1187,10 +1187,12 @@ export interface SharedEmpty extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required & Attribute.DefaultTo<'Title'>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'No Data Founds'>;
     description: Attribute.Text &
       Attribute.Required &
-      Attribute.DefaultTo<'Description'>;
+      Attribute.DefaultTo<'Try to refresh the page or check back later'>;
   };
 }
 
@@ -1306,6 +1308,7 @@ export interface TableAppliedJobs extends Schema.Component {
     tableConfig: Attribute.Component<'config.header-config'>;
     empty: Attribute.Component<'shared.empty'>;
     tableHead: Attribute.Component<'config.header-field', true>;
+    style: Attribute.Component<'component.style-section'>;
   };
 }
 

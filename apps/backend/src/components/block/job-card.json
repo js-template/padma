@@ -24,7 +24,7 @@
     },
     "jobs": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "plugin::metajob-strapi.job"
     }
   }
