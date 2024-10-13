@@ -1293,6 +1293,38 @@ export interface PluginMetajobStrapiJobCategory extends Schema.CollectionType {
   };
 }
 
+export interface PluginMetajobStrapiEmailHistory extends Schema.CollectionType {
+  collectionName: 'email_histories';
+  info: {
+    singularName: 'email-history';
+    pluralName: 'email-histories';
+    displayName: 'Email History';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    title: Attribute.String;
+    datetime: Attribute.DateTime;
+    receiver: Attribute.Email;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.email-history',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.email-history',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginGoogleMapsConfig extends Schema.SingleType {
   collectionName: 'google_maps_configs';
   info: {
@@ -2496,6 +2528,7 @@ declare module '@strapi/types' {
       'plugin::metajob-strapi.resume': PluginMetajobStrapiResume;
       'plugin::metajob-strapi.skill': PluginMetajobStrapiSkill;
       'plugin::metajob-strapi.job-category': PluginMetajobStrapiJobCategory;
+      'plugin::metajob-strapi.email-history': PluginMetajobStrapiEmailHistory;
       'plugin::google-maps.config': PluginGoogleMapsConfig;
       'plugin::react-icons.iconlibrary': PluginReactIconsIconlibrary;
       'plugin::i18n.locale': PluginI18NLocale;

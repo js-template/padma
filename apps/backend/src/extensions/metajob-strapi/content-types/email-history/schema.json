@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "email_histories",
+  "info": {
+    "singularName": "email-history",
+    "pluralName": "email-histories",
+    "displayName": "Email History",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "datetime": {
+      "type": "datetime"
+    },
+    "receiver": {
+      "type": "email"
+    }
+  }
+}

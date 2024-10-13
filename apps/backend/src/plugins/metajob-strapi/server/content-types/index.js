@@ -15,6 +15,8 @@ const resumeSchema = require("./resume/schema.json");
 const skillSchema = require("./skill/schema.json");
 const jobCategorySchema = require("./job-category/schema.json");
 
+const emailHistorySchema = require("./email-history/schema.json");
+
 module.exports = {
   job: {
     schema: jobSchema,
@@ -45,5 +47,8 @@ module.exports = {
   },
   "job-category": {
     schema: jobCategorySchema,
+  },
+  "email-history": {
+    schema: emailHistorySchema,
   },
 };

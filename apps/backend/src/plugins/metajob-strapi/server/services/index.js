@@ -10,6 +10,7 @@ const appliedJobService = require("./applied-job");
 
 const resumeService = require("./resume");
 const skillService = require("./skill");
+const emailHistoryService = require("./email-history");
 
 const jobCategoryService = require("./job-category");
 module.exports = {
@@ -23,4 +24,5 @@ module.exports = {
   resume: resumeService,
   skill: skillService,
   "job-category": jobCategoryService,
+  "email-history": emailHistoryService,
 };

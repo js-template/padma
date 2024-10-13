@@ -13,6 +13,7 @@ const resumeController = require("./resume");
 
 const skillController = require("./skill");
 const jobCategory = require("./job-category");
+const emailHistory = require("./email-history");
 
 module.exports = {
   job: jobController,
@@ -25,4 +26,5 @@ module.exports = {
   resume: resumeController,
   skill: skillController,
   "job-category": jobCategory,
+  "email-history": emailHistory,
 };

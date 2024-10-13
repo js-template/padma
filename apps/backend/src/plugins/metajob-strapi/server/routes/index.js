@@ -11,4 +11,5 @@ module.exports = {
   resume: require("./resume"),
   skill: require("./skill"),
   "job-category": require("./job-category"),
+  "email-history": require("./email-history"),
 };
