@@ -56,19 +56,16 @@ module.exports = ({ env }) => ({
   "react-icons": true,
 
   email: {
-    provider: env("EMAIL_PROVIDER", "smtp"),
-    providerOptions: {
-      host: env("EMAIL_HOST"),
-      port: env("EMAIL_PORT"),
-      auth: {
-        user: env("EMAIL_NAME"),
-        pass: env("EMAIL_PASSWORD"),
+    config: {
+      provider: env("EMAIL_PROVIDER"),
+      providerOptions: {
+        apiKey: env("BREVO_API_KEY"),
       },
-      secure: env("EMAIL_SECURE", 587),
-    },
-    settings: {
-      defaultFrom: env("EMAIL_NAME"),
-      defaultReplyTo: env("EMAIL_NAME"),
+      settings: {
+        defaultSenderEmail: env("EMAIL_EMAIL"),
+        defaultSenderName: env("EMAIL_NAME"),
+        defaultReplyTo: env("EMAIL_EMAIL"),
+      },
     },
   },
 });

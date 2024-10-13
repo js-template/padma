@@ -85,5 +85,6 @@
       "repeatable": false,
       "component": "shared.seo"
     }
-  }
+  },
+  "uid": "plugin::metajob-strapi.job"
 }
