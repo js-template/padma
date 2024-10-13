@@ -35,7 +35,7 @@ module.exports = {
     // // Send email after job creation
     await strapi.plugins["email"].services.email.send({
       to: emailReciver, // Assuming result contains the email of job creator
-      from: process.env.EMAIL_EMAIL || "info@jstemplate.net",
+      from: process.env.EMAIL_EMAIL,
       subject: "Job Created Successfully",
       text: `Your job posting "${result.title}" has been successfully created.`,
       html: emailTemplate, // Use the HTML content
