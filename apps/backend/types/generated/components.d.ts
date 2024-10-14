@@ -83,20 +83,6 @@ export interface BlockCategoryCard2 extends Schema.Component {
   };
 }
 
-export interface BlockCompanyCard extends Schema.Component {
-  collectionName: 'components_block_company_cards';
-  info: {
-    displayName: 'CompanyCard';
-  };
-  attributes: {
-    companies: Attribute.Relation<
-      'block.company-card',
-      'oneToMany',
-      'plugin::metajob-strapi.company'
-    >;
-  };
-}
-
 export interface BlockContact extends Schema.Component {
   collectionName: 'components_block_contacts';
   info: {
@@ -122,7 +108,6 @@ export interface BlockJobCard extends Schema.Component {
     title: Attribute.String;
     description: Attribute.String;
     button: Attribute.Component<'component.link'>;
-    lists: Attribute.Relation<'block.job-card', 'oneToMany', 'api::list.list'>;
     jobs: Attribute.Relation<
       'block.job-card',
       'oneToMany',
@@ -1564,7 +1549,6 @@ declare module '@strapi/types' {
       'block.bookmark-list': BlockBookmarkList;
       'block.category-card': BlockCategoryCard;
       'block.category-card2': BlockCategoryCard2;
-      'block.company-card': BlockCompanyCard;
       'block.contact': BlockContact;
       'block.job-card': BlockJobCard;
       'block.latest-applied': BlockLatestApplied;

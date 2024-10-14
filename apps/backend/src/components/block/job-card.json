@@ -17,11 +17,6 @@
       "repeatable": false,
       "component": "component.link"
     },
-    "lists": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::list.list"
-    },
     "jobs": {
       "type": "relation",
       "relation": "oneToMany",
