@@ -99,9 +99,9 @@ export interface BlockContact extends Schema.Component {
 }
 
 export interface BlockJobCard extends Schema.Component {
-  collectionName: 'components_block_job_cards';
+  collectionName: 'components_block_job_test_cards';
   info: {
-    displayName: 'JobCard';
+    displayName: 'JobCardTest';
     description: '';
   };
   attributes: {
@@ -1541,6 +1541,24 @@ export interface WidgetTotalList extends Schema.Component {
   };
 }
 
+export interface JobCardsJobCard extends Schema.Component {
+  collectionName: 'components_block_job_cards';
+  info: {
+    displayName: 'Job Card';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.String;
+    button: Attribute.Component<'component.link'>;
+    jobs: Attribute.Relation<
+      'job-cards.job-card',
+      'oneToMany',
+      'plugin::metajob-strapi.job'
+    >;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -1621,6 +1639,7 @@ declare module '@strapi/types' {
       'widget.open-list': WidgetOpenList;
       'widget.safety-tips': WidgetSafetyTips;
       'widget.total-list': WidgetTotalList;
+      'job-cards.job-card': JobCardsJobCard;
     }
   }
 }

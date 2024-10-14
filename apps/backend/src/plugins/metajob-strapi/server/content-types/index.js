@@ -17,6 +17,8 @@ const jobCategorySchema = require("./job-category/schema.json");
 
 const emailHistorySchema = require("./email-history/schema.json");
 
+const jobComponentSchema = require("./../components/blocks/job-card");
+
 module.exports = {
   job: {
     schema: jobSchema,

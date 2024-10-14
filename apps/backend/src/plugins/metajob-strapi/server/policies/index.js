@@ -1,3 +1,5 @@
-'use strict';
+"use strict";
 
-module.exports = {};
+module.exports = {
+  // allow componenst to be used in the editor
+};

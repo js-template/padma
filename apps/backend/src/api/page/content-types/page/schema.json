@@ -1,5 +1,4 @@
 {
-  "kind": "collectionType",
   "collectionName": "pages",
   "info": {
     "singularName": "page",
@@ -40,5 +39,7 @@
         "block.category-card2"
       ]
     }
-  }
+  },
+  "kind": "collectionType"
 }
+

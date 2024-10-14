@@ -4,9 +4,9 @@
  *
  */
 
-import React from 'react';
+import React from "react";
 // import PropTypes from 'prop-types';
-import pluginId from '../../pluginId';
+import pluginId from "../../pluginId";
 
 const HomePage = () => {
   return (

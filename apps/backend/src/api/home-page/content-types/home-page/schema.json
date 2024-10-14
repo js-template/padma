@@ -1,5 +1,4 @@
 {
-  "kind": "singleType",
   "collectionName": "home_pages",
   "info": {
     "singularName": "home-page",
@@ -57,5 +56,7 @@
       },
       "component": "shared.seo"
     }
-  }
+  },
+  "kind": "singleType"
 }
+
