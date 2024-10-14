@@ -738,7 +738,7 @@ export interface PluginMetajobStrapiBookmark extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    type: Attribute.Enumeration<['resume', 'list', 'job', 'company']> &
+    type: Attribute.Enumeration<['resume', 'job', 'company']> &
       Attribute.Required &
       Attribute.DefaultTo<'resume'>;
     resume: Attribute.Relation<
@@ -796,11 +796,6 @@ export interface PluginMetajobStrapiChat extends Schema.CollectionType {
       'plugin::metajob-strapi.chat',
       'oneToOne',
       'plugin::users-permissions.user'
-    >;
-    list: Attribute.Relation<
-      'plugin::metajob-strapi.chat',
-      'oneToOne',
-      'api::list.list'
     >;
     chat_blocked: Attribute.Boolean &
       Attribute.Required &
@@ -999,11 +994,6 @@ export interface PluginMetajobStrapiAppliedJob extends Schema.CollectionType {
       'plugin::metajob-strapi.job'
     >;
     cover_letter: Attribute.RichText;
-    list: Attribute.Relation<
-      'plugin::metajob-strapi.applied-job',
-      'oneToOne',
-      'api::list.list'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

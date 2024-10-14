@@ -21,7 +21,6 @@
       "type": "enumeration",
       "enum": [
         "resume",
-        "list",
         "job",
         "company"
       ],
