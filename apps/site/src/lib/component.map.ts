@@ -1,5 +1,4 @@
 import {
-   AllCategory,
    BreadCrumbs,
    CompanyFilter,
    HeroSection,
@@ -10,7 +9,8 @@ import {
    AppliedList,
    FavoriteList,
    MatchedList,
-   AppliedJobs
+   AppliedJobs,
+   CategoryBlock
 } from "@padma/metajob-ui"
 
 import {
@@ -68,7 +68,7 @@ export const blockComponentMapping = {
       component: CategoryCard
    },
    "block.category-card2": {
-      component: AllCategory
+      component: CategoryBlock
    },
    "block.job-card": {
       component: ListCard
