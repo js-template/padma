@@ -1,7 +1,13 @@
 {
-   "name": "site",
+   "name": "@padma/frontend",
    "version": "1.0.0-beta",
    "private": true,
+   "description": "The Next.js Framework for Strapi",
+   "license": "MIT",
+   "author": {
+      "name": "JS Template",
+      "email": "support@jstemplate.net"
+   },
    "scripts": {
       "dev": "next dev",
       "build": "next build",
