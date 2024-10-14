@@ -1,37 +1,39 @@
 "use strict";
 
-const { createJobTemplate } = require("../../../email-templates/job");
+const {
+  createAppliedJobTemplate,
+} = require("../../../email-templates/appliedJob");
 
 module.exports = {
   async afterCreate(event) {
     const { result } = event;
 
-    // Get the title and current time
-    const title = result.title; // Get the title from the created job
-    const currentTime = new Date().toISOString(); // Get current time in ISO format
-    const subject = `Job Created Successfully: ${title}`;
-
     // Receiver email from the populated owner
     const populatedOwner = await strapi
-      .service("plugin::metajob-strapi.job")
-      .findOne(result.id, {
+      .service("plugin::metajob-strapi.applied-job")
+      .findOne(result?.id, {
         populate: "*", // Change this to your relation name
       });
 
-    const emailReceiver = populatedOwner.owner.email;
-    const ownerId = populatedOwner.owner.id;
+    // Get the title and current time
+    const title = populatedOwner?.list?.title || "Applied Job Demo"; // Get the title from the created applied-job
+    const currentTime = new Date().toISOString(); // Get current time in ISO format
+    const subject = `Applied Job Successfully: ${title}`;
+
+    const emailReceiver = populatedOwner?.owner?.email;
+    const ownerId = populatedOwner?.owner?.id;
 
     // Try to send the email and handle success or failure
     try {
       // Load the email template
-      const jobEmailTemplate = createJobTemplate(title);
+      const jobEmailTemplate = createAppliedJobTemplate(title);
 
       // Send email after job creation
       await strapi.plugins["email"].services.email.send({
         to: emailReceiver, // Receiver's email
         from: process.env.EMAIL_EMAIL,
-        subject: "Job Created", // Customized subject
-        text: `Your job posting "${title}" has been successfully created on ${currentTime}.`,
+        subject: "Job Applied", // Customized subject
+        text: `Your job apply for "${title}" has been successfully created on ${currentTime}.`,
         html: jobEmailTemplate, // Use the HTML content
       });
 
