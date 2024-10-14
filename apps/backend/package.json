@@ -1,11 +1,12 @@
 {
-  "name": "backend",
+  "name": "@padma/backend",
   "version": "1.0.0-beta",
   "private": true,
   "description": "A Strapi application",
   "license": "MIT",
   "author": {
-    "name": "A Strapi developer"
+    "name": "JS Template",
+    "email": "support@jstemplate.net"
   },
   "scripts": {
     "build": "strapi build",
