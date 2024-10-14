@@ -1631,11 +1631,6 @@ export interface ApiContactListContactList extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    list: Attribute.Relation<
-      'api::contact-list.contact-list',
-      'oneToOne',
-      'api::list.list'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
