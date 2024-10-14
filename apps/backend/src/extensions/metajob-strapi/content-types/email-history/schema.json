@@ -19,6 +19,12 @@
     },
     "receiver": {
       "type": "email"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "email_histories"
     }
   }
 }

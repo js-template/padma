@@ -630,6 +630,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToOne',
       'plugin::metajob-strapi.resume'
     >;
+    email_histories: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'plugin::metajob-strapi.email-history'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1304,10 +1309,23 @@ export interface PluginMetajobStrapiEmailHistory extends Schema.CollectionType {
   options: {
     draftAndPublish: false;
   };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
   attributes: {
     title: Attribute.String;
     datetime: Attribute.DateTime;
     receiver: Attribute.Email;
+    owner: Attribute.Relation<
+      'plugin::metajob-strapi.email-history',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
