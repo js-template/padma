@@ -32,6 +32,7 @@ module.exports = {
       });
 
     const emailReceiver = populatedOwner.owner.email;
+    const ownerId = populatedOwner.owner.id;
 
     // Try to send the email and handle success or failure
     try {
@@ -49,6 +50,9 @@ module.exports = {
         title: subject,
         datetime: currentTime,
         receiver: emailReceiver,
+        owner: {
+          id: ownerId,
+        },
       };
 
       // Create the email history entry using `entityService.create`
@@ -58,8 +62,6 @@ module.exports = {
           data: emailHistoryEntry, // Insert the email history data
         },
       );
-
-      console.log("Email sent and email history entry created:", entry);
     } catch (error) {
       console.error(
         "Error sending email or creating email history entry:",
