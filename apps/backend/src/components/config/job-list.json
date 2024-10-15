@@ -1,13 +1,13 @@
 {
   "collectionName": "components_config_job_lists",
   "info": {
-    "displayName": "jobList",
+    "displayName": "relations",
     "icon": "apps",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "jobId": {
+    "relationId": {
       "type": "integer",
       "required": false
     }

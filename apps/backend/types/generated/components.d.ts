@@ -21,12 +21,13 @@ export interface BlockBlogCard extends Schema.Component {
   info: {
     displayName: 'BlogCard';
     icon: 'collapse';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
-    posts: Attribute.Relation<'block.blog-card', 'oneToMany', 'api::post.post'>;
     button: Attribute.Component<'component.link'>;
+    posts: Attribute.Component<'config.job-list', true>;
   };
 }
 
@@ -60,12 +61,8 @@ export interface BlockCategoryCard extends Schema.Component {
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
-    categories: Attribute.Relation<
-      'block.category-card',
-      'oneToMany',
-      'api::category.category'
-    >;
     button: Attribute.Component<'component.link'>;
+    categories: Attribute.Component<'config.job-list', true>;
   };
 }
 
@@ -108,7 +105,7 @@ export interface BlockJobCard extends Schema.Component {
     title: Attribute.String;
     description: Attribute.String;
     button: Attribute.Component<'component.link'>;
-    jobId: Attribute.Component<'config.job-list', true>;
+    jobs: Attribute.Component<'config.job-list', true>;
   };
 }
 
@@ -568,12 +565,12 @@ export interface ConfigHeaderField extends Schema.Component {
 export interface ConfigJobList extends Schema.Component {
   collectionName: 'components_config_job_lists';
   info: {
-    displayName: 'jobList';
+    displayName: 'relations';
     icon: 'apps';
     description: '';
   };
   attributes: {
-    jobId: Attribute.Integer;
+    relationId: Attribute.Integer;
   };
 }
 

@@ -17,7 +17,7 @@
       "repeatable": false,
       "component": "component.link"
     },
-    "jobId": {
+    "jobs": {
       "displayName": "jobList",
       "type": "component",
       "repeatable": true,
