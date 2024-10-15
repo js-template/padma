@@ -19,9 +19,9 @@
       "component": "component.link"
     },
     "posts": {
-      "type": "component",
-      "repeatable": true,
-      "component": "config.job-list"
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::post.post"
     }
   }
 }
