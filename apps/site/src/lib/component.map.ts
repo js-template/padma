@@ -10,7 +10,8 @@ import {
    FavoriteList,
    MatchedList,
    AppliedJobs,
-   CategoryBlock
+   CategoryBlock,
+   AddResumeForm
 } from "@padma/metajob-ui"
 
 import {
@@ -126,5 +127,8 @@ export const dashboardBlocksMapping = {
    },
    "table.applied-jobs": {
       component: AppliedJobs
+   },
+   "block.my-resume": {
+      component: AddResumeForm //TODO: this will be applicable for dynamic resume page
    }
 } as any
