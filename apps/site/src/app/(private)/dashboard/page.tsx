@@ -73,7 +73,7 @@ export default async function DashboardPage({
 
    return (
       <>
-         <Body blocks={blocks} styles={styles} session={session} />
+         <Body blocks={blocks} styles={styles} session={session} language={language} />
       </>
    )
 }
