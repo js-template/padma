@@ -161,11 +161,6 @@ export interface BlockManageCompanies extends Schema.Component {
     enableEdit: Attribute.Boolean;
     empty: Attribute.Component<'shared.empty'>;
     style: Attribute.Component<'component.style-section'>;
-    form: Attribute.Relation<
-      'block.manage-companies',
-      'oneToOne',
-      'api::form.form'
-    >;
     addButtonText: Attribute.String;
     editButtonText: Attribute.String;
     perPageText: Attribute.String &
@@ -173,6 +168,7 @@ export interface BlockManageCompanies extends Schema.Component {
       Attribute.DefaultTo<'Showing per page'>;
     tableConfig: Attribute.Component<'config.header-config'> &
       Attribute.Required;
+    form: Attribute.Component<'config.job-list'>;
   };
 }
 
@@ -199,16 +195,12 @@ export interface BlockManageLists extends Schema.Component {
         min: 6;
         max: 6;
       }>;
-    form: Attribute.Relation<
-      'block.manage-lists',
-      'oneToOne',
-      'api::form.form'
-    >;
     addButtonText: Attribute.String;
     editButtonText: Attribute.String;
     perPageText: Attribute.String &
       Attribute.Required &
       Attribute.DefaultTo<'Showing per page'>;
+    form: Attribute.Component<'config.job-list'>;
   };
 }
 
@@ -260,11 +252,7 @@ export interface BlockReviewCard extends Schema.Component {
   attributes: {
     title: Attribute.String;
     description: Attribute.String;
-    reviews: Attribute.Relation<
-      'block.review-card',
-      'oneToMany',
-      'api::review.review'
-    >;
+    reviews: Attribute.Component<'config.job-list', true>;
   };
 }
 
