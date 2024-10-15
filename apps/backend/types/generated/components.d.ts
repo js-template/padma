@@ -27,7 +27,7 @@ export interface BlockBlogCard extends Schema.Component {
     title: Attribute.String;
     description: Attribute.Text;
     button: Attribute.Component<'component.link'>;
-    posts: Attribute.Component<'config.job-list', true>;
+    posts: Attribute.Relation<'block.blog-card', 'oneToMany', 'api::post.post'>;
   };
 }
 
