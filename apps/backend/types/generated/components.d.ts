@@ -108,11 +108,7 @@ export interface BlockJobCard extends Schema.Component {
     title: Attribute.String;
     description: Attribute.String;
     button: Attribute.Component<'component.link'>;
-    jobs: Attribute.Relation<
-      'block.job-card',
-      'oneToMany',
-      'plugin::metajob-strapi.job'
-    >;
+    jobId: Attribute.Component<'config.job-list', true>;
   };
 }
 
@@ -566,6 +562,18 @@ export interface ConfigHeaderField extends Schema.Component {
     align: Attribute.Enumeration<['left', 'right', 'center']> &
       Attribute.Required &
       Attribute.DefaultTo<'left'>;
+  };
+}
+
+export interface ConfigJobList extends Schema.Component {
+  collectionName: 'components_config_job_lists';
+  info: {
+    displayName: 'jobList';
+    icon: 'apps';
+    description: '';
+  };
+  attributes: {
+    jobId: Attribute.Integer;
   };
 }
 
@@ -1576,6 +1584,7 @@ declare module '@strapi/types' {
       'component.titles': ComponentTitles;
       'config.header-config': ConfigHeaderConfig;
       'config.header-field': ConfigHeaderField;
+      'config.job-list': ConfigJobList;
       'config.message': ConfigMessage;
       'config.recent-jobs-header': ConfigRecentJobsHeader;
       'config.role': ConfigRole;

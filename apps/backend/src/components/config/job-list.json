@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_config_job_lists",
+  "info": {
+    "displayName": "jobList",
+    "icon": "apps",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "jobId": {
+      "type": "integer",
+      "required": false
+    }
+  }
+}

@@ -17,10 +17,11 @@
       "repeatable": false,
       "component": "component.link"
     },
-    "jobs": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "plugin::metajob-strapi.job"
+    "jobId": {
+      "displayName": "jobList",
+      "type": "component",
+      "repeatable": true,
+      "component": "config.job-list"
     }
   }
 }
