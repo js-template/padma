@@ -2,8 +2,8 @@ import React from "react"
 import { cookies } from "next/headers"
 import { Box } from "@mui/material"
 import { find } from "@/lib/strapi"
-import Header from "@/components/header"
 import { Footer } from "@padma/metajob-ui"
+import HeaderBody from "./headerBody"
 
 export default async function PublicLayout(props: { children: React.ReactNode }) {
    const cookieStore = cookies()
@@ -24,7 +24,7 @@ export default async function PublicLayout(props: { children: React.ReactNode })
 
    return (
       <main>
-         <Header language={language} />
+         <HeaderBody />
          <Box
             sx={
                {
