@@ -4,7 +4,8 @@
 node_modules
 .pnp
 .pnp.js
-packages/metajob-theme
+packages/metajob-ui
+packages/metajob-strapi
 .npmrc
 # testing
 coverage
@@ -18,6 +19,7 @@ build
 # misc
 .DS_Store
 *.pem
+
 
 # debug
 npm-debug.log*
@@ -38,5 +40,4 @@ package-lock.json*
 pnpm-lock.yaml*
 yarn.lock*
 .vercel
-/packages/metajob-ui
 .npmrc
