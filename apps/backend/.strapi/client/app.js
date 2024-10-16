@@ -10,7 +10,7 @@ import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
 import locationField from "strapi-location-field-plugin/strapi-admin";
 import multiSelect from "strapi-plugin-multi-select/strapi-admin";
 import reactIcons from "strapi-plugin-react-icons/strapi-admin";
-import metajobStrapi from "../../src/plugins/metajob-strapi/strapi-admin";
+import metajobStrapi from "../../src/plugins/metajob-backend/strapi-admin";
 import { renderAdmin } from "@strapi/strapi/admin";
 
 renderAdmin(document.getElementById("strapi"), {
