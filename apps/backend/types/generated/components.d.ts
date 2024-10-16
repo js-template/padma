@@ -520,6 +520,9 @@ export interface ConfigHeaderConfig extends Schema.Component {
         'plugin::multi-select.multi-select',
         [
           'title',
+          'type',
+          'status',
+          'action',
           'description',
           'salary',
           'createdAt',
