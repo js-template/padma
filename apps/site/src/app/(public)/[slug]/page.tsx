@@ -1,10 +1,9 @@
-import { Fragment } from "react"
 import { notFound } from "next/navigation"
 import { Metadata, ResolvingMetadata } from "next"
-import { blockComponentMapping } from "@/lib/component.map"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
+import { blockComponentMapping } from "@padma/metajob-ui"
 export const dynamicParams = false // true | false,
 
 // *** generate metadata type
@@ -12,6 +11,11 @@ type Props = {
    params: { slug: string }
    searchParams: { [key: string]: string | string[] | undefined }
 }
+
+// Load the active theme components
+// const loadThemeComponents = async () => {
+//    await loadActiveTheme() // Load the components from the active theme
+// }
 
 // *** generate metadata for the page
 export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
@@ -64,7 +68,6 @@ export default async function DynamicPages({
    searchParams: { [key: string]: string | string[] | undefined }
 }) {
    const pageSlug = params?.slug
-
    const language = getLanguageFromCookie()
 
    const { data, error } = await find(
@@ -95,7 +98,16 @@ export default async function DynamicPages({
    // }
 
    return (
-      <Fragment>
+      <>
+         {/* {blocks.map((block: any, index: number) => {
+            const ComponentToRender = getThemeComponent(block.__component) // Get the component from the active theme
+
+            if (ComponentToRender) {
+               // Pass down data and any additional props
+               return <ComponentToRender key={index} data={block} language={language} {...block} />
+            }
+            return null // Handle missing components gracefully
+         })} */}
          {blocks?.map((block: any, index: number) => {
             const BlockConfig = blockComponentMapping[block.__component]
 
@@ -106,7 +118,7 @@ export default async function DynamicPages({
             }
             return null // Handle the case where the component mapping is missing
          })}
-      </Fragment>
+      </>
    )
 }
 

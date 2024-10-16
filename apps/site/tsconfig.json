@@ -23,7 +23,7 @@
       "paths": {
          "@/*": ["./src/*"],
          "auth": ["./src/context/auth"],
-         "@faceData/*": ["@fake-data/*"]
+         "@faceData/*": ["@fake-data/*"],
       }
    },
    "include": [
