@@ -6,7 +6,7 @@ node_modules
 .pnp.js
 packages/metajob-theme
 .npmrc
-.strapi
+apps/backend/.strapi
 # testing
 coverage
 dist
