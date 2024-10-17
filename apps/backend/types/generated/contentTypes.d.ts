@@ -671,7 +671,7 @@ export interface PluginMetajobStrapiJob extends Schema.CollectionType {
     category: Attribute.Relation<
       'plugin::metajob-strapi.job',
       'oneToOne',
-      'api::category.category'
+      'plugin::metajob-strapi.job-category'
     >;
     type: Attribute.JSON &
       Attribute.CustomField<
