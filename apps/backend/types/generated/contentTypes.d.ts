@@ -1018,10 +1018,10 @@ export interface PluginMetajobStrapiResume extends Schema.CollectionType {
     singularName: 'resume';
     pluralName: 'resumes';
     displayName: 'Resume';
+    description: '';
   };
   options: {
     draftAndPublish: true;
-    comment: '';
   };
   attributes: {
     education: Attribute.Component<'component.experience', true>;
@@ -1041,7 +1041,7 @@ export interface PluginMetajobStrapiResume extends Schema.CollectionType {
     category: Attribute.Relation<
       'plugin::metajob-strapi.resume',
       'oneToOne',
-      'api::category.category'
+      'plugin::metajob-strapi.job-category'
     >;
     salary: Attribute.BigInteger;
     salaryType: Attribute.Enumeration<

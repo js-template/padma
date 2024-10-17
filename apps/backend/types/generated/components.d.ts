@@ -70,12 +70,13 @@ export interface BlockCategoryCard2 extends Schema.Component {
   collectionName: 'components_block_category_card2s';
   info: {
     displayName: 'CategoryCard2';
+    description: '';
   };
   attributes: {
     categories: Attribute.Relation<
       'block.category-card2',
       'oneToMany',
-      'api::category.category'
+      'plugin::metajob-strapi.job-category'
     >;
   };
 }
