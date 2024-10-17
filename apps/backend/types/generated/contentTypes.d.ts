@@ -897,7 +897,7 @@ export interface PluginMetajobStrapiCompany extends Schema.CollectionType {
     industry: Attribute.Relation<
       'plugin::metajob-strapi.company',
       'oneToOne',
-      'api::category.category'
+      'plugin::metajob-strapi.job-category'
     >;
     slug: Attribute.UID & Attribute.Required;
     owner: Attribute.Relation<
