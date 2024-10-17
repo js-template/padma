@@ -30,7 +30,6 @@ module.exports = ({ env }) => ({
   },
   "metajob-strapi": {
     enabled: true,
-    resolve: "./src/plugins/metajob-backend",
   },
   "google-maps": {
     enabled: true,
