@@ -951,7 +951,7 @@ export interface FormsJobFilter extends Schema.Component {
     categories: Attribute.Relation<
       'forms.job-filter',
       'oneToMany',
-      'api::category.category'
+      'plugin::metajob-strapi.job-category'
     >;
     job_type: Attribute.JSON &
       Attribute.CustomField<
