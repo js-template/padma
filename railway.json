@@ -1,9 +1,20 @@
 {
+  "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "cmd": "turbo run build --filter=backend",
-    "context": "."
-  },
-  "start": {
-    "cmd": "turbo run start --filter=backend"
+    "builder": "NIXPACKS",
+    "nixpacksPlan": {
+      "phases": {
+        "npm:config": {
+          "dependsOn": ["setup"],
+          "cmds": [
+            "npm config set @padma:registry https://api.keygen.sh/v1/accounts/88de7a21-b541-48e5-8727-f992ebeb43fa/artifacts",
+            "npm config set //api.keygen.sh/v1/accounts/88de7a21-b541-48e5-8727-f992ebeb43fa/artifacts/:_authToken=$LICENSE_TOKEN"
+          ]
+        },
+        "install": {
+          "dependsOn": ["setup", "npm:config"]
+        }
+      }
+    }
   }
 }
