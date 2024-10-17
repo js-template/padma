@@ -30,7 +30,6 @@ module.exports = ({ env }) => ({
   },
   "metajob-strapi": {
     enabled: true,
-    resolve: "@padma/metajob-strapi",
   },
   "google-maps": {
     enabled: true,
