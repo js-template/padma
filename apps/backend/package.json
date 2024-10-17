@@ -9,7 +9,6 @@
     "email": "support@jstemplate.net"
   },
   "scripts": {
-    "preinstall": "echo '@padma:registry=https://api.keygen.sh/v1/accounts/88de7a21-b541-48e5-8727-f992ebeb43fa/artifacts/' > .npmrc && echo '//api.keygen.sh/v1/accounts/88de7a21-b541-48e5-8727-f992ebeb43fa/artifacts/:_authToken=${LICENSE_TOKEN}' >> .npmrc",
     "build": "strapi build",
     "dev": "strapi develop",
     "start": "strapi start",
