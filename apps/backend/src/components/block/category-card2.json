@@ -1,14 +1,15 @@
 {
   "collectionName": "components_block_category_card2s",
   "info": {
-    "displayName": "CategoryCard2"
+    "displayName": "CategoryCard2",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "categories": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::category.category"
+      "target": "plugin::metajob-strapi.job-category"
     }
   }
 }

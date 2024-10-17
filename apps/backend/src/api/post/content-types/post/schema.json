@@ -64,8 +64,8 @@
     "post_categories": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::post-category.post-category",
-      "inversedBy": "posts"
+      "target": "api::category.category",
+      "mappedBy": "posts"
     }
   }
 }
