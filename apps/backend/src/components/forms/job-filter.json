@@ -9,7 +9,7 @@
     "categories": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::category.category"
+      "target": "plugin::metajob-strapi.job-category"
     },
     "job_type": {
       "type": "customField",

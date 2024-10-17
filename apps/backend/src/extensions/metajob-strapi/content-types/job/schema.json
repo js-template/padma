@@ -29,7 +29,7 @@
     "category": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::category.category"
+      "target": "plugin::metajob-strapi.job-category"
     },
     "type": {
       "type": "customField",
@@ -57,7 +57,11 @@
     },
     "status": {
       "type": "enumeration",
-      "enum": ["open", "closed", "draft"],
+      "enum": [
+        "open",
+        "closed",
+        "draft"
+      ],
       "default": "draft",
       "required": true
     },

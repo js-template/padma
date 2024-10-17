@@ -5,9 +5,10 @@ import React from "react"
 import { AddResumeForm } from "@padma/metajob-ui"
 
 type Props = {
-   session: () => { data: any; status: string }
+   useSession: () => { data: any; status: string }
 }
-const PageBody = ({ session }: Props) => {
+const PageBody = ({ useSession }: Props) => {
+   const { data: session, status } = useSession()
    return (
       <Paper
          elevation={0}
@@ -17,7 +18,7 @@ const PageBody = ({ session }: Props) => {
             p: 0,
             mb: 5
          }}>
-         <AddResumeForm useSession={session} />
+         <AddResumeForm userId={session?.user?.id} />
       </Paper>
    )
 }

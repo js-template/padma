@@ -33,8 +33,7 @@
     "strapi-plugin-populate-deep": "^3.0.1",
     "strapi-plugin-react-icons": "^0.2.1",
     "styled-components": "^5.2.1",
-    "strapi-provider-email-brevo": "^1.0.4",
-    "@padma/metajob-backend": "0.0.1-beta.0"
+    "strapi-provider-email-brevo": "^1.0.4"
   },
   "engines": {
     "node": "20"
