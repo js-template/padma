@@ -1,5 +1,5 @@
 "use client"
-import { blockComponentMapping } from "../../lib/component.map"
+import { getPublicComponents } from "@padma/metajob-ui"
 
 interface DynamicBlockRendererProps {
    initialData: any
@@ -13,11 +13,12 @@ export default function DynamicBlockRenderer({ initialData, language }: DynamicB
    return (
       <>
          {/* Render blocks */}
-         {blocks?.map((block: any, index: number) => {
-            const BlockConfig = blockComponentMapping[block.__component]
+         {blocks?.map((block: { __component: keyof typeof getPublicComponents }, index: number) => {
+            const BlockConfig = getPublicComponents[block.__component]
+
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
-               return <ComponentToRender key={index} data={block} language={language} {...block} />
+               return <ComponentToRender key={index} language={language} data={block} {...block} />
             }
             return null // Handle case where component mapping is missing
          })}
