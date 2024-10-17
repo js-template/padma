@@ -9,24 +9,12 @@ import { getLanguageFromCookie } from "@/utils/language"
 export async function generateMetadata(): Promise<Metadata> {
    const language = getLanguageFromCookie()
    // *** fetch seo data
+
+   // TODO: We can populate like populate= "*""
    const product = await find(
       "api/home-page",
       {
-         populate: {
-            seo: {
-               fields: [
-                  "metaTitle",
-                  "metaDescription",
-                  "metaImage",
-                  "metaSocial",
-                  "keywords",
-                  "metaRobots",
-                  "structuredData",
-                  "metaViewport",
-                  "canonicalURL"
-               ]
-            }
-         },
+         populate: "*",
          publicationState: "live",
          locale: language ? [language] : ["en"]
       },

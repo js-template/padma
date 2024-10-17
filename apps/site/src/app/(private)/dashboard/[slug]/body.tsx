@@ -1,11 +1,11 @@
 "use client"
 import React from "react"
 import { Grid } from "@mui/material"
-import { dashboardBlocksMapping } from "@/lib/component.map"
 import { Session } from "next-auth"
 import useSWR from "swr"
 import { privetPageFetcher } from "./utils"
 import { useGlobalContext } from "@/context/store"
+import { getPrivateComponents } from "../../../../../config/theme-settings"
 
 interface BodyProps {
    blocks: any[]
@@ -51,8 +51,6 @@ const Body: React.FC<BodyProps> = ({ blocks, styleData, pageSlug, session }) => 
       keepPreviousData: true
    })
 
-   // console.log("Updated Blocks", data)
-
    return (
       <Grid
          container
@@ -63,12 +61,11 @@ const Body: React.FC<BodyProps> = ({ blocks, styleData, pageSlug, session }) => 
          {...(data?.styles?.columns && { columns: data?.styles.columns })}
          {...(data?.styles?.wrap && { wrap: data?.styles.wrap })}
          sx={{ mb: 4 }}>
-         {data?.blocks?.map((block: any, index: number) => {
-            const BlockConfig = dashboardBlocksMapping[block.__component]
+         {data?.blocks?.map((block: { __component: keyof typeof getPrivateComponents }, index: number) => {
+            const BlockConfig = getPrivateComponents[block.__component]
 
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
-
                return (
                   <ComponentToRender
                      key={index}

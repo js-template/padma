@@ -27,21 +27,7 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
                $eq: pageSlug
             }
          },
-         populate: {
-            seo: {
-               fields: [
-                  "metaTitle",
-                  "metaDescription",
-                  "metaImage",
-                  "metaSocial",
-                  "keywords",
-                  "metaRobots",
-                  "structuredData",
-                  "metaViewport",
-                  "canonicalURL"
-               ]
-            }
-         },
+         populate: "*",
          publicationState: "live",
          locale: language ? [language] : ["en"]
       },
