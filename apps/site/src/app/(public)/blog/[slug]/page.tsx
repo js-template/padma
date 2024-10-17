@@ -116,7 +116,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
    // *** get  blogs-category data from strapi ***
    const { data: blogCategoryData, error: blogCategoryError } = await find(
-      "api/post-categories",
+      "api/categories",
       {
          populate: {
             image: {

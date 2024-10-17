@@ -1588,6 +1588,11 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    posts: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::post.post'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -2155,7 +2160,7 @@ export interface ApiPostPost extends Schema.CollectionType {
     post_categories: Attribute.Relation<
       'api::post.post',
       'manyToMany',
-      'api::post-category.post-category'
+      'api::category.category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -2163,44 +2168,6 @@ export interface ApiPostPost extends Schema.CollectionType {
     createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPostCategoryPostCategory extends Schema.CollectionType {
-  collectionName: 'post_categories';
-  info: {
-    singularName: 'post-category';
-    pluralName: 'post-categories';
-    displayName: 'Post Categories';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    image: Attribute.Media;
-    slug: Attribute.UID;
-    posts: Attribute.Relation<
-      'api::post-category.post-category',
-      'manyToMany',
-      'api::post.post'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::post-category.post-category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::post-category.post-category',
-      'oneToOne',
-      'admin::user'
-    > &
       Attribute.Private;
   };
 }
@@ -2452,7 +2419,6 @@ declare module '@strapi/types' {
       'api::package.package': ApiPackagePackage;
       'api::page.page': ApiPagePage;
       'api::post.post': ApiPostPost;
-      'api::post-category.post-category': ApiPostCategoryPostCategory;
       'api::private-page.private-page': ApiPrivatePagePrivatePage;
       'api::review.review': ApiReviewReview;
       'api::sidebar.sidebar': ApiSidebarSidebar;
