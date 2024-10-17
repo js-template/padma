@@ -13,15 +13,15 @@
     "description": {
       "type": "text"
     },
-    "categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category"
-    },
     "button": {
       "type": "component",
       "repeatable": false,
       "component": "component.link"
+    },
+    "categories": {
+      "type": "component",
+      "repeatable": true,
+      "component": "config.job-list"
     }
   }
 }

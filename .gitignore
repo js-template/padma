@@ -40,3 +40,5 @@ yarn.lock*
 .vercel
 /packages/metajob-ui
 .npmrc
+apps/backend/src/plugins/metajob-backend/
+.npmrc

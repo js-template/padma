@@ -22,11 +22,6 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
     },
-    "list": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::list.list"
-    },
     "chat_blocked": {
       "type": "boolean",
       "default": false,

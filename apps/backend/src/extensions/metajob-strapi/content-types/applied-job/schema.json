@@ -31,11 +31,6 @@
     },
     "cover_letter": {
       "type": "richtext"
-    },
-    "list": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::list.list"
     }
   }
 }

@@ -37,11 +37,6 @@
       "min": 6,
       "required": true
     },
-    "form": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::form.form"
-    },
     "addButtonText": {
       "type": "string"
     },
@@ -52,6 +47,11 @@
       "type": "string",
       "required": true,
       "default": "Showing per page"
+    },
+    "form": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.job-list"
     }
   }
 }

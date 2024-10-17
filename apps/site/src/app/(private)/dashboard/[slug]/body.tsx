@@ -51,7 +51,7 @@ const Body: React.FC<BodyProps> = ({ blocks, styleData, pageSlug, session }) => 
       keepPreviousData: true
    })
 
-   console.log("Updated Blocks", data)
+   // console.log("Updated Blocks", data)
 
    return (
       <Grid

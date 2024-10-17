@@ -21,12 +21,13 @@ export interface BlockBlogCard extends Schema.Component {
   info: {
     displayName: 'BlogCard';
     icon: 'collapse';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
-    posts: Attribute.Relation<'block.blog-card', 'oneToMany', 'api::post.post'>;
     button: Attribute.Component<'component.link'>;
+    posts: Attribute.Relation<'block.blog-card', 'oneToMany', 'api::post.post'>;
   };
 }
 
@@ -60,12 +61,8 @@ export interface BlockCategoryCard extends Schema.Component {
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
-    categories: Attribute.Relation<
-      'block.category-card',
-      'oneToMany',
-      'api::category.category'
-    >;
     button: Attribute.Component<'component.link'>;
+    categories: Attribute.Component<'config.job-list', true>;
   };
 }
 
@@ -79,20 +76,6 @@ export interface BlockCategoryCard2 extends Schema.Component {
       'block.category-card2',
       'oneToMany',
       'api::category.category'
-    >;
-  };
-}
-
-export interface BlockCompanyCard extends Schema.Component {
-  collectionName: 'components_block_company_cards';
-  info: {
-    displayName: 'CompanyCard';
-  };
-  attributes: {
-    companies: Attribute.Relation<
-      'block.company-card',
-      'oneToMany',
-      'plugin::metajob-strapi.company'
     >;
   };
 }
@@ -122,12 +105,7 @@ export interface BlockJobCard extends Schema.Component {
     title: Attribute.String;
     description: Attribute.String;
     button: Attribute.Component<'component.link'>;
-    lists: Attribute.Relation<'block.job-card', 'oneToMany', 'api::list.list'>;
-    jobs: Attribute.Relation<
-      'block.job-card',
-      'oneToMany',
-      'plugin::metajob-strapi.job'
-    >;
+    jobs: Attribute.Component<'config.job-list', true>;
   };
 }
 
@@ -183,11 +161,6 @@ export interface BlockManageCompanies extends Schema.Component {
     enableEdit: Attribute.Boolean;
     empty: Attribute.Component<'shared.empty'>;
     style: Attribute.Component<'component.style-section'>;
-    form: Attribute.Relation<
-      'block.manage-companies',
-      'oneToOne',
-      'api::form.form'
-    >;
     addButtonText: Attribute.String;
     editButtonText: Attribute.String;
     perPageText: Attribute.String &
@@ -195,6 +168,7 @@ export interface BlockManageCompanies extends Schema.Component {
       Attribute.DefaultTo<'Showing per page'>;
     tableConfig: Attribute.Component<'config.header-config'> &
       Attribute.Required;
+    form: Attribute.Component<'config.job-list'>;
   };
 }
 
@@ -221,16 +195,12 @@ export interface BlockManageLists extends Schema.Component {
         min: 6;
         max: 6;
       }>;
-    form: Attribute.Relation<
-      'block.manage-lists',
-      'oneToOne',
-      'api::form.form'
-    >;
     addButtonText: Attribute.String;
     editButtonText: Attribute.String;
     perPageText: Attribute.String &
       Attribute.Required &
       Attribute.DefaultTo<'Showing per page'>;
+    form: Attribute.Component<'config.job-list'>;
   };
 }
 
@@ -282,11 +252,7 @@ export interface BlockReviewCard extends Schema.Component {
   attributes: {
     title: Attribute.String;
     description: Attribute.String;
-    reviews: Attribute.Relation<
-      'block.review-card',
-      'oneToMany',
-      'api::review.review'
-    >;
+    reviews: Attribute.Component<'config.job-list', true>;
   };
 }
 
@@ -554,6 +520,9 @@ export interface ConfigHeaderConfig extends Schema.Component {
         'plugin::multi-select.multi-select',
         [
           'title',
+          'type',
+          'status',
+          'action',
           'description',
           'salary',
           'createdAt',
@@ -581,6 +550,18 @@ export interface ConfigHeaderField extends Schema.Component {
     align: Attribute.Enumeration<['left', 'right', 'center']> &
       Attribute.Required &
       Attribute.DefaultTo<'left'>;
+  };
+}
+
+export interface ConfigJobList extends Schema.Component {
+  collectionName: 'components_config_job_lists';
+  info: {
+    displayName: 'relations';
+    icon: 'apps';
+    description: '';
+  };
+  attributes: {
+    relationId: Attribute.Integer;
   };
 }
 
@@ -1564,7 +1545,6 @@ declare module '@strapi/types' {
       'block.bookmark-list': BlockBookmarkList;
       'block.category-card': BlockCategoryCard;
       'block.category-card2': BlockCategoryCard2;
-      'block.company-card': BlockCompanyCard;
       'block.contact': BlockContact;
       'block.job-card': BlockJobCard;
       'block.latest-applied': BlockLatestApplied;
@@ -1592,6 +1572,7 @@ declare module '@strapi/types' {
       'component.titles': ComponentTitles;
       'config.header-config': ConfigHeaderConfig;
       'config.header-field': ConfigHeaderField;
+      'config.job-list': ConfigJobList;
       'config.message': ConfigMessage;
       'config.recent-jobs-header': ConfigRecentJobsHeader;
       'config.role': ConfigRole;
