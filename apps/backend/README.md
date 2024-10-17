@@ -21,7 +21,7 @@ pnpm dev
 ```
 
 Step 5: Explore and Customize
-Once everything is up and running, you can begin exploring the code, customizing themes, and adding your own content through the Strapi admin panel at http://localhost:1337/admin.
+Once everything is up and running, you can begin exploring the code, customizing themes, and adding your own content through the Strapi admin panel at http://localhost:1337/admin
 
 
 
