@@ -1,9 +1,17 @@
 
 # Padma- The Next.js Framework for Strapi 
 
-## License and Usage
-This project includes a premium theme that is governed by the [End-User License Agreement (EULA)](LICENSE.md). By using or installing the premium theme, you agree to the terms of the EULA.
- ## The project will Open Source Soon
+> # 📢 Project Release Notice
+> 
+> This project is currently released as a **Job Board Solution** under an [EULA License](./EULA.md).
+> 
+> For now, it is available only for **job board use cases**, but it can be adapted for **multi-purpose solutions** soon.
+> 
+> ---
+> 
+> 🔓 **Open-Source Announcement**:  
+> This project will be **open-sourced soon**! Stay tuned for updates on its release.
+
 
 ## **What is Padma?**
 #### Introduction:
