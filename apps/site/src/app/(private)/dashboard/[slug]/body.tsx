@@ -70,6 +70,7 @@ const Body: React.FC<BodyProps> = ({ blocks, styleData, pageSlug, session }) => 
                   <ComponentToRender
                      key={index}
                      userId={Number(session?.user?.id)}
+                     // @ts-ignore
                      role={session?.user?.role?.type}
                      direction={direction}
                      data={block}
