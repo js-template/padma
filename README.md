@@ -9,7 +9,6 @@ This project includes a premium theme that is governed by the [End-User License 
 #### Introduction:
 Padma is the easiest way to create lightning-fast websites using Strapi and Next.js. It's open source and free to use.
 
-[Try Demo](#)
 
 ## How Padma Works:
 
