@@ -18,6 +18,7 @@ export default function DynamicBlockRenderer({ initialData, language }: DynamicB
 
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
+               // @ts-ignore
                return <ComponentToRender key={index} language={language} data={block} {...block} />
             }
             return null // Handle case where component mapping is missing
