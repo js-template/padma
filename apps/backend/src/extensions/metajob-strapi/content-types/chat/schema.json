@@ -1,36 +1,36 @@
 {
   "kind": "collectionType",
-  "collectionName": "applied_jobs",
+  "collectionName": "chats",
   "info": {
-    "singularName": "applied-job",
-    "pluralName": "applied-jobs",
-    "displayName": "Applied Job",
+    "singularName": "chat",
+    "pluralName": "chats",
+    "displayName": "Chat",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
-    "status": {
-      "type": "enumeration",
-      "enum": [
-        "Shortlisted",
-        "Pending",
-        "Rejected"
-      ]
-    },
-    "owner": {
+    "sender": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "receiver": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "chat_blocked": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     },
     "job": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::metajob-strapi.job"
-    },
-    "cover_letter": {
-      "type": "richtext"
     }
   }
 }

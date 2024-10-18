@@ -21,6 +21,9 @@
       "type": "customField",
       "options": [
         "title",
+        "type",
+        "status",
+        "action",
         "description",
         "salary",
         "createdAt",

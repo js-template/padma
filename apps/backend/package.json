@@ -1,11 +1,12 @@
 {
-  "name": "backend",
+  "name": "@padma/backend",
   "version": "1.0.0-beta",
   "private": true,
   "description": "A Strapi application",
   "license": "MIT",
   "author": {
-    "name": "A Strapi developer"
+    "name": "JS Template",
+    "email": "support@jstemplate.net"
   },
   "scripts": {
     "build": "strapi build",
@@ -21,6 +22,7 @@
     "@strapi/plugin-users-permissions": "4.19.0",
     "@strapi/provider-upload-cloudinary": "4.15.4",
     "@strapi/strapi": "4.15.5",
+    "@padma/metajob-backend": "0.0.1",
     "pg": "8.11.3",
     "prop-types": "^15.7.2",
     "react": "^18.0.0",
@@ -30,7 +32,8 @@
     "strapi-plugin-multi-select": "^1.2.3",
     "strapi-plugin-populate-deep": "^3.0.1",
     "strapi-plugin-react-icons": "^0.2.1",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "strapi-provider-email-brevo": "^1.0.4"
   },
   "engines": {
     "node": "20"

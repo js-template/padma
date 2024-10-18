@@ -1,5 +1,4 @@
 import {
-   AllCategory,
    BreadCrumbs,
    CompanyFilter,
    HeroSection,
@@ -10,7 +9,9 @@ import {
    AppliedList,
    FavoriteList,
    MatchedList,
-   AppliedLists
+   AppliedJobs,
+   CategoryBlock,
+   AddResumeForm
 } from "@padma/metajob-ui"
 
 import {
@@ -68,7 +69,7 @@ export const blockComponentMapping = {
       component: CategoryCard
    },
    "block.category-card2": {
-      component: AllCategory
+      component: CategoryBlock
    },
    "block.job-card": {
       component: ListCard
@@ -125,6 +126,9 @@ export const dashboardBlocksMapping = {
       component: ManageCompanies
    },
    "table.applied-jobs": {
-      component: AppliedLists
+      component: AppliedJobs
+   },
+   "block.my-resume": {
+      component: AddResumeForm //TODO: this will be applicable for dynamic resume page
    }
 } as any

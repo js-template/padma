@@ -20,28 +20,14 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 
    // *** fetch seo data
    const { data } = await find(
-      "api/resumes",
+      "api/metajob-strapi/resumes",
       {
          filters: {
             slug: {
                $eq: pageSlug
             }
          },
-         populate: {
-            seo: {
-               fields: [
-                  "metaTitle",
-                  "metaDescription",
-                  "metaImage",
-                  "metaSocial",
-                  "keywords",
-                  "metaRobots",
-                  "structuredData",
-                  "metaViewport",
-                  "canonicalURL"
-               ]
-            }
-         },
+         populate: "*",
          publicationState: "live",
          locale: language ? [language] : ["en"]
       },
@@ -72,7 +58,7 @@ export default async function page({ params }: { params: { slug: string } }) {
    // *** get candidates data from strapi ***
    const { data, error } = await find(
       // "api/candidates",
-      "api/resumes",
+      "api/metajob-strapi/resumes",
       {
          filters: {
             slug: {
@@ -89,18 +75,5 @@ export default async function page({ params }: { params: { slug: string } }) {
    // if (error) {
    //    return <div>Something went wrong</div>
    // }
-   return (
-      <>
-         <CandidateProfile data={data?.data} language={language} />
-         {data?.data[0]?.attributes?.seo?.structuredData && (
-            <Script
-               id='json-ld-structured-data'
-               type='application/ld+json'
-               dangerouslySetInnerHTML={{
-                  __html: JSON.stringify(data?.data[0]?.attributes?.seo?.structuredData)
-               }}
-            />
-         )}
-      </>
-   )
+   return <CandidateProfile data={data?.data} language={language} />
 }

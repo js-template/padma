@@ -1,17 +1,26 @@
 "use client"
 import NextLink from "next/link"
+import { signOut, useSession } from "next-auth/react"
+import useThemeToggle from "@/next-theme/useThemeToggle"
 import { Box, Button, Container, Paper, Typography } from "@mui/material"
-import { GoBackBtn } from "@padma/metajob-ui"
-import Header from "@/components/header"
 import { useGlobalContext } from "@/context/store"
-import { Footer } from "@padma/metajob-ui"
+import { SignOut } from "@/lib/user"
+import { getLanguageValue } from "@/utils/common"
+import { GoBackBtn, Header, Footer } from "@padma/metajob-ui"
 
 const NotFoundBody = () => {
    const { layoutData } = useGlobalContext()
 
    return (
       <main>
-         <Header />
+         <Header
+            useThemeToggle={useThemeToggle}
+            useGlobalContext={useGlobalContext}
+            signOut={signOut}
+            SignOut={SignOut}
+            useSession={useSession}
+            getLanguageValue={getLanguageValue}
+         />
          <Container maxWidth='lg'>
             <Box
                sx={{

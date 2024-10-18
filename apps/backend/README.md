@@ -1,6 +1,34 @@
-# Autolist- Classified Ads Headless Strapi Backend
 
-#### Frontend Repository [Here](https://github.com/js-template/autolist)
+## **Getting Started:**
+
+### Step 1: Fork the Repository
+Click the "Fork" button at the top right of this GitHub repository to copy it to your account.
+
+### Step 2: Set Up Environment Variables
+For both the `apps/backend` folders, create an `.env` file and add the required environment variables. The `.env.example` files will guide you on what’s needed.
+
+### Step 3: Run the Backend
+To start the backend (Strapi CMS), navigate to the `apps/backend` directory and run the following commands:
+
+**Install Packgaes**
+```bash
+pnpm install
+```
+
+**Start development Server**
+```bash
+pnpm dev
+```
+
+Step 5: Explore and Customize
+Once everything is up and running, you can begin exploring the code, customizing themes, and adding your own content through the Strapi admin panel at http://localhost:1337/admin
+
+
+
+
+
+
+<!-- #### Frontend Repository [Here](https://github.com/js-template/autolist)
 
 ## One Click Deploy
 
@@ -15,46 +43,5 @@
 
 - Click the Railway button 👆
 - Add the environment variables
-  - If you choose not to add the Cloudinary related environment variables, your media will not be persisted between deploys.
+  - If you choose not to add the Cloudinary related environment variables, your media will not be persisted between deploys. -->
 
-## 💻 Developing locally
-
-When developing locally this Strapi template will connect to the Postgres server from its public [TCP Proxy](https://docs.railway.app/deploy/exposing-your-app#tcp-proxying)
-
-- Clone the repository locally
-- Install the dependencies with `yarn install` or `npm install`
-- Install the Railway CLI, instructions for that can be found [here](https://docs.railway.app/develop/cli#installation)
-    - If this is your first time using the CLI make sure to login with `railway login`
-- Within the local repository run `railway link` to link the local repository to the Strapi service on Railway
-- Start Strapi for development with `railway run yarn run develop` or `railway run npm run develop`
-    - This command run Strapi in development mode with the service variables available locally
-- Open your browser to `http://127.0.0.1:1337/admin`
-
-## 📝 Notes
-
-- After your app is deployed, visit the `/admin` endpoint to create your admin user.
-- Railway's filesystem is ephemeral which is why any changes to the filesystem are not persisted between deploys. This is why, this template uses Cloudinary for media storage.
-  
-### 💁‍♀️ Frontend Setup (Next.js)
-
-1. Clone the frontend repository:
-    ```bash
-    git clone https://github.com/js-template/autolist
-    cd nextjs-frontend
-    ```
-
-2. Install the dependencies:
-    ```bash
-    pnpm install
-    # or
-    yarn install
-    ```
-
-3. Start the Next.js development server:
-    ```bash
-    pnpm dev
-    # or
-    yarn dev
-    ```
-
-  

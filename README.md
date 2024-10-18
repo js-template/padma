@@ -1,42 +1,46 @@
 
-# Padma- Multipurpose Listing Solution 
+# Padma- The Next.js Framework for Strapi 
 
 ## License and Usage
 This project includes a premium theme that is governed by the [End-User License Agreement (EULA)](LICENSE.md). By using or installing the premium theme, you agree to the terms of the EULA.
-
+ ## The project will Open Source Soon
 
 ## **What is Padma?**
+#### Introduction:
+Padma is the easiest way to create lightning-fast websites using Strapi and Next.js. It's open source and free to use.
 
-**Introduction:**  
-Padma is a comprehensive full-stack listing solution designed to be flexible and adaptable for various use cases. Whether you need a platform for job listings, classified ads, property listings, or any other type of directory, Padma has you covered. It provides a ready-to-use system that combines both frontend and backend in a seamless, customizable solution. Our goal is to provide businesses with the tools they need to create a fast, scalable, and user-friendly listing platform.
+
+## How Padma Works:
+
+The Nextjs dynamic framework for the headless CMS, Strapi.
+
+1. **Strapi** is used as a headless CMS for creating and managing your content.
+2. The **Strapi REST API** allows you to retrieve your content and generate the final HTML.
+3. **Padma** apps built with Next.js serve your content and build lightning-fast websites.
+
+## Strapi + Next.js Made Easy
+
+**Padma** connects seamlessly with Strapi, allowing you to focus on building your website or blog. There’s no need for complex configuration, and the learning curve is minimal.
+
+### 01. Create Your Project
+- Fork the Padma project and get started.
+- Install and set it up in your environment.
+[Learn more](#)
+
+### 02. Connect Padma to Your Backend
+- Easily connect your backend URL and link it to your Strapi site.
+
+### 03. Set Up Your Free or Premium Theme
+- Start with a pre-made theme or create a custom one.
+- Style your site using MUI for a modern design.
+[Learn more](#)
+
+### 04. Deploy Anywhere
+- Deploy your site to any Node.js or serverless provider.
+- Use your favorite Strapi cloud or any Strapi hosting service.
+[Learn more](#)
 
 ---
-
-<h2>Project Goal</h2>
-
-<table style="width:100%;">
-    <tr>
-        <th>Theme Name</th>
-        <th>Type</th>
-        <th>Status</th>
-    </tr>
-    <tr>
-        <td><strong>Metajob</strong></td>
-        <td><a href="#">Job Board Solution</a></td>
-        <td>Released</td>
-    </tr>
-    <tr>
-        <td><strong>Metaads</strong></td>
-        <td>Classified Ads Listing</td>
-        <td>In Plan</td>
-    </tr>
-    <tr>
-        <td><strong>Metaproperty</strong></td>
-        <td>Property Listing Solution</td>
-        <td>In Plan</td>
-    </tr>
-</table>
-
 
 ---
 
@@ -46,7 +50,7 @@ Padma is a comprehensive full-stack listing solution designed to be flexible and
    Padma includes a complete solution, covering both frontend (Next.js) and backend (Strapi), with all APIs provided for seamless integration.
    
 2. **Multilingual Support**  
-   The platform is built to support multiple languages, enabling you to reach a global audience with ease.
+   The platform is built to support multiple 
    
 3. **Lightning-Fast Performance**  
    Optimized for speed, Padma ensures that your listing pages load quickly, offering an exceptional user experience.
@@ -57,17 +61,6 @@ Padma is a comprehensive full-stack listing solution designed to be flexible and
 5. **Full Site Editing**  
    Admins and users can easily manage and edit all aspects of the site, providing full control over content and appearance.
    
-6. **Real-Time Features**  
-   Padma supports real-time updates, ensuring that new listings, messages, and notifications are instantly reflected on the site.
-   
-7. **Live Chat**  
-   Integrated chat functionality allows users to communicate in real-time, improving engagement and customer support.
-   
-8. **Paid Membership Support**  
-   Monetize your platform with paid memberships or subscriptions, enabling access to exclusive content or services.
-   
-9. **Dark and Light Mode**  
-   Choose between dark or light mode to provide a personalized user experience.
    
 10. **Easy to Maintain**  
     Designed with simplicity in mind, the platform is easy to maintain, even for non-technical users.
@@ -94,11 +87,6 @@ Padma is a comprehensive full-stack listing solution designed to be flexible and
     - **`@padma/metajob-ui:`**  
       └── This package includes the theme for the job listing solution.
 
-
-## **How It Works:**
-
-Padma leverages Strapi as a headless CMS to manage content, while the frontend themes (built with Next.js and MUI) pull data through APIs and render dynamic, high-performance HTML in the browser using React. The backend handles all the business logic and API integrations, while the frontend focuses on displaying content efficiently.
-
 ## **Getting Started:**
 
 If you’re new to development, don’t worry! This guide will help you set up the project with ease.
@@ -122,7 +110,7 @@ In another terminal, navigate to the apps/site directory and run:
 
 ```bash
 pnpm install
-pnpm run dev
+pnpm dev
 ```
 This will launch the frontend, and the site will be accessible at http://localhost:3000.
 

@@ -630,6 +630,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToOne',
       'plugin::metajob-strapi.resume'
     >;
+    email_histories: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'plugin::metajob-strapi.email-history'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -666,7 +671,7 @@ export interface PluginMetajobStrapiJob extends Schema.CollectionType {
     category: Attribute.Relation<
       'plugin::metajob-strapi.job',
       'oneToOne',
-      'api::category.category'
+      'plugin::metajob-strapi.job-category'
     >;
     type: Attribute.JSON &
       Attribute.CustomField<
@@ -728,17 +733,12 @@ export interface PluginMetajobStrapiBookmark extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    company: Attribute.Relation<
-      'plugin::metajob-strapi.bookmark',
-      'oneToOne',
-      'plugin::metajob-strapi.company'
-    >;
     owner: Attribute.Relation<
       'plugin::metajob-strapi.bookmark',
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    type: Attribute.Enumeration<['resume', 'list', 'company']> &
+    type: Attribute.Enumeration<['resume', 'job', 'company']> &
       Attribute.Required &
       Attribute.DefaultTo<'resume'>;
     resume: Attribute.Relation<
@@ -747,6 +747,11 @@ export interface PluginMetajobStrapiBookmark extends Schema.CollectionType {
       'plugin::metajob-strapi.resume'
     >;
     note: Attribute.Text;
+    company: Attribute.Relation<
+      'plugin::metajob-strapi.bookmark',
+      'oneToOne',
+      'plugin::metajob-strapi.company'
+    >;
     job: Attribute.Relation<
       'plugin::metajob-strapi.bookmark',
       'oneToOne',
@@ -792,14 +797,14 @@ export interface PluginMetajobStrapiChat extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    list: Attribute.Relation<
-      'plugin::metajob-strapi.chat',
-      'oneToOne',
-      'api::list.list'
-    >;
     chat_blocked: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    job: Attribute.Relation<
+      'plugin::metajob-strapi.chat',
+      'oneToOne',
+      'plugin::metajob-strapi.job'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -824,10 +829,10 @@ export interface PluginMetajobStrapiMessage extends Schema.CollectionType {
     singularName: 'message';
     pluralName: 'messages';
     displayName: 'Messages';
+    description: '';
   };
   options: {
     draftAndPublish: true;
-    comment: '';
   };
   attributes: {
     sender: Attribute.Relation<
@@ -846,6 +851,11 @@ export interface PluginMetajobStrapiMessage extends Schema.CollectionType {
     send_notification: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    chat_session: Attribute.Relation<
+      'plugin::metajob-strapi.message',
+      'oneToOne',
+      'plugin::metajob-strapi.chat'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -887,7 +897,7 @@ export interface PluginMetajobStrapiCompany extends Schema.CollectionType {
     industry: Attribute.Relation<
       'plugin::metajob-strapi.company',
       'oneToOne',
-      'api::category.category'
+      'plugin::metajob-strapi.job-category'
     >;
     slug: Attribute.UID & Attribute.Required;
     owner: Attribute.Relation<
@@ -984,11 +994,6 @@ export interface PluginMetajobStrapiAppliedJob extends Schema.CollectionType {
       'plugin::metajob-strapi.job'
     >;
     cover_letter: Attribute.RichText;
-    list: Attribute.Relation<
-      'plugin::metajob-strapi.applied-job',
-      'oneToOne',
-      'api::list.list'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1013,10 +1018,10 @@ export interface PluginMetajobStrapiResume extends Schema.CollectionType {
     singularName: 'resume';
     pluralName: 'resumes';
     displayName: 'Resume';
+    description: '';
   };
   options: {
     draftAndPublish: true;
-    comment: '';
   };
   attributes: {
     education: Attribute.Component<'component.experience', true>;
@@ -1036,7 +1041,7 @@ export interface PluginMetajobStrapiResume extends Schema.CollectionType {
     category: Attribute.Relation<
       'plugin::metajob-strapi.resume',
       'oneToOne',
-      'api::category.category'
+      'plugin::metajob-strapi.job-category'
     >;
     salary: Attribute.BigInteger;
     salaryType: Attribute.Enumeration<
@@ -1280,6 +1285,51 @@ export interface PluginMetajobStrapiJobCategory extends Schema.CollectionType {
       'plugin::metajob-strapi.job-category'
     >;
     locale: Attribute.String;
+  };
+}
+
+export interface PluginMetajobStrapiEmailHistory extends Schema.CollectionType {
+  collectionName: 'email_histories';
+  info: {
+    singularName: 'email-history';
+    pluralName: 'email-histories';
+    displayName: 'Email History';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: true;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    title: Attribute.String;
+    datetime: Attribute.DateTime;
+    receiver: Attribute.Email;
+    owner: Attribute.Relation<
+      'plugin::metajob-strapi.email-history',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.email-history',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.email-history',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
   };
 }
 
@@ -1538,6 +1588,11 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    posts: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::post.post'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1559,48 +1614,6 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'api::category.category'
     >;
     locale: Attribute.String;
-  };
-}
-
-export interface ApiContactListContactList extends Schema.CollectionType {
-  collectionName: 'contact_lists';
-  info: {
-    singularName: 'contact-list';
-    pluralName: 'contact-lists';
-    displayName: 'Contact Lists';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    status: Attribute.Enumeration<['Shortlisted', 'Pending', 'Rejected']>;
-    cover_letter: Attribute.String;
-    owner: Attribute.Relation<
-      'api::contact-list.contact-list',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    list: Attribute.Relation<
-      'api::contact-list.contact-list',
-      'oneToOne',
-      'api::list.list'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::contact-list.contact-list',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::contact-list.contact-list',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
   };
 }
 
@@ -1964,62 +1977,6 @@ export interface ApiLayoutLayout extends Schema.SingleType {
   };
 }
 
-export interface ApiListList extends Schema.CollectionType {
-  collectionName: 'lists';
-  info: {
-    singularName: 'list';
-    pluralName: 'lists';
-    displayName: 'Lists';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    startDate: Attribute.Date & Attribute.Required;
-    price: Attribute.Decimal & Attribute.Required;
-    description: Attribute.RichText;
-    category: Attribute.Relation<
-      'api::list.list',
-      'oneToOne',
-      'api::category.category'
-    >;
-    type: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['Full Time', 'Part Time', 'Contract Base', 'Freelance', 'Remote']
-      >;
-    vacancy: Attribute.Integer;
-    slug: Attribute.UID<'api::list.list', 'title'> & Attribute.Required;
-    company: Attribute.Relation<
-      'api::list.list',
-      'oneToOne',
-      'plugin::metajob-strapi.company'
-    >;
-    status: Attribute.Enumeration<['open', 'closed', 'draft']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'draft'>;
-    endDate: Attribute.Date & Attribute.Required;
-    owner: Attribute.Relation<
-      'api::list.list',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    location: Attribute.JSON &
-      Attribute.CustomField<'plugin::google-maps.location-picker'>;
-    tags: Attribute.Relation<'api::list.list', 'oneToMany', 'api::tag.tag'>;
-    seo: Attribute.Component<'shared.seo'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::list.list', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::list.list', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface ApiListDetailListDetail extends Schema.SingleType {
   collectionName: 'list_details';
   info: {
@@ -2159,7 +2116,6 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.review-card',
         'header.breadcrumbs',
         'banner.banner-one',
-        'block.company-card',
         'forms.job-filter',
         'forms.company-filter',
         'forms.candidate-filter',
@@ -2204,7 +2160,7 @@ export interface ApiPostPost extends Schema.CollectionType {
     post_categories: Attribute.Relation<
       'api::post.post',
       'manyToMany',
-      'api::post-category.post-category'
+      'api::category.category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -2212,44 +2168,6 @@ export interface ApiPostPost extends Schema.CollectionType {
     createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPostCategoryPostCategory extends Schema.CollectionType {
-  collectionName: 'post_categories';
-  info: {
-    singularName: 'post-category';
-    pluralName: 'post-categories';
-    displayName: 'Post Categories';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    image: Attribute.Media;
-    slug: Attribute.UID;
-    posts: Attribute.Relation<
-      'api::post-category.post-category',
-      'manyToMany',
-      'api::post.post'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::post-category.post-category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::post-category.post-category',
-      'oneToOne',
-      'admin::user'
-    > &
       Attribute.Private;
   };
 }
@@ -2335,6 +2253,12 @@ export interface ApiPrivatePagePrivatePage extends Schema.CollectionType {
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
+        };
+      }>;
+    seo: Attribute.Component<'shared.seo'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
         };
       }>;
     createdAt: Attribute.DateTime;
@@ -2480,23 +2404,21 @@ declare module '@strapi/types' {
       'plugin::metajob-strapi.resume': PluginMetajobStrapiResume;
       'plugin::metajob-strapi.skill': PluginMetajobStrapiSkill;
       'plugin::metajob-strapi.job-category': PluginMetajobStrapiJobCategory;
+      'plugin::metajob-strapi.email-history': PluginMetajobStrapiEmailHistory;
       'plugin::google-maps.config': PluginGoogleMapsConfig;
       'plugin::react-icons.iconlibrary': PluginReactIconsIconlibrary;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::blog-detail.blog-detail': ApiBlogDetailBlogDetail;
       'api::category.category': ApiCategoryCategory;
-      'api::contact-list.contact-list': ApiContactListContactList;
       'api::dashboard-home.dashboard-home': ApiDashboardHomeDashboardHome;
       'api::form.form': ApiFormForm;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::layout.layout': ApiLayoutLayout;
-      'api::list.list': ApiListList;
       'api::list-detail.list-detail': ApiListDetailListDetail;
       'api::membership.membership': ApiMembershipMembership;
       'api::package.package': ApiPackagePackage;
       'api::page.page': ApiPagePage;
       'api::post.post': ApiPostPost;
-      'api::post-category.post-category': ApiPostCategoryPostCategory;
       'api::private-page.private-page': ApiPrivatePagePrivatePage;
       'api::review.review': ApiReviewReview;
       'api::sidebar.sidebar': ApiSidebarSidebar;

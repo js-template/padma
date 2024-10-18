@@ -15,9 +15,10 @@ interface BodyProps {
       columns: number | null
    }
    session: Session | null
+   language?: string
 }
 
-const Body: React.FC<BodyProps> = ({ blocks, styles, session }) => {
+const Body: React.FC<BodyProps> = ({ blocks, styles, session, language }) => {
    //console.log("Blocks", blocks)
    return (
       <Grid
@@ -40,6 +41,7 @@ const Body: React.FC<BodyProps> = ({ blocks, styles, session }) => {
                      key={index}
                      userId={Number(session?.user?.id)}
                      role={session?.user?.role?.type}
+                     language={language}
                      data={block}
                      {...block}
                   />

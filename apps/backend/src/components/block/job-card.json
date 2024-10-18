@@ -17,10 +17,11 @@
       "repeatable": false,
       "component": "component.link"
     },
-    "lists": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::list.list"
+    "jobs": {
+      "displayName": "jobList",
+      "type": "component",
+      "repeatable": true,
+      "component": "config.job-list"
     }
   }
 }

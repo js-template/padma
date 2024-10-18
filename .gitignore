@@ -6,6 +6,7 @@ node_modules
 .pnp.js
 packages/metajob-theme
 .npmrc
+.strapi
 # testing
 coverage
 dist
@@ -39,4 +40,6 @@ pnpm-lock.yaml*
 yarn.lock*
 .vercel
 /packages/metajob-ui
+.npmrc
+apps/backend/src/plugins/metajob-backend/
 .npmrc

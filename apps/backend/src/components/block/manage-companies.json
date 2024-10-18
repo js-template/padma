@@ -41,11 +41,6 @@
       "repeatable": false,
       "component": "component.style-section"
     },
-    "form": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::form.form"
-    },
     "addButtonText": {
       "type": "string"
     },
@@ -62,6 +57,11 @@
       "repeatable": false,
       "component": "config.header-config",
       "required": true
+    },
+    "form": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.job-list"
     }
   }
 }

@@ -10,12 +10,12 @@
     "title": {
       "type": "string",
       "required": true,
-      "default": "Title"
+      "default": "No Data Founds"
     },
     "description": {
       "type": "text",
       "required": true,
-      "default": "Description"
+      "default": "Try to refresh the page or check back later"
     }
   }
 }

@@ -69,7 +69,12 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "membership": {
       "type": "relation",
@@ -93,6 +98,12 @@
       "relation": "oneToOne",
       "target": "plugin::metajob-strapi.resume",
       "mappedBy": "user"
+    },
+    "email_histories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::metajob-strapi.email-history",
+      "mappedBy": "owner"
     }
   }
 }
