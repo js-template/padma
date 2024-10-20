@@ -935,15 +935,20 @@ export interface PluginMetajobStrapiJobDetail extends Schema.SingleType {
     singularName: 'job-detail';
     pluralName: 'job-details';
     displayName: 'Job Details';
+    description: '';
   };
   options: {
     draftAndPublish: true;
-    comment: '';
   };
   attributes: {
     title: Attribute.String;
     blocks: Attribute.DynamicZone<
-      ['shared.spacing', 'shared.empty', 'component.page-title']
+      [
+        'shared.spacing',
+        'shared.empty',
+        'component.page-title',
+        'single-type.job-details'
+      ]
     >;
     sidebar: Attribute.Enumeration<
       ['Left Sidebar', 'Right Sidebar', 'No Sidebar', 'Both Sidebar']
