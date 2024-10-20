@@ -1,6 +1,4 @@
-import { IJobDetailsPageData } from "@/type/job-deatils"
-
-export const jobDetailsPageData: IJobDetailsPageData = {
+export const jobDetailsPageData = {
    pageTitle: "Job Details",
    backgroundImage: "/images/jobs/findJob.png",
    titleCard: {

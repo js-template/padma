@@ -1,6 +1,4 @@
-import { IExperienceFilter, IJobsData, IJobTypeFilter, ISliksFilter } from "@/type/find-job"
-
-export const jobTypeFilterData: IJobTypeFilter[] = [
+export const jobTypeFilterData = [
    {
       type: "Full Time",
       jobCount: 124,
@@ -28,7 +26,7 @@ export const jobTypeFilterData: IJobTypeFilter[] = [
    }
 ]
 
-export const experienceFilterData: IExperienceFilter[] = [
+export const experienceFilterData = [
    {
       title: "No Need",
       jobCount: 200,
@@ -61,7 +59,7 @@ export const experienceFilterData: IExperienceFilter[] = [
    }
 ]
 
-export const skillsFilterData: ISliksFilter[] = [
+export const skillsFilterData = [
    {
       title: "HTML",
       jobCount: 200,
@@ -88,7 +86,7 @@ export const skillsFilterData: ISliksFilter[] = [
       id: 5
    }
 ]
-export const jobsData: IJobsData[] = [
+export const jobsData = [
    {
       id: 1,
       tags: ["Full Time", "Remote"],
