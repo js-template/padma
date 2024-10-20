@@ -633,6 +633,20 @@ export interface ConfigRole extends Schema.Component {
   };
 }
 
+export interface ConfigSinglePage extends Schema.Component {
+  collectionName: 'components_config_single_pages';
+  info: {
+    displayName: 'singlePage';
+    icon: 'arrowRight';
+    description: '';
+  };
+  attributes: {
+    slug: Attribute.String;
+    collectionModel: Attribute.String & Attribute.DefaultTo<'api/posts'>;
+    singelModel: Attribute.String;
+  };
+}
+
 export interface ConfigTableHead extends Schema.Component {
   collectionName: 'components_config_table_heads';
   info: {
@@ -1577,6 +1591,7 @@ declare module '@strapi/types' {
       'config.message': ConfigMessage;
       'config.recent-jobs-header': ConfigRecentJobsHeader;
       'config.role': ConfigRole;
+      'config.single-page': ConfigSinglePage;
       'config.table-head': ConfigTableHead;
       'forms.candidate-filter': FormsCandidateFilter;
       'forms.company-filter': FormsCompanyFilter;

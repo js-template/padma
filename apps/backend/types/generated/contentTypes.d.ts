@@ -2132,6 +2132,38 @@ export interface ApiPagePage extends Schema.CollectionType {
   };
 }
 
+export interface ApiPermalinkPermalink extends Schema.SingleType {
+  collectionName: 'permalinks';
+  info: {
+    singularName: 'permalink';
+    pluralName: 'permalinks';
+    displayName: 'Permalinks';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    structure: Attribute.Enumeration<['Plain', 'Name and display']>;
+    singlePage: Attribute.Component<'config.single-page', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::permalink.permalink',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::permalink.permalink',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPostPost extends Schema.CollectionType {
   collectionName: 'posts';
   info: {
@@ -2418,6 +2450,7 @@ declare module '@strapi/types' {
       'api::membership.membership': ApiMembershipMembership;
       'api::package.package': ApiPackagePackage;
       'api::page.page': ApiPagePage;
+      'api::permalink.permalink': ApiPermalinkPermalink;
       'api::post.post': ApiPostPost;
       'api::private-page.private-page': ApiPrivatePagePrivatePage;
       'api::review.review': ApiReviewReview;
