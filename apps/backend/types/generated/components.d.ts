@@ -69,10 +69,23 @@ export interface BlockCategoryCard extends Schema.Component {
 export interface BlockCategoryCard2 extends Schema.Component {
   collectionName: 'components_block_category_card2s';
   info: {
-    displayName: 'CategoryList';
+    displayName: 'CategoryCard2';
     description: '';
   };
   attributes: {};
+}
+
+export interface BlockCategoryList extends Schema.Component {
+  collectionName: 'components_block_category_lists';
+  info: {
+    displayName: 'CategoryList';
+    icon: 'apps';
+  };
+  attributes: {
+    title: Attribute.String;
+    enableSearch: Attribute.Boolean & Attribute.DefaultTo<true>;
+    empty: Attribute.Component<'shared.empty'>;
+  };
 }
 
 export interface BlockContact extends Schema.Component {
@@ -1540,6 +1553,7 @@ declare module '@strapi/types' {
       'block.bookmark-list': BlockBookmarkList;
       'block.category-card': BlockCategoryCard;
       'block.category-card2': BlockCategoryCard2;
+      'block.category-list': BlockCategoryList;
       'block.contact': BlockContact;
       'block.job-card': BlockJobCard;
       'block.latest-applied': BlockLatestApplied;
