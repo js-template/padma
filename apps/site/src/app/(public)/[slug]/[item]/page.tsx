@@ -51,6 +51,35 @@ export default async function DynamicPages({
       return notFound()
    }
 
+   const { data: postData, error: postError } = await find(
+      singlePageData?.collectionModel,
+      {
+         filters: {
+            slug: {
+               $eq: singleType
+            }
+         },
+         populate: "deep",
+         publicationState: "live",
+         locale: language ? [language] : ["en"]
+      },
+      "no-store"
+   )
+
+   console.log("postData", postData, postError)
+
+   // *** get  blogs-details page data from strapi ***
+   const { data: blogPageData, error: blogPageError } = await find(
+      singlePageData?.singelModel,
+      {
+         populate: "deep",
+         locale: language ? [language] : ["en"]
+      },
+      "no-store"
+   )
+
+   console.log("blogPageData", blogPageData, blogPageError)
+
    // *** if error, return error page ***
    // if (error) {
    //    throw error;
