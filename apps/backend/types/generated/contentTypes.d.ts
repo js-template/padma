@@ -1982,47 +1982,6 @@ export interface ApiLayoutLayout extends Schema.SingleType {
   };
 }
 
-export interface ApiListDetailListDetail extends Schema.SingleType {
-  collectionName: 'list_details';
-  info: {
-    singularName: 'list-detail';
-    pluralName: 'list-details';
-    displayName: 'List Details';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    blocks: Attribute.DynamicZone<
-      ['shared.spacing', 'shared.empty', 'component.page-title']
-    >;
-    sidebar: Attribute.Enumeration<
-      ['Left Sidebar', 'Right Sidebar', 'No Sidebar', 'Both Sidebar']
-    > &
-      Attribute.Required &
-      Attribute.DefaultTo<'Right Sidebar'>;
-    leftSidebar: Attribute.DynamicZone<['component.page-title']>;
-    relatedLists: Attribute.Boolean;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::list-detail.list-detail',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::list-detail.list-detail',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiMembershipMembership extends Schema.SingleType {
   collectionName: 'memberships';
   info: {
@@ -2451,7 +2410,6 @@ declare module '@strapi/types' {
       'api::form.form': ApiFormForm;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::layout.layout': ApiLayoutLayout;
-      'api::list-detail.list-detail': ApiListDetailListDetail;
       'api::membership.membership': ApiMembershipMembership;
       'api::package.package': ApiPackagePackage;
       'api::page.page': ApiPagePage;

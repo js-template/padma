@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_single_type_job_details",
+  "collectionName": "components_single_type_resume_details",
   "info": {
-    "displayName": "job Details",
+    "displayName": "Resume Details",
     "icon": "arrowRight",
     "description": ""
   },
