@@ -69,16 +69,10 @@ export interface BlockCategoryCard extends Schema.Component {
 export interface BlockCategoryCard2 extends Schema.Component {
   collectionName: 'components_block_category_card2s';
   info: {
-    displayName: 'CategoryCard2';
+    displayName: 'CategoryList';
     description: '';
   };
-  attributes: {
-    categories: Attribute.Relation<
-      'block.category-card2',
-      'oneToMany',
-      'plugin::metajob-strapi.job-category'
-    >;
-  };
+  attributes: {};
 }
 
 export interface BlockContact extends Schema.Component {
