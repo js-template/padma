@@ -7,44 +7,6 @@ import Script from "next/script"
 import { CandidateProfile } from "@padma/metajob-ui"
 import { getLanguageFromCookie } from "@/utils/language"
 
-// *** generate metadata type
-type Props = {
-   params: { slug: string }
-   searchParams: { [key: string]: string | string[] | undefined }
-}
-
-// *** generate metadata for the page
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-   const pageSlug = params?.slug
-   const language = getLanguageFromCookie()
-
-   // *** fetch seo data
-   const { data } = await find(
-      "api/metajob-strapi/resumes",
-      {
-         filters: {
-            slug: {
-               $eq: pageSlug
-            }
-         },
-         populate: "*",
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
-      },
-      "no-cache"
-   )
-
-   // if seo is not available, return default data
-   if (!data?.data?.[0]?.attributes?.seo) {
-      return {
-         title: data?.data[0]?.attributes?.title || "Title not found",
-         description: data?.data[0]?.attributes?.description || "Description not found"
-      }
-   }
-
-   return StrapiSeoFormate(data?.data?.[0]?.attributes?.seo, `/resume/${pageSlug}`)
-}
-
 export default async function page({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
 
@@ -76,4 +38,46 @@ export default async function page({ params }: { params: { slug: string } }) {
    //    return <div>Something went wrong</div>
    // }
    return <CandidateProfile data={data?.data} language={language} />
+}
+
+// *** generate metadata type
+type Props = {
+   params: { slug: string }
+   searchParams: { [key: string]: string | string[] | undefined }
+}
+
+// *** generate metadata for the page
+export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+   const pageSlug = params?.slug
+   const language = getLanguageFromCookie()
+
+   // *** fetch seo data
+   const { data } = await find(
+      "api/metajob-strapi/resumes",
+      {
+         filters: {
+            slug: {
+               $eq: pageSlug
+            }
+         },
+         populate: {
+            seo: {
+               populate: "*"
+            }
+         },
+         publicationState: "live",
+         locale: language ? [language] : ["en"]
+      },
+      "no-cache"
+   )
+
+   // if seo is not available, return default data
+   if (!data?.data?.[0]?.attributes?.seo) {
+      return {
+         title: data?.data[0]?.attributes?.name || "Title not found",
+         description: data?.data[0]?.attributes?.description || "Description not found"
+      }
+   }
+
+   return StrapiSeoFormate(data?.data?.[0]?.attributes?.seo, `/resume/${pageSlug}`)
 }

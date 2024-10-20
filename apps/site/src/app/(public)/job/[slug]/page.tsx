@@ -8,58 +8,6 @@ import { JobDetails } from "@padma/metajob-ui"
 import { getLanguageFromCookie } from "@/utils/language"
 import { auth } from "@/context/auth"
 
-// *** generate metadata type
-type Props = {
-   params: { slug: string }
-   searchParams: { [key: string]: string | string[] | undefined }
-}
-
-// *** generate metadata for the page
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-   const pageSlug = params?.slug
-   const language = getLanguageFromCookie()
-
-   // *** fetch seo data
-   const { data } = await find(
-      "api/metajob-strapi/jobs",
-      {
-         filters: {
-            slug: {
-               $eq: pageSlug
-            }
-         },
-         populate: {
-            seo: {
-               fields: [
-                  "metaTitle",
-                  "metaDescription",
-                  "metaImage",
-                  "metaSocial",
-                  "keywords",
-                  "metaRobots",
-                  "structuredData",
-                  "metaViewport",
-                  "canonicalURL"
-               ]
-            }
-         },
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
-      },
-      "no-cache"
-   )
-
-   // if seo is not available, return default data
-   if (!data?.data?.[0]?.attributes?.seo) {
-      return {
-         title: data?.data[0]?.attributes?.title || "Title not found",
-         description: data?.data[0]?.attributes?.description || "Description not found"
-      }
-   }
-
-   return StrapiSeoFormate(data?.data?.[0]?.attributes?.seo, `/job/${pageSlug}`)
-}
-
 export default async function JobDetailsPage({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
 
@@ -110,4 +58,46 @@ export default async function JobDetailsPage({ params }: { params: { slug: strin
          />
       </>
    )
+}
+
+// *** generate metadata type
+type Props = {
+   params: { slug: string }
+   searchParams: { [key: string]: string | string[] | undefined }
+}
+
+// *** generate metadata for the page
+export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+   const pageSlug = params?.slug
+   const language = getLanguageFromCookie()
+
+   // *** fetch seo data
+   const { data } = await find(
+      "api/metajob-strapi/jobs",
+      {
+         filters: {
+            slug: {
+               $eq: pageSlug
+            }
+         },
+         populate: {
+            seo: {
+               populate: "*"
+            }
+         },
+         publicationState: "live",
+         locale: language ? [language] : ["en"]
+      },
+      "no-cache"
+   )
+
+   // if seo is not available, return default data
+   if (!data?.data?.[0]?.attributes?.seo) {
+      return {
+         title: data?.data[0]?.attributes?.title || "Title not found",
+         description: data?.data[0]?.attributes?.description || "Description not found"
+      }
+   }
+
+   return StrapiSeoFormate(data?.data?.[0]?.attributes?.seo, `/job/${pageSlug}`)
 }
