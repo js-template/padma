@@ -1,9 +1,11 @@
+// FIXME: This page should not exist
+
 import { notFound } from "next/navigation"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
 import { Metadata, ResolvingMetadata } from "next"
-import Script from "next/script"
+
 import React from "react"
 import { CompanyProfilePage } from "@padma/metajob-ui"
 import { auth } from "@/context/auth"

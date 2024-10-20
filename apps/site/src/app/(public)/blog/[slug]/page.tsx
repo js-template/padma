@@ -5,6 +5,7 @@ import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
 import { Metadata, ResolvingMetadata } from "next"
 import Script from "next/script"
+// FIXME: should be from theme settings
 import { BlogDetails } from "@padma/metajob-ui"
 
 // *** generate metadata type
@@ -13,51 +14,6 @@ type Props = {
    searchParams: { [key: string]: string | string[] | undefined }
 }
 
-// *** generate metadata for the page
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-   const pageSlug = params?.slug
-   const language = getLanguageFromCookie()
-
-   // *** fetch seo data
-   const { data } = await find(
-      "api/posts",
-      {
-         filters: {
-            slug: {
-               $eq: pageSlug
-            }
-         },
-         populate: {
-            seo: {
-               fields: [
-                  "metaTitle",
-                  "metaDescription",
-                  "metaImage",
-                  "metaSocial",
-                  "keywords",
-                  "metaRobots",
-                  "structuredData",
-                  "metaViewport",
-                  "canonicalURL"
-               ]
-            }
-         },
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
-      },
-      "no-cache"
-   )
-
-   // if seo is not available, return default data
-   if (!data?.data?.[0]?.attributes?.seo) {
-      return {
-         title: data?.data[0]?.attributes?.title || "Title not found",
-         description: data?.data[0]?.attributes?.description || "Description not found"
-      }
-   }
-
-   return StrapiSeoFormate(data?.data?.[0]?.attributes?.seo, `/blog/${pageSlug}`)
-}
 export default async function Page({ params }: { params: { slug: string } }) {
    const pageSlug = params?.slug
 
@@ -142,6 +98,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
    return (
       <>
+         {/* TODO: Check why do need to map */}
          <BlogDetails
             data={data?.data}
             recentBlogs={recentBlogs?.data}
@@ -149,7 +106,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             blogCategories={blogCategoryData?.data}
             language={language}
          />
-         {data?.data[0]?.attributes?.seo?.structuredData && (
+         {/* {data?.data[0]?.attributes?.seo?.structuredData && (
             <Script
                id='json-ld-structured-data'
                type='application/ld+json'
@@ -157,7 +114,53 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   __html: JSON.stringify(data?.data[0]?.attributes?.seo?.structuredData)
                }}
             />
-         )}
+         )} */}
       </>
    )
+}
+
+// *** generate metadata for the page
+export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+   const pageSlug = params?.slug
+   const language = getLanguageFromCookie()
+   // FIXME: Should be popuate by *
+   // *** fetch seo data
+   const { data } = await find(
+      "api/posts",
+      {
+         filters: {
+            slug: {
+               $eq: pageSlug
+            }
+         },
+         populate: {
+            seo: {
+               fields: [
+                  "metaTitle",
+                  "metaDescription",
+                  "metaImage",
+                  "metaSocial",
+                  "keywords",
+                  "metaRobots",
+                  "structuredData",
+                  "metaViewport",
+                  "canonicalURL"
+               ]
+            }
+         },
+         publicationState: "live",
+         locale: language ? [language] : ["en"]
+      },
+      "no-cache"
+   )
+
+   // if seo is not available, return default data
+   if (!data?.data?.[0]?.attributes?.seo) {
+      return {
+         title: data?.data[0]?.attributes?.title || "Title not found",
+         description: data?.data[0]?.attributes?.description || "Description not found"
+      }
+   }
+
+   return StrapiSeoFormate(data?.data?.[0]?.attributes?.seo, `/blog/${pageSlug}`)
 }

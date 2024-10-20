@@ -1,3 +1,5 @@
+// FIXME: This page should not exist
+
 import { notFound } from "next/navigation"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"

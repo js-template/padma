@@ -14,7 +14,11 @@ export async function generateMetadata(): Promise<Metadata> {
    const product = await find(
       "api/home-page",
       {
-         populate: "*",
+         populate: {
+            seo: {
+               populate: "*"
+            }
+         },
          publicationState: "live",
          locale: language ? [language] : ["en"]
       },

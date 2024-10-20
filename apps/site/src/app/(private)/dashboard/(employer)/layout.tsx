@@ -1,6 +1,6 @@
 import { auth } from "@/context/auth"
 import { Fragment } from "react"
-
+// FIXME: Should delete
 export default async function EmployerLayout({
    children // will be a page or nested layout
 }: {

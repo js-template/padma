@@ -6,6 +6,7 @@ import { Box, Button, Container, Paper, Typography } from "@mui/material"
 import { useGlobalContext } from "@/context/store"
 import { SignOut } from "@/lib/user"
 import { getLanguageValue } from "@/utils/common"
+// FIXME: package should come from the theme
 import { GoBackBtn, Header, Footer } from "@padma/metajob-ui"
 
 const NotFoundBody = () => {

@@ -1,5 +1,5 @@
 // app/api/find/route.ts
-
+// TODO: Check security status.
 import { find } from "@/lib/strapi"
 import { NextRequest, NextResponse } from "next/server"
 

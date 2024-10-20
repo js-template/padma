@@ -1,6 +1,7 @@
 import { Fragment } from "react"
 import { notFound } from "next/navigation"
 import { Metadata, ResolvingMetadata } from "next"
+// FIXME: blockComponentMapping should replace with getPublicComponents
 import { blockComponentMapping } from "@/lib/component.map"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
