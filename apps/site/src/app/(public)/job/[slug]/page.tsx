@@ -87,6 +87,7 @@ export default async function JobDetailsPage({ params }: { params: { slug: strin
       "no-store"
    )
 
+   // FIXME: WHy list details here
    // *** get  blogs-details page data from strapi ***
    const { data: listDetailsPageData, error: listPageError } = await find(
       "api/list-detail",
