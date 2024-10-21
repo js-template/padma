@@ -8,42 +8,6 @@ import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
 export const dynamicParams = false // true | false,
 
-// *** generate metadata type
-type Props = {
-   params: { slug: string }
-   searchParams: { [key: string]: string | string[] | undefined }
-}
-
-// *** generate metadata for the page
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-   const pageSlug = params?.slug
-   const language = getLanguageFromCookie()
-
-   // ***fetch seo data
-   const product = await find(
-      "api/pages",
-      {
-         filters: {
-            slug: {
-               $eq: pageSlug
-            }
-         },
-         populate: "*",
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
-      },
-      "no-store"
-   )
-
-   if (!product?.data?.data?.[0]?.attributes?.seo) {
-      return {
-         title: product?.data?.data?.[0]?.attributes?.title || "Title not found",
-         description: `Description ${product?.data?.data[0]?.attributes?.title}` || "Description not found"
-      }
-   }
-   return StrapiSeoFormate(product?.data?.data?.[0]?.attributes?.seo, `/${pageSlug}`)
-}
-
 export default async function DynamicPages({
    params
 }: {
@@ -112,4 +76,44 @@ export async function generateStaticParams() {
    return data?.data?.map((post: any) => ({
       slug: post?.attributes?.slug
    }))
+}
+
+// *** generate metadata type
+type Props = {
+   params: { slug: string }
+   searchParams: { [key: string]: string | string[] | undefined }
+}
+
+// *** generate metadata for the page
+export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+   const pageSlug = params?.slug
+   const language = getLanguageFromCookie()
+
+   // ***fetch seo data
+   const product = await find(
+      "api/pages",
+      {
+         filters: {
+            slug: {
+               $eq: pageSlug
+            }
+         },
+         populate: {
+            seo: {
+               populate: "*"
+            }
+         },
+         publicationState: "live",
+         locale: language ? [language] : ["en"]
+      },
+      "no-store"
+   )
+
+   if (!product?.data?.data?.[0]?.attributes?.seo) {
+      return {
+         title: product?.data?.data?.[0]?.attributes?.title || "Title not found",
+         description: `Description ${product?.data?.data[0]?.attributes?.title}` || "Description not found"
+      }
+   }
+   return StrapiSeoFormate(product?.data?.data?.[0]?.attributes?.seo, `/${pageSlug}`)
 }

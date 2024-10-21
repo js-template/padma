@@ -1,6 +1,4 @@
-import { ICompany } from "@/type/company"
-
-export const companies: ICompany[] = [
+export const companies = [
    {
       id: 1,
       companyName: "Google",

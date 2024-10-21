@@ -123,7 +123,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
 export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
    const pageSlug = params?.slug
    const language = getLanguageFromCookie()
-   // FIXME: Should be popuate by *
    // *** fetch seo data
    const { data } = await find(
       "api/posts",
@@ -135,17 +134,7 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
          },
          populate: {
             seo: {
-               fields: [
-                  "metaTitle",
-                  "metaDescription",
-                  "metaImage",
-                  "metaSocial",
-                  "keywords",
-                  "metaRobots",
-                  "structuredData",
-                  "metaViewport",
-                  "canonicalURL"
-               ]
+               populate: "*"
             }
          },
          publicationState: "live",
@@ -157,8 +146,8 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
    // if seo is not available, return default data
    if (!data?.data?.[0]?.attributes?.seo) {
       return {
-         title: data?.data[0]?.attributes?.title || "Title not found",
-         description: data?.data[0]?.attributes?.description || "Description not found"
+         title: data?.data?.[0]?.attributes?.title || "Title not found",
+         description: data?.data?.[0]?.attributes?.short_description || "Description not found"
       }
    }
 

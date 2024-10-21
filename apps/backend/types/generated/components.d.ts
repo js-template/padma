@@ -72,12 +72,19 @@ export interface BlockCategoryCard2 extends Schema.Component {
     displayName: 'CategoryCard2';
     description: '';
   };
+  attributes: {};
+}
+
+export interface BlockCategoryList extends Schema.Component {
+  collectionName: 'components_block_category_lists';
+  info: {
+    displayName: 'CategoryList';
+    icon: 'apps';
+  };
   attributes: {
-    categories: Attribute.Relation<
-      'block.category-card2',
-      'oneToMany',
-      'plugin::metajob-strapi.job-category'
-    >;
+    title: Attribute.String;
+    enableSearch: Attribute.Boolean & Attribute.DefaultTo<true>;
+    empty: Attribute.Component<'shared.empty'>;
   };
 }
 
@@ -1560,6 +1567,7 @@ declare module '@strapi/types' {
       'block.bookmark-list': BlockBookmarkList;
       'block.category-card': BlockCategoryCard;
       'block.category-card2': BlockCategoryCard2;
+      'block.category-list': BlockCategoryList;
       'block.contact': BlockContact;
       'block.job-card': BlockJobCard;
       'block.latest-applied': BlockLatestApplied;

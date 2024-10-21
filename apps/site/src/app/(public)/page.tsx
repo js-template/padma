@@ -5,29 +5,6 @@ import DynamicBlockRenderer from "./body"
 import React from "react"
 import { getLanguageFromCookie } from "@/utils/language"
 
-// *** generate metadata for the page
-export async function generateMetadata(): Promise<Metadata> {
-   const language = getLanguageFromCookie()
-   // *** fetch seo data
-
-   // TODO: We can populate like populate= "*""
-   const product = await find(
-      "api/home-page",
-      {
-         populate: {
-            seo: {
-               populate: "*"
-            }
-         },
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
-      },
-      "force-cache"
-   )
-
-   return StrapiSeoFormate(product?.data?.data?.attributes?.seo)
-}
-
 export default async function Home() {
    const language = getLanguageFromCookie()
 
@@ -61,4 +38,26 @@ export default async function Home() {
          )} */}
       </>
    )
+}
+
+// *** generate metadata for the page
+export async function generateMetadata(): Promise<Metadata> {
+   const language = getLanguageFromCookie()
+   // *** fetch seo data
+
+   const product = await find(
+      "api/home-page",
+      {
+         populate: {
+            seo: {
+               populate: "*"
+            }
+         },
+         publicationState: "live",
+         locale: language ? [language] : ["en"]
+      },
+      "force-cache"
+   )
+
+   return StrapiSeoFormate(product?.data?.data?.attributes?.seo)
 }

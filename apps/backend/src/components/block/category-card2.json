@@ -5,11 +5,5 @@
     "description": ""
   },
   "options": {},
-  "attributes": {
-    "categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "plugin::metajob-strapi.job-category"
-    }
-  }
+  "attributes": {}
 }

@@ -1,6 +1,4 @@
-import { ICompanyProfileData } from "@/type/company-profile"
-
-export const companyProfileData: ICompanyProfileData = {
+export const companyProfileData = {
    name: "ABC Company",
    tagline: "Short Text About Company Lorem Ipsum Text",
    phone: "123-456-7890",
