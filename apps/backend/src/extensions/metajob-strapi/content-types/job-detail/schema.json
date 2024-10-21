@@ -21,7 +21,9 @@
         "shared.empty",
         "component.page-title",
         "single-type.job-details"
-      ]
+      ],
+      "required": true,
+      "min": 1
     },
     "sidebar": {
       "type": "enumeration",

@@ -949,7 +949,11 @@ export interface PluginMetajobStrapiJobDetail extends Schema.SingleType {
         'component.page-title',
         'single-type.job-details'
       ]
-    >;
+    > &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     sidebar: Attribute.Enumeration<
       ['Left Sidebar', 'Right Sidebar', 'No Sidebar', 'Both Sidebar']
     > &
@@ -1522,7 +1526,7 @@ export interface ApiBlogDetailBlogDetail extends Schema.SingleType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   pluginOptions: {
     i18n: {
@@ -1564,7 +1568,6 @@ export interface ApiBlogDetailBlogDetail extends Schema.SingleType {
       }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::blog-detail.blog-detail',
       'oneToOne',
