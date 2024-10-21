@@ -1338,6 +1338,52 @@ export interface PluginMetajobStrapiEmailHistory extends Schema.CollectionType {
   };
 }
 
+export interface PluginMetajobStrapiResumeDetail extends Schema.SingleType {
+  collectionName: 'resume_details';
+  info: {
+    singularName: 'resume-detail';
+    pluralName: 'resume-details';
+    displayName: 'Resume Details';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    blocks: Attribute.DynamicZone<
+      [
+        'shared.spacing',
+        'shared.empty',
+        'component.page-title',
+        'single-type.resume-details'
+      ]
+    >;
+    sidebar: Attribute.Enumeration<
+      ['Left Sidebar', 'Right Sidebar', 'No Sidebar', 'Both Sidebar']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'Right Sidebar'>;
+    leftSidebar: Attribute.DynamicZone<['component.page-title']>;
+    relatedLists: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::metajob-strapi.resume-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::metajob-strapi.resume-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginGoogleMapsConfig extends Schema.SingleType {
   collectionName: 'google_maps_configs';
   info: {
@@ -2401,6 +2447,7 @@ declare module '@strapi/types' {
       'plugin::metajob-strapi.skill': PluginMetajobStrapiSkill;
       'plugin::metajob-strapi.job-category': PluginMetajobStrapiJobCategory;
       'plugin::metajob-strapi.email-history': PluginMetajobStrapiEmailHistory;
+      'plugin::metajob-strapi.resume-detail': PluginMetajobStrapiResumeDetail;
       'plugin::google-maps.config': PluginGoogleMapsConfig;
       'plugin::react-icons.iconlibrary': PluginReactIconsIconlibrary;
       'plugin::i18n.locale': PluginI18NLocale;
