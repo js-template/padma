@@ -1298,6 +1298,18 @@ export interface SharedSpacing extends Schema.Component {
   };
 }
 
+export interface SingleTypeCompanyDeatils extends Schema.Component {
+  collectionName: 'components_single_type_company_deatils';
+  info: {
+    displayName: 'companyDeatils';
+    icon: 'arrowRight';
+  };
+  attributes: {
+    title: Attribute.String;
+    styles: Attribute.Component<'component.style-section'>;
+  };
+}
+
 export interface SingleTypeJobDetails extends Schema.Component {
   collectionName: 'components_single_type_job_details';
   info: {
@@ -1649,6 +1661,7 @@ declare module '@strapi/types' {
       'shared.seo': SharedSeo;
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
+      'single-type.company-deatils': SingleTypeCompanyDeatils;
       'single-type.job-details': SingleTypeJobDetails;
       'single-type.resume-details': SingleTypeResumeDetails;
       'table.applied-jobs': TableAppliedJobs;

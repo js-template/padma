@@ -128,6 +128,8 @@ export default async function DynamicPages({ params }: Props) {
       locale: language ? [language] : ["en"]
    })
 
+   //console.log("singleData", singleData)
+
    if (!singleData) {
       return notFound()
    }
