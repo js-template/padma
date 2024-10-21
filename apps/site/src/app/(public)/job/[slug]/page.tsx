@@ -56,6 +56,7 @@ export default async function JobDetailsPage({ params }: { params: { slug: strin
             listPageData={listDetailsPageData?.data?.attributes}
             language={language}
             session={session}
+            pageDetails={undefined}
          />
       </>
    )

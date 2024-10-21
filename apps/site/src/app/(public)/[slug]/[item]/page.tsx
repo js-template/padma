@@ -1,151 +1,222 @@
 import { Fragment } from "react"
 import { notFound } from "next/navigation"
-import { Metadata, ResolvingMetadata } from "next"
-// FIXME: blockComponentMapping should replace with getPublicComponents
-import { blockComponentMapping } from "@/lib/component.map"
 import { find } from "@/lib/strapi"
+import { getPublicComponents } from "@padma/metajob-ui" // Same as in your other pages
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
-import { getLanguageFromCookie } from "@/utils/language"
-export const dynamicParams = false // true | false,
+import { Metadata } from "next"
 
-// *** generate metadata type
+// ?? Next.js will invalidate the cache when a
+// ?? request comes in, at most once every 60 seconds.
+export const revalidate = 60
+
+// ?? We'll prerender only the params from `generateStaticParams` at build time.
+// ?? If a request comes in for a path that hasn't been generated,
+// ?? Next.js will server-render the page on-demand.
+export const dynamicParams = false // or false, to 404 on unknown paths
+
+// *** generate page params type
 type Props = {
-   params: { slug: string }
-   searchParams: { [key: string]: string | string[] | undefined }
+   params: { slug: string; item: string }
 }
 
 // *** generate metadata for the page
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+   const pageSlug = params?.slug // e.g., "job", "resume"
+   const pageItem = params?.item // e.g., "fullstack" or "designer"
 
-export default async function DynamicPages({
-   params
-}: {
-   params: { slug: string; item: string }
-   searchParams: { [key: string]: string | string[] | undefined }
-}) {
-   const pageSlug = params?.slug
-   const singleType = params?.item
+   // ?? Fetch the permalink structure from Strapi
+   const { data } = await find("api/permalink", {
+      populate: "*",
+      publicationState: "live",
+      locale: ["en"]
+   })
 
-   const language = getLanguageFromCookie()
+   // ?? Get the singlePages from the permalink data
+   const singlePages = data?.data?.attributes?.singlePage
 
-   const { data, error } = await find(
-      "api/permalink",
-      {
-         populate: "*",
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
-      },
-      "no-store"
-   )
-
-   const blocks = data?.data?.attributes?.singlePage
-
-   //    filter by slug
-   const singlePageData = blocks?.find((block: any) => block.slug === pageSlug)
-
-   console.log("singlePageData", singlePageData)
-
-   console.log("blocks", blocks)
-
-   // *** if blocks is empty, return 404 ***
-   if (!singlePageData || singlePageData?.length === 0) {
-      return notFound()
+   // ?? If no matching page is found, return 404
+   if (!singlePages) {
+      return {
+         title: "404 - Not Found",
+         description: "Page not found"
+      }
    }
 
-   const { data: postData, error: postError } = await find(
+   // ?? find the pageItem in the singlePages slug
+   const singlePageData = singlePages?.find((page: any) => page.slug === pageSlug)
+
+   // ?? Get he seo data for the page from Strapi
+   const { data: seoData } = await find(
       singlePageData?.collectionModel,
       {
          filters: {
             slug: {
-               $eq: singleType
+               $eq: pageItem
             }
          },
-         populate: "deep",
+         populate: {
+            seo: {
+               fields: [
+                  "metaTitle",
+                  "metaDescription",
+                  "metaImage",
+                  "metaSocial",
+                  "keywords",
+                  "metaRobots",
+                  "structuredData",
+                  "metaViewport",
+                  "canonicalURL"
+               ]
+            }
+         },
          publicationState: "live",
-         locale: language ? [language] : ["en"]
+         locale: ["en"]
       },
-      "no-store"
+      "no-cache"
    )
 
-   console.log("postData", postData, postError)
+   // ?? If no matching page is found, return 404
+   if (!seoData) {
+      return {
+         title: "404 - Not Found",
+         description: "Page not found"
+      }
+   }
 
-   // *** get  blogs-details page data from strapi ***
-   const { data: blogPageData, error: blogPageError } = await find(
-      singlePageData?.singelModel,
-      {
-         populate: "deep",
-         locale: language ? [language] : ["en"]
+   // ?? if seo is not available, return default data
+   if (!seoData?.data?.[0]?.attributes?.seo) {
+      return {
+         title: seoData?.data[0]?.attributes?.title || "Title not found",
+         description: seoData?.data[0]?.attributes?.description || "Description not found"
+      }
+   }
+
+   // ?? Return the formatted SEO data
+   return StrapiSeoFormate(seoData?.data?.[0]?.attributes?.seo, `/${pageSlug}/${pageItem}`)
+}
+
+export default async function DynamicPages({ params }: Props) {
+   const pageSlug = params?.slug // e.g., "job", "resume"
+   const singleType = params?.item // e.g., "fullstack" or "designer"
+
+   // ?? Fetch the language or use a default
+   const language = "en"
+
+   // ?? Fetch the permalink structure from Strapi
+   const { data: permalinkData } = await find("api/permalink", {
+      populate: "*",
+      publicationState: "live",
+      locale: language ? [language] : ["en"]
+   })
+
+   const singlePages = permalinkData?.data?.attributes?.singlePage
+   const singlePageData = singlePages?.find((page: any) => page.slug === pageSlug)
+
+   // ?? If no matching page is found, return 404
+   if (!singlePageData) {
+      return notFound()
+   }
+
+   const collectionModel = singlePageData?.collectionModel
+
+   const singleModel = singlePageData?.singelModel
+
+   // ?? Fetch the content data based on the collection model (e.g., jobs, resumes)
+   const { data: singleData, error: singleError } = await find(singleModel, {
+      populate: "deep",
+      publicationState: "live",
+      locale: language ? [language] : ["en"]
+   })
+
+   if (!singleData) {
+      return notFound()
+   }
+
+   // ?? Fetch additional page details (if needed)
+   const { data: pageDetails, error: pageDeatilsError } = await find(collectionModel, {
+      filters: {
+         slug: {
+            $eq: singleType
+         }
       },
-      "no-store"
-   )
+      populate: "deep",
+      locale: language ? [language] : ["en"]
+   })
 
-   console.log("blogPageData", blogPageData, blogPageError)
+   const pageDetailsData = pageDetails?.data?.[0]?.attributes
 
-   // *** if error, return error page ***
-   // if (error) {
-   //    throw error;
-   // }
+   if (!pageDetailsData) {
+      return notFound()
+   }
+
+   const blocks = singleData?.data?.attributes?.blocks || []
+
+   // ?? If no blocks are found, return 404
+   if (!blocks) {
+      return notFound()
+   }
 
    return (
       <Fragment>
-         <h1>hello</h1>
-         {/* {blocks?.map((block: any, index: number) => {
-            const BlockConfig = blockComponentMapping[block.__component]
+         {/* Render the components dynamically using blockComponentMapping */}
+         {blocks?.map((block: any, index: number) => {
+            // @ts-ignore
+            const BlockConfig = getPublicComponents[block.__component]
 
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
 
-               return <ComponentToRender key={index} data={block} language={language} {...block} />
+               return <ComponentToRender key={index} data={block} pageDetails={pageDetailsData} language={language} />
             }
-            return null // Handle the case where the component mapping is missing
-         })} */}
+            return null // Handle missing component mapping case
+         })}
       </Fragment>
    )
 }
 
-// Return a list of `params` to populate the [slug] dynamic segment
-// export async function generateStaticParams() {
-//    const { data, error } = await find(
-//       "api/permalinks",
-//       {
-//          fields: ["slug"],
-//          publicationState: "live",
-//          locale: ["en"]
-//       },
-//       "force-cache"
-//    )
+// *** Return a list of `params` to populate the [slug] dynamic segment
+export async function generateStaticParams() {
+   // ?? Fetch the permalink structure from Strapi
+   const { data } = await find("api/permalink", {
+      populate: "*",
+      publicationState: "live",
+      locale: ["en"]
+   })
 
-//    console.log("data", data)
+   // ?? Get the singlePages from the permalink data
+   const singlePages = data?.data?.attributes?.singlePage
 
-//    return data?.data?.map((post: any) => ({
-//       slug: post?.attributes?.slug
-//    }))
-// }
+   // ?? If no singlePages are found, return an empty array
+   let params: Array<{ slug: string; item: string }> = []
 
-// export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-//    const pageSlug = params?.slug
-//    const language = getLanguageFromCookie()
+   // ?? Loop through all singlePages and fetch the collectionModel data
+   await Promise.all(
+      singlePages?.map(async (page: { slug: string; collectionModel: string; singelModel: string }) => {
+         // ?? Get the collectionModel API data
+         const { data: collectionData } = await find(page.collectionModel, {
+            fields: ["slug"],
+            filters: {
+               slug: {
+                  $ne: null
+               }
+            },
+            publicationState: "live",
+            locale: ["en"]
+         })
 
-//    // ***fetch seo data
-//    const product = await find(
-//       "api/pages",
-//       {
-//          filters: {
-//             slug: {
-//                $eq: pageSlug
-//             }
-//          },
-//          populate: "*",
-//          publicationState: "live",
-//          locale: language ? [language] : ["en"]
-//       },
-//       "no-store"
-//    )
+         // ?? Store all slugs in the params array
+         const mappedSlugs = collectionData?.data?.map((single: any) => ({
+            slug: page.slug,
+            item: single?.attributes?.slug
+         }))
 
-//    if (!product?.data?.data?.[0]?.attributes?.seo) {
-//       return {
-//          title: product?.data?.data?.[0]?.attributes?.title || "Title not found",
-//          description: `Description ${product?.data?.data[0]?.attributes?.title}` || "Description not found"
-//       }
-//    }
-//    return StrapiSeoFormate(product?.data?.data?.[0]?.attributes?.seo, `/${pageSlug}`)
-// }
+         params = params.concat(mappedSlugs)
+      })
+   )
+
+   // ?? Return the params array
+   return params?.map((post: { slug: string; item: string }) => ({
+      slug: post.slug,
+      item: post.item
+   }))
+}

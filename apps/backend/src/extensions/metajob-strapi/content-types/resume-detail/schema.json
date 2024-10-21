@@ -1,16 +1,15 @@
 {
   "kind": "singleType",
-  "collectionName": "list_details",
+  "collectionName": "resume_details",
   "info": {
-    "singularName": "list-detail",
-    "pluralName": "list-details",
-    "displayName": "List Details",
+    "singularName": "resume-detail",
+    "pluralName": "resume-details",
+    "displayName": "Resume Details",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string"
@@ -20,7 +19,8 @@
       "components": [
         "shared.spacing",
         "shared.empty",
-        "component.page-title"
+        "component.page-title",
+        "single-type.resume-details"
       ]
     },
     "sidebar": {
