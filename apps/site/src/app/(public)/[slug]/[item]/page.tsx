@@ -143,7 +143,7 @@ export default async function DynamicPages({ params }: Props) {
       locale: language ? [language] : ["en"]
    })
 
-   const pageDetailsData = pageDetails?.data?.[0]?.attributes
+   const pageDetailsData = pageDetails?.data?.[0]
 
    if (!pageDetailsData) {
       return notFound()
@@ -166,7 +166,7 @@ export default async function DynamicPages({ params }: Props) {
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
 
-               return <ComponentToRender key={index} data={block} pageDetails={pageDetailsData} language={language} />
+               return <ComponentToRender key={index} block={block} data={pageDetailsData} language={language} />
             }
             return null // Handle missing component mapping case
          })}
