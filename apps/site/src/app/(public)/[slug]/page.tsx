@@ -53,7 +53,7 @@ export default async function DynamicPages({
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
 
-               return <ComponentToRender key={index} data={block} language={language} {...block} />
+               return <ComponentToRender key={index} data={block} language={language} />
             }
             return null // Handle the case where the component mapping is missing
          })}
