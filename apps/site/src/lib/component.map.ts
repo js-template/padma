@@ -68,12 +68,9 @@ export const blockComponentMapping = {
    "block.category-card": {
       component: CategoryCard
    },
-   "block.category-card2": {
+   "block.category-list": {
       component: CategoryBlock
    },
-   // "block.category-list": {
-   //    component: CategoryBlock
-   // },
    "block.job-card": {
       component: ListCard
    },
