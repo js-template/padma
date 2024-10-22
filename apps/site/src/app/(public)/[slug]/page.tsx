@@ -2,10 +2,14 @@ import { Fragment } from "react"
 import { notFound } from "next/navigation"
 import { Metadata, ResolvingMetadata } from "next"
 // FIXME: blockComponentMapping should replace with getPublicComponents
+//import { blockComponentMapping } from "@padma/metajob-ui"
 import { blockComponentMapping } from "@/lib/component.map"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
+
+import { loadActiveTheme, getThemeComponent } from "../../../../config/theme-loader"
+
 export const dynamicParams = false // true | false,
 
 export default async function DynamicPages({
@@ -15,7 +19,11 @@ export default async function DynamicPages({
    searchParams: { [key: string]: string | string[] | undefined }
 }) {
    const pageSlug = params?.slug
+   // Load the active theme and get public components
+   const currentThemeComponents = await loadActiveTheme()
 
+   console.log("currentThemeComponents", currentThemeComponents)
+   console.log("blockComponentMapping", blockComponentMapping)
    const language = getLanguageFromCookie()
 
    const { data, error } = await find(
@@ -39,7 +47,6 @@ export default async function DynamicPages({
    if (!blocks || blocks?.length === 0) {
       return notFound()
    }
-
    // *** if error, return error page ***
    // if (error) {
    //    throw error;
@@ -48,12 +55,13 @@ export default async function DynamicPages({
    return (
       <Fragment>
          {blocks?.map((block: any, index: number) => {
-            const BlockConfig = blockComponentMapping[block.__component]
+            const BlockConfig = currentThemeComponents[block.__component as keyof typeof currentThemeComponents]
 
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
 
-               return <ComponentToRender key={index} data={block} language={language} />
+               // return <ComponentToRender key={index} data={data} block={block} language={language} {...block} />
+               return <ComponentToRender key={index} data={block} language={language} {...block} />
             }
             return null // Handle the case where the component mapping is missing
          })}
@@ -70,7 +78,7 @@ export async function generateStaticParams() {
          publicationState: "live",
          locale: ["en"]
       },
-      "force-cache"
+      "no-store"
    )
 
    return data?.data?.map((post: any) => ({
