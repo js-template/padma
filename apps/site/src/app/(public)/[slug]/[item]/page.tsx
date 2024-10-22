@@ -1,9 +1,11 @@
 import { Fragment } from "react"
 import { notFound } from "next/navigation"
 import { find } from "@/lib/strapi"
-import { getPublicComponents } from "@padma/metajob-ui" // Same as in your other pages
+import { getPublicComponents } from "@padma/blank-theme" // Same as in your other pages
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { Metadata } from "next"
+
+import { loadActiveTheme } from "../../../../../config/theme-loader"
 
 // ?? Next.js will invalidate the cache when a
 // ?? request comes in, at most once every 60 seconds.
@@ -102,6 +104,10 @@ export default async function DynamicPages({ params }: Props) {
    // ?? Fetch the language or use a default
    const language = "en"
 
+   const themeComponents = await loadActiveTheme()
+
+   console.log("themeComponents", themeComponents)
+
    // ?? Fetch the permalink structure from Strapi
    const { data: permalinkData } = await find("api/permalink", {
       populate: "*",
@@ -163,7 +169,7 @@ export default async function DynamicPages({ params }: Props) {
          {/* Render the components dynamically using blockComponentMapping */}
          {blocks?.map((block: any, index: number) => {
             // @ts-ignore
-            const BlockConfig = getPublicComponents[block.__component]
+            const BlockConfig = themeComponents[block.__component]
 
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig

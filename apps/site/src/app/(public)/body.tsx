@@ -1,4 +1,4 @@
-import { getPublicComponents } from "@padma/metajob-ui"
+import { getPublicComponents } from "@padma/blank-theme"
 
 interface DynamicBlockRendererProps {
    initialData: any

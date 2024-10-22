@@ -22,8 +22,6 @@ export default async function DynamicPages({
    // Load the active theme and get public components
    const currentThemeComponents = await loadActiveTheme()
 
-   console.log("currentThemeComponents", currentThemeComponents)
-   console.log("blockComponentMapping", blockComponentMapping)
    const language = getLanguageFromCookie()
 
    const { data, error } = await find(

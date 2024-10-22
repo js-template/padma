@@ -674,17 +674,13 @@ export interface FormsCandidateFilter extends Schema.Component {
   attributes: {
     showFilter: Attribute.Boolean;
     search: Attribute.Component<'forms.seaech-form'>;
-    categories: Attribute.Relation<
-      'forms.candidate-filter',
-      'oneToMany',
-      'api::category.category'
-    >;
     rate: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
         ['Rate', '10k', '20k', '30k', '40k', '50k']
       >;
     button: Attribute.Component<'component.link'>;
+    categories: Attribute.Component<'config.job-list'>;
   };
 }
 
@@ -969,11 +965,6 @@ export interface FormsJobFilter extends Schema.Component {
     description: '';
   };
   attributes: {
-    categories: Attribute.Relation<
-      'forms.job-filter',
-      'oneToMany',
-      'plugin::metajob-strapi.job-category'
-    >;
     job_type: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -1001,6 +992,7 @@ export interface FormsJobFilter extends Schema.Component {
     description: Attribute.Text;
     button: Attribute.Component<'component.link'>;
     search: Attribute.Component<'forms.seaech-form'>;
+    categories: Attribute.Component<'config.job-list'>;
   };
 }
 
@@ -1041,11 +1033,6 @@ export interface FormsSeaechForm extends Schema.Component {
     searchByLocation: Attribute.String;
     button: Attribute.String;
     link: Attribute.String;
-    categories: Attribute.Relation<
-      'forms.seaech-form',
-      'oneToMany',
-      'api::category.category'
-    >;
   };
 }
 

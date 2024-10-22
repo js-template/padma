@@ -7,21 +7,24 @@ import { useGlobalContext } from "@/context/store"
 import { SignOut } from "@/lib/user"
 import { getLanguageValue } from "@/utils/common"
 // FIXME: package should come from the theme
-import { GoBackBtn, Header, Footer } from "@padma/metajob-ui"
+
+// current update at: 2021-10-20
+//commented out header and footer by @zelal
+//import { GoBackBtn, Header, Footer } from "@padma/metajob-ui"
 
 const NotFoundBody = () => {
    const { layoutData } = useGlobalContext()
 
    return (
       <main>
-         <Header
+         {/* <Header
             useThemeToggle={useThemeToggle}
             useGlobalContext={useGlobalContext}
             signOut={signOut}
             SignOut={SignOut}
             useSession={useSession}
             getLanguageValue={getLanguageValue}
-         />
+         /> */}
          <Container maxWidth='lg'>
             <Box
                sx={{
@@ -71,15 +74,15 @@ const NotFoundBody = () => {
                         mt: 2,
                         gap: 2
                      }}>
-                     <Button variant='contained' color='primary' component={NextLink} href='/'>
+                     {/* <Button variant='contained' color='primary' component={NextLink} href='/'>
                         Return Home
                      </Button>
-                     <GoBackBtn />
+                     <GoBackBtn /> */}
                   </Box>
                </Paper>
             </Box>
          </Container>
-         {layoutData && <Footer data={layoutData} />}
+         {/* {layoutData && <Footer data={layoutData} />} */}
       </main>
    )
 }
