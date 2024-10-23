@@ -256,6 +256,8 @@ export interface BlockReviewCard extends Schema.Component {
     title: Attribute.String;
     description: Attribute.String;
     reviews: Attribute.Component<'config.job-list', true>;
+    empty: Attribute.Component<'shared.empty'>;
+    styles: Attribute.Component<'component.style-section'>;
   };
 }
 
