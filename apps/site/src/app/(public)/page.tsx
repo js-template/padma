@@ -32,7 +32,7 @@ export default async function Home() {
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
                //@ts-ignore
-               return <ComponentToRender key={index} language={language} data={block} />
+               return <ComponentToRender key={index} language={language} block={block} />
             }
             return null // Handle case where component mapping is missing
          })}
