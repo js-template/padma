@@ -12,7 +12,8 @@ export interface BannerBannerOne extends Schema.Component {
     description: Attribute.Text;
     search: Attribute.Component<'forms.seaech-form'>;
     image: Attribute.Media;
-    style: Attribute.JSON;
+    styles: Attribute.Component<'component.style-section'>;
+    empty: Attribute.Component<'shared.empty'>;
   };
 }
 

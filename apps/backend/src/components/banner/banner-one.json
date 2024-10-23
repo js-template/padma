@@ -29,8 +29,15 @@
         "audios"
       ]
     },
-    "style": {
-      "type": "json"
+    "styles": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
     }
   }
 }
