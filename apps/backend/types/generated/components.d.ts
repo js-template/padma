@@ -1026,6 +1026,7 @@ export interface FormsSeaechForm extends Schema.Component {
     searchByLocation: Attribute.String;
     button: Attribute.String;
     link: Attribute.String;
+    searchByCategory: Attribute.String;
   };
 }
 
