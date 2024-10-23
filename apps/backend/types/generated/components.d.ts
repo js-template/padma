@@ -107,6 +107,8 @@ export interface BlockJobCard extends Schema.Component {
     description: Attribute.String;
     button: Attribute.Component<'component.link'>;
     jobs: Attribute.Component<'config.job-list', true>;
+    empty: Attribute.Component<'shared.empty'>;
+    styles: Attribute.Component<'component.style-section'>;
   };
 }
 
