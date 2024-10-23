@@ -4,11 +4,11 @@ let activeThemeComponents: Record<string, any> = {} // Use 'any' for React compo
 
 // Load the active theme components
 export const loadActiveTheme = async () => {
-   const { getPublicComponents } = await import("@padma/blank-theme") // Use the activeTheme variable
+   const { getPublicComponents, getPrivateComponents } = await import("@padma/metajob-ui") // Use the activeTheme variable
 
    // Set the activeThemeComponents to the loaded components
    const activeThemeComponents = getPublicComponents
-   return activeThemeComponents
+   return { getPrivateComponents, getPublicComponents }
 }
 
 // Get the theme component by its key

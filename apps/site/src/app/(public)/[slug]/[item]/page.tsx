@@ -1,7 +1,6 @@
 import { Fragment } from "react"
 import { notFound } from "next/navigation"
 import { find } from "@/lib/strapi"
-import { getPublicComponents } from "@padma/blank-theme" // Same as in your other pages
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { Metadata } from "next"
 
@@ -104,9 +103,9 @@ export default async function DynamicPages({ params }: Props) {
    // ?? Fetch the language or use a default
    const language = "en"
 
-   const themeComponents = await loadActiveTheme()
+   const { getPublicComponents } = await loadActiveTheme()
 
-   console.log("themeComponents", themeComponents)
+   console.log("themeComponents", getPublicComponents)
 
    // ?? Fetch the permalink structure from Strapi
    const { data: permalinkData } = await find("api/permalink", {
@@ -169,7 +168,7 @@ export default async function DynamicPages({ params }: Props) {
          {/* Render the components dynamically using blockComponentMapping */}
          {blocks?.map((block: any, index: number) => {
             // @ts-ignore
-            const BlockConfig = themeComponents[block.__component]
+            const BlockConfig = getPublicComponents[block.__component]
 
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig

@@ -3,12 +3,11 @@ import { notFound } from "next/navigation"
 import { Metadata, ResolvingMetadata } from "next"
 // FIXME: blockComponentMapping should replace with getPublicComponents
 //import { blockComponentMapping } from "@padma/metajob-ui"
-import { blockComponentMapping } from "@/lib/component.map"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
 
-import { loadActiveTheme, getThemeComponent } from "../../../../config/theme-loader"
+import { loadActiveTheme } from "../../../../config/theme-loader"
 
 export const dynamicParams = false // true | false,
 
@@ -20,7 +19,7 @@ export default async function DynamicPages({
 }) {
    const pageSlug = params?.slug
    // Load the active theme and get public components
-   const currentThemeComponents = await loadActiveTheme()
+   const { getPublicComponents } = await loadActiveTheme()
 
    const language = getLanguageFromCookie()
 
@@ -53,7 +52,7 @@ export default async function DynamicPages({
    return (
       <Fragment>
          {blocks?.map((block: any, index: number) => {
-            const BlockConfig = currentThemeComponents[block.__component as keyof typeof currentThemeComponents]
+            const BlockConfig = getPublicComponents[block.__component as keyof typeof getPublicComponents]
 
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
