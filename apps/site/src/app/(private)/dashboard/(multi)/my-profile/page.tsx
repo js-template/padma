@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
-import ProfilePageBody from "./PageBody"
 import { auth } from "@/context/auth"
+import { MyProfile } from "@padma/metajob-ui"
 
 export default async function ProfilePage() {
    const session = await auth()
@@ -9,6 +9,7 @@ export default async function ProfilePage() {
    if (session?.user?.role?.type !== "candidate" && session?.user?.role?.type !== "employer") {
       redirect("/dashboard")
    }
+   const userId = session?.user?.id as unknown as string
 
-   return <ProfilePageBody />
+   return <MyProfile userId={userId} />
 }
