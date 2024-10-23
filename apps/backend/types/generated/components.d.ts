@@ -64,6 +64,8 @@ export interface BlockCategoryCard extends Schema.Component {
     description: Attribute.Text;
     button: Attribute.Component<'component.link'>;
     categories: Attribute.Component<'config.job-list', true>;
+    empty: Attribute.Component<'shared.empty'>;
+    styles: Attribute.Component<'component.style-section'>;
   };
 }
 
