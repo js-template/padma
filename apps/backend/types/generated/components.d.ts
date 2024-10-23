@@ -66,24 +66,14 @@ export interface BlockCategoryCard extends Schema.Component {
   };
 }
 
-export interface BlockCategoryCard2 extends Schema.Component {
-  collectionName: 'components_block_category_card2s';
-  info: {
-    displayName: 'CategoryCard2';
-    description: '';
-  };
-  attributes: {};
-}
-
 export interface BlockCategoryList extends Schema.Component {
   collectionName: 'components_block_category_lists';
   info: {
     displayName: 'CategoryList';
     icon: 'apps';
+    description: '';
   };
   attributes: {
-    title: Attribute.String;
-    enableSearch: Attribute.Boolean & Attribute.DefaultTo<true>;
     empty: Attribute.Component<'shared.empty'>;
   };
 }
@@ -969,11 +959,6 @@ export interface FormsJobFilter extends Schema.Component {
     description: '';
   };
   attributes: {
-    categories: Attribute.Relation<
-      'forms.job-filter',
-      'oneToMany',
-      'plugin::metajob-strapi.job-category'
-    >;
     job_type: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -1041,11 +1026,6 @@ export interface FormsSeaechForm extends Schema.Component {
     searchByLocation: Attribute.String;
     button: Attribute.String;
     link: Attribute.String;
-    categories: Attribute.Relation<
-      'forms.seaech-form',
-      'oneToMany',
-      'api::category.category'
-    >;
   };
 }
 
@@ -1604,7 +1584,6 @@ declare module '@strapi/types' {
       'block.blog-card': BlockBlogCard;
       'block.bookmark-list': BlockBookmarkList;
       'block.category-card': BlockCategoryCard;
-      'block.category-card2': BlockCategoryCard2;
       'block.category-list': BlockCategoryList;
       'block.contact': BlockContact;
       'block.job-card': BlockJobCard;

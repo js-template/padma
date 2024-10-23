@@ -2176,9 +2176,9 @@ export interface ApiPagePage extends Schema.CollectionType {
         'header.breadcrumbs',
         'banner.banner-one',
         'forms.job-filter',
+        'forms.company-filter',
         'forms.candidate-filter',
-        'block.category-card2',
-        'forms.company-filter'
+        'block.category-list'
       ]
     >;
     createdAt: Attribute.DateTime;
