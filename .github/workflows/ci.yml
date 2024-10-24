@@ -25,13 +25,16 @@ jobs:
           npm install -g pnpm
 
       - name: Install Dependencies
-        run: pnpm install # Install all dependencies for the monorepo
+        run: pnpm install
 
       - name: Build Backend
-        run: pnpm -F @padma/backend build # Run backend build command
+        run: pnpm -F @padma/blank-theme install
+
+      - name: Build Backend
+        run: pnpm -F @padma/backend build
 
       - name: Build Frontend
-        run: pnpm -F @padma/frontend build # Run frontend build command
+        run: pnpm -F @padma/frontend build
 
       - name: Deploy Backend
         run: |
