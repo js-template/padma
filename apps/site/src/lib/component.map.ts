@@ -128,7 +128,7 @@ export const dashboardBlocksMapping = {
    "table.applied-jobs": {
       component: AppliedJobs
    },
-   "block.my-resume": {
-      component: AddResumeForm //TODO: this will be applicable for dynamic resume page
+   "block.manage-resume": {
+      component: AddResumeForm
    }
 } as any
