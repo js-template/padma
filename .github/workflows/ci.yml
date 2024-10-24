@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [dev]  # Change this to your dev branch
+  pull_request:
+    branches: [dev]  # Change this to your dev branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
