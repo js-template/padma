@@ -164,8 +164,7 @@
       },
       "type": "dynamiczone",
       "components": ["block.public-header", "block.private-header"],
-      "min": 1,
-      "required": true
+      "required": false
     },
     "footer": {
       "pluginOptions": {
@@ -175,8 +174,7 @@
       },
       "type": "dynamiczone",
       "components": ["block.footer", "widget.footer-top"],
-      "required": true,
-      "min": 1
+      "required": false
     },
     "private_sidebar_menus": {
       "pluginOptions": {
@@ -186,8 +184,7 @@
       },
       "type": "dynamiczone",
       "components": ["shared.share-menu"],
-      "min": 1,
-      "required": true
+      "required": false
     }
   }
 }

@@ -1,5 +1,5 @@
 import React from "react"
-import DashboardLayoutBody from "./NavbarBody"
+import DashboardLayoutBody from "./body"
 import { find } from "@/lib/strapi"
 import { loadActiveTheme } from "config/theme-loader"
 import { getLanguageFromCookie } from "@/utils/language"

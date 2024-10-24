@@ -1274,34 +1274,22 @@ export interface ApiLayoutLayout extends Schema.SingleType {
     header: Attribute.DynamicZone<
       ['block.public-header', 'block.private-header']
     > &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
-      }> &
-      Attribute.SetMinMax<{
-        min: 1;
       }>;
     footer: Attribute.DynamicZone<['block.footer', 'widget.footer-top']> &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
-      }> &
-      Attribute.SetMinMax<{
-        min: 1;
       }>;
     private_sidebar_menus: Attribute.DynamicZone<['shared.share-menu']> &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
-      }> &
-      Attribute.SetMinMax<{
-        min: 1;
       }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

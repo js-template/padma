@@ -7,7 +7,7 @@ import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
 
-import { loadActiveTheme } from "../../../../config/theme-loader"
+import { loadActiveTheme } from "config/theme-loader"
 
 export const dynamicParams = false // true | false,
 
