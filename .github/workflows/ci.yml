@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Padma CI
 
 on:
   push:
@@ -18,30 +18,23 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'  # Specify the Node.js version you are using
+          node-version: '20'
+
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm  # Install pnpm globally
 
       - name: Install Dependencies
         run: pnpm install  # Install all dependencies for the monorepo
 
       - name: Build Backend
-        run: pnpm -F @padma/backend build  # Run backend build command
-
-      - name: Build Frontend
-        run: pnpm -F @padma/frontend build  # Run frontend build command
-
-      - name: Deploy Backend
-        run: |
-          echo "Deploying backend..."
-          # Add your backend deployment commands here
+        run: pnpm build  # Run backend build command
+    
         env:
           # Add environment variables needed for deployment
           NODE_ENV: development
           # Add other necessary secrets here
 
-      - name: Deploy Frontend
-        run: |
-          echo "Deploying frontend..."
-          # Add your frontend deployment commands here
         env:
           NODE_ENV: development
           # Add other necessary secrets here
