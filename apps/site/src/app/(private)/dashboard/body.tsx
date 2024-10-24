@@ -35,16 +35,7 @@ const Body: React.FC<BodyProps> = ({ blocks, styles, session, language, currentT
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
 
-               return (
-                  <ComponentToRender
-                     key={index}
-                     userId={Number(session?.user?.id)}
-                     role={session?.user?.role?.type}
-                     language={language}
-                     data={block}
-                     {...block}
-                  />
-               )
+               return <ComponentToRender key={index} block={block} session={session} language={language} />
             }
             return null // Handle the case where the component mapping is missing
          })}

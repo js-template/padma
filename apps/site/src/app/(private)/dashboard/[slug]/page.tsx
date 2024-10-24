@@ -60,7 +60,8 @@ export default async function DynamicPrivatePages({
       redirect("/login")
    }
 
-   // const language = getLanguageFromCookie();
+   // fetch the language from cookies or session
+   const language = getLanguageFromCookie()
 
    const { data, error } = await find(
       "api/private-pages",
@@ -100,6 +101,7 @@ export default async function DynamicPrivatePages({
       <>
          <Body
             blocks={blocks}
+            language={language}
             styleData={style}
             pageSlug={pageSlug}
             session={session}
