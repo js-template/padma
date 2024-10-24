@@ -1,21 +1,47 @@
-name: CI
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [dev]  # Change this to your dev branch
+    branches:
+      - dev  # Adjust according to your branch
   pull_request:
-    branches: [dev]  # Change this to your dev branch
+    branches:
+      - dev  # Adjust according to your branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        run: pnpm install
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'  # Specify the Node.js version you are using
 
-      - name: Build
-        run: pnpm build
+      - name: Install Dependencies
+        run: pnpm install  # Install all dependencies for the monorepo
+
+      - name: Build Backend
+        run: pnpm -F @padma/backend build  # Run backend build command
+
+      - name: Build Frontend
+        run: pnpm -F @padma/frontend build  # Run frontend build command
+
+      - name: Deploy Backend
+        run: |
+          echo "Deploying backend..."
+          # Add your backend deployment commands here
+        env:
+          # Add environment variables needed for deployment
+          NODE_ENV: development
+          # Add other necessary secrets here
+
+      - name: Deploy Frontend
+        run: |
+          echo "Deploying frontend..."
+          # Add your frontend deployment commands here
+        env:
+          NODE_ENV: development
+          # Add other necessary secrets here
