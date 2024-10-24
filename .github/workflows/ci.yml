@@ -28,10 +28,10 @@ jobs:
         run: pnpm install
 
       - name: Build Backend
-        run: pnpm -F @padma/blank-theme install
-
-      - name: Build Backend
         run: pnpm -F @padma/backend build
+
+      - name: Install  Blank Theme
+        run: pnpm -F @padma/blank-theme build
 
       - name: Build Frontend
         run: pnpm -F @padma/frontend build
