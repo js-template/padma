@@ -1,9 +1,9 @@
 import { Fragment } from "react"
 import { notFound } from "next/navigation"
 import { find } from "@/lib/strapi"
-import { getPublicComponents } from "@padma/metajob-ui" // Same as in your other pages
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { Metadata } from "next"
+import { loadActiveTheme } from "config/theme-loader"
 
 // ?? Next.js will invalidate the cache when a
 // ?? request comes in, at most once every 60 seconds.
@@ -101,6 +101,8 @@ export default async function DynamicPages({ params }: Props) {
 
    // ?? Fetch the language or use a default
    const language = "en"
+
+   const { getPublicComponents } = await loadActiveTheme()
 
    // ?? Fetch the permalink structure from Strapi
    const { data: permalinkData } = await find("api/permalink", {

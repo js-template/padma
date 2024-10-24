@@ -44,6 +44,11 @@
       "type": "component",
       "repeatable": false,
       "component": "forms.seaech-form"
+    },
+    "categories": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.job-list"
     }
   }
 }
