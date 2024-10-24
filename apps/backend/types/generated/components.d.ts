@@ -1413,6 +1413,22 @@ export interface SharedSpacing extends Schema.Component {
   };
 }
 
+export interface SingleTypeBlogDetails extends Schema.Component {
+  collectionName: 'components_single_type_blog_details';
+  info: {
+    displayName: 'Blog Details';
+    icon: 'arrowRight';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    style: Attribute.Component<'component.style-section'>;
+    sidebar: Attribute.Enumeration<
+      ['Left Sidebar', 'Right Sidebar', 'Both Sidebar', 'No Sidebar']
+    >;
+  };
+}
+
 export interface SingleTypeCompanyDeatils extends Schema.Component {
   collectionName: 'components_single_type_company_deatils';
   info: {
@@ -1803,6 +1819,7 @@ declare module '@strapi/types' {
       'shared.share-menu': SharedShareMenu;
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
+      'single-type.blog-details': SingleTypeBlogDetails;
       'single-type.company-deatils': SingleTypeCompanyDeatils;
       'single-type.job-details': SingleTypeJobDetails;
       'single-type.resume-details': SingleTypeResumeDetails;
