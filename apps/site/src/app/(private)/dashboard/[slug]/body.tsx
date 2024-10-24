@@ -8,6 +8,7 @@ import { useGlobalContext } from "@/context/store"
 
 interface BodyProps {
    blocks: any[]
+   language?: string
    styleData?: {
       columnSpacing: number | null
       rowSpacing: number | null
@@ -21,7 +22,7 @@ interface BodyProps {
    currentThemeComponents: any
 }
 
-const Body: React.FC<BodyProps> = ({ blocks, styleData, pageSlug, session, currentThemeComponents }) => {
+const Body: React.FC<BodyProps> = ({ blocks, language, styleData, pageSlug, session, currentThemeComponents }) => {
    const { direction } = useGlobalContext()
 
    const queryParams = {
@@ -66,17 +67,7 @@ const Body: React.FC<BodyProps> = ({ blocks, styleData, pageSlug, session, curre
 
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
-               return (
-                  <ComponentToRender
-                     key={index}
-                     userId={Number(session?.user?.id)}
-                     // @ts-ignore
-                     role={session?.user?.role?.type}
-                     direction={direction}
-                     data={block}
-                     {...block}
-                  />
-               )
+               return <ComponentToRender key={index} block={block} session={session} language={language} />
             }
             return null // Handle the case where the component mapping is missing
          })}

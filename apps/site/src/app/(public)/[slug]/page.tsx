@@ -1,12 +1,9 @@
 import { Fragment } from "react"
 import { notFound } from "next/navigation"
 import { Metadata, ResolvingMetadata } from "next"
-// FIXME: blockComponentMapping should replace with getPublicComponents
-//import { blockComponentMapping } from "@padma/metajob-ui"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
-
 import { loadActiveTheme } from "config/theme-loader"
 
 export const dynamicParams = false // true | false,
@@ -57,8 +54,8 @@ export default async function DynamicPages({
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
 
-               // return <ComponentToRender key={index} data={data} block={block} language={language} {...block} />
-               return <ComponentToRender key={index} data={block} language={language} {...block} />
+               //@ts-ignore
+               return <ComponentToRender key={index} block={block} language={language} />
             }
             return null // Handle the case where the component mapping is missing
          })}

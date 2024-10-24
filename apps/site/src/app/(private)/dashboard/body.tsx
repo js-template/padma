@@ -1,7 +1,6 @@
 "use client"
 import React from "react"
 import { Grid } from "@mui/material"
-import { dashboardBlocksMapping } from "@/lib/component.map"
 import { Session } from "next-auth"
 
 interface BodyProps {
@@ -16,9 +15,10 @@ interface BodyProps {
    }
    session: Session | null
    language?: string
+   currentThemeComponents: any
 }
 
-const Body: React.FC<BodyProps> = ({ blocks, styles, session, language }) => {
+const Body: React.FC<BodyProps> = ({ blocks, styles, session, language, currentThemeComponents }) => {
    //console.log("Blocks", blocks)
    return (
       <Grid
@@ -30,22 +30,12 @@ const Body: React.FC<BodyProps> = ({ blocks, styles, session, language }) => {
          {...(styles?.columns && { columns: styles.columns })}
          {...(styles?.wrap && { wrap: styles.wrap })}
          sx={{ mb: 4 }}>
-         {blocks?.map((block: any, index: number) => {
-            const BlockConfig = dashboardBlocksMapping[block.__component]
-
+         {blocks?.map((block: { __component: keyof typeof currentThemeComponents }, index: number) => {
+            const BlockConfig = currentThemeComponents[block.__component]
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
 
-               return (
-                  <ComponentToRender
-                     key={index}
-                     userId={Number(session?.user?.id)}
-                     role={session?.user?.role?.type}
-                     language={language}
-                     data={block}
-                     {...block}
-                  />
-               )
+               return <ComponentToRender key={index} block={block} session={session} language={language} />
             }
             return null // Handle the case where the component mapping is missing
          })}

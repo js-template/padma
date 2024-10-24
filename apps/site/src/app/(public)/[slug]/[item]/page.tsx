@@ -1,5 +1,6 @@
 import { Fragment } from "react"
 import { notFound } from "next/navigation"
+import { auth } from "@/context/auth"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { Metadata } from "next"
@@ -96,6 +97,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function DynamicPages({ params }: Props) {
+   const session = await auth()
+
    const pageSlug = params?.slug // e.g., "job", "resume"
    const singleType = params?.item // e.g., "fullstack" or "designer"
 
@@ -170,7 +173,15 @@ export default async function DynamicPages({ params }: Props) {
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
 
-               return <ComponentToRender key={index} block={block} data={pageDetailsData} language={language} />
+               return (
+                  <ComponentToRender
+                     key={index}
+                     block={block}
+                     data={pageDetailsData}
+                     language={language}
+                     session={session}
+                  />
+               )
             }
             return null // Handle missing component mapping case
          })}

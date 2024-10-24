@@ -6,6 +6,7 @@ import Body from "./body"
 import { auth } from "@/context/auth"
 import { redirect } from "next/navigation"
 import _ from "lodash"
+import { loadActiveTheme } from "config/theme-loader"
 
 // *** generate metadata type
 
@@ -71,9 +72,18 @@ export default async function DashboardPage({
 
    const styles = blocksData?.styles
 
+   // Load the active theme and get public components
+   const { getPrivateComponents } = await loadActiveTheme()
+
    return (
       <>
-         <Body blocks={blocks} styles={styles} session={session} language={language} />
+         <Body
+            blocks={blocks}
+            styles={styles}
+            session={session}
+            language={language}
+            currentThemeComponents={getPrivateComponents}
+         />
       </>
    )
 }

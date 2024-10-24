@@ -1594,7 +1594,9 @@ export interface ApiBlogDetailBlogDetail extends Schema.SingleType {
           localized: true;
         };
       }>;
-    blocks: Attribute.DynamicZone<['shared.spacing', 'component.page-title']> &
+    blocks: Attribute.DynamicZone<
+      ['shared.spacing', 'component.page-title', 'single-type.blog-details']
+    > &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

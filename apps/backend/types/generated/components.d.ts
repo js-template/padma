@@ -12,7 +12,7 @@ export interface BannerBannerOne extends Schema.Component {
     description: Attribute.Text;
     search: Attribute.Component<'forms.seaech-form'>;
     image: Attribute.Media;
-    styles: Attribute.Component<'component.style-section'>;
+    style: Attribute.Component<'component.style-section'>;
     empty: Attribute.Component<'shared.empty'>;
   };
 }
@@ -30,7 +30,7 @@ export interface BlockBlogCard extends Schema.Component {
     button: Attribute.Component<'component.link'>;
     posts: Attribute.Relation<'block.blog-card', 'oneToMany', 'api::post.post'>;
     empty: Attribute.Component<'shared.empty'>;
-    styles: Attribute.Component<'component.style-section'>;
+    style: Attribute.Component<'component.style-section'>;
   };
 }
 
@@ -67,7 +67,7 @@ export interface BlockCategoryCard extends Schema.Component {
     button: Attribute.Component<'component.link'>;
     categories: Attribute.Component<'config.job-list', true>;
     empty: Attribute.Component<'shared.empty'>;
-    styles: Attribute.Component<'component.style-section'>;
+    style: Attribute.Component<'component.style-section'>;
   };
 }
 
@@ -160,7 +160,7 @@ export interface BlockJobCard extends Schema.Component {
     button: Attribute.Component<'component.link'>;
     jobs: Attribute.Component<'config.job-list', true>;
     empty: Attribute.Component<'shared.empty'>;
-    styles: Attribute.Component<'component.style-section'>;
+    style: Attribute.Component<'component.style-section'>;
   };
 }
 
@@ -379,7 +379,7 @@ export interface BlockReviewCard extends Schema.Component {
     description: Attribute.String;
     reviews: Attribute.Component<'config.job-list', true>;
     empty: Attribute.Component<'shared.empty'>;
-    styles: Attribute.Component<'component.style-section'>;
+    style: Attribute.Component<'component.style-section'>;
   };
 }
 
@@ -1424,6 +1424,22 @@ export interface SharedSpacing extends Schema.Component {
   };
 }
 
+export interface SingleTypeBlogDetails extends Schema.Component {
+  collectionName: 'components_single_type_blog_details';
+  info: {
+    displayName: 'Blog Details';
+    icon: 'arrowRight';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    style: Attribute.Component<'component.style-section'>;
+    sidebar: Attribute.Enumeration<
+      ['Left Sidebar', 'Right Sidebar', 'Both Sidebar', 'No Sidebar']
+    >;
+  };
+}
+
 export interface SingleTypeCompanyDeatils extends Schema.Component {
   collectionName: 'components_single_type_company_deatils';
   info: {
@@ -1815,6 +1831,7 @@ declare module '@strapi/types' {
       'shared.share-menu': SharedShareMenu;
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
+      'single-type.blog-details': SingleTypeBlogDetails;
       'single-type.company-deatils': SingleTypeCompanyDeatils;
       'single-type.job-details': SingleTypeJobDetails;
       'single-type.resume-details': SingleTypeResumeDetails;
