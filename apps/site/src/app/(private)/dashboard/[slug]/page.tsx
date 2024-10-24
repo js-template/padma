@@ -7,8 +7,8 @@ import { Metadata, ResolvingMetadata } from "next"
 import Body from "./body"
 import { auth } from "@/context/auth"
 import { notFound, redirect } from "next/navigation"
+import { loadActiveTheme } from "config/theme-loader"
 export const dynamicParams = false // true | false,
-import React from "react"
 // *** generate metadata type
 type Props = {
    params: { slug: string }
@@ -93,9 +93,18 @@ export default async function DynamicPrivatePages({
    //    throw error;
    // }
 
+   // Load the active theme and get public components
+   const { getPrivateComponents } = await loadActiveTheme()
+
    return (
       <>
-         <Body blocks={blocks} styleData={style} pageSlug={pageSlug} session={session} />
+         <Body
+            blocks={blocks}
+            styleData={style}
+            pageSlug={pageSlug}
+            session={session}
+            currentThemeComponents={getPrivateComponents}
+         />
          {/* JSON_LD for SEO */}
          {/* {data?.data[0]?.attributes?.seo?.structuredData && (
             <Script

@@ -103,6 +103,56 @@ export interface BlockContact extends Schema.Component {
   };
 }
 
+export interface BlockFooter extends Schema.Component {
+  collectionName: 'components_block_footers';
+  info: {
+    displayName: 'Footer';
+    icon: 'server';
+    description: 'The footer block is used to display the footer of the website.';
+  };
+  attributes: {
+    FooterGrid: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 4;
+      }>;
+    FooterOne: Attribute.Component<'widget.footer-one'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    FooterTwo: Attribute.Component<'widget.footer-two'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    FooterThree: Attribute.Component<'widget.footer-two'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    FooterFour: Attribute.Component<'widget.footer-two'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    FooterBottom: Attribute.Component<'widget.footer-bottom'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    copyright: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+  };
+}
+
 export interface BlockJobCard extends Schema.Component {
   collectionName: 'components_block_job_cards';
   info: {
@@ -226,6 +276,27 @@ export interface BlockPortfolio extends Schema.Component {
   };
 }
 
+export interface BlockPrivateHeader extends Schema.Component {
+  collectionName: 'components_block_private_headers';
+  info: {
+    displayName: 'Private Header';
+    icon: 'server';
+    description: '';
+  };
+  attributes: {
+    light_logo: Attribute.Component<'header.logo'>;
+    dark_logo: Attribute.Component<'header.logo'>;
+    userMenu: Attribute.Component<'component.link', true>;
+    langMenu: Attribute.Component<'component.link', true>;
+    dark_mode: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    notification: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+  };
+}
+
 export interface BlockProfile extends Schema.Component {
   collectionName: 'components_block_profiles';
   info: {
@@ -234,6 +305,44 @@ export interface BlockProfile extends Schema.Component {
     description: '';
   };
   attributes: {};
+}
+
+export interface BlockPublicHeader extends Schema.Component {
+  collectionName: 'components_block_headers';
+  info: {
+    displayName: 'Public Header';
+    icon: 'layout';
+    description: 'The header block is used to display the header of the website.';
+  };
+  attributes: {
+    light_logo: Attribute.Component<'header.logo'>;
+    dark_logo: Attribute.Component<'header.logo'>;
+    dark_mode: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    notification: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    MainMenu: Attribute.Component<'component.menu', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    langMenu: Attribute.Component<'component.link', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    userMenu: Attribute.Component<'component.link', true>;
+    Button: Attribute.Component<'component.link', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+  };
 }
 
 export interface BlockRecentActivities extends Schema.Component {
@@ -674,17 +783,13 @@ export interface FormsCandidateFilter extends Schema.Component {
   attributes: {
     showFilter: Attribute.Boolean;
     search: Attribute.Component<'forms.seaech-form'>;
-    categories: Attribute.Relation<
-      'forms.candidate-filter',
-      'oneToMany',
-      'api::category.category'
-    >;
     rate: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
         ['Rate', '10k', '20k', '30k', '40k', '50k']
       >;
     button: Attribute.Component<'component.link'>;
+    categories: Attribute.Component<'config.job-list'>;
   };
 }
 
@@ -969,11 +1074,6 @@ export interface FormsJobFilter extends Schema.Component {
     description: '';
   };
   attributes: {
-    categories: Attribute.Relation<
-      'forms.job-filter',
-      'oneToMany',
-      'plugin::metajob-strapi.job-category'
-    >;
     job_type: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -1001,6 +1101,7 @@ export interface FormsJobFilter extends Schema.Component {
     description: Attribute.Text;
     button: Attribute.Component<'component.link'>;
     search: Attribute.Component<'forms.seaech-form'>;
+    categories: Attribute.Component<'config.job-list'>;
   };
 }
 
@@ -1041,11 +1142,6 @@ export interface FormsSeaechForm extends Schema.Component {
     searchByLocation: Attribute.String;
     button: Attribute.String;
     link: Attribute.String;
-    categories: Attribute.Relation<
-      'forms.seaech-form',
-      'oneToMany',
-      'api::category.category'
-    >;
   };
 }
 
@@ -1247,6 +1343,25 @@ export interface SharedSeo extends Schema.Component {
     structuredData: Attribute.JSON;
     metaViewport: Attribute.String;
     canonicalURL: Attribute.String;
+  };
+}
+
+export interface SharedShareMenu extends Schema.Component {
+  collectionName: 'components_shared_share_menus';
+  info: {
+    displayName: 'Share Menu';
+    icon: 'server';
+  };
+  attributes: {
+    role: Attribute.Enumeration<['candidate', 'employer']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'candidate'>;
+    menus: Attribute.Component<'component.menu', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -1517,6 +1632,11 @@ export interface WidgetFooterOne extends Schema.Component {
     location: Attribute.Component<'component.icon-with-label'>;
     phone: Attribute.Component<'component.icon-with-label'>;
     email: Attribute.Component<'component.icon-with-label'>;
+    style: Attribute.Component<'component.style-section'> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
   };
 }
 
@@ -1533,6 +1653,20 @@ export interface WidgetFooterSearch extends Schema.Component {
   };
 }
 
+export interface WidgetFooterTop extends Schema.Component {
+  collectionName: 'components_widget_footer_tops';
+  info: {
+    displayName: 'FooterTop';
+    icon: 'server';
+  };
+  attributes: {
+    light_logo: Attribute.Media;
+    dark_logo: Attribute.Media;
+    title: Attribute.String;
+    search: Attribute.Component<'forms.seaech-form'>;
+  };
+}
+
 export interface WidgetFooterTwo extends Schema.Component {
   collectionName: 'components_widget_footer_twos';
   info: {
@@ -1543,6 +1677,11 @@ export interface WidgetFooterTwo extends Schema.Component {
   attributes: {
     title: Attribute.String;
     FooterMenu: Attribute.Component<'component.link', true>;
+    style: Attribute.Component<'component.style-section'> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
   };
 }
 
@@ -1607,13 +1746,16 @@ declare module '@strapi/types' {
       'block.category-card2': BlockCategoryCard2;
       'block.category-list': BlockCategoryList;
       'block.contact': BlockContact;
+      'block.footer': BlockFooter;
       'block.job-card': BlockJobCard;
       'block.latest-applied': BlockLatestApplied;
       'block.location-card': BlockLocationCard;
       'block.manage-companies': BlockManageCompanies;
       'block.manage-lists': BlockManageLists;
       'block.portfolio': BlockPortfolio;
+      'block.private-header': BlockPrivateHeader;
       'block.profile': BlockProfile;
+      'block.public-header': BlockPublicHeader;
       'block.recent-activities': BlockRecentActivities;
       'block.review-card': BlockReviewCard;
       'component.experience': ComponentExperience;
@@ -1659,6 +1801,7 @@ declare module '@strapi/types' {
       'shared.empty': SharedEmpty;
       'shared.meta-social': SharedMetaSocial;
       'shared.seo': SharedSeo;
+      'shared.share-menu': SharedShareMenu;
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
       'single-type.company-deatils': SingleTypeCompanyDeatils;
@@ -1678,6 +1821,7 @@ declare module '@strapi/types' {
       'widget.footer-bottom': WidgetFooterBottom;
       'widget.footer-one': WidgetFooterOne;
       'widget.footer-search': WidgetFooterSearch;
+      'widget.footer-top': WidgetFooterTop;
       'widget.footer-two': WidgetFooterTwo;
       'widget.matched-lists': WidgetMatchedLists;
       'widget.open-list': WidgetOpenList;
