@@ -29,7 +29,7 @@
         "audios"
       ]
     },
-    "styles": {
+    "style": {
       "type": "component",
       "repeatable": false,
       "component": "component.style-section"
