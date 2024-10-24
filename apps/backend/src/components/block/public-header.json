@@ -22,6 +22,11 @@
       "default": true,
       "required": true
     },
+    "notification": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
     "MainMenu": {
       "type": "component",
       "repeatable": true,

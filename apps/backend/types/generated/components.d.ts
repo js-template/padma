@@ -291,6 +291,9 @@ export interface BlockPrivateHeader extends Schema.Component {
     dark_mode: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<true>;
+    notification: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
   };
 }
 
@@ -315,6 +318,9 @@ export interface BlockPublicHeader extends Schema.Component {
     light_logo: Attribute.Component<'header.logo'>;
     dark_logo: Attribute.Component<'header.logo'>;
     dark_mode: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    notification: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<true>;
     MainMenu: Attribute.Component<'component.menu', true> &
