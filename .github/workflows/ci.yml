@@ -36,7 +36,12 @@ jobs:
       - name: Build Frontend
         run: pnpm -F @padma/frontend build
         env:
-          Node_ENV: dev-padma-backend
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }} # Your Vercel URL
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }} # Localhost or staging URL
+          NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }} # Google Maps API key
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }} # Stripe API key
+          STRAPI_AUTH_TOKEN: ${{ secrets.STRAPI_AUTH_TOKEN }} # Strapi auth token
+          STRAPI_ENDPOINT: ${{ secrets.STRAPI_ENDPOINT }} # Strapi production URL
 
       - name: Deploy Backend
         run: |
