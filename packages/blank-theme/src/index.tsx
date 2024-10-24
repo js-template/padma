@@ -14,3 +14,4 @@ export const getPublicComponents = {
    "forms.job-filter": { component: PlaceholderComponent }
    // Add other components as needed...
 }
+export const getPrivateComponents = {}

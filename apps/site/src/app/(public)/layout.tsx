@@ -1,6 +1,6 @@
 import React from "react"
 import { find } from "@/lib/strapi"
-import { loadActiveTheme } from "config/theme-loader"
+import { loadActiveTheme } from "../../../config/theme-loader"
 import LayoutBody from "./LayoutBody"
 import { getLanguageFromCookie } from "@/utils/language"
 
