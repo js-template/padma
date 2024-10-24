@@ -20,6 +20,9 @@
     },
     "link": {
       "type": "string"
+    },
+    "searchByCategory": {
+      "type": "string"
     }
   }
 }
