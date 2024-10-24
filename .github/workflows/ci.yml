@@ -32,11 +32,11 @@ jobs:
 
       - name: Install  Blank Theme
         run: pnpm -F @padma/blank-theme build
-        env:
-          Node_ENV: dev-padma-backend
 
       - name: Build Frontend
         run: pnpm -F @padma/frontend build
+        env:
+          Node_ENV: dev-padma-backend
 
       - name: Deploy Backend
         run: |
