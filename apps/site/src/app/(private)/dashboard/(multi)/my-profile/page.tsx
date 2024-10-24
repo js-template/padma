@@ -28,7 +28,7 @@ export default async function ProfilePage() {
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
 
-               return <ComponentToRender key={index} block={block} userId={userId} language={language} />
+               return <ComponentToRender key={index} block={block} session={session} language={language} />
             }
             return null // Handle missing component mapping case
          })}
