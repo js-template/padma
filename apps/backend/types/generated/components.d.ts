@@ -259,6 +259,17 @@ export interface BlockManageLists extends Schema.Component {
   };
 }
 
+export interface BlockManageResume extends Schema.Component {
+  collectionName: 'components_block_manage_resumes';
+  info: {
+    displayName: 'Manage Resume';
+    icon: 'arrowRight';
+  };
+  attributes: {
+    title: Attribute.String;
+  };
+}
+
 export interface BlockPortfolio extends Schema.Component {
   collectionName: 'components_block_portfolios';
   info: {
@@ -1767,6 +1778,7 @@ declare module '@strapi/types' {
       'block.location-card': BlockLocationCard;
       'block.manage-companies': BlockManageCompanies;
       'block.manage-lists': BlockManageLists;
+      'block.manage-resume': BlockManageResume;
       'block.portfolio': BlockPortfolio;
       'block.private-header': BlockPrivateHeader;
       'block.profile': BlockProfile;

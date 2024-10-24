@@ -2252,7 +2252,8 @@ export interface ApiPrivatePagePrivatePage extends Schema.CollectionType {
         'block.latest-applied',
         'block.manage-lists',
         'block.manage-companies',
-        'table.applied-jobs'
+        'table.applied-jobs',
+        'block.manage-resume'
       ]
     > &
       Attribute.SetPluginOptions<{
