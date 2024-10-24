@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { find } from "@/lib/strapi"
 import { StrapiSeoFormate } from "@/lib/strapiSeo"
 import { getLanguageFromCookie } from "@/utils/language"
-import { getPublicComponents } from "@padma/metajob-ui"
+import { loadActiveTheme } from "config/theme-loader"
 
 export default async function Home() {
    const language = getLanguageFromCookie()
@@ -17,6 +17,7 @@ export default async function Home() {
       },
       "no-store"
    )
+   const { getPublicComponents } = await loadActiveTheme()
 
    // if (error) {
    //    throw error;
