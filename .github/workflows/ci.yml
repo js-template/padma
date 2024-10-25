@@ -1,61 +1,61 @@
-name: Padma CI
+# name: Padma CI
 
-on:
-  push:
-    branches:
-      - dev # Adjust according to your branch
-  pull_request:
-    branches:
-      - dev # Adjust according to your branch
+# on:
+#   push:
+#     branches:
+#       - dev # Adjust according to your branch
+#   pull_request:
+#     branches:
+#       - dev # Adjust according to your branch
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "20"
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: "20"
 
-      - name: Install pnpm
-        run: |
-          npm install -g pnpm
+#       - name: Install pnpm
+#         run: |
+#           npm install -g pnpm
 
-      - name: Install Dependencies
-        run: pnpm install
+#       - name: Install Dependencies
+#         run: pnpm install
 
-      - name: Build Backend
-        run: pnpm -F @padma/backend build
+#       - name: Build Backend
+#         run: pnpm -F @padma/backend build
 
-      - name: Install  Blank Theme
-        run: pnpm -F @padma/blank-theme build
+#       - name: Install  Blank Theme
+#         run: pnpm -F @padma/blank-theme build
 
-      - name: Build Frontend
-        run: pnpm -F @padma/frontend build
-        env:
-          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }} # Your Vercel URL
-          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }} # Localhost or staging URL
-          NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }} # Google Maps API key
-          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }} # Stripe API key
-          STRAPI_AUTH_TOKEN: ${{ secrets.STRAPI_AUTH_TOKEN }} # Strapi auth token
-          STRAPI_ENDPOINT: ${{ secrets.STRAPI_ENDPOINT }} # Strapi production URL
+#       - name: Build Frontend
+#         run: pnpm -F @padma/frontend build
+#         env:
+#           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }} # Your Vercel URL
+#           NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }} # Localhost or staging URL
+#           NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }} # Google Maps API key
+#           NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }} # Stripe API key
+#           STRAPI_AUTH_TOKEN: ${{ secrets.STRAPI_AUTH_TOKEN }} # Strapi auth token
+#           STRAPI_ENDPOINT: ${{ secrets.STRAPI_ENDPOINT }} # Strapi production URL
 
-      - name: Deploy Backend
-        run: |
-          echo "Deploying backend..."
-          # Add your backend deployment commands here
-        env:
-          # Add environment variables needed for deployment
-          NODE_ENV: development
-          # Add other necessary secrets here
+#       - name: Deploy Backend
+#         run: |
+#           echo "Deploying backend..."
+#           # Add your backend deployment commands here
+#         env:
+#           # Add environment variables needed for deployment
+#           NODE_ENV: development
+#           # Add other necessary secrets here
 
-      - name: Deploy Frontend
-        run: |
-          echo "Deploying frontend..."
-          # Add your frontend deployment commands here
-        env:
-          NODE_ENV: development
-          # Add other necessary secrets here
+#       - name: Deploy Frontend
+#         run: |
+#           echo "Deploying frontend..."
+#           # Add your frontend deployment commands here
+#         env:
+#           NODE_ENV: development
+#           # Add other necessary secrets here
