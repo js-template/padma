@@ -1,8 +1,5 @@
-// PlaceholderComponent.tsx
-import React from "react"
+"use server"
 
-const PlaceholderComponent: React.FC = () => {
+export const PlaceholderComponent = () => {
    return <div>This component is not yet available.</div>
 }
-
-export default PlaceholderComponent
