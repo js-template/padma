@@ -33,6 +33,8 @@ jobs:
       - name: Install  Blank Theme
         run: pnpm -F @padma/blank-theme build
 
+      - name: Build Frontend
+        run: pnpm -F @padma/frontend build
         env:
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }} # Your Vercel URL
           NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }} # Localhost or staging URL
@@ -40,15 +42,6 @@ jobs:
           NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }} # Stripe API key
           STRAPI_AUTH_TOKEN: ${{ secrets.STRAPI_AUTH_TOKEN }} # Strapi auth token
           STRAPI_ENDPOINT: ${{ secrets.STRAPI_ENDPOINT }} # Strapi production URL
-
-      - name: Check environment variables
-        run: |
-          echo "NEXTAUTH_URL: $NEXTAUTH_URL"
-          echo "NEXT_PUBLIC_BASE_URL: $NEXT_PUBLIC_BASE_URL"
-          echo "STRAPI_ENDPOINT: $STRAPI_ENDPOINT"
-
-      - name: Build Frontend
-        run: pnpm -F @padma/frontend build
 
       - name: Deploy Backend
         run: |
