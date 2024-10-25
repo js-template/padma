@@ -190,48 +190,56 @@ export default async function DynamicPages({ params }: Props) {
 }
 
 // *** Return a list of `params` to populate the [slug] dynamic segment
-export async function generateStaticParams() {
-   // ?? Fetch the permalink structure from Strapi
-   const { data } = await find("api/permalink", {
-      populate: "*",
-      publicationState: "live",
-      locale: ["en"]
-   })
+// export async function generateStaticParams() {
+//    // ?? Fetch the permalink structure from Strapi
+//    const { data } = await find("api/permalink", {
+//       populate: "*",
+//       publicationState: "live",
+//       locale: ["en"]
+//    })
 
-   // ?? Get the singlePages from the permalink data
-   const singlePages = data?.data?.attributes?.singlePage
+//    console.log("data from search params", data)
 
-   // ?? If no singlePages are found, return an empty array
-   let params: Array<{ slug: string; item: string }> = []
+//    // ?? Get the singlePages from the permalink data
+//    const singlePages = data?.data?.attributes?.singlePage || []
 
-   // ?? Loop through all singlePages and fetch the collectionModel data
-   await Promise.all(
-      singlePages?.map(async (page: { slug: string; collectionModel: string; singelModel: string }) => {
-         // ?? Get the collectionModel API data
-         const { data: collectionData } = await find(page.collectionModel, {
-            fields: ["slug"],
-            filters: {
-               slug: {
-                  $ne: null
-               }
-            },
-            publicationState: "live",
-            locale: ["en"]
-         })
+//    console.log("singlePages", singlePages)
 
-         // ?? Store all slugs in the params array
-         const mappedSlugs = collectionData?.data?.map((single: any) => ({
-            slug: page.slug,
-            item: single?.attributes?.slug
-         }))
+//    // ?? If no singlePages are found, return an empty array
+//    let params: Array<{ slug: string; item: string }> = []
 
-         params = params.concat(mappedSlugs)
-      })
-   )
+//    // ?? Loop through all singlePages and fetch the collectionModel data
+//    await Promise.all(
+//       singlePages?.map(async (page: { slug: string; collectionModel: string; singelModel: string }) => {
+//          // ?? Get the collectionModel API data
+//          const { data: collectionData, error: collectionError } = await find(page.collectionModel, {
+//             fields: ["slug"],
+//             filters: {
+//                slug: {
+//                   $ne: null
+//                }
+//             },
+//             publicationState: "live",
+//             locale: ["en"]
+//          })
 
-   // ?? Return the params array
-   return params?.map((post: { slug: string; item: string }) => ({
-      slug: post.slug,
-      item: post.item
-   }))
-}
+//          console.log("collectionData", collectionData, "collectionError", collectionError)
+
+//          // ?? Store all slugs in the params array
+//          const mappedSlugs = collectionData?.data?.map((single: any) => ({
+//             slug: page.slug,
+//             item: single?.attributes?.slug
+//          }))
+
+//          params = params.concat(mappedSlugs)
+//       })
+//    )
+
+//    console.log("params", params)
+
+//    // ?? Return the params array
+//    return params?.map((post: { slug: string; item: string }) => ({
+//       slug: post?.slug,
+//       item: post?.item
+//    }))
+// }

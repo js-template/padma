@@ -1,6 +1,6 @@
 // components.ts
 
-import PlaceholderComponent from "./utils/placeholder"
+import { PlaceholderComponent } from "./utils/placeholder"
 export * from "./blocks/header"
 export * from "./blocks/footer"
 
