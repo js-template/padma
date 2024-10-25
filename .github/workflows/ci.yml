@@ -35,6 +35,12 @@ jobs:
 
       - name: Build Frontend
         run: pnpm -F @padma/frontend build
+
+      - name: Check environment variables
+        run: |
+          echo "NEXTAUTH_URL: $NEXTAUTH_URL"
+          echo "NEXT_PUBLIC_BASE_URL: $NEXT_PUBLIC_BASE_URL"
+          echo "STRAPI_ENDPOINT: $STRAPI_ENDPOINT"
         env:
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }} # Your Vercel URL
           NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }} # Localhost or staging URL
