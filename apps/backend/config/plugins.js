@@ -28,10 +28,7 @@ module.exports = ({ env }) => ({
       maxFileSize: 250 * 1024 * 1024, // multipart data, modify here limit of uploaded file size
     },
   },
-  // "metajob-strapi": {
-  //   enabled: true,
-  //   resolve: "./src/plugins/metajob-backend",
-  // },
+
   "google-maps": {
     enabled: true,
   },
