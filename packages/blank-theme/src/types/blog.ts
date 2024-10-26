@@ -1,11 +1,25 @@
-export type IPostSection = {
+export type IPostBlock = {
    id: number
    __component: string
-   job_type: string[]
-   sort: string[]
    title: string
    description: string | null
-   button: any
+   style?: {
+      id: 25
+      color?: any
+      backgroundColor?: any
+      mobile: number
+      tab: number
+      desktop: number
+   }
+   empty?: {
+      id: number
+      title: string
+      description: string
+   }
+   button?: {
+      label: string
+      link: string
+   }
    posts: IPosts
 }
 type ImageFormat = {

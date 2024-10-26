@@ -1,17 +1,20 @@
 // components.ts
 
-import { PlaceholderComponent } from "./utils/placeholder"
-export * from "./blocks/header"
-export * from "./blocks/footer"
+import { NavBar } from "./blocks/dashboard-nav/nav-bar"
+import { Footer } from "./blocks/footer"
+import { Header } from "./blocks/header"
+import PlaceholderComponent from "./utils/placeholder"
 
 export const getPublicComponents = {
    // Block component mapping
-   "banner.banner-one": { component: PlaceholderComponent },
-   "block.public-header": { component: PlaceholderComponent },
+   "block.public-header": { component: Header },
    "block.private-header": { component: PlaceholderComponent },
-   "block.footer": { component: PlaceholderComponent },
-   "header.breadcrumbs": { component: PlaceholderComponent },
-   "forms.job-filter": { component: PlaceholderComponent }
+   "block.footer": { component: Footer }
    // Add other components as needed...
 }
-export const getPrivateComponents = {}
+export const getPrivateComponents = {
+   "block.private-header": { component: NavBar }
+   // Add other components as needed...
+}
+
+export { Header, Footer, NavBar, PlaceholderComponent }
