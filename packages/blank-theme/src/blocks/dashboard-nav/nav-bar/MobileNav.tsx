@@ -7,7 +7,6 @@ import toast from "react-hot-toast"
 import CIcon from "../../../components/common/icon"
 import NavItems from "./NavItems"
 import { SharedMenuList } from "./type"
-import { signOut, useSession } from "next-auth/react"
 import { useTheme as modeUseTheme } from "next-themes"
 import { getLanguageValue } from "../../../utils"
 import { PublicHeaderDataProps } from "../../header/types"
@@ -21,6 +20,8 @@ type MobileNavProps = {
    changeLang: (lang: string) => void
    changeDirection: (dir: "rtl" | "ltr") => void
    lang: string
+   useSession: any
+   signOut: () => Promise<void>
 }
 
 const MobileNav = ({
@@ -31,7 +32,9 @@ const MobileNav = ({
    changeLang,
    changeDirection,
    lang,
-   headerData
+   headerData,
+   signOut,
+   useSession
 }: MobileNavProps) => {
    const { data: session } = useSession()
    const { theme: mode, setTheme } = modeUseTheme()

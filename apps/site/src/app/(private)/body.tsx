@@ -1,6 +1,7 @@
 "use client"
 import { useGlobalContext } from "@/context/store"
 import { SignOut } from "@/lib/user"
+import { signOut, useSession } from "next-auth/react"
 
 export default function DashboardLayoutBody({
    data,
@@ -34,7 +35,9 @@ export default function DashboardLayoutBody({
                        language: language,
                        changeLang: changeLang,
                        changeDirection: changeDirection,
-                       children: children
+                       children: children,
+                       useSession: useSession,
+                       signOut: signOut
                     })
                   : null}
             </>

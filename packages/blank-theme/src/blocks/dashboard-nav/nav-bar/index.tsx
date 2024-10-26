@@ -8,7 +8,6 @@ import { CSSObject, Theme, styled, useTheme } from "@mui/material/styles"
 import React, { useEffect } from "react"
 import NavItems from "./NavItems"
 import toast from "react-hot-toast"
-import { signOut, useSession } from "next-auth/react"
 import { SharedMenuList } from "./type"
 import CustomAppBar from "../app-bar"
 import MobileNav from "./MobileNav"
@@ -22,6 +21,8 @@ type IProps = {
    changeLang: (lang: string) => void
    changeDirection: (dir: "rtl" | "ltr") => void
    children: React.ReactNode
+   useSession: any
+   signOut: () => Promise<void>
 }
 
 const drawerWidth = 260
@@ -83,7 +84,9 @@ export const NavBar = ({
    changeDirection,
    changeLang,
    language = "en",
-   children
+   children,
+   signOut,
+   useSession
 }: IProps) => {
    const { data: session } = useSession()
    const theme = useTheme()
@@ -144,6 +147,8 @@ export const NavBar = ({
             changeLang={changeLang}
             lang={language}
             changeDirection={changeDirection}
+            signOut={signOut}
+            useSession={useSession}
          />
          {/* Desktop */}
          {!isTablet && (
@@ -218,6 +223,8 @@ export const NavBar = ({
                changeLang={changeLang}
                lang={language}
                sidebarMenus={sidebarMenus}
+               signOut={signOut}
+               useSession={useSession}
             />
          )}
          <Box sx={{ width: "100%" }}>

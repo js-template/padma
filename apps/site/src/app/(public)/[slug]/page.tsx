@@ -65,18 +65,19 @@ export default async function DynamicPages({
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-   const { data, error } = await find(
-      "api/pages",
-      {
-         fields: ["slug"],
-         publicationState: "live",
-         locale: ["en"]
+   const { data, error } = await find("api/pages", {
+      fields: ["slug"],
+      filters: {
+         slug: {
+            $ne: null
+         }
       },
-      "no-store"
-   )
+      publicationState: "live",
+      locale: ["en"]
+   })
 
    return data?.data?.map((post: any) => ({
-      slug: post?.attributes?.slug
+      slug: post?.attributes?.slug || ""
    }))
 }
 

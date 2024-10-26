@@ -73,6 +73,8 @@ export type PublicHeaderProps = {
    language?: string
    changeLang: (lang: string) => void
    changeDirection: (dir: "rtl" | "ltr") => void
+   useSession: any
+   signOut: () => Promise<void>
 }
 
 export type PublicHeaderDataProps = {

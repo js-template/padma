@@ -31,11 +31,10 @@ import { hexToRGBA } from "../../lib/hex-to-rgba"
 import CIcon from "../../components/common/icon"
 import { fetcher } from "./hook"
 import { MenuItemProps, PublicHeaderProps } from "./types"
-import { signOut, useSession } from "next-auth/react"
 import { useTheme as modeUseTheme } from "next-themes"
 import { getLanguageValue } from "../../utils"
 
-export const Header = ({ data, language, changeLang, changeDirection }: PublicHeaderProps) => {
+export const Header = ({ data, language, changeLang, changeDirection, useSession, signOut }: PublicHeaderProps) => {
    const theme = useTheme()
    const [loading, setLoading] = useState(false)
    const { theme: mode, setTheme } = modeUseTheme()

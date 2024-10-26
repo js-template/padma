@@ -20,12 +20,10 @@ import {
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
 import { styled } from "@mui/material/styles"
 import _ from "lodash"
-// import { signOut, useSession } from "next-auth/react";
 import NextLink from "next/link"
 import React from "react"
 import toast from "react-hot-toast"
 import { fetcher } from "./hook"
-import { signOut, useSession } from "next-auth/react"
 import { getLanguageValue } from "../../../utils"
 import { useTheme as modeUseTheme } from "next-themes"
 import { MenuItemProps, PublicHeaderDataProps } from "../../header/types"
@@ -59,7 +57,9 @@ const CustomAppBar = ({
    changeLang,
    lang,
    changeDirection,
-   headerData
+   headerData,
+   useSession,
+   signOut
 }: {
    open: boolean
    handleDrawerOpen: () => void
@@ -71,6 +71,8 @@ const CustomAppBar = ({
    lang: string
    changeDirection?: (dir: "rtl" | "ltr") => void
    headerData: PublicHeaderDataProps
+   useSession: any
+   signOut: () => Promise<void>
 }) => {
    const theme = useTheme()
    const [loading, setLoading] = React.useState(false)

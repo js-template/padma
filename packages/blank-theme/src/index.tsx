@@ -8,7 +8,6 @@ import PlaceholderComponent from "./utils/placeholder"
 export const getPublicComponents = {
    // Block component mapping
    "block.public-header": { component: Header },
-   "block.private-header": { component: PlaceholderComponent },
    "block.footer": { component: Footer }
    // Add other components as needed...
 }
