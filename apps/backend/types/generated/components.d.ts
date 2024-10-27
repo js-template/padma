@@ -1264,6 +1264,24 @@ export interface HeaderLogo extends Schema.Component {
   attributes: {
     logo: Attribute.Media;
     link: Attribute.String;
+    xs_width: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 0;
+      }> &
+      Attribute.DefaultTo<150>;
+    sm_width: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 0;
+      }> &
+      Attribute.DefaultTo<160>;
+    md_width: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 0;
+      }> &
+      Attribute.DefaultTo<175>;
   };
 }
 

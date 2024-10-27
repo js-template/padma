@@ -946,7 +946,7 @@ export interface ApiDashboardHomeDashboardHome extends Schema.SingleType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     title: Attribute.String;
@@ -992,7 +992,6 @@ export interface ApiDashboardHomeDashboardHome extends Schema.SingleType {
     styles: Attribute.Component<'component.gird-container'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::dashboard-home.dashboard-home',
       'oneToOne',
@@ -1108,7 +1107,7 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   pluginOptions: {
     i18n: {
@@ -1150,7 +1149,6 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
       }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::home-page.home-page',
       'oneToOne',
@@ -1181,7 +1179,7 @@ export interface ApiLayoutLayout extends Schema.SingleType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   pluginOptions: {
     i18n: {
@@ -1211,7 +1209,6 @@ export interface ApiLayoutLayout extends Schema.SingleType {
       }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::layout.layout',
       'oneToOne',
@@ -1356,14 +1353,13 @@ export interface ApiPermalinkPermalink extends Schema.SingleType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     structure: Attribute.Enumeration<['Plain', 'Name and display']>;
     singlePage: Attribute.Component<'config.single-page', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::permalink.permalink',
       'oneToOne',
@@ -1576,7 +1572,7 @@ export interface ApiSidebarSidebar extends Schema.SingleType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     adsSidebar: Attribute.DynamicZone<
@@ -1587,7 +1583,6 @@ export interface ApiSidebarSidebar extends Schema.SingleType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::sidebar.sidebar',
       'oneToOne',

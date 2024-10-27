@@ -86,11 +86,17 @@ export type PublicHeaderDataProps = {
       id: number
       link: string
       logo: LogoProps
+      xs_width: number
+      sm_width: number
+      md_width: number
    }
    dark_logo: {
       id: number
       link: string
       logo: LogoProps
+      xs_width: number
+      sm_width: number
+      md_width: number
    }
    MainMenu: MenuItemProps[]
    langMenu: MenuItemProps[]
