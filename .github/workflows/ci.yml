@@ -27,32 +27,12 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Install  Blank Theme
-        run: pnpm -F @padma/blank-theme build
-
       - name: Build Frontend
         run: pnpm -F @padma/frontend build
         env:
-          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }} # Your Vercel URL
-          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }} # Localhost or staging URL
-          NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }} # Google Maps API key
-          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }} # Stripe API key
-          STRAPI_AUTH_TOKEN: ${{ secrets.STRAPI_AUTH_TOKEN }} # Strapi auth token
-          STRAPI_ENDPOINT: ${{ secrets.STRAPI_ENDPOINT }} # Strapi production URL
-
-      # - name: Deploy Backend
-      #   run: |
-      #     echo "Deploying backend..."
-      #     # Add your backend deployment commands here
-      #   env:
-      #     # Add environment variables needed for deployment
-      #     NODE_ENV: development
-      # Add other necessary secrets here
-
-      - name: Deploy Frontend
-        run: |
-          echo "Deploying frontend..."
-          # Add your frontend deployment commands here
-        env:
-          NODE_ENV: development
-          # Add other necessary secrets here
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+          NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          STRAPI_AUTH_TOKEN: ${{ secrets.STRAPI_AUTH_TOKEN }}
+          STRAPI_ENDPOINT: ${{ secrets.STRAPI_ENDPOINT }}
