@@ -2,6 +2,7 @@
 import { useGlobalContext } from "@/context/store"
 import { Box } from "@mui/material"
 import React from "react"
+import { signOut, useSession } from "next-auth/react"
 
 const LayoutBody = ({
    data,
@@ -31,7 +32,9 @@ const LayoutBody = ({
                        data: headerBlock,
                        language: language,
                        changeLang: changeLang,
-                       changeDirection: changeDirection
+                       changeDirection: changeDirection,
+                       useSession: useSession,
+                       signOut: signOut
                     })
                   : null}
             </>

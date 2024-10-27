@@ -1,14 +1,3 @@
-export type IReviewsSectionData = {
-   id: number
-   __component: string
-   title: string
-   description: string | null
-   // reviews: IReviewsData
-   reviews: {
-      id: number
-      relationId: number
-   }[]
-}
 export type IReviewsData = {
    data: ISingleReview[]
 }
