@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {
     "i18n": {
@@ -23,7 +23,10 @@
         }
       },
       "type": "dynamiczone",
-      "components": ["block.public-header", "block.private-header"],
+      "components": [
+        "block.public-header",
+        "block.private-header"
+      ],
       "required": false
     },
     "footer": {
@@ -33,7 +36,10 @@
         }
       },
       "type": "dynamiczone",
-      "components": ["block.footer", "widget.footer-top"],
+      "components": [
+        "block.footer",
+        "widget.footer-top"
+      ],
       "required": false
     },
     "private_sidebar_menus": {
@@ -43,7 +49,9 @@
         }
       },
       "type": "dynamiczone",
-      "components": ["shared.share-menu"],
+      "components": [
+        "shared.share-menu"
+      ],
       "required": false
     }
   }

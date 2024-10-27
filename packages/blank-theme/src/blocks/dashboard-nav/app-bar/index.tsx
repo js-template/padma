@@ -27,7 +27,6 @@ import { fetcher } from "./hook"
 import { getLanguageValue } from "../../../utils"
 import { useTheme as modeUseTheme } from "next-themes"
 import { MenuItemProps, PublicHeaderDataProps } from "../../header/types"
-import Image from "next/image"
 
 interface AppBarProps extends MuiAppBarProps {
    open?: boolean
@@ -46,6 +45,12 @@ const AppBar = styled(MuiAppBar, {
    display: "grid",
    alignItems: "center"
 }))
+
+const Image = styled("img")({
+   display: "block",
+   maxWidth: "200px",
+   height: "auto"
+})
 
 const CustomAppBar = ({
    open,
@@ -81,7 +86,7 @@ const CustomAppBar = ({
    const toggleTheme = () => {
       setTheme(mode === "dark" ? "light" : "dark")
    }
-   const isTablet = useMediaQuery(theme.breakpoints.down("md"))
+   const isTablet = useMediaQuery(theme.breakpoints.down("sm"))
 
    // *** Language Menu ***
    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -165,113 +170,131 @@ const CustomAppBar = ({
                      }}
                      component={NextLink}
                      href={dashboardLink ?? "/"}>
-                     <Image src={logo} alt='logo' width={140} height={38} />
+                     <Image
+                        src={logo}
+                        alt='logo'
+                        sx={{
+                           width: {
+                              xs: headerData?.light_logo?.xs_width ?? "auto",
+                              sm: headerData?.light_logo?.sm_width ?? "auto",
+                              md: headerData?.light_logo?.md_width ?? "auto"
+                           }
+                        }}
+                     />
                   </Box>
                )}
             </Box>
 
             <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center", gap: 1.5 }}>
-               {/* language-button  */}
-               {headerData?.langMenu && headerData?.langMenu.length > 0 && (
-                  <Box
-                     sx={{
-                        display: {
-                           xs: "none",
-                           sm: "flex"
-                        }
-                     }}>
-                     <Button
-                        id='basic-button'
-                        aria-controls={openLang ? "basic-menu" : undefined}
-                        aria-haspopup='true'
-                        aria-expanded={openLang ? "true" : undefined}
-                        color='inherit'
-                        variant='text'
-                        onClick={handleClick}
-                        sx={{
-                           textTransform: "capitalize",
-                           display: "flex",
-                           fontSize: "1rem",
-                           gap: 1
-                        }}>
-                        <CIcon
-                           icon='tabler:language'
+               {!isTablet && (
+                  <>
+                     {/* language-button  */}
+                     {headerData?.langMenu && headerData?.langMenu.length > 0 && (
+                        <Box
                            sx={{
-                              fontSize: "1.25rem"
-                           }}
-                        />
-                        {getLanguageValue(lang as any) || "English"}
-                        <CIcon
-                           icon='ri:arrow-down-s-line'
-                           sx={{
-                              color: theme.palette.text.primary,
-                              transform: openLang ? "rotate(180deg)" : "rotate(0deg)",
-                              transition: theme.transitions.create("transform", {
-                                 duration: theme.transitions.duration.shortest
-                              })
-                           }}
-                        />
-                     </Button>
-                     <Menu
-                        id='basic-menu'
-                        anchorEl={anchorEl}
-                        open={openLang}
-                        onClose={handleClose}
-                        MenuListProps={{
-                           "aria-labelledby": "basic-button"
-                        }}>
-                        {_.map(headerData?.langMenu, (lang, index) => (
-                           <MenuItem
-                              onClick={() => {
-                                 if (lang?.link === "ar") {
-                                    if (changeDirection) {
-                                       changeDirection("rtl")
-                                    }
-                                    changeLang(lang?.link)
-                                    window.location.reload()
-                                 } else if (lang?.link === "en" || lang?.link === "es") {
-                                    if (changeDirection) {
-                                       changeDirection("ltr")
-                                    }
-                                    changeLang(lang?.link)
-                                    window.location.reload()
-                                 }
-                                 handleClose()
-                              }}
+                              display: {
+                                 xs: "none",
+                                 sm: "flex"
+                              }
+                           }}>
+                           <Button
+                              id='basic-button'
+                              aria-controls={openLang ? "basic-menu" : undefined}
+                              aria-haspopup='true'
+                              aria-expanded={openLang ? "true" : undefined}
+                              color='inherit'
+                              variant='text'
+                              onClick={handleClick}
                               sx={{
-                                 color: theme.palette.text.primary,
-                                 px: 2,
-                                 gap: 1.5,
-                                 textAlign: "left",
-                                 ":hover": {
-                                    background: theme.palette.background.default,
-                                    color: theme.palette.primary.main
-                                 }
-                              }}
-                              key={index}>
-                              {lang?.link && (
-                                 <CIcon icon={lang?.link} size={22} sx={{ color: theme.palette.text.primary + "60" }} />
-                              )}
-                              {lang?.label ?? "English"}
-                           </MenuItem>
-                        ))}
-                     </Menu>
-                  </Box>
-               )}
-               {/* dark-light-theme-toggle  */}
-               {headerData?.dark_mode && (
-                  <IconButton
-                     size='large'
-                     color='inherit'
-                     sx={{
-                        display: {
-                           xs: "none",
-                           sm: "flex"
-                        }
-                     }}
-                     onClick={toggleTheme}>
-                     <CIcon icon={mode === "light" ? "ri:moon-fill" : "ri:sun-fill"} />
-                  </IconButton>
+                                 textTransform: "capitalize",
+                                 display: "flex",
+                                 fontSize: "1rem",
+                                 gap: 1
+                              }}>
+                              <CIcon
+                                 icon='tabler:language'
+                                 sx={{
+                                    fontSize: "1.25rem"
+                                 }}
+                              />
+                              {getLanguageValue(lang as any) || "English"}
+                              <CIcon
+                                 icon='ri:arrow-down-s-line'
+                                 sx={{
+                                    color: theme.palette.text.primary,
+                                    transform: openLang ? "rotate(180deg)" : "rotate(0deg)",
+                                    transition: theme.transitions.create("transform", {
+                                       duration: theme.transitions.duration.shortest
+                                    })
+                                 }}
+                              />
+                           </Button>
+                           <Menu
+                              id='basic-menu'
+                              anchorEl={anchorEl}
+                              open={openLang}
+                              onClose={handleClose}
+                              MenuListProps={{
+                                 "aria-labelledby": "basic-button"
+                              }}>
+                              {_.map(headerData?.langMenu, (lang, index) => (
+                                 <MenuItem
+                                    onClick={() => {
+                                       if (lang?.link === "ar") {
+                                          if (changeDirection) {
+                                             changeDirection("rtl")
+                                          }
+                                          changeLang(lang?.link)
+                                          window.location.reload()
+                                       } else if (lang?.link === "en" || lang?.link === "es") {
+                                          if (changeDirection) {
+                                             changeDirection("ltr")
+                                          }
+                                          changeLang(lang?.link)
+                                          window.location.reload()
+                                       }
+                                       handleClose()
+                                    }}
+                                    sx={{
+                                       color: theme.palette.text.primary,
+                                       px: 2,
+                                       gap: 1.5,
+                                       textAlign: "left",
+                                       ":hover": {
+                                          background: theme.palette.background.default,
+                                          color: theme.palette.primary.main
+                                       }
+                                    }}
+                                    key={index}>
+                                    {lang?.link && (
+                                       <CIcon
+                                          icon={lang?.link}
+                                          size={22}
+                                          sx={{ color: theme.palette.text.primary + "60" }}
+                                       />
+                                    )}
+                                    {lang?.label ?? "English"}
+                                 </MenuItem>
+                              ))}
+                           </Menu>
+                        </Box>
+                     )}
+                     {/* dark-light-theme-toggle  */}
+                     {headerData?.dark_mode && (
+                        <IconButton
+                           size='large'
+                           color='inherit'
+                           sx={{
+                              display: {
+                                 xs: "none",
+                                 sm: "flex"
+                              }
+                           }}
+                           onClick={toggleTheme}>
+                           <CIcon icon={mode === "light" ? "ri:moon-fill" : "ri:sun-fill"} />
+                        </IconButton>
+                     )}
+                  </>
                )}
                {/* notification-button  */}
                {headerData?.notification && (

@@ -153,62 +153,7 @@ export const NavBar = ({
          {/* Desktop */}
          {!isTablet && (
             <Drawer anchor={theme.direction === "rtl" ? "right" : "left"} variant='permanent' open={open}>
-               <List sx={{ py: 2, px: 1.5 }}>
-                  {NavItems(sidebarMenu, open, theme.direction as any)}
-                  {/* Logout */}
-                  {/* <ListItem sx={{ display: "block", py: 0, mb: 1, px: 0 }}>
-                     <LoadingButton
-                        onClick={() => {
-                           LogOutHandler()
-                        }}
-                        fullWidth
-                        loading={loading}
-                        loadingPosition='end'
-                        sx={{
-                           justifyContent: open ? "initial" : "center",
-                           pl: 2,
-                           pr: 1,
-                           height: "38px",
-                           borderRadius: "6px",
-                           color: theme.palette.text.primary + " !important",
-                           gap: 1,
-                           fontSize: "16px",
-                           fontWeight: 500,
-                           "&:hover": {
-                              backgroundColor: theme.palette.primary.main,
-                              color: theme.palette.primary.contrastText + " !important",
-
-                              "& svg": {
-                                 color: theme.palette.primary.contrastText + " !important"
-                              },
-
-                              "& .MuiChip-root": {
-                                 backgroundColor: theme.palette.primary.contrastText + " !important",
-                                 color: theme.palette.primary.main + " !important"
-                              }
-                           },
-                           // disabled
-                           "& .MuiButton-root.Mui-disabled": {
-                              backgroundColor: theme.palette.divider,
-                              color: theme.palette.text.disabled + " !important",
-
-                              "& svg": {
-                                 color: theme.palette.text.disabled + " !important"
-                              }
-                           }
-                        }}>
-                        <CIcon
-                           icon={"solar:logout-linear"}
-                           size={22}
-                           sx={{
-                              color: theme.palette.text.primary + "60",
-                              flex: "none"
-                           }}
-                        />
-                        Logout
-                     </LoadingButton>
-                  </ListItem> */}
-               </List>
+               <List sx={{ py: 2, px: 1.5 }}>{NavItems(sidebarMenu, open, theme.direction as any, signOut)}</List>
             </Drawer>
          )}
 

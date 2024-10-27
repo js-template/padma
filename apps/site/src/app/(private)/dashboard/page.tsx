@@ -61,7 +61,6 @@ export default async function DashboardPage({
    // Get the role from session and determine the correct block to render
    const userRole = session?.user?.role?.type?.toLowerCase()
 
-   //console.log("User Role", userRole)
    const blocksData = _.get(data, "data.attributes", {})
    const role1 = blocksData?.role1
    const role2 = blocksData?.role2

@@ -18,7 +18,6 @@ const LayoutBody = ({
    const { changeLang, changeDirection } = useGlobalContext()
    // ?? get the public-header from the layout data
    const headerBlock = data?.data?.attributes?.header?.find((block: any) => block.__component === "block.public-header")
-   const headerConfig = currentThemeComponents["block.public-header"]
 
    // ?? get the footer from the layout data
    const footerBlock = data?.data?.attributes?.footer?.find((block: any) => block.__component === "block.footer")

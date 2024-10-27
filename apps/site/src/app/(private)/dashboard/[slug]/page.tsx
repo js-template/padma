@@ -54,8 +54,6 @@ export default async function DynamicPrivatePages({
    const pageSlug = params?.slug
    const session = await auth()
 
-   // console.log("Page Slug", pageSlug)
-
    if (!session) {
       redirect("/login")
    }

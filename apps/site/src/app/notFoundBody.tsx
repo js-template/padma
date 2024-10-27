@@ -1,30 +1,43 @@
 "use client"
-import NextLink from "next/link"
 import { signOut, useSession } from "next-auth/react"
-import useThemeToggle from "@/next-theme/useThemeToggle"
 import { Box, Button, Container, Paper, Typography } from "@mui/material"
 import { useGlobalContext } from "@/context/store"
-import { SignOut } from "@/lib/user"
-import { getLanguageValue } from "@/utils/common"
-// FIXME: package should come from the theme
+import NextLink from "next/link"
 
-// current update at: 2021-10-20
-//commented out header and footer by @zelal
-//import { GoBackBtn, Header, Footer } from "@padma/metajob-ui"
+const NotFoundBody = ({
+   data,
+   currentThemeComponents,
+   children,
+   language
+}: {
+   data: any
+   currentThemeComponents: any
+   children: React.ReactNode
+   language: string
+}) => {
+   const { changeLang, changeDirection } = useGlobalContext()
+   // ?? get the public-header from the layout data
+   const headerBlock = data?.data?.attributes?.header?.find((block: any) => block.__component === "block.public-header")
 
-const NotFoundBody = () => {
-   const { layoutData } = useGlobalContext()
+   // ?? get the footer from the layout data
+   const footerBlock = data?.data?.attributes?.footer?.find((block: any) => block.__component === "block.footer")
 
    return (
       <main>
-         {/* <Header
-            useThemeToggle={useThemeToggle}
-            useGlobalContext={useGlobalContext}
-            signOut={signOut}
-            SignOut={SignOut}
-            useSession={useSession}
-            getLanguageValue={getLanguageValue}
-         /> */}
+         {headerBlock && (
+            <>
+               {currentThemeComponents["block.public-header"]
+                  ? currentThemeComponents["block.public-header"].component({
+                       data: headerBlock,
+                       language: language,
+                       changeLang: changeLang,
+                       changeDirection: changeDirection,
+                       useSession: useSession,
+                       signOut: signOut
+                    })
+                  : null}
+            </>
+         )}
          <Container maxWidth='lg'>
             <Box
                sx={{
@@ -74,15 +87,15 @@ const NotFoundBody = () => {
                         mt: 2,
                         gap: 2
                      }}>
-                     {/* <Button variant='contained' color='primary' component={NextLink} href='/'>
+                     <Button variant='contained' color='primary' component={NextLink} href='/'>
                         Return Home
                      </Button>
-                     <GoBackBtn /> */}
+                     <Button onClick={() => window.history.back()}>Go Back</Button>
                   </Box>
                </Paper>
             </Box>
          </Container>
-         {/* {layoutData && <Footer data={layoutData} />} */}
+         {footerBlock && <footer>{currentThemeComponents["block.footer"]?.component({ data: footerBlock })}</footer>}
       </main>
    )
 }

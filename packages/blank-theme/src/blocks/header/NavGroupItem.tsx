@@ -3,21 +3,11 @@ import { Box, Collapse, ListItem, ListItemButton, ListItemText, useTheme } from 
 import _ from "lodash"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import CIcon from "../../../components/common/icon"
+import CIcon from "../../components/common/icon"
 import NavLink from "./NavLink"
-import { MenuItemProps } from "./type"
+import { MenuItemProps } from "./types"
 
-const NavGroupItem = ({
-   item,
-   open,
-   direction,
-   signOut
-}: {
-   item: MenuItemProps
-   open: boolean
-   direction: "ltr" | "rtl"
-   signOut: () => Promise<void>
-}) => {
+const NavGroupItem = ({ item, open, direction }: { item: MenuItemProps; open: boolean; direction: "ltr" | "rtl" }) => {
    const theme = useTheme()
    const pathname = usePathname()
    const [openGroup, setOpenGroup] = useState<boolean>(false)
@@ -70,7 +60,7 @@ const NavGroupItem = ({
                   gap: 1,
                   alignItems: "center"
                }}>
-               {item?.icon ? <CIcon icon={item.icon} size={22} /> : null}
+               {/* {item?.icon ? <CIcon icon={item.icon} size={22} /> : null} */}
                <ListItemText
                   primary={item.label}
                   sx={{
@@ -108,7 +98,7 @@ const NavGroupItem = ({
                p: 0
             }}>
             {_.map(item?.child, (item: MenuItemProps, index: number) => {
-               return <NavLink key={index} item={item} open={open} isChild direction={direction} signOut={signOut} />
+               return <NavLink key={index} item={item} open={open} isChild direction={direction} />
             })}
          </Collapse>
       </ListItem>

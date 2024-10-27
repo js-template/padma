@@ -1,7 +1,7 @@
 import React from "react"
 import { find } from "@/lib/strapi"
 import { loadActiveTheme } from "../../../config/theme-loader"
-import LayoutBody from "./LayoutBody"
+import LayoutBody from "./body"
 import { getLanguageFromCookie } from "@/utils/language"
 
 export default async function PublicLayout(props: { children: React.ReactNode }) {

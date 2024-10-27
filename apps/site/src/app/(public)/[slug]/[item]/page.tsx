@@ -133,8 +133,6 @@ export default async function DynamicPages({ params }: Props) {
       locale: language ? [language] : ["en"]
    })
 
-   //console.log("singleData", singleData)
-
    if (!singleData) {
       return notFound()
    }
@@ -218,8 +216,6 @@ export async function generateStaticParams() {
             publicationState: "live",
             locale: ["en"]
          })
-
-         console.log("collectionData", collectionData, "collectionError", collectionError)
 
          // ?? Store all slugs in the params array
          const mappedSlugs = collectionData?.data?.map((single: any) => ({

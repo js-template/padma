@@ -1,8 +1,7 @@
 "use client"
 import { Fragment, useState, MouseEvent } from "react"
 import NextLink from "next/link"
-import Image from "next/image"
-import { usePathname, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import useSWR from "swr"
 import _ from "lodash"
 import MenuIcon from "@mui/icons-material/Menu"
@@ -18,21 +17,25 @@ import {
    AppBar,
    Box,
    Avatar,
-   Collapse,
-   List,
-   ListItem,
-   Popover,
    Stack,
    Tooltip,
    useTheme,
-   Theme
+   Theme,
+   styled,
+   useMediaQuery
 } from "@mui/material"
-import { hexToRGBA } from "../../lib/hex-to-rgba"
 import CIcon from "../../components/common/icon"
 import { fetcher } from "./hook"
 import { MenuItemProps, PublicHeaderProps } from "./types"
 import { useTheme as modeUseTheme } from "next-themes"
 import { getLanguageValue } from "../../utils"
+import MobileNav from "./MobileNav"
+
+const Image = styled("img")({
+   display: "block",
+   maxWidth: "200px",
+   height: "auto"
+})
 
 export const Header = ({ data, language, changeLang, changeDirection, useSession, signOut }: PublicHeaderProps) => {
    const theme = useTheme()
@@ -41,23 +44,24 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
    const toggleTheme = () => {
       setTheme(mode === "dark" ? "light" : "dark")
    }
-   const currentPath = usePathname()
+   const isTablet = useMediaQuery(theme.breakpoints.down("sm"))
    const { data: session, status } = useSession()
    const router = useRouter()
 
    const logo =
       mode === "light" ? data?.light_logo?.logo?.data?.attributes?.url : data?.dark_logo?.logo?.data?.attributes?.url
 
-   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
    // *** Language Menu ***
    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
    const openLang = Boolean(anchorEl)
 
+   // ?? mobile menu - state
+   const [show, setShow] = useState(false)
+
    // submenu -stated
    const [anchorElSub, setAnchorElSub] = useState<null | HTMLElement>(null)
    const [activeMenu, setActiveMenu] = useState<number | null>(null)
-   const [activeMobileMenu, setActiveMobileMenu] = useState<number | null>(null)
 
    //===start submenu functions
    // Handle opening the menu on hover
@@ -70,25 +74,6 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
       setAnchorElSub(null)
       setActiveMenu(null)
    }
-   // Only keep the menu open when the user hovers over the popover
-   const handleSubPopoverEnter = () => {
-      // Keep the menu open by resetting state
-      setActiveMenu(activeMenu)
-   }
-   // Close when the mouse leaves the Popover
-   const handleSubPopoverLeave = () => {
-      setAnchorElSub(null)
-      setActiveMenu(null)
-   }
-   // Toggle submenu for mobile view
-   const handleMenuMobileClick = (index: number) => {
-      setActiveMobileMenu((prev) => (prev === index ? null : index)) // Toggle submenu
-   }
-   // Close submenu for mobile view
-   const handleMenuMobileClose = () => {
-      setActiveMobileMenu(null)
-   }
-   //===close submenu functions
 
    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
       setAnchorEl(event.currentTarget)
@@ -98,8 +83,8 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
    }
    const langMenu = data?.langMenu ?? []
 
-   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
-      setAnchorElNav(event.currentTarget)
+   const handleOpenNavMenu = () => {
+      setShow(true)
    }
    const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
       if (data?.userMenu && data?.userMenu.length > 0) {
@@ -107,10 +92,6 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
       } else {
          router.push("/dashboard")
       }
-   }
-
-   const handleCloseNavMenu = () => {
-      setAnchorElNav(null)
    }
 
    const handleCloseUserMenu = () => {
@@ -142,6 +123,31 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
    const userAvatar = userData?.avatar?.url || ""
    const userName = session?.user?.name || ""
 
+   const handleMouseEnterButton = (event: React.MouseEvent<HTMLElement>, index: number) => {
+      setAnchorEl(event.currentTarget) // Open menu on button hover
+      setActiveMenu(index)
+   }
+
+   const handleMouseLeaveButton = (event: React.MouseEvent<HTMLElement>) => {
+      const relatedTarget = event.relatedTarget as HTMLElement
+
+      // Only close if the mouse isn't moving to the menu
+      if (!relatedTarget || !relatedTarget.closest("#dropdown-menu")) {
+         setAnchorEl(null)
+         setActiveMenu(null)
+      }
+   }
+
+   const handleMouseLeaveMenu = (event: React.MouseEvent<HTMLElement>) => {
+      const relatedTarget = event.relatedTarget as HTMLElement
+
+      // Only close if the mouse isn't moving to the button
+      if (!relatedTarget || !relatedTarget.closest("button")) {
+         setAnchorEl(null)
+         setActiveMenu(null)
+      }
+   }
+
    return (
       <AppBar
          position='static'
@@ -154,148 +160,80 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
          //elevation={4}
       >
          <Container maxWidth='lg' sx={{ width: "100%" }}>
-            <Toolbar disableGutters>
-               {logo && (
-                  <Box
-                     sx={{
-                        display: { xs: "none", md: "flex" }
-                     }}
-                     component={NextLink}
-                     href='/'>
-                     <Image src={logo} alt='logo' width={140} height={38} />
+            <Toolbar
+               disableGutters
+               sx={{
+                  justifyContent: "space-between"
+               }}>
+               <Box
+                  sx={{
+                     display: "flex",
+                     alignItems: "center",
+                     gap: 1
+                  }}>
+                  {logo && (
+                     <Box
+                        sx={{
+                           display: { xs: "none", md: "flex" }
+                        }}
+                        component={NextLink}
+                        href='/'>
+                        <Image
+                           src={logo}
+                           alt='logo'
+                           sx={{
+                              width: {
+                                 xs: data?.light_logo?.xs_width ?? "auto",
+                                 sm: data?.light_logo?.sm_width ?? "auto",
+                                 md: data?.light_logo?.md_width ?? "auto"
+                              }
+                           }}
+                        />
+                     </Box>
+                  )}
+                  {/* mobile menu  */}
+                  <Box sx={{ flex: "none", display: { xs: "flex", md: "none" } }}>
+                     <IconButton
+                        size='large'
+                        aria-label='account of current user'
+                        aria-controls='menu-appbar'
+                        aria-haspopup='true'
+                        onClick={handleOpenNavMenu}
+                        sx={{ color: (theme) => (show ? theme.palette.primary.main : theme.palette.text.primary) }}>
+                        <MenuIcon />
+                     </IconButton>
+                     <MobileNav
+                        changeDirection={changeDirection}
+                        changeLang={changeLang}
+                        lang={language}
+                        open={show}
+                        setOpen={setShow}
+                        headerData={data}
+                     />
                   </Box>
-               )}
-               {/* mobile menu  */}
-               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                  <IconButton
-                     size='large'
-                     aria-label='account of current user'
-                     aria-controls='menu-appbar'
-                     aria-haspopup='true'
-                     onClick={handleOpenNavMenu}
-                     sx={{ color: (theme) => theme.palette.primary.main }}>
-                     <MenuIcon />
-                  </IconButton>
-                  <Menu
-                     id='menu-appbar'
-                     anchorEl={anchorElNav}
-                     anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "left"
-                     }}
-                     keepMounted
-                     transformOrigin={{
-                        vertical: "top",
-                        horizontal: "left"
-                     }}
-                     open={Boolean(anchorElNav)}
-                     onClose={() => {
-                        handleCloseNavMenu()
-                        handleMenuMobileClose()
-                     }}
-                     sx={{
-                        display: { xs: "block", md: "none" }
-                     }}>
-                     {_.map(data?.MainMenu, (menuItem: MenuItemProps, index: number) => (
-                        <Box key={index}>
-                           <MenuItem
-                              onClick={() => {
-                                 if (menuItem?.child && menuItem?.child?.length) {
-                                    handleMenuMobileClick(index)
-                                 } else {
-                                    handleCloseNavMenu()
-                                 }
-                              }}>
-                              <Typography
-                                 display={"block"}
-                                 component={menuItem?.child && menuItem?.child?.length > 0 ? "div" : NextLink} // Use "div" if child items are present
-                                 href={
-                                    menuItem?.child && menuItem?.child?.length > 0 ? undefined : (menuItem?.link ?? "/")
-                                 }
-                                 target={
-                                    menuItem?.child && menuItem?.child?.length > 0
-                                       ? undefined
-                                       : (menuItem?.target ?? "_self")
-                                 }
-                                 sx={{
-                                    textDecoration: "none",
-                                    fontSize: 16,
-                                    fontWeight: 500,
-                                    "&:hover": {
-                                       color: "primary.main"
-                                    },
-                                    color:
-                                       currentPath === menuItem?.link
-                                          ? (theme: Theme) => theme.palette.primary.main
-                                          : (theme: Theme) => hexToRGBA(theme.palette.text.primary, 0.9),
-                                    display: "flex",
-                                    alignItems: "center"
-                                 }}>
-                                 {menuItem?.label ?? "No title"}
-                                 {menuItem?.child && menuItem?.child?.length > 0 && (
-                                    <CIcon
-                                       icon='ri:arrow-down-s-line'
-                                       sx={{
-                                          color: theme.palette.text.secondary,
-                                          transform: activeMobileMenu === index ? "rotate(180deg)" : "rotate(0deg)",
-                                          transition: theme.transitions.create("transform", {
-                                             duration: theme.transitions.duration.shortest
-                                          })
-                                       }}
-                                    />
-                                 )}
-                              </Typography>
-                           </MenuItem>
-                           {/* Submenu: Only display if there are child items */}
-                           {menuItem?.child && menuItem?.child?.length > 0 && (
-                              <Collapse in={activeMobileMenu === index} timeout='auto' unmountOnExit>
-                                 <List component='div' disablePadding>
-                                    {menuItem?.child?.map((childItem, childIndex) => (
-                                       <ListItem
-                                          key={childIndex}
-                                          onClick={() => {
-                                             handleCloseNavMenu()
-                                             handleMenuMobileClose()
-                                          }}
-                                          component={NextLink}
-                                          href={childItem?.link}
-                                          target={childItem?.target ?? "_self"}
-                                          sx={{
-                                             display: "flex",
-                                             justifyContent: "center",
-                                             color: theme.palette.text.secondary,
-                                             ":hover": {
-                                                background: theme.palette.background.default,
-                                                color: theme.palette.primary.main
-                                             }
-                                          }}>
-                                          <Typography
-                                             sx={{
-                                                fontSize: "16px",
-                                                fontWeight: 400
-                                             }}>
-                                             {childItem?.label ?? "No title"}
-                                          </Typography>
-                                       </ListItem>
-                                    ))}
-                                 </List>
-                              </Collapse>
-                           )}
-                        </Box>
-                     ))}
-                  </Menu>
+                  {logo && (
+                     <Box
+                        component={NextLink}
+                        href='/'
+                        sx={{
+                           display: { xs: "flex", md: "none" },
+                           flexGrow: 1,
+                           justifyContent: "center"
+                        }}>
+                        <Image
+                           src={logo}
+                           alt='logo'
+                           sx={{
+                              width: {
+                                 xs: data?.light_logo?.xs_width ?? "auto",
+                                 sm: data?.light_logo?.sm_width ?? "auto",
+                                 md: data?.light_logo?.md_width ?? "auto"
+                              }
+                           }}
+                        />
+                     </Box>
+                  )}
                </Box>
-               {logo && (
-                  <Box
-                     sx={{
-                        display: { xs: "none", sm: "flex", md: "none" },
-                        flexGrow: 1
-                     }}
-                     component={NextLink}
-                     href='/'>
-                     <Image src={logo} alt='logo' width={140} height={38} />
-                  </Box>
-               )}
                {/* desktop menu  */}
                <Box
                   sx={{
@@ -305,7 +243,7 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
                   }}>
                   <Stack direction={"row"} gap={3}>
                      {data?.MainMenu?.map((item: MenuItemProps, index: number) => (
-                        <Box key={index} sx={{ position: "relative" }} onMouseLeave={handleSubMenuClose}>
+                        <Box key={index} sx={{ position: "relative" }}>
                            {/* Main Menu Item */}
                            <Typography
                               // onMouseEnter={(event) => item?.child?.length && handleSubMenuOpen(event, index)}
@@ -322,7 +260,9 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
                                  display: "flex",
                                  alignItems: "center",
                                  cursor: "pointer"
-                              }}>
+                              }}
+                              onMouseEnter={(event: any) => handleMouseEnterButton(event, index)}
+                              onMouseLeave={handleMouseLeaveButton}>
                               {item?.label ?? "No title"}
                               {item?.child && item?.child?.length > 0 && (
                                  <CIcon
@@ -341,41 +281,52 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
 
                            {/* Submenu - Only show if there are child items */}
                            {item?.child && item?.child?.length > 0 && (
-                              <Popover
+                              <Menu
+                                 id='dropdown-menu'
+                                 anchorEl={anchorEl}
                                  open={activeMenu === index}
-                                 anchorEl={anchorElSub}
-                                 onClose={handleSubMenuClose}
-                                 anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                                 transformOrigin={{ vertical: "top", horizontal: "left" }}
-                                 onMouseEnter={handleSubPopoverEnter} // Keep the popover open when hovering
-                                 onMouseLeave={handleSubPopoverLeave} // Close when mouse leaves popover
+                                 onClose={handleSubMenuClose} // Close menu if focus lost
+                                 MenuListProps={{
+                                    onMouseLeave: handleMouseLeaveMenu // Close when mouse leaves the menu
+                                 }}
                                  sx={{
-                                    mt: 1,
-                                    p: 1,
-                                    boxShadow: 3
+                                    mt: "18px",
+                                    "& .MuiPaper-root": {
+                                       minWidth: "200px",
+                                       border: "1px solid",
+                                       borderColor: theme.palette.divider,
+                                       borderRadius: "6px",
+                                       background: theme.palette.background.default,
+                                       boxShadow: "0px 8px 28px -4px rgba(20, 28, 46, 0.08)"
+                                    }
+                                 }}
+                                 anchorOrigin={{
+                                    vertical: "bottom",
+                                    horizontal: "left"
+                                 }}
+                                 transformOrigin={{
+                                    vertical: "top",
+                                    horizontal: "left"
                                  }}>
-                                 <List sx={{ minWidth: "180px" }}>
-                                    {item.child.map((child, childIndex) => (
-                                       <ListItem
-                                          onClick={handleSubMenuClose}
-                                          key={childIndex}
-                                          component={NextLink}
-                                          href={child?.link}
-                                          target={child?.target ?? "_self"}
-                                          sx={{
-                                             fontSize: "16px",
-                                             fontWeight: 400,
-                                             color: theme.palette.text.primary,
-                                             ":hover": {
-                                                background: theme.palette.background.default,
-                                                color: theme.palette.primary.main
-                                             }
-                                          }}>
-                                          {child.label ?? "No title"}
-                                       </ListItem>
-                                    ))}
-                                 </List>
-                              </Popover>
+                                 {_.map(item?.child, (childItem, childIndex) => (
+                                    <MenuItem
+                                       key={childIndex}
+                                       onClick={handleSubMenuClose}
+                                       component={NextLink}
+                                       href={childItem?.link}
+                                       target={childItem?.target ?? "_self"}
+                                       sx={{
+                                          gap: 1,
+                                          color: theme.palette.text.primary,
+                                          ":hover": {
+                                             background: theme.palette.background.default,
+                                             color: theme.palette.primary.main
+                                          }
+                                       }}>
+                                       {childItem?.label ?? "No title"}
+                                    </MenuItem>
+                                 ))}
+                              </Menu>
                            )}
                         </Box>
                      ))}
@@ -386,99 +337,103 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
                   {status === "unauthenticated" && (
                      // <Stack direction={"row"} gap={2}>
                      <Stack direction={"row"} gap={1.5}>
-                        {/* language-button  */}
-                        {langMenu.length > 1 && (
-                           <Box>
-                              <Button
-                                 id='basic-button'
-                                 aria-controls={openLang ? "basic-menu" : undefined}
-                                 aria-haspopup='true'
-                                 aria-expanded={openLang ? "true" : undefined}
-                                 color='inherit'
-                                 variant='text'
-                                 onClick={handleClick}
-                                 sx={{
-                                    textTransform: "capitalize",
-                                    px: 0,
-                                    display: "flex",
-                                    fontSize: "1rem",
-                                    gap: 1,
-                                    color: theme.palette.text.primary
-                                 }}>
-                                 <CIcon
-                                    icon='tabler:language'
-                                    sx={{
-                                       fontSize: "1.25rem"
-                                    }}
-                                 />
-                                 <CIcon
-                                    icon='ri:arrow-down-s-line'
-                                    sx={{
-                                       color: theme.palette.text.primary,
-                                       transform: openLang ? "rotate(180deg)" : "rotate(0deg)",
-                                       transition: theme.transitions.create("transform", {
-                                          duration: theme.transitions.duration.shortest
-                                       })
-                                    }}
-                                 />
-                              </Button>
-                              <Menu
-                                 id='basic-menu'
-                                 anchorEl={anchorEl}
-                                 open={openLang}
-                                 onClose={handleClose}
-                                 MenuListProps={{
-                                    "aria-labelledby": "basic-button"
-                                 }}>
-                                 {_.map(langMenu, (lang: MenuItemProps, index: number) => (
-                                    <MenuItem
-                                       onClick={() => {
-                                          if (lang?.link === "ar") {
-                                             if (changeDirection) {
-                                                changeDirection("rtl")
-                                             }
-                                             changeLang(lang?.link ?? "")
-                                             window.location.reload()
-                                          } else if (lang?.link === "en" || lang?.link === "es") {
-                                             if (changeDirection) {
-                                                changeDirection("ltr")
-                                             }
-                                             changeLang(lang?.link ?? "")
-                                             window.location.reload()
-                                          }
-                                          handleClose()
-                                       }}
+                        {!isTablet && (
+                           <>
+                              {/* language-button  */}
+                              {langMenu.length > 1 && (
+                                 <Box>
+                                    <Button
+                                       id='basic-button'
+                                       aria-controls={openLang ? "basic-menu" : undefined}
+                                       aria-haspopup='true'
+                                       aria-expanded={openLang ? "true" : undefined}
+                                       color='inherit'
+                                       variant='text'
+                                       onClick={handleClick}
                                        sx={{
-                                          color: theme.palette.text.primary,
-                                          px: 2,
-                                          gap: 1.5,
-                                          textAlign: "left",
-                                          ":hover": {
-                                             background: theme.palette.background.default,
-                                             color: theme.palette.primary.main
-                                          }
-                                       }}
-                                       key={index}>
-                                       {lang?.link && (
-                                          <CIcon
-                                             icon={lang?.link}
-                                             size={22}
-                                             sx={{ color: theme.palette.text.primary + "60" }}
-                                          />
-                                       )}
-                                       {lang?.label ?? "English"}
-                                    </MenuItem>
-                                 ))}
-                              </Menu>
-                           </Box>
-                        )}
+                                          textTransform: "capitalize",
+                                          px: 0,
+                                          display: "flex",
+                                          fontSize: "1rem",
+                                          gap: 1,
+                                          color: theme.palette.text.primary
+                                       }}>
+                                       <CIcon
+                                          icon='tabler:language'
+                                          sx={{
+                                             fontSize: "1.25rem"
+                                          }}
+                                       />
+                                       <CIcon
+                                          icon='ri:arrow-down-s-line'
+                                          sx={{
+                                             color: theme.palette.text.primary,
+                                             transform: openLang ? "rotate(180deg)" : "rotate(0deg)",
+                                             transition: theme.transitions.create("transform", {
+                                                duration: theme.transitions.duration.shortest
+                                             })
+                                          }}
+                                       />
+                                    </Button>
+                                    <Menu
+                                       id='basic-menu'
+                                       anchorEl={anchorEl}
+                                       open={openLang}
+                                       onClose={handleClose}
+                                       MenuListProps={{
+                                          "aria-labelledby": "basic-button"
+                                       }}>
+                                       {_.map(langMenu, (lang: MenuItemProps, index: number) => (
+                                          <MenuItem
+                                             onClick={() => {
+                                                if (lang?.link === "ar") {
+                                                   if (changeDirection) {
+                                                      changeDirection("rtl")
+                                                   }
+                                                   changeLang(lang?.link ?? "")
+                                                   window.location.reload()
+                                                } else if (lang?.link === "en" || lang?.link === "es") {
+                                                   if (changeDirection) {
+                                                      changeDirection("ltr")
+                                                   }
+                                                   changeLang(lang?.link ?? "")
+                                                   window.location.reload()
+                                                }
+                                                handleClose()
+                                             }}
+                                             sx={{
+                                                color: theme.palette.text.primary,
+                                                px: 2,
+                                                gap: 1.5,
+                                                textAlign: "left",
+                                                ":hover": {
+                                                   background: theme.palette.background.default,
+                                                   color: theme.palette.primary.main
+                                                }
+                                             }}
+                                             key={index}>
+                                             {lang?.link && (
+                                                <CIcon
+                                                   icon={lang?.link}
+                                                   size={22}
+                                                   sx={{ color: theme.palette.text.primary + "60" }}
+                                                />
+                                             )}
+                                             {lang?.label ?? "English"}
+                                          </MenuItem>
+                                       ))}
+                                    </Menu>
+                                 </Box>
+                              )}
 
-                        {data?.dark_mode && (
-                           <IconButton
-                              sx={{ ml: 1, color: (theme) => theme.palette.text.primary }}
-                              onClick={toggleTheme}>
-                              <CIcon icon={mode === "light" ? "ri:moon-fill" : "ri:sun-fill"} />
-                           </IconButton>
+                              {data?.dark_mode && (
+                                 <IconButton
+                                    sx={{ ml: 1, color: (theme) => theme.palette.text.primary }}
+                                    onClick={toggleTheme}>
+                                    <CIcon icon={mode === "light" ? "ri:moon-fill" : "ri:sun-fill"} />
+                                 </IconButton>
+                              )}
+                           </>
                         )}
                         {data?.Button?.map((button: MenuItemProps, index: number) => (
                            <Button
@@ -501,100 +456,103 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
                         <Stack direction='row' gap={1.5} alignItems={"center"}>
                            {/* <CIcon icon='iconamoon:search-light' color='text.disabled' />
                              <CIcon icon='carbon:notification-new' color='text.disabled' /> */}
-
-                           {/* language-button  */}
-                           {langMenu.length > 1 && (
-                              <Box>
-                                 <Button
-                                    id='basic-button'
-                                    aria-controls={openLang ? "basic-menu" : undefined}
-                                    aria-haspopup='true'
-                                    aria-expanded={openLang ? "true" : undefined}
-                                    color='inherit'
-                                    variant='text'
-                                    onClick={handleClick}
-                                    sx={{
-                                       textTransform: "capitalize",
-                                       display: "flex",
-                                       fontSize: "1rem",
-                                       gap: 1,
-                                       color: theme.palette.text.primary
-                                    }}>
-                                    <CIcon
-                                       icon='tabler:language'
-                                       sx={{
-                                          fontSize: "1.25rem"
-                                       }}
-                                    />
-                                    {getLanguageValue(language as any) || "English"}
-                                    <CIcon
-                                       icon='ri:arrow-down-s-line'
-                                       sx={{
-                                          color: theme.palette.text.primary,
-                                          transform: openLang ? "rotate(180deg)" : "rotate(0deg)",
-                                          transition: theme.transitions.create("transform", {
-                                             duration: theme.transitions.duration.shortest
-                                          })
-                                       }}
-                                    />
-                                 </Button>
-                                 <Menu
-                                    id='basic-menu'
-                                    anchorEl={anchorEl}
-                                    open={openLang}
-                                    onClose={handleClose}
-                                    MenuListProps={{
-                                       "aria-labelledby": "basic-button"
-                                    }}>
-                                    {_.map(langMenu, (lang, index) => (
-                                       <MenuItem
-                                          onClick={() => {
-                                             if (lang?.link === "ar") {
-                                                if (changeDirection) {
-                                                   changeDirection("rtl")
-                                                }
-                                                changeLang(lang?.link)
-                                                window.location.reload()
-                                             } else if (lang?.link === "en" || lang?.link === "es") {
-                                                if (changeDirection) {
-                                                   changeDirection("ltr")
-                                                }
-                                                changeLang(lang?.link)
-                                                window.location.reload()
-                                             }
-                                             handleClose()
-                                          }}
+                           {!isTablet && (
+                              <>
+                                 {/* language-button  */}
+                                 {langMenu.length > 1 && (
+                                    <Box>
+                                       <Button
+                                          id='basic-button'
+                                          aria-controls={openLang ? "basic-menu" : undefined}
+                                          aria-haspopup='true'
+                                          aria-expanded={openLang ? "true" : undefined}
+                                          color='inherit'
+                                          variant='text'
+                                          onClick={handleClick}
                                           sx={{
-                                             color: theme.palette.text.primary,
-                                             px: 2,
-                                             gap: 1.5,
-                                             textAlign: "left",
-                                             ":hover": {
-                                                background: theme.palette.background.default,
-                                                color: theme.palette.primary.main
-                                             }
-                                          }}
-                                          key={index}>
-                                          {lang?.link && (
-                                             <CIcon
-                                                icon={lang?.link}
-                                                size={22}
-                                                sx={{ color: theme.palette.text.primary + "60" }}
-                                             />
-                                          )}
-                                          {lang?.label ?? "English"}
-                                       </MenuItem>
-                                    ))}
-                                 </Menu>
-                              </Box>
-                           )}
+                                             textTransform: "capitalize",
+                                             display: "flex",
+                                             fontSize: "1rem",
+                                             gap: 1,
+                                             color: theme.palette.text.primary
+                                          }}>
+                                          <CIcon
+                                             icon='tabler:language'
+                                             sx={{
+                                                fontSize: "1.25rem"
+                                             }}
+                                          />
+                                          {getLanguageValue(language as any) || "English"}
+                                          <CIcon
+                                             icon='ri:arrow-down-s-line'
+                                             sx={{
+                                                color: theme.palette.text.primary,
+                                                transform: openLang ? "rotate(180deg)" : "rotate(0deg)",
+                                                transition: theme.transitions.create("transform", {
+                                                   duration: theme.transitions.duration.shortest
+                                                })
+                                             }}
+                                          />
+                                       </Button>
+                                       <Menu
+                                          id='basic-menu'
+                                          anchorEl={anchorEl}
+                                          open={openLang}
+                                          onClose={handleClose}
+                                          MenuListProps={{
+                                             "aria-labelledby": "basic-button"
+                                          }}>
+                                          {_.map(langMenu, (lang, index) => (
+                                             <MenuItem
+                                                onClick={() => {
+                                                   if (lang?.link === "ar") {
+                                                      if (changeDirection) {
+                                                         changeDirection("rtl")
+                                                      }
+                                                      changeLang(lang?.link)
+                                                      window.location.reload()
+                                                   } else if (lang?.link === "en" || lang?.link === "es") {
+                                                      if (changeDirection) {
+                                                         changeDirection("ltr")
+                                                      }
+                                                      changeLang(lang?.link)
+                                                      window.location.reload()
+                                                   }
+                                                   handleClose()
+                                                }}
+                                                sx={{
+                                                   color: theme.palette.text.primary,
+                                                   px: 2,
+                                                   gap: 1.5,
+                                                   textAlign: "left",
+                                                   ":hover": {
+                                                      background: theme.palette.background.default,
+                                                      color: theme.palette.primary.main
+                                                   }
+                                                }}
+                                                key={index}>
+                                                {lang?.link && (
+                                                   <CIcon
+                                                      icon={lang?.link}
+                                                      size={22}
+                                                      sx={{ color: theme.palette.text.primary + "60" }}
+                                                   />
+                                                )}
+                                                {lang?.label ?? "English"}
+                                             </MenuItem>
+                                          ))}
+                                       </Menu>
+                                    </Box>
+                                 )}
 
-                           {data?.dark_mode && (
-                              <IconButton
-                                 sx={{ ml: 1, color: (theme) => theme.palette.text.primary }}
-                                 onClick={toggleTheme}>
-                                 <CIcon icon={mode === "light" ? "ri:moon-fill" : "ri:sun-fill"} />
-                              </IconButton>
+                                 {data?.dark_mode && (
+                                    <IconButton
+                                       sx={{ ml: 1, color: (theme) => theme.palette.text.primary }}
+                                       onClick={toggleTheme}>
+                                       <CIcon icon={mode === "light" ? "ri:moon-fill" : "ri:sun-fill"} />
+                                    </IconButton>
+                                 )}
+                              </>
                            )}
                            {/* notification-button  */}
                            {data?.notification && (
@@ -675,7 +633,7 @@ export const Header = ({ data, language, changeLang, changeDirection, useSession
                                     minWidth: "180px",
                                     border: "1px solid",
                                     borderColor: theme.palette.divider,
-                                    borderRadius: "12px",
+                                    borderRadius: "6px",
                                     background: theme.palette.background.default,
                                     boxShadow: "0px 8px 28px -4px rgba(20, 28, 46, 0.08)"
                                  }
