@@ -2,7 +2,7 @@
    "name": "@padma/frontend",
    "version": "1.0.0-beta",
    "private": true,
-   "description": "The Next.js Framework for Strapi",
+   "description": "Padma- Nextjs frontend",
    "license": "MIT",
    "author": {
       "name": "JS Template",
