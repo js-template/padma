@@ -2,8 +2,8 @@
    "name": "@padma/blank-theme",
    "version": "0.0.1",
    "private": true,
-   "main": "dist/index.tsx",
-   "types": "dist/types/index.d.ts",
+   "main": "src/index.tsx",
+   "types": "src/types/index.d.ts",
    "keywords": [],
    "license": "EULA",
    "scripts": {
