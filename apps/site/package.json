@@ -1,6 +1,6 @@
 {
    "name": "@padma/frontend",
-   "version": "1.0.0-beta",
+   "version": "0.0.2",
    "private": true,
    "description": "Padma- Nextjs frontend",
    "license": "MIT",
