@@ -1,22 +1,6 @@
 
 # Padma- The Next.js Framework for Strapi 
 
-> # 📢 Project Release Notice
-> 
-> This project is currently released as a **Job Board Solution** under an [EULA License](./EULA.md).
-> 
-> For now, it is available only for **job board use cases**, but it can be adapted for **multi-purpose solutions** soon.
-> 
-> ---
-> 
-> 🔓 **Open-Source Announcement**:  
-> This project will be **open-sourced soon**! Stay tuned for updates on its release.
-
-
-## **What is Padma?**
-#### Introduction:
-Padma is the easiest way to create lightning-fast websites using Strapi and Next.js. It's open source and free to use.
-
 
 ## How Padma Works:
 
