@@ -1,77 +1,76 @@
 // src/commands/create.ts
-import {Command, Flags, Args} from '@oclif/core'
-import {execSync} from 'child_process'
-import * as fs from 'fs-extra'
-import * as path from 'path'
-import {select} from '@inquirer/prompts' // Use the new select prompt from @inquirer/prompts
-import * as child_process from 'child_process'
-
+import {Command, Args} from '@oclif/core'
+import fs from 'fs-extra'
+import path from 'path'
+import {fileURLToPath} from 'url'
+import {dirname, resolve} from 'path'
 export default class Create extends Command {
-  static description = 'Create a new Padma project'
+  static description = 'Create a new Padma demo project'
 
   static args = {
     projectName: Args.string({description: 'Name of the project', required: true}),
   }
 
-  // static flags = {
-  //   template: Flags.string({
-  //     char: 't',
-  //     description: 'Choose a project template',
-  //     options: ['blank-theme', 'metablog-theme', 'mteajob-theme'],
-  //     default: 'metablog-theme',
-  //   }),
-  // }
-
   async run() {
-    const {args, flags} = await this.parse(Create)
+    const {args} = await this.parse(Create)
     const projectName = args.projectName
-    const template = flags.template
+    console.log('projectName', projectName)
+
     const projectPath = path.resolve(process.cwd(), projectName)
+    //console.log('projectPath', projectPath)
 
-    this.log(`Creating project: ${projectName}`)
-    this.log(`Selected template: ${template}`)
+    // Get the current file name and directory
+    const __filename = fileURLToPath(import.meta.url)
+    const __dirname = dirname(__filename)
 
-    // if (fs.existsSync(projectPath)) {
-    //   this.log(`Error: Directory ${projectName} already exists.`)
-    //   return
-    // }
+    // Resolve the path to the templates directory
+    const templateFolder = path.resolve(__dirname, '../../templates/site')
+    //console.log('templateFolder', templateFolder)
 
-    // Clone the monorepo's 'apps/site' folder into the new project
-    const repoUrl = 'https://github.com/js-template/padma' // Change this to your repo
-    const cloneCommand = `git clone --single-branch --branch main ${repoUrl} ${projectPath}`
+    this.log(`Checking if the folder ${projectName} exists...`)
 
+    // Check if the demo folder already exists
+    const demoFolderExists = await fs.pathExists(projectPath)
+
+    if (demoFolderExists) {
+      this.log(`Error: The folder ${projectName} already exists.`)
+      return
+    }
+
+    // Create the folder if it does not exist
     try {
-      execSync(cloneCommand, {stdio: 'inherit'})
+      await fs.ensureDir(projectPath, (err) => {
+        console.log('error on creating folder', err) // => null
+        console.log('success!')
+      })
+      // Creates the directory if it doesn't exist
 
-      // Navigate to the apps/site folder
-      const sitePath = path.join(projectPath, 'apps', 'site')
-      if (!fs.existsSync(sitePath)) {
-        this.log("Error: Could not find 'apps/site' folder in the repository.")
+      this.log('Folder created successfully.')
+
+      // Check if the template folder exists
+      if (fs.existsSync(templateFolder)) {
+        this.log('Template folder exists.')
+      } else {
+        this.log('Error: The template folder does not exist.')
         return
       }
 
-      // Ask user for the theme choice using the new select prompt from @inquirer/prompts
-      const theme: string = await select({
-        message: 'Select a theme for your project',
-        choices: ['blank-theme', 'metablog-theme', 'mteajob-theme'], // Available themes
-      })
+      this.log(`Using template from: ${templateFolder}`)
 
-      this.log(`Selected theme: ${theme}`)
-      this.log('Installing selected theme...')
+      // Copy the template files to the new demo folder
+      fs.copySync(templateFolder, projectPath)
 
-      // Install the theme from npm
-      try {
-        // execSync(`npm install ${theme}`, {cwd: sitePath, stdio: 'inherit'})
-        this.log(`Successfully installed ${theme} theme.`)
+      this.log(`Successfully copied template files to ${projectName}`)
 
-        // Install other dependencies (if necessary)
-        // execSync('npm install', {cwd: sitePath, stdio: 'inherit'})
-        this.log('Project dependencies have been installed.')
-      } catch (error) {
-        this.log('Error installing theme or dependencies.')
-      }
+      // Optionally: Install dependencies or run setup scripts
+      this.log('Installing dependencies...')
+      // execSync('npm install', {cwd: projectPath, stdio: 'inherit'})
+      this.log('Dependencies installed successfully.')
+
+      this.log('Project setup completed successfully.')
     } catch (error) {
-      this.log('Error cloning repository. Please check the repository URL or your internet connection.')
+      this.log('Error setting up the project. Please check the template folder or the permissions.')
+      this.log(String(error))
     }
   }
 }

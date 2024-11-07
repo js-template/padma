@@ -1,12 +1,12 @@
 {
   "name": "create-padma",
   "description": "A new CLI generated with oclif",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "author": "Zelal Hossain",
   "bin": {
     "create-padma": "./bin/run.js"
   },
-  "bugs": "https://github.com/https://github.com/js-template/padma/JS Template/issues",
+  "bugs": "https://github.com/js-template/padma",
   "dependencies": {
     "@inquirer/prompts": "^7.0.1",
     "@oclif/core": "^4",
@@ -42,9 +42,9 @@
     "/dist",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/https://github.com/js-template/padma/JS Template",
+  "homepage": "https://github.com/js-template/padma/",
   "keywords": [
-    "oclif"
+    "padma"
   ],
   "license": "MIT",
   "main": "dist/index.js",
@@ -64,7 +64,7 @@
       }
     }
   },
-  "repository": "https://github.com/js-template/padma/JS Template",
+  "repository": "https://github.com/js-template/padma/",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
