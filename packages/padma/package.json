@@ -1,10 +1,10 @@
 {
-  "name": "create-padma",
+  "name": "@padma/padma",
   "description": "Padma- Nextjs Framework for Strapi",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "author": "Zelal Hossain",
   "bin": {
-    "create-padma": "bin/run.js"
+    "padma": "./bin/run.js"
   },
   "bugs": "https://github.com/js-template/padma",
   "dependencies": {
@@ -12,6 +12,7 @@
     "@oclif/core": "^4",
     "@oclif/plugin-help": "^6",
     "@oclif/plugin-plugins": "^5",
+    "@padma/padma": "^0.0.1-alpha.3",
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.7",
     "fs-extra": "^11.2.0",
@@ -50,8 +51,8 @@
   "license": "MIT",
   "main": "dist/index.js",
   "oclif": {
-    "bin": "create-padma",
-    "dirname": "create-padma",
+    "bin": "padma",
+    "dirname": "padma",
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",
