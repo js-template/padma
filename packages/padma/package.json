@@ -1,5 +1,5 @@
 {
-  "name": "@padma/padma",
+  "name": "@padmadev/padma",
   "description": "Padma- Nextjs Framework for Strapi",
   "version": "0.0.1-alpha.4",
   "author": "Zelal Hossain",
@@ -12,7 +12,6 @@
     "@oclif/core": "^4",
     "@oclif/plugin-help": "^6",
     "@oclif/plugin-plugins": "^5",
-    "@padma/padma": "^0.0.1-alpha.3",
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.7",
     "fs-extra": "^11.2.0",
