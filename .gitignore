@@ -7,6 +7,8 @@ node_modules
 packages/metajob-theme
 .npmrc
 .strapi
+scripts
+
 # testing
 bin
 .bin
