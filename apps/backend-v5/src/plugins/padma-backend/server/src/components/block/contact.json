@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_block_contacts",
+  "info": {
+    "displayName": "Contact",
+    "icon": "phone",
+    "description": ""
+  },
+  "category": "block",
+  "modelName": "contact",
+  "globalId": "ComponentsBlockContacts",
+  "uid": "block.contact",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "friendlyAddress": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    }
+  }
+}

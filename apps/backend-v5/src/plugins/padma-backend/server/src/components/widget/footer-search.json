@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_widget_footer_searches",
+  "info": {
+    "displayName": "Footer Search",
+    "description": ""
+  },
+  "category": "widget",
+  "modelName": "footerSearch",
+  "globalId": "ComponentsWidgetFooterSearches",
+  "uid": "widget.footerSearch",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "files", "videos", "audios"]
+    },
+    "title": {
+      "type": "string"
+    },
+    "search": {
+      "type": "component",
+      "repeatable": false,
+      "component": "forms.seaech-form"
+    }
+  }
+}

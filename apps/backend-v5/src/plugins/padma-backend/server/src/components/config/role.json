@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_config_roles",
+  "info": {
+    "displayName": "role",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "role": {
+      "type": "enumeration",
+      "enum": [
+        "employer",
+        "candidate",
+        "authenticated"
+      ]
+    }
+  }
+}

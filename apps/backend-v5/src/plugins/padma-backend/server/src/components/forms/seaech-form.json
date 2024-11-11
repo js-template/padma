@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_forms_seaech_forms",
+  "info": {
+    "displayName": "Search",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "searchByWords": {
+      "type": "string"
+    },
+    "searchByLocation": {
+      "type": "string"
+    },
+    "button": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "searchByCategory": {
+      "type": "string"
+    }
+  }
+}

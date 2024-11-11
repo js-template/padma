@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_shared_social_medias",
+  "info": {
+    "displayName": "Social Medias",
+    "icon": "earth"
+  },
+  "category": "shared",
+  "modelName": "social-medias",
+  "globalId": "ComponentsSharedSocialMedias",
+  "uid": "shared.social-medias",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "facebook",
+        "instagram",
+        "twitter",
+        "linkedin",
+        "snapchat",
+        "tiktok",
+        "pinterest",
+        "reddit",
+        "tumblr",
+        "youtube",
+        "whatsapp",
+        "wechat",
+        "discord",
+        "telegram",
+        "viber",
+        "line",
+        "kik",
+        "clubhouse"
+      ],
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_header_breadcrumbs",
+  "info": {
+    "displayName": "Breadcrumbs",
+    "icon": "manyWays",
+    "description": ""
+  },
+  "category": "header",
+  "modelName": "breadcrumbs",
+  "globalId": "ComponentsHeaderBreadcrumbs",
+  "uid": "header.breadcrumbs",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "showBreadcrumb": {
+      "type": "boolean"
+    },
+    "style": {
+      "type": "json"
+    },
+    "background_image": {
+      "allowedTypes": ["images"],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
