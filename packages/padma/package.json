@@ -1,7 +1,7 @@
 {
   "name": "@padmadev/padma",
   "description": "Padma- Nextjs Framework for Strapi",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "author": "Zelal Hossain",
   "bin": {
     "padma": "./bin/run.js"
