@@ -1,5 +1,4 @@
 {
-  "kind": "collectionType",
   "collectionName": "categories",
   "info": {
     "singularName": "category",
@@ -27,5 +26,6 @@
     "description": {
       "type": "text"
     }
-  }
+  },
+  "kind": "collectionType"
 }

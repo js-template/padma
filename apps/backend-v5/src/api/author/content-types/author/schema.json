@@ -1,5 +1,4 @@
 {
-  "kind": "collectionType",
   "collectionName": "authors",
   "info": {
     "singularName": "author",
@@ -19,7 +18,11 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images", "files", "videos"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
     },
     "email": {
       "type": "string"
@@ -30,5 +33,6 @@
       "target": "api::article.article",
       "mappedBy": "author"
     }
-  }
+  },
+  "kind": "collectionType"
 }
