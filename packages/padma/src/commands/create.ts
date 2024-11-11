@@ -33,17 +33,13 @@ export default class Create extends Command {
     const projectPath = path.resolve(process.cwd(), projectName)
     this.log(`Project path: ${projectPath}`)
 
-    // Get the current file name and directory
     const __filename = fileURLToPath(import.meta.url)
     const __dirname = dirname(__filename)
 
-    // Resolve the path to the templates directory
     const templateFolder = path.resolve(__dirname, '../../templates/site')
-
     this.log(`Template path: ${templateFolder}`)
     this.log(`Checking if the folder ${projectName} exists...`)
 
-    // Check if the project folder already exists
     const projectFolderExists = await fs.pathExists(projectPath)
 
     if (projectFolderExists && !force) {
@@ -58,24 +54,18 @@ export default class Create extends Command {
         name: 'packageManager',
         message: 'Choose a package manager:',
         choices: ['npm', 'yarn', 'pnpm'],
-        default: 'pnpm',
+        default: 'npm',
       },
       {
         type: 'list',
         name: 'themePackage',
         message: 'Choose a theme to install:',
-        choices: [
-          'blank-theme',
-          'river-theme',
-          'metablog-theme',
-          // Add more theme options here
-        ],
+        choices: ['blank-theme'],
         default: selectedTheme || 'blank-theme', // Use flag theme if provided
       },
     ])
 
     try {
-      // Create the folder if it does not exist
       await fs.ensureDir(projectPath)
       this.log('Folder created successfully.')
 
@@ -90,9 +80,28 @@ export default class Create extends Command {
       fs.copySync(templateFolder, projectPath)
       this.log(`Successfully copied template files to ${projectName}`)
 
-      // Install dependencies with the chosen package manager
+      // Modify package.json to set the name field
+      const packageJsonPath = path.join(projectPath, 'package.json')
+      if (await fs.pathExists(packageJsonPath)) {
+        const packageJson = await fs.readJson(packageJsonPath)
+        packageJson.name = projectName
+        await fs.writeJson(packageJsonPath, packageJson, {spaces: 2})
+        this.log('Updated package.json with the project name.')
+      }
+
+      // Install dependencies with the chosen package manager and generate lock file
       this.log('Installing dependencies...')
-      execSync(`${packageManager} install`, {cwd: projectPath, stdio: 'inherit'})
+
+      if (packageManager === 'yarn') {
+        fs.writeFileSync(path.join(projectPath, 'yarn.lock'), '')
+        execSync('yarn add', {cwd: projectPath, stdio: 'inherit'})
+      } else if (packageManager === 'pnpm') {
+        fs.writeFileSync(path.join(projectPath, 'pnpm-lock.yaml'), '')
+        execSync('pnpm install', {cwd: projectPath, stdio: 'inherit'})
+      } else {
+        fs.writeFileSync(path.join(projectPath, 'package-lock.json'), '')
+        execSync('npm install', {cwd: projectPath, stdio: 'inherit'})
+      }
 
       this.log('Dependencies installed successfully.')
       this.log('Project setup completed successfully.')

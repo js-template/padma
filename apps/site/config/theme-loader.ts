@@ -7,8 +7,6 @@ export const loadActiveTheme = async () => {
    // @ts-ignore
    const { getPublicComponents, getPrivateComponents } = await import("@padmadev/blank-theme") // Use the activeTheme variable
 
-   // Set the activeThemeComponents to the loaded components
-   const activeThemeComponents = getPublicComponents
    return { getPrivateComponents, getPublicComponents }
 }
 
