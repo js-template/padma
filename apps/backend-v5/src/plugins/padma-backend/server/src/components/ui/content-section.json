@@ -1,0 +1,32 @@
+{
+    "collectionName": "ui_content_section",
+    "info": {
+        "displayName": "Content Section",
+        "icon": "file",
+        "description": "Content section for the article"
+    },
+    "category": "ui",
+    "modelName": "content-section",
+    "globalId": "UiContentSection",
+    "uid": "ui.content-section",
+    "modelType": "component",
+    "options": {},
+    "pluginOptions": {},
+    "attributes": {
+        "heading": {
+            "type": "string"
+        },
+        "body": {
+            "type": "richtext"
+        },
+        "image": {
+            "type": "media",
+
+            "allowedTypes": ["images"]
+        },
+        "demo": {
+            "type": "component",
+            "component": "ui.author-info"
+        }
+    }
+}

@@ -62,6 +62,35 @@ export interface SharedSlider extends Struct.ComponentSchema {
   };
 }
 
+export interface UiAuthorInfo extends Struct.ComponentSchema {
+  collectionName: 'ui_author-info';
+  info: {
+    description: 'Author details for the article';
+    displayName: 'Author Info';
+    icon: 'user';
+  };
+  attributes: {
+    bio: Schema.Attribute.Text;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    profilePicture: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface UiContentSection extends Struct.ComponentSchema {
+  collectionName: 'ui_content_section';
+  info: {
+    description: 'Content section for the article';
+    displayName: 'Content Section';
+    icon: 'file';
+  };
+  attributes: {
+    body: Schema.Attribute.RichText;
+    demo: Schema.Attribute.Component<'ui.author-info', false>;
+    heading: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -70,6 +99,8 @@ declare module '@strapi/strapi' {
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
       'shared.slider': SharedSlider;
+      'ui.author-info': UiAuthorInfo;
+      'ui.content-section': UiContentSection;
     }
   }
 }
