@@ -1,7 +1,7 @@
 {
   "name": "@padmadev/padma",
   "description": "Padma- Nextjs Framework for Strapi",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.6",
   "author": "Zelal Hossain",
   "bin": {
     "padma": "./bin/run.js"
@@ -41,7 +41,8 @@
   "files": [
     "/bin",
     "/dist",
-    "/oclif.manifest.json"
+    "/oclif.manifest.json",
+    "/templates"
   ],
   "homepage": "https://github.com/js-template/padma/",
   "keywords": [
