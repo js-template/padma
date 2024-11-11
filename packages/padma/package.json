@@ -1,7 +1,7 @@
 {
   "name": "@padmadev/padma",
   "description": "Padma- Nextjs Framework for Strapi",
-  "version": "0.0.1-alpha.6",
+  "version": "0.0.1",
   "author": "Zelal Hossain",
   "bin": {
     "padma": "./bin/run.js"
@@ -34,6 +34,9 @@
     "ts-node": "^10",
     "typescript": "^5"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=18.0.0"
   },
@@ -46,7 +49,10 @@
   ],
   "homepage": "https://github.com/js-template/padma/",
   "keywords": [
-    "padma"
+    "padma",
+    "cli",
+    "nextjs",
+    "headless cms"
   ],
   "license": "MIT",
   "main": "dist/index.js",
