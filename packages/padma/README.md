@@ -10,10 +10,10 @@ npx padma create my-project
 
 ### 2. Select a Starter Theme
 
-If it's your first time using Padma, we recommend that you select `@padma/river-theme` to start with.
+If it's your first time using Padma, we recommend that you select `@padma/blank-theme` to start with.
 
 ```
-? Pick a starter theme to clone: @padma/river-theme (recommended)
+? Pick a starter theme to clone: @padma/blank-theme (recommended)
 ```
 
 A directory with the same name as the project you used will be created. It will have a structure similar to this:
@@ -25,8 +25,6 @@ my-project/
 |__ package.json
 |__ padma.settings.js
 |__ favicon.ico
-|__ packages/
-    |__blank-theme
 ```
 
 ### 3. Run the Project Locally
