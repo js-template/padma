@@ -16,26 +16,6 @@
       "type": "boolean",
       "required": true,
       "default": true
-    },
-    "tableHeader": {
-      "type": "customField",
-      "options": [
-        "title",
-        "type",
-        "status",
-        "action",
-        "description",
-        "salary",
-        "createdAt",
-        "updatedAt",
-        "publishedAt",
-        "tags",
-        "vacancy",
-        "slug",
-        "startDate",
-        "endDate"
-      ],
-      "customField": "plugin::multi-select.multi-select"
     }
   }
 }

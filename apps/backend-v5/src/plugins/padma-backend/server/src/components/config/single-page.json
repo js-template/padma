@@ -5,7 +5,13 @@
     "icon": "arrowRight",
     "description": ""
   },
+  "category": "config",
+  "modelName": "single-page",
+  "globalId": "ComponentsConfigSinglePages",
+  "uid": "config.single-page",
+  "modelType": "component",
   "options": {},
+  "pluginOptions": {},
   "attributes": {
     "slug": {
       "type": "string"

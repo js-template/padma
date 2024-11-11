@@ -24,11 +24,6 @@
       "repeatable": false,
       "component": "component.link"
     },
-    "categories": {
-      "type": "component",
-      "repeatable": true,
-      "component": "config.job-list"
-    },
     "empty": {
       "type": "component",
       "repeatable": false,

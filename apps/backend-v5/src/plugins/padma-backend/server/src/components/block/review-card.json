@@ -18,11 +18,7 @@
     "description": {
       "type": "string"
     },
-    "reviews": {
-      "type": "component",
-      "repeatable": true,
-      "component": "config.job-list"
-    },
+
     "empty": {
       "type": "component",
       "repeatable": false,

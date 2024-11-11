@@ -24,7 +24,7 @@
     "search": {
       "type": "component",
       "repeatable": false,
-      "component": "forms.seaech-form"
+      "component": "forms.search-form"
     }
   }
 }

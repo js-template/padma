@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "sidebars",
+  "info": {
+    "singularName": "sidebar",
+    "pluralName": "sidebars",
+    "displayName": "Sidebar",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

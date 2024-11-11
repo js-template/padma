@@ -31,6 +31,8 @@ import SocialMeias from './shared/social-medias.json';
 import Spacing from './shared/spacing.json';
 
 import BlogDetails from './single-type/blog-details.json';
+import GridContainer from './component/grid-container.json';
+import SearchForm from './forms/search-form.json';
 
 import ContactForm from './widget/contact-form.json';
 import FooterOne from './widget/footer-one.json';
@@ -38,7 +40,16 @@ import FooterTwo from './widget/footer-two.json';
 import FooterTop from './widget/footer-top.json';
 import FooterBottom from './widget/footer-bottom.json';
 
+import Formsbutton from './forms/form-buttons.json';
+
+import SinglePage from './config/single-page.json';
+
 export default {
+  'forms.search-form': SearchForm,
+  'widget.footer-one': FooterOne,
+  'widget.footer-two': FooterTwo,
+  'widget.footer-top': FooterTop,
+  'widget.footer-bottom': FooterBottom,
   'ui.author-info': AuthorInfo,
   'ui.content-section': contentSection,
   'block.blog-card': BlogCard,
@@ -70,8 +81,8 @@ export default {
   'shared.spacing': Spacing,
   'single-type.blog-details': BlogDetails,
   'widget.contact-form': ContactForm,
-  'widget.footer-one': FooterOne,
-  'widget.footer-two': FooterTwo,
-  'widget.footer-top': FooterTop,
-  'widget.footer-bottom': FooterBottom,
+
+  'component.grid-container': GridContainer,
+  'forms.form-buttons': Formsbutton,
+  'config.single-page': SinglePage,
 };

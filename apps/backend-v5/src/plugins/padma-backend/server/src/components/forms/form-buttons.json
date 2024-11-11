@@ -4,7 +4,13 @@
     "displayName": "formButtons",
     "icon": "server"
   },
+  "category": "form",
+  "modelName": "form-buttons",
+  "globalId": "ComponentsFormsFormButtons",
+  "uid": "forms.form-buttons",
+  "modelType": "component",
   "options": {},
+  "pluginOptions": {},
   "attributes": {
     "cancel": {
       "type": "string",
