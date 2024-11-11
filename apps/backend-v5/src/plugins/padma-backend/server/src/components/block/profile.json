@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_block_profiles",
+  "info": {
+    "displayName": "Profile",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "category": "block",
+  "modelName": "profile",
+  "globalId": "ComponentsBlockProfiles",
+  "uid": "block.profile",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {}
+}

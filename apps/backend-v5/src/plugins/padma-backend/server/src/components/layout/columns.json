@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_layout_columns",
+  "info": {
+    "displayName": "Columns",
+    "icon": "arrowRight"
+  },
+  "category": "layout",
+  "modelName": "columns",
+  "globalId": "ComponentsLayoutColumns",
+  "uid": "layout.columns",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {}
+}

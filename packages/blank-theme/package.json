@@ -1,19 +1,15 @@
 {
-   "name": "@padma/blank-theme",
-   "version": "0.0.1",
-   "private": true,
-   "main": "src/index.tsx",
-   "types": "src/types/index.d.ts",
+   "name": "@padmadev/blank-theme",
+   "version": "0.0.1-alpha.0",
+   "main": "dist/index.js",
+   "types": "dist/types/index.d.ts",
    "keywords": [],
-   "license": "EULA",
+   "license": "MIT",
    "scripts": {
       "build": "tsc",
       "dev": "tsc --watch",
       "lint": "eslint .",
-      "format": "prettier --write . --ignore-path .prettierignore",
-      "publish:pack": "npm pack --pack-destination dist",
-      "publish:upload": "node scripts/publish.js",
-      "publish": "npm run publish:pack && npm run publish:upload"
+      "format": "prettier --write . --ignore-path .prettierignore"
    },
    "dependencies": {
       "@emotion/react": "latest",
@@ -44,5 +40,10 @@
       "@types/react-dom": "latest",
       "node-fetch": "^2.6.1",
       "typescript": "latest"
-   }
+   },
+   "files": [
+      "dist",
+      "README.md",
+      "LICENSE"
+   ]
 }

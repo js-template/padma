@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_category_cards",
+  "info": {
+    "displayName": "CategoryCard",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "category": "block",
+  "modelName": "category-card",
+  "globalId": "ComponentsCategoryCards",
+  "uid": "block.category-card",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    }
+  }
+}

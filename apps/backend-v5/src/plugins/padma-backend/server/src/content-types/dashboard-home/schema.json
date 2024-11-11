@@ -1,0 +1,44 @@
+{
+  "kind": "singleType",
+  "collectionName": "dashboard_homes",
+  "info": {
+    "singularName": "dashboard-home",
+    "pluralName": "dashboard-homes",
+    "displayName": "Dashboard Home",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "role1Components": {
+      "type": "dynamiczone",
+      "components": ["shared.spacing"]
+    },
+    "role1": {
+      "type": "enumeration",
+      "enum": ["candidate", "employer", "authenticated"],
+      "required": true,
+      "default": "employer"
+    },
+    "role2": {
+      "type": "enumeration",
+      "enum": ["candidate", "employer"],
+      "default": "candidate",
+      "required": true
+    },
+    "role2Components": {
+      "type": "dynamiczone",
+      "components": ["shared.spacing"]
+    },
+    "styles": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.grid-container"
+    }
+  }
+}

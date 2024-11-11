@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_widget_footer_tops",
+  "info": {
+    "displayName": "FooterTop",
+    "icon": "server"
+  },
+  "category": "widget",
+  "modelName": "footerTop",
+  "globalId": "ComponentsWidgetFooterTops",
+  "uid": "widget.footerTop",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "light_logo": {
+      "allowedTypes": ["images"],
+      "type": "media",
+      "multiple": false
+    },
+    "dark_logo": {
+      "allowedTypes": ["images"],
+      "type": "media",
+      "multiple": false
+    },
+    "title": {
+      "type": "string"
+    },
+    "search": {
+      "type": "component",
+      "repeatable": false,
+      "component": "forms.search-form"
+    }
+  }
+}

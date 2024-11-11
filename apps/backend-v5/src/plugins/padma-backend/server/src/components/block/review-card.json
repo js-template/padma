@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_block_review_cards",
+  "info": {
+    "displayName": "ReviewCard",
+    "description": ""
+  },
+  "category": "block",
+  "modelName": "review-card",
+  "globalId": "ComponentsBlockReviewCards",
+  "uid": "block.review-card",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    }
+  }
+}

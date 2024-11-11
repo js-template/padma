@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_widget_footer_twos",
+  "info": {
+    "displayName": "FooterTwo",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "category": "widget",
+  "modelName": "footerTwo",
+  "globalId": "ComponentsWidgetFooterTwos",
+  "uid": "widget.footerTwo",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "FooterMenu": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.link"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "required": true,
+      "component": "component.style-section",
+      "min": 1
+    }
+  }
+}
