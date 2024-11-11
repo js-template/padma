@@ -7,11 +7,17 @@ node_modules
 packages/metajob-theme
 .npmrc
 .strapi
+scripts
+templates
 # testing
+bin
+.bin
 coverage
 dist
 # next.js
 .next/
+oclif.manifest.json
+
 out/
 build
 .idea
