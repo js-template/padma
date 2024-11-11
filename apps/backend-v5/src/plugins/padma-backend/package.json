@@ -1,5 +1,8 @@
 {
-  "version": "0.0.0",
+  "name": "@padmadev/padma-backend",
+  "description": "Padma Backend",
+  "license": "MIT",
+  "version": "0.0.0-alpha.1",
   "keywords": [],
   "type": "commonjs",
   "exports": {
@@ -58,13 +61,10 @@
   },
   "strapi": {
     "kind": "plugin",
-    "name": "@padmadev/padma-backend",
+    "name": "padma-backend",
     "displayName": "Padma Backend",
     "description": "Padma- Headless Strapi Backend for Nextjs Framework"
   },
-  "name": "@padmadev/padma-backend",
-  "description": "Padma Backend",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com//Robi-Code.git"
@@ -73,5 +73,8 @@
     "url": "https://github.com/js-template/padma/issues/"
   },
   "homepage": "https://github.com/js-template/padma",
-  "author": "https://github.com/js-template/padma"
+  "author": "https://github.com/js-template/padma",
+  "publishConfig": {
+    "access": "public"
+  }
 }
