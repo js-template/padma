@@ -1,11 +1,11 @@
 {
   "kind": "singleType",
-  "collectionName": "dashboard_homes",
+  "collectionName": "private_frontpage",
   "info": {
-    "singularName": "dashboard-home",
-    "pluralName": "dashboard-homes",
-    "displayName": "Dashboard Home",
-    "description": ""
+    "singularName": "private-frontpage",
+    "pluralName": "private-frontpages",
+    "displayName": "Private Frontpage",
+    "description": "Public Static Frontpage"
   },
   "options": {
     "draftAndPublish": false
