@@ -2,7 +2,7 @@
   "name": "@padmadev/padma-backend",
   "description": "Padma Backend",
   "license": "MIT",
-  "version": "0.0.0-alpha.1",
+  "version": "0.0.0-alpha.4",
   "keywords": [],
   "type": "commonjs",
   "exports": {
@@ -67,7 +67,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com//Robi-Code.git"
+    "url": "https://github.com/js-template/padma"
   },
   "bugs": {
     "url": "https://github.com/js-template/padma/issues/"
