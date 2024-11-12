@@ -12,6 +12,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@padmadev/padma-backend": "^0.0.0-alpha.4",
     "@strapi/plugin-users-permissions": "5.3.0",
     "@strapi/strapi": "5.3.0",
     "better-sqlite3": "11.3.0",
