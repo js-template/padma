@@ -40,7 +40,7 @@
         }
       },
       "type": "dynamiczone",
-      "components": ["shared.spacing", "component.page-title", "single-type.blog-details"]
+      "components": ["shared.spacing"]
     },
     "leftSidebar": {
       "pluginOptions": {

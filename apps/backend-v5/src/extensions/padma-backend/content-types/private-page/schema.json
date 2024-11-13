@@ -29,15 +29,6 @@
       "targetField": "title",
       "required": true
     },
-    "blocks": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "dynamiczone",
-      "components": ["block.category-card", "block.blog-card"]
-    },
     "styles": {
       "displayName": "grid container",
       "type": "component",
