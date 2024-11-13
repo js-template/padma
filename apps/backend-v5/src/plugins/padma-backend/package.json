@@ -2,8 +2,14 @@
   "name": "@padmadev/padma-backend",
   "description": "Padma Backend",
   "license": "MIT",
-  "version": "0.0.0-alpha.4",
-  "keywords": [],
+  "version": "0.0.1",
+  "keywords": [
+    "strapi",
+    "strapi-plugin",
+    "strapi-backend",
+    "padma",
+    "headless cms"
+  ],
   "type": "commonjs",
   "exports": {
     "./package.json": "./package.json",
