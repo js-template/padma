@@ -1,10 +1,16 @@
 {
-  "collectionName": "components_shared_share_menus",
+  "collectionName": "components_shared_menus",
   "info": {
-    "displayName": "Share Menu",
+    "displayName": "Menu",
     "icon": "server"
   },
+  "category": "shared",
+  "modelName": "",
+  "globalId": "ComponentsSharedShareMenus",
+  "uid": "shared.menus",
+  "modelType": "component",
   "options": {},
+  "pluginOptions": {},
   "attributes": {
     "role": {
       "type": "enumeration",

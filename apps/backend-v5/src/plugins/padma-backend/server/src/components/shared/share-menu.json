@@ -26,7 +26,7 @@
           "localized": true
         }
       },
-      "component": "component.menu"
+      "component": "config.menu"
     }
   }
 }
