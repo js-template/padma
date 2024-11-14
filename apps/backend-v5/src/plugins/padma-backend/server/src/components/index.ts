@@ -1,16 +1,19 @@
 // all Text type Components
 import Typography from './text/typography.json';
 
+// all Config type Components
+import ReviewCard from './config/review-card.json';
+
+// all block type Components
+import ReviewBlock from './block/review-block.json';
+
 import AuthorInfo from './ui/author-info.json';
 import contentSection from './ui/content-section.json';
 import BlogCard from './block/blog-card.json';
 import CategoryCard from './block/category-card.json';
-import ContactList from './block/contact.json';
-import Footer from './block/footer.json';
+
 import PublicHeader from './block/public-header.json';
 import PrivateHeader from './block/private-header.json';
-import Profile from './block/profile.json';
-import ReviewCard from './block/review-card.json';
 import IconBox from './component/icon-box.json';
 
 import Link from './component/link.json';
@@ -43,18 +46,15 @@ import Formsbutton from './forms/form-buttons.json';
 import SinglePage from './config/single-page.json';
 
 export default {
+  'config.review-card': ReviewCard,
   'text.typography': Typography,
   'forms.search-form': SearchForm,
   'ui.author-info': AuthorInfo,
   'ui.content-section': contentSection,
-  'block.blog-card': BlogCard,
-  'block.category-card': CategoryCard,
-  'block.contact': ContactList,
-  'block.footer': Footer,
+
   'block.public-header': PublicHeader,
   'block.private-header': PrivateHeader,
-  'block.profile': Profile,
-  'block.review-card': ReviewCard,
+
   'component.icon-box': IconBox,
   'component.link': Link,
   'component.menu': Menu,
@@ -81,4 +81,7 @@ export default {
   'config.single-page': SinglePage,
 
   'block.breadcrumbs': BreadCrumbs,
+  'block.blog-card': BlogCard,
+  'block.category-card': CategoryCard,
+  'block.review-block': ReviewBlock,
 };
