@@ -1,3 +1,6 @@
+// all Text type Components
+import Typography from './text/typography.json';
+
 import AuthorInfo from './ui/author-info.json';
 import contentSection from './ui/content-section.json';
 import BlogCard from './block/blog-card.json';
@@ -46,6 +49,7 @@ import Formsbutton from './forms/form-buttons.json';
 import SinglePage from './config/single-page.json';
 
 export default {
+  'text.typography': Typography,
   'forms.search-form': SearchForm,
   'widget.footer-one': FooterOne,
   'widget.footer-two': FooterTwo,

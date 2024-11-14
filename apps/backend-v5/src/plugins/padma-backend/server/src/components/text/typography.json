@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_content_typography",
+  "info": {
+    "displayName": "Typography"
+  },
+  "options": {},
+  "category": "Text",
+  "modelName": "typography",
+  "uid": "text.typography",
+  "globalId": "ComponentsContentTypography",
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["H1", "H2", "H3", "H4", "H5", "H6", "Body1", "Body2", "Caption"],
+      "default": "H2",
+      "required": true
+    },
+    "text": {
+      "type": "text",
+      "default": "Your text here",
+      "required": false
+    }
+  }
+}

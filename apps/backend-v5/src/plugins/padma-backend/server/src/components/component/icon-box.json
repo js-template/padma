@@ -1,7 +1,7 @@
 {
   "collectionName": "components_component_icon_boxes",
   "info": {
-    "displayName": "IconBox",
+    "displayName": "Icon Box",
     "icon": "apps",
     "description": ""
   },
@@ -13,20 +13,25 @@
   "options": {},
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string"
+    "icon": {
+      "type": "string",
+      "required": true,
+      "default": "bx:info-circle"
     },
-    "feedback": {
-      "type": "text"
+    "title": {
+      "type": "string",
+      "required": true,
+      "default": "Your Title Here"
     },
-    "avatar": {
-      "type": "media",
-      "multiple": false,
+    "description": {
+      "type": "text",
       "required": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "default": "Short description about the icon box."
     },
-    "designation": {
-      "type": "string"
+    "link": {
+      "type": "string",
+      "required": false,
+      "default": "#"
     }
   }
 }

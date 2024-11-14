@@ -12,16 +12,10 @@
   "globalId": "ComponentsBlockBlogCards",
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "description": {
-      "type": "text"
-    },
-    "button": {
+    "content": {
       "type": "component",
-      "repeatable": false,
-      "component": "component.link"
+      "repeatable": true,
+      "component": "text.typography"
     },
     "posts": {
       "type": "relation",
@@ -32,6 +26,11 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.empty"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
     },
     "style": {
       "type": "component",
