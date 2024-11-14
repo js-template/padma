@@ -3,6 +3,7 @@ import Typography from './config/typography.json';
 
 // all Config type Components
 import ReviewCard from './config/review-card.json';
+import CarouselCard from './config/carousel-card.json';
 
 // all block type Components
 import PublicHeader from './block/public-header.json';
@@ -12,6 +13,8 @@ import BlogCard from './block/blog-card.json';
 import CategoryCard from './block/category-card.json';
 import BreadCrumbs from './block/breadcrumbs.json';
 import PrivateHeader from './block/private-header.json';
+import ContentBox from './block/content-box.json';
+import Imagecarousel from './block/image-carousel.json';
 
 import AuthorInfo from './ui/author-info.json';
 import contentSection from './ui/content-section.json';
@@ -48,13 +51,11 @@ import SinglePage from './config/single-page.json';
 
 export default {
   'config.review-card': ReviewCard,
+  'config.carousel-card': CarouselCard,
   'text.typography': Typography,
   'forms.search-form': SearchForm,
   'ui.author-info': AuthorInfo,
   'ui.content-section': contentSection,
-
-  'block.public-header': PublicHeader,
-  'block.private-header': PrivateHeader,
 
   'component.icon-box': IconBox,
   'component.link': Link,
@@ -81,9 +82,13 @@ export default {
   'forms.form-buttons': Formsbutton,
   'config.single-page': SinglePage,
 
+  'block.public-header': PublicHeader,
+  'block.private-header': PrivateHeader,
   'block.breadcrumbs': BreadCrumbs,
   'block.blog-card': BlogCard,
   'block.category-card': CategoryCard,
   'block.review-block': ReviewBlock,
   'block.banner': Banner,
+  'block.content-box': ContentBox,
+  'block.image-carousel': Imagecarousel,
 };
