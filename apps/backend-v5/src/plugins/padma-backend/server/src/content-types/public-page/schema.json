@@ -11,6 +11,7 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
+  "uid": "public-page",
   "attributes": {
     "title": {
       "type": "string"

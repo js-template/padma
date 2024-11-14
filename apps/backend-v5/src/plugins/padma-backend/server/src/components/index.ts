@@ -13,6 +13,7 @@ import Image from './component/image.json';
 import Link from './component/link.json';
 import Menu from './component/menu.json';
 import MetaData from './component/meta-data.json';
+import SharedSEO from './shared/seo.json';
 import PageTitle from './component/page-title.json';
 import SocialLink from './component/social-link.json';
 import StyleSection from './component/style-section.json';
@@ -75,6 +76,7 @@ export default {
   'header.topbar': Topbar,
   'layout.columns': Collums,
   'shared.empty': Empty,
+  'shared.seo': SharedSEO,
   'shared.meta-social': MetaSocial,
   'shared.share-menu': ShareMenu,
   'shared.social-medias': SocialMeias,
