@@ -1,13 +1,13 @@
 {
-  "collectionName": "components_component_menus",
+  "collectionName": "components_config_menus",
   "info": {
     "displayName": "Menu",
     "icon": "bulletList",
     "description": ""
   },
-  "category": "component",
+  "category": "config",
   "modelName": "menu",
-  "globalId": "ComponentsComponentMenus",
+  "globalId": "ComponentsConfigMenus",
   "uid": "config.menu",
   "modelType": "component",
   "options": {},
