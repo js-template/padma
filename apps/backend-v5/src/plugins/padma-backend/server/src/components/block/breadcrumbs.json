@@ -5,7 +5,7 @@
     "icon": "manyWays",
     "description": ""
   },
-  "category": "Public Blocks",
+  "category": "Blocks",
   "modelName": "breadcrumbs",
   "globalId": "ComponentsblockBreadcrumbs",
   "uid": "block.breadcrumbs",

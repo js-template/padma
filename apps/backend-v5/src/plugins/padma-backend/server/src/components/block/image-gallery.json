@@ -5,7 +5,7 @@
     "icon": "gallery",
     "description": "A component for displaying multiple images in various layouts."
   },
-  "category": "Public Blocks",
+  "category": "Blocks",
   "modelName": "image-gallery",
   "globalId": "ComponentsBlockImageGallery",
   "uid": "block.image-gallery",

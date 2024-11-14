@@ -5,7 +5,7 @@
     "icon": "star",
     "description": "A block for displaying multiple reviews with customizable options."
   },
-  "category": "Public Blocks",
+  "category": "Blocks",
   "modelName": "review-block",
   "globalId": "ComponentsBlockReviews",
   "uid": "block.review-block",

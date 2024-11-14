@@ -5,7 +5,7 @@
     "icon": "image",
     "description": "Banner component with advanced text, style, and layout options"
   },
-  "category": "Public Blocks",
+  "category": "Blocks",
   "modelName": "banner",
   "globalId": "ComponentsBlockBanners",
   "uid": "block.banner",

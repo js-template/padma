@@ -5,7 +5,7 @@
     "icon": "box",
     "description": "A content box with text, icons, and style options."
   },
-  "category": "Public Blocks",
+  "category": "Blocks",
   "modelName": "content-box",
   "globalId": "ComponentsBlockContentBoxes",
   "uid": "block.content-box",

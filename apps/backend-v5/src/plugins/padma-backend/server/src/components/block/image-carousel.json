@@ -5,7 +5,7 @@
     "icon": "images",
     "description": "Carousel component with configurable cards and styling options."
   },
-  "category": "Public Blocks",
+  "category": "Blocks",
   "modelName": "image-carousel",
   "globalId": "ComponentsBlockImageCarousels",
   "uid": "block.image-carousel",

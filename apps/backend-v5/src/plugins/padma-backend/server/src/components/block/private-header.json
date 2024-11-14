@@ -5,7 +5,7 @@
     "icon": "server",
     "description": ""
   },
-  "category": "Public Blocks",
+  "category": "Blocks",
   "modelName": "private-header",
   "globalId": "ComponentsBlockPrivateHeaders",
   "uid": "block.private-header",

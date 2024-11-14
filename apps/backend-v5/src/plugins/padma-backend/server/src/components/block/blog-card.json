@@ -6,7 +6,7 @@
     "description": ""
   },
   "options": {},
-  "category": "Public Blocks",
+  "category": "Blocks",
   "modelName": "blog-card",
   "uid": "block.blog-card",
   "globalId": "ComponentsBlockBlogCards",
