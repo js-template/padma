@@ -8,13 +8,14 @@ import CategoryCard from './block/category-card.json';
 import ContactList from './block/contact.json';
 import Footer from './block/footer.json';
 import PublicHeader from './block/public-header.json';
+import PrivateHeader from './block/private-header.json';
 import Profile from './block/profile.json';
 import ReviewCard from './block/review-card.json';
 import IconBox from './component/icon-box.json';
 
 import Link from './component/link.json';
-import Menu from './component/menu.json';
-import MetaData from './component/meta-data.json';
+import Menu from './config/menu.json';
+import MetaData from './config/meta-data.json';
 import SharedSEO from './shared/seo.json';
 import PageTitle from './component/page-title.json';
 import SocialLink from './component/social-link.json';
@@ -22,7 +23,7 @@ import StyleSection from './component/style-section.json';
 import TextField from './component/text-field.json';
 import Title from './component/titles.json';
 
-import BreadCrumbs from './header/breadcrumbs.json';
+import BreadCrumbs from './block/breadcrumbs.json';
 import Logo from './header/logo.json';
 import Topbar from './header/topbar.json';
 
@@ -51,6 +52,7 @@ export default {
   'block.contact': ContactList,
   'block.footer': Footer,
   'block.public-header': PublicHeader,
+  'block.private-header': PrivateHeader,
   'block.profile': Profile,
   'block.review-card': ReviewCard,
   'component.icon-box': IconBox,
@@ -62,7 +64,7 @@ export default {
   'component.style-section': StyleSection,
   'component.text-field': TextField,
   'component.title': Title,
-  'header.breadcrumbs': BreadCrumbs,
+
   'header.logo': Logo,
   'header.topbar': Topbar,
   'layout.columns': Collums,
@@ -77,4 +79,6 @@ export default {
   'component.grid-container': GridContainer,
   'forms.form-buttons': Formsbutton,
   'config.single-page': SinglePage,
+
+  'block.breadcrumbs': BreadCrumbs,
 };
