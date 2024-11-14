@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_block_breadcrumbs",
+  "info": {
+    "displayName": "Breadcrumbs",
+    "icon": "manyWays",
+    "description": ""
+  },
+  "category": "block",
+  "modelName": "breadcrumbs",
+  "globalId": "ComponentsblockBreadcrumbs",
+  "uid": "block.breadcrumbs",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "separator": {
+      "type": "string",
+      "default": "/",
+      "required": true
+    },
+    "items": {
+      "type": "json",
+      "required": false,
+      "default": [
+        { "label": "Home", "link": "/" },
+        { "label": "Category", "link": "/category" },
+        { "label": "Product", "link": "/product" }
+      ]
+    },
+    "variation": {
+      "type": "enumeration",
+      "enum": ["default", "simple", "minimal"],
+      "default": "default"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    }
+  }
+}
