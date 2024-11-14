@@ -3,7 +3,7 @@ import Category from './category/schema.json';
 import PrivateFrontPage from './private-frontpage/schema.json';
 
 import PublicFrontpage from './public-frontpage/schema.json';
-import Layout from './public-layout/schema.json';
+import Layout from './layout/schema.json';
 import Permalink from './permalink/schema.json';
 import Post from './post/schema.json';
 import PrivatePage from './private-page/schema.json';

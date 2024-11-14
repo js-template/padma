@@ -5,7 +5,7 @@
     "singularName": "layout",
     "pluralName": "layouts",
     "displayName": "Public Layout",
-    "description": ""
+    "description": "Public Layout for the website"
   },
   "options": {
     "draftAndPublish": false
@@ -24,16 +24,6 @@
       },
       "type": "dynamiczone",
       "components": ["block.public-header", "block.private-header"],
-      "required": false
-    },
-    "footer": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "dynamiczone",
-      "components": ["block.footer"],
       "required": false
     }
   }
