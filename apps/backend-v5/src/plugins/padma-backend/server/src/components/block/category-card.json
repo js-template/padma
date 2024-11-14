@@ -1,7 +1,7 @@
 {
   "collectionName": "components_category_cards",
   "info": {
-    "displayName": "CategoryCard",
+    "displayName": "Category Card",
     "icon": "arrowRight",
     "description": ""
   },
@@ -13,21 +13,25 @@
   "options": {},
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "description": {
-      "type": "text"
-    },
-    "button": {
+    "content": {
       "type": "component",
-      "repeatable": false,
-      "component": "component.link"
+      "repeatable": true,
+      "component": "text.typography"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::padma-backend.category"
     },
     "empty": {
       "type": "component",
       "repeatable": false,
       "component": "shared.empty"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
     },
     "style": {
       "type": "component",
