@@ -2,7 +2,7 @@
   "name": "@padmadev/padma-backend",
   "description": "Padma Backend",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "strapi",
     "strapi-plugin",
