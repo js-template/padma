@@ -15,27 +15,26 @@
     "title": {
       "type": "string"
     },
+    "role1": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.role"
+    },
     "role1Components": {
       "type": "dynamiczone",
       "components": ["shared.spacing"]
     },
-    "role1": {
-      "type": "enumeration",
-      "enum": ["candidate", "employer", "authenticated"],
-      "required": true,
-      "default": "employer"
-    },
+
     "role2": {
-      "type": "enumeration",
-      "enum": ["candidate", "employer"],
-      "default": "candidate",
-      "required": true
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.role"
     },
     "role2Components": {
       "type": "dynamiczone",
       "components": ["shared.spacing"]
     },
-    "styles": {
+    "style": {
       "type": "component",
       "repeatable": false,
       "component": "component.grid-container"
