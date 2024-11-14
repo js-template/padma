@@ -5,7 +5,7 @@
     "icon": "arrowRight",
     "description": ""
   },
-  "category": "block",
+  "category": "Public Blocks",
   "modelName": "category-card",
   "globalId": "ComponentsCategoryCards",
   "uid": "block.category-card",

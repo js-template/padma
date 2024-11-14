@@ -27,7 +27,14 @@
         }
       },
       "type": "dynamiczone",
-      "components": ["block.category-card", "block.blog-card"]
+      "components": [
+        "block.banner",
+        "block.blog-card",
+        "block.breadcrumbs",
+        "shared.empty",
+        "block.category-card",
+        "block.review-block"
+      ]
     },
     "seo": {
       "type": "component",

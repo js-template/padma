@@ -5,7 +5,7 @@
     "icon": "star",
     "description": ""
   },
-  "category": "config",
+  "category": "Public Config",
   "modelName": "review-card",
   "globalId": "ComponentsReviewCards",
   "uid": "config.review-card",

@@ -1,12 +1,12 @@
 {
   "collectionName": "components_block_blog_cards",
   "info": {
-    "displayName": "BlogCard",
+    "displayName": "Blog Post",
     "icon": "collapse",
     "description": ""
   },
   "options": {},
-  "category": "block",
+  "category": "Public Blocks",
   "modelName": "blog-card",
   "uid": "block.blog-card",
   "globalId": "ComponentsBlockBlogCards",

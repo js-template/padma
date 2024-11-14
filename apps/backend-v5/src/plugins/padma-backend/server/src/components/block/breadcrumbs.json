@@ -5,7 +5,7 @@
     "icon": "manyWays",
     "description": ""
   },
-  "category": "block",
+  "category": "Public Blocks",
   "modelName": "breadcrumbs",
   "globalId": "ComponentsblockBreadcrumbs",
   "uid": "block.breadcrumbs",
@@ -17,15 +17,6 @@
       "type": "string",
       "default": "/",
       "required": true
-    },
-    "items": {
-      "type": "json",
-      "required": false,
-      "default": [
-        { "label": "Home", "link": "/" },
-        { "label": "Category", "link": "/category" },
-        { "label": "Product", "link": "/product" }
-      ]
     },
     "variation": {
       "type": "enumeration",

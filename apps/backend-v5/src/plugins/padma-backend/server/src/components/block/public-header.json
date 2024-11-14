@@ -5,7 +5,7 @@
     "icon": "layout",
     "description": "The header block is used to display the header of the website."
   },
-  "category": "block",
+  "category": "Public Blocks",
   "modelName": "public-header",
   "globalId": "ComponentsBlockHeaders",
   "uid": "block.public-header",

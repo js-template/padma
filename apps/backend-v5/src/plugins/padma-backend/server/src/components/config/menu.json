@@ -5,7 +5,7 @@
     "icon": "bulletList",
     "description": ""
   },
-  "category": "config",
+  "category": "Public Config",
   "modelName": "menu",
   "globalId": "ComponentsConfigMenus",
   "uid": "config.menu",

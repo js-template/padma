@@ -1,19 +1,21 @@
 // all Text type Components
-import Typography from './text/typography.json';
+import Typography from './config/typography.json';
 
 // all Config type Components
 import ReviewCard from './config/review-card.json';
 
 // all block type Components
+import PublicHeader from './block/public-header.json';
+import Banner from './block/banner.json';
 import ReviewBlock from './block/review-block.json';
+import BlogCard from './block/blog-card.json';
+import CategoryCard from './block/category-card.json';
+import BreadCrumbs from './block/breadcrumbs.json';
+import PrivateHeader from './block/private-header.json';
 
 import AuthorInfo from './ui/author-info.json';
 import contentSection from './ui/content-section.json';
-import BlogCard from './block/blog-card.json';
-import CategoryCard from './block/category-card.json';
 
-import PublicHeader from './block/public-header.json';
-import PrivateHeader from './block/private-header.json';
 import IconBox from './component/icon-box.json';
 
 import Link from './component/link.json';
@@ -26,7 +28,6 @@ import StyleSection from './component/style-section.json';
 import TextField from './component/text-field.json';
 import Title from './component/titles.json';
 
-import BreadCrumbs from './block/breadcrumbs.json';
 import Logo from './header/logo.json';
 import Topbar from './header/topbar.json';
 
@@ -84,4 +85,5 @@ export default {
   'block.blog-card': BlogCard,
   'block.category-card': CategoryCard,
   'block.review-block': ReviewBlock,
+  'block.banner': Banner,
 };

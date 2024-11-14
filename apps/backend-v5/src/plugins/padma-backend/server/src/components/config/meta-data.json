@@ -5,7 +5,7 @@
     "icon": "chartBubble",
     "description": ""
   },
-  "category": "config",
+  "category": "Public Config",
   "modelName": "meta-data",
   "globalId": "ComponentsComponentMetaDatas",
   "uid": "config.meta-data",

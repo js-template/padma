@@ -5,7 +5,7 @@
     "icon": "arrowRight",
     "description": ""
   },
-  "category": "config",
+  "category": "Public Config",
   "modelName": "single-page",
   "globalId": "ComponentsConfigSinglePages",
   "uid": "config.single-page",
