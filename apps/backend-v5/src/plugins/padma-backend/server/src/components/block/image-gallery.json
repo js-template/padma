@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_block_image_gallery",
+  "info": {
+    "displayName": "Image Gallery",
+    "icon": "gallery",
+    "description": "A component for displaying multiple images in various layouts."
+  },
+  "category": "Public Blocks",
+  "modelName": "image-gallery",
+  "globalId": "ComponentsBlockImageGallery",
+  "uid": "block.image-gallery",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "text.typography"
+    },
+    "variation": {
+      "type": "enumeration",
+      "enum": ["grid", "masonry", "carousel", "grid-with-title"],
+      "default": "grid",
+      "required": true
+    },
+
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    }
+  }
+}

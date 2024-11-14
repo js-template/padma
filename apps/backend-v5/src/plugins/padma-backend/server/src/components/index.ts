@@ -15,6 +15,7 @@ import BreadCrumbs from './block/breadcrumbs.json';
 import PrivateHeader from './block/private-header.json';
 import ContentBox from './block/content-box.json';
 import Imagecarousel from './block/image-carousel.json';
+import ImageGallery from './block/image-gallery.json';
 
 import AuthorInfo from './ui/author-info.json';
 import contentSection from './ui/content-section.json';
@@ -91,4 +92,5 @@ export default {
   'block.banner': Banner,
   'block.content-box': ContentBox,
   'block.image-carousel': Imagecarousel,
+  'block.image-gallery': ImageGallery,
 };
