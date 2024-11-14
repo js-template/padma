@@ -35,7 +35,7 @@
           "localized": true
         }
       },
-      "component": "component.menu"
+      "component": "config.menu"
     },
     "langMenu": {
       "type": "component",

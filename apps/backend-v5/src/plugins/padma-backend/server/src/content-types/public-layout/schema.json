@@ -23,7 +23,7 @@
         }
       },
       "type": "dynamiczone",
-      "components": ["block.public-header"],
+      "components": ["block.public-header", "block.private-header"],
       "required": false
     },
     "footer": {
