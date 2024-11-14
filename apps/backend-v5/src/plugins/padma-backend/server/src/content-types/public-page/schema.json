@@ -29,11 +29,14 @@
       "type": "dynamiczone",
       "components": [
         "block.banner",
+        "block.content-box",
         "block.blog-card",
         "block.breadcrumbs",
         "shared.empty",
         "block.category-card",
-        "block.review-block"
+        "block.review-block",
+        "block.image-carousel",
+        "block.image-gallery"
       ]
     },
     "seo": {
