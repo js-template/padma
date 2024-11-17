@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_forms_form_buttons",
+  "info": {
+    "displayName": "formButtons",
+    "icon": "server"
+  },
+  "category": "form",
+  "modelName": "form-buttons",
+  "globalId": "ComponentsFormsFormButtons",
+  "uid": "forms.form-buttons",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "cancel": {
+      "type": "string",
+      "required": true,
+      "default": "Cancel"
+    },
+    "back": {
+      "type": "string",
+      "required": true,
+      "default": "Previous"
+    },
+    "next": {
+      "type": "string",
+      "required": true,
+      "default": "Next"
+    },
+    "submit": {
+      "type": "string",
+      "required": true,
+      "default": "Submit"
+    },
+    "skip": {
+      "type": "string",
+      "required": true,
+      "default": "Skip"
+    }
+  }
+}

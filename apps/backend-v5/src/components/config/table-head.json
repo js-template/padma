@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_config_table_heads",
+  "info": {
+    "displayName": "tableHead",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "fields": {
+      "displayName": "headerField",
+      "type": "component",
+      "repeatable": true,
+      "component": "config.header-field"
+    }
+  }
+}

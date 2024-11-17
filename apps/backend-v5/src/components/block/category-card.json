@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_category_cards",
+  "info": {
+    "displayName": "Category Card",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "category": "Blocks",
+  "modelName": "category-card",
+  "globalId": "ComponentsCategoryCards",
+  "uid": "block.category-card",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text.typography"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::padma-backend.category"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    }
+  }
+}
