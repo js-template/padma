@@ -5,7 +5,13 @@
     "icon": "cursor",
     "description": ""
   },
+  "category": "component",
+  "modelName": "link",
+  "globalId": "ComponentsComponentLinks",
+  "uid": "component.link",
+  "modelType": "component",
   "options": {},
+  "pluginOptions": {},
   "attributes": {
     "label": {
       "type": "string"
@@ -15,17 +21,11 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": [
-        "External",
-        "Internal"
-      ]
+      "enum": ["External", "Internal"]
     },
     "target": {
       "type": "enumeration",
-      "enum": [
-        "_blank",
-        "_self"
-      ]
+      "enum": ["_blank", "_self"]
     },
     "icon": {
       "type": "string",

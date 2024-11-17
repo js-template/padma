@@ -5,7 +5,13 @@
     "icon": "arrowRight",
     "description": ""
   },
+  "category": "single-type",
+  "modelName": "blog-details",
+  "globalId": "ComponentsSingleTypeBlogDetails",
+  "uid": "single-type.blog-details",
+  "modelType": "component",
   "options": {},
+  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string"
@@ -17,12 +23,7 @@
     },
     "sidebar": {
       "type": "enumeration",
-      "enum": [
-        "Left Sidebar",
-        "Right Sidebar",
-        "Both Sidebar",
-        "No Sidebar"
-      ]
+      "enum": ["Left Sidebar", "Right Sidebar", "Both Sidebar", "No Sidebar"]
     }
   }
 }

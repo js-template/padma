@@ -4,7 +4,13 @@
     "displayName": "seo",
     "icon": "search"
   },
+  "category": "shared",
+  "modelName": "seo",
+  "globalId": "ComponentsSharedSeos",
+  "uid": "shared.seo",
+  "modelType": "component",
   "options": {},
+  "pluginOptions": {},
   "attributes": {
     "metaTitle": {
       "required": true,
@@ -21,11 +27,7 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ]
+      "allowedTypes": ["images", "files", "videos"]
     },
     "metaSocial": {
       "type": "component",

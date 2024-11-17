@@ -5,7 +5,13 @@
     "icon": "arrowUp",
     "description": ""
   },
+  "category": "component",
+  "modelName": "style-section",
+  "globalId": "ComponentsComponentStyleSections",
+  "uid": "component.style-section",
+  "modelType": "component",
   "options": {},
+  "pluginOptions": {},
   "attributes": {
     "color": {
       "type": "string"

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_component_meta_datas",
+  "info": {
+    "displayName": "Meta Data",
+    "icon": "chartBubble",
+    "description": ""
+  },
+  "category": "Public Config",
+  "modelName": "meta-data",
+  "globalId": "ComponentsComponentMetaDatas",
+  "uid": "config.meta-data",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "key": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

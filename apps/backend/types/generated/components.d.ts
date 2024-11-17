@@ -1,1304 +1,850 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface BannerBannerOne extends Schema.Component {
-  collectionName: 'components_banner_banner_ones';
+export interface BlockBanner extends Struct.ComponentSchema {
+  collectionName: 'components_block_banners';
   info: {
-    displayName: 'BannerOne';
-    icon: 'arrowRight';
-    description: '';
+    description: 'Banner component with advanced text, style, and layout options';
+    displayName: 'Banner';
+    icon: 'image';
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    search: Attribute.Component<'forms.seaech-form'>;
-    image: Attribute.Media;
-    style: Attribute.Component<'component.style-section'>;
-    empty: Attribute.Component<'shared.empty'>;
+    content: Schema.Attribute.Component<'text.typography', true>;
+    style: Schema.Attribute.Component<'component.style-section', false>;
+    variation: Schema.Attribute.Enumeration<
+      [
+        'simple',
+        'center',
+        'bottom right',
+        'left right',
+        'box left',
+        'box right',
+        'circle',
+      ]
+    > &
+      Schema.Attribute.DefaultTo<'simple'>;
   };
 }
 
-export interface BlockBlogCard extends Schema.Component {
+export interface BlockBlogCard extends Struct.ComponentSchema {
   collectionName: 'components_block_blog_cards';
   info: {
-    displayName: 'BlogCard';
+    description: '';
+    displayName: 'Blog Post';
     icon: 'collapse';
+  };
+  attributes: {
+    button: Schema.Attribute.Component<'component.link', false>;
+    content: Schema.Attribute.Component<'text.typography', true>;
+    empty: Schema.Attribute.Component<'shared.empty', false>;
+    posts: Schema.Attribute.Relation<'oneToMany', 'plugin::padma-backend.post'>;
+    style: Schema.Attribute.Component<'component.style-section', false>;
+  };
+}
+
+export interface BlockBreadcrumbs extends Struct.ComponentSchema {
+  collectionName: 'components_block_breadcrumbs';
+  info: {
     description: '';
+    displayName: 'Breadcrumbs';
+    icon: 'manyWays';
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    button: Attribute.Component<'component.link'>;
-    posts: Attribute.Relation<'block.blog-card', 'oneToMany', 'api::post.post'>;
-    empty: Attribute.Component<'shared.empty'>;
-    style: Attribute.Component<'component.style-section'>;
+    separator: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'/'>;
+    style: Schema.Attribute.Component<'component.style-section', false>;
+    variation: Schema.Attribute.Enumeration<['default', 'simple', 'minimal']> &
+      Schema.Attribute.DefaultTo<'default'>;
   };
 }
 
-export interface BlockBookmarkList extends Schema.Component {
-  collectionName: 'components_block_bookmark_lists';
+export interface BlockCategoryCard extends Struct.ComponentSchema {
+  collectionName: 'components_category_cards';
   info: {
-    displayName: 'Recent Bookmarks';
-    icon: 'bulletList';
     description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    style: Attribute.Component<'component.style-section'>;
-    column_1: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Title'>;
-    column_2: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Type'>;
-    empty: Attribute.Component<'shared.empty'>;
-  };
-}
-
-export interface BlockCategoryCard extends Schema.Component {
-  collectionName: 'components_ads_category_cards';
-  info: {
-    displayName: 'CategoryCard';
-    icon: 'arrowRight';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    button: Attribute.Component<'component.link'>;
-    categories: Attribute.Component<'config.job-list', true>;
-    empty: Attribute.Component<'shared.empty'>;
-    style: Attribute.Component<'component.style-section'>;
-  };
-}
-
-export interface BlockCategoryList extends Schema.Component {
-  collectionName: 'components_block_category_lists';
-  info: {
-    displayName: 'CategoryList';
-    icon: 'apps';
-    description: '';
-  };
-  attributes: {
-    empty: Attribute.Component<'shared.empty'>;
-  };
-}
-
-export interface BlockContact extends Schema.Component {
-  collectionName: 'components_block_contacts';
-  info: {
-    displayName: 'Contact';
-    icon: 'phone';
-    description: '';
-  };
-  attributes: {
-    friendlyAddress: Attribute.String;
-    location: Attribute.String;
-    map: Attribute.JSON &
-      Attribute.CustomField<'plugin::google-maps.location-picker'>;
-  };
-}
-
-export interface BlockFooter extends Schema.Component {
-  collectionName: 'components_block_footers';
-  info: {
-    displayName: 'Footer';
-    icon: 'server';
-    description: 'The footer block is used to display the footer of the website.';
-  };
-  attributes: {
-    FooterGrid: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 4;
-      }>;
-    FooterOne: Attribute.Component<'widget.footer-one'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    FooterTwo: Attribute.Component<'widget.footer-two'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    FooterThree: Attribute.Component<'widget.footer-two'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    FooterFour: Attribute.Component<'widget.footer-two'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    FooterBottom: Attribute.Component<'widget.footer-bottom'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    copyright: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-  };
-}
-
-export interface BlockJobCard extends Schema.Component {
-  collectionName: 'components_block_job_cards';
-  info: {
-    displayName: 'JobCard';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.String;
-    button: Attribute.Component<'component.link'>;
-    jobs: Attribute.Component<'config.job-list', true>;
-    empty: Attribute.Component<'shared.empty'>;
-    style: Attribute.Component<'component.style-section'>;
-  };
-}
-
-export interface BlockLatestApplied extends Schema.Component {
-  collectionName: 'components_block_latest_applieds';
-  info: {
-    displayName: 'Latest Applied';
-    icon: 'bulletList';
-  };
-  attributes: {
-    title: Attribute.String;
-    column_1: Attribute.String;
-    column_2: Attribute.String;
-    style: Attribute.Component<'component.style-section'>;
-    empty: Attribute.Component<'shared.empty'>;
-  };
-}
-
-export interface BlockLocationCard extends Schema.Component {
-  collectionName: 'components_block_location_cards';
-  info: {
-    displayName: 'LocationCard';
+    displayName: 'Category Card';
     icon: 'arrowRight';
   };
   attributes: {
-    Title: Attribute.String;
-    Description: Attribute.Text;
-    Image: Attribute.Media;
-    Location: Attribute.JSON &
-      Attribute.CustomField<'plugin::google-maps.location-picker'>;
-    Button: Attribute.Component<'component.link'>;
+    button: Schema.Attribute.Component<'component.link', false>;
+    category: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::padma-backend.category'
+    >;
+    content: Schema.Attribute.Component<'text.typography', true>;
+    empty: Schema.Attribute.Component<'shared.empty', false>;
+    style: Schema.Attribute.Component<'component.style-section', false>;
   };
 }
 
-export interface BlockManageCompanies extends Schema.Component {
-  collectionName: 'components_block_manage_companies';
+export interface BlockContentBox extends Struct.ComponentSchema {
+  collectionName: 'components_block_content_boxes';
   info: {
-    displayName: 'Manage Companies';
-    icon: 'bulletList';
-    description: '';
+    description: 'A content box with text, icons, and style options.';
+    displayName: 'Content Box';
+    icon: 'box';
   };
   attributes: {
-    title: Attribute.String;
-    subTitle: Attribute.String;
-    enableSearch: Attribute.Boolean & Attribute.DefaultTo<true>;
-    tableHead: Attribute.Component<'config.header-field', true> &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 4;
-        max: 4;
-      }>;
-    enableDelete: Attribute.Boolean;
-    enableEdit: Attribute.Boolean;
-    empty: Attribute.Component<'shared.empty'>;
-    style: Attribute.Component<'component.style-section'>;
-    addButtonText: Attribute.String;
-    editButtonText: Attribute.String;
-    perPageText: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Showing per page'>;
-    tableConfig: Attribute.Component<'config.header-config'> &
-      Attribute.Required;
-    form: Attribute.Component<'config.job-list'>;
+    content: Schema.Attribute.Component<'text.typography', true>;
+    empty: Schema.Attribute.Component<'shared.empty', false>;
+    icon_box: Schema.Attribute.Component<'component.icon-box', true>;
+    style: Schema.Attribute.Component<'component.style-section', false>;
   };
 }
 
-export interface BlockManageLists extends Schema.Component {
-  collectionName: 'components_block_manage_lists';
+export interface BlockImageCarousel extends Struct.ComponentSchema {
+  collectionName: 'components_block_image_carousels';
   info: {
-    displayName: 'Manage Lists';
-    icon: 'bulletList';
-    description: '';
+    description: 'Carousel component with configurable cards and styling options.';
+    displayName: 'Image Carousel';
+    icon: 'images';
   };
   attributes: {
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Manage Lists'>;
-    enableSearch: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-    tableConfig: Attribute.Component<'config.header-config'> &
-      Attribute.Required;
-    empty: Attribute.Component<'shared.empty'> & Attribute.Required;
-    tableHead: Attribute.Component<'config.header-field', true> &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 6;
-        max: 6;
-      }>;
-    addButtonText: Attribute.String;
-    editButtonText: Attribute.String;
-    perPageText: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Showing per page'>;
-    form: Attribute.Component<'config.job-list'>;
+    autoplay: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    cards: Schema.Attribute.Component<'config.carousel-card', true> &
+      Schema.Attribute.Required;
+    interval: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<3000>;
+    style: Schema.Attribute.Component<'component.style-section', false>;
+    variation: Schema.Attribute.Enumeration<
+      ['default', 'fade', 'slide', 'zoom']
+    > &
+      Schema.Attribute.DefaultTo<'default'>;
   };
 }
 
-export interface BlockManageResume extends Schema.Component {
-  collectionName: 'components_block_manage_resumes';
+export interface BlockImageGallery extends Struct.ComponentSchema {
+  collectionName: 'components_block_image_gallery';
   info: {
-    displayName: 'Manage Resume';
-    icon: 'arrowRight';
+    description: 'A component for displaying multiple images in various layouts.';
+    displayName: 'Image Gallery';
+    icon: 'gallery';
   };
   attributes: {
-    title: Attribute.String;
+    content: Schema.Attribute.Component<'text.typography', false>;
+    images: Schema.Attribute.Media<undefined, true> & Schema.Attribute.Required;
+    style: Schema.Attribute.Component<'component.style-section', false>;
+    variation: Schema.Attribute.Enumeration<
+      ['grid', 'masonry', 'carousel', 'grid-with-title']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'grid'>;
   };
 }
 
-export interface BlockPortfolio extends Schema.Component {
-  collectionName: 'components_block_portfolios';
-  info: {
-    displayName: 'portfolio';
-    icon: 'clock';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    image: Attribute.Media;
-    link: Attribute.Component<'component.link'>;
-  };
-}
-
-export interface BlockPrivateHeader extends Schema.Component {
+export interface BlockPrivateHeader extends Struct.ComponentSchema {
   collectionName: 'components_block_private_headers';
   info: {
+    description: '';
     displayName: 'Private Header';
     icon: 'server';
-    description: '';
   };
   attributes: {
-    light_logo: Attribute.Component<'header.logo'>;
-    dark_logo: Attribute.Component<'header.logo'>;
-    userMenu: Attribute.Component<'component.link', true>;
-    langMenu: Attribute.Component<'component.link', true>;
-    dark_mode: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-    notification: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
+    dark_logo: Schema.Attribute.Component<'header.logo', false>;
+    dark_mode: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    langMenu: Schema.Attribute.Component<'component.link', true>;
+    light_logo: Schema.Attribute.Component<'header.logo', false>;
+    notification: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    userMenu: Schema.Attribute.Component<'component.link', true>;
   };
 }
 
-export interface BlockProfile extends Schema.Component {
-  collectionName: 'components_block_profiles';
-  info: {
-    displayName: 'Profile';
-    icon: 'arrowRight';
-    description: '';
-  };
-  attributes: {};
-}
-
-export interface BlockPublicHeader extends Schema.Component {
+export interface BlockPublicHeader extends Struct.ComponentSchema {
   collectionName: 'components_block_headers';
   info: {
+    description: 'The header block is used to display the header of the website.';
     displayName: 'Public Header';
     icon: 'layout';
-    description: 'The header block is used to display the header of the website.';
   };
   attributes: {
-    light_logo: Attribute.Component<'header.logo'>;
-    dark_logo: Attribute.Component<'header.logo'>;
-    dark_mode: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-    notification: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-    MainMenu: Attribute.Component<'component.menu', true> &
-      Attribute.SetPluginOptions<{
+    Button: Schema.Attribute.Component<'component.link', true> &
+      Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    langMenu: Attribute.Component<'component.link', true> &
-      Attribute.SetPluginOptions<{
+    dark_logo: Schema.Attribute.Component<'header.logo', false>;
+    dark_mode: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    langMenu: Schema.Attribute.Component<'component.link', true> &
+      Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
         };
       }>;
-    userMenu: Attribute.Component<'component.link', true>;
-    Button: Attribute.Component<'component.link', true> &
-      Attribute.SetPluginOptions<{
+    light_logo: Schema.Attribute.Component<'header.logo', false>;
+    MainMenu: Schema.Attribute.Component<'config.menu', true> &
+      Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
+    notification: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    userMenu: Schema.Attribute.Component<'component.link', true>;
   };
 }
 
-export interface BlockRecentActivities extends Schema.Component {
-  collectionName: 'components_block_recent_activities';
+export interface BlockReviewBlock extends Struct.ComponentSchema {
+  collectionName: 'components_block_reviews';
   info: {
-    displayName: 'Notification Lists';
-    icon: 'bulletList';
-    description: '';
+    description: 'A block for displaying multiple reviews with customizable options.';
+    displayName: 'Review Block';
+    icon: 'star';
   };
   attributes: {
-    title: Attribute.String;
-    style: Attribute.Component<'component.style-section'>;
-    column_1: Attribute.String & Attribute.Required;
-    empty: Attribute.Component<'shared.empty'>;
+    button: Schema.Attribute.Component<'component.link', false>;
+    content: Schema.Attribute.Component<'text.typography', true>;
+    empty: Schema.Attribute.Component<'shared.empty', false>;
+    reviews: Schema.Attribute.Component<'config.review-card', true>;
+    style: Schema.Attribute.Component<'component.style-section', false>;
+    variation: Schema.Attribute.Enumeration<
+      ['default', 'compact', 'detailed']
+    > &
+      Schema.Attribute.DefaultTo<'default'>;
   };
 }
 
-export interface BlockReviewCard extends Schema.Component {
-  collectionName: 'components_block_review_cards';
+export interface ComponentGridContainer extends Struct.ComponentSchema {
+  collectionName: 'components_component_grid_containers';
   info: {
-    displayName: 'ReviewCard';
     description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.String;
-    reviews: Attribute.Component<'config.job-list', true>;
-    empty: Attribute.Component<'shared.empty'>;
-    style: Attribute.Component<'component.style-section'>;
-  };
-}
-
-export interface ComponentExperience extends Schema.Component {
-  collectionName: 'components_component_experiences';
-  info: {
-    displayName: 'Experience / Education';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    startDate: Attribute.Date;
-    endDate: Attribute.Date;
-    institution: Attribute.String;
-  };
-}
-
-export interface ComponentGirdContainer extends Schema.Component {
-  collectionName: 'components_component_gird_containers';
-  info: {
-    displayName: 'GirdContainer';
+    displayName: 'GridContainer';
     icon: 'brush';
-    description: '';
   };
   attributes: {
-    columnSpacing: Attribute.Decimal &
-      Attribute.SetMinMax<{
-        min: 0;
-      }>;
-    rowSpacing: Attribute.Decimal &
-      Attribute.SetMinMax<{
-        min: 0;
-      }>;
-    spacing: Attribute.Decimal &
-      Attribute.SetMinMax<{
-        min: 0;
-      }>;
-    wrap: Attribute.Enumeration<['wrap-reverse', 'nowrap', 'wrap']> &
-      Attribute.DefaultTo<'wrap'>;
-    zeroMinWidth: Attribute.Boolean & Attribute.DefaultTo<false>;
-    columns: Attribute.Integer &
-      Attribute.SetMinMax<{
-        min: 0;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<12>;
+    columns: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
+    columnSpacing: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    rowSpacing: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    spacing: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    wrap: Schema.Attribute.Enumeration<['wrap-reverse', 'nowrap', 'wrap']> &
+      Schema.Attribute.DefaultTo<'wrap'>;
+    zeroMinWidth: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
 
-export interface ComponentIconBox extends Schema.Component {
+export interface ComponentIconBox extends Struct.ComponentSchema {
   collectionName: 'components_component_icon_boxes';
   info: {
-    displayName: 'IconBox';
+    description: '';
+    displayName: 'Icon Box';
     icon: 'apps';
-    description: '';
   };
   attributes: {
-    name: Attribute.String;
-    feedback: Attribute.Text;
-    avatar: Attribute.Media;
-    designation: Attribute.String;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.DefaultTo<'Short description about the icon box.'>;
+    icon: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'bx:info-circle'>;
+    link: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Your Title Here'>;
   };
 }
 
-export interface ComponentIconWithLabel extends Schema.Component {
-  collectionName: 'components_component_icon_with_labels';
-  info: {
-    displayName: 'IconWithLabel';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    icon: Attribute.String & Attribute.DefaultTo<'bx:smile'>;
-  };
-}
-
-export interface ComponentImage extends Schema.Component {
-  collectionName: 'components_component_images';
-  info: {
-    displayName: 'Image';
-    icon: 'paperPlane';
-    description: '';
-  };
-  attributes: {
-    image: Attribute.Media;
-    Alt: Attribute.String;
-    link: Attribute.String;
-  };
-}
-
-export interface ComponentLink extends Schema.Component {
+export interface ComponentLink extends Struct.ComponentSchema {
   collectionName: 'components_component_links';
   info: {
+    description: '';
     displayName: 'Link';
     icon: 'cursor';
-    description: '';
   };
   attributes: {
-    label: Attribute.String;
-    link: Attribute.String;
-    type: Attribute.Enumeration<['External', 'Internal']>;
-    target: Attribute.Enumeration<['_blank', '_self']>;
-    icon: Attribute.String & Attribute.DefaultTo<'bx:smile'>;
-    disabled: Attribute.Boolean & Attribute.DefaultTo<false>;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    icon: Schema.Attribute.String & Schema.Attribute.DefaultTo<'bx:smile'>;
+    label: Schema.Attribute.String;
+    link: Schema.Attribute.String;
+    target: Schema.Attribute.Enumeration<['_blank', '_self']>;
+    type: Schema.Attribute.Enumeration<['External', 'Internal']>;
   };
 }
 
-export interface ComponentMenu extends Schema.Component {
+export interface ComponentMenu extends Struct.ComponentSchema {
   collectionName: 'components_component_menus';
   info: {
+    description: '';
     displayName: 'Menu';
     icon: 'bulletList';
-    description: '';
   };
   attributes: {
-    label: Attribute.String & Attribute.Required;
-    link: Attribute.String & Attribute.Required;
-    type: Attribute.Enumeration<['External', 'Internal']>;
-    target: Attribute.Enumeration<['_blank', '_self']>;
-    icon: Attribute.String & Attribute.DefaultTo<'bx:smile'>;
-    disabled: Attribute.Boolean & Attribute.DefaultTo<false>;
-    child: Attribute.Component<'component.link', true>;
+    child: Schema.Attribute.Component<'component.link', true>;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    icon: Schema.Attribute.String & Schema.Attribute.DefaultTo<'bx:smile'>;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    link: Schema.Attribute.String & Schema.Attribute.Required;
+    target: Schema.Attribute.Enumeration<['_blank', '_self']>;
+    type: Schema.Attribute.Enumeration<['External', 'Internal']>;
   };
 }
 
-export interface ComponentMetaData extends Schema.Component {
-  collectionName: 'components_component_meta_data';
-  info: {
-    displayName: 'MetaData';
-    icon: 'chartBubble';
-    description: '';
-  };
-  attributes: {
-    key: Attribute.String;
-    value: Attribute.String;
-  };
-}
-
-export interface ComponentPageTitle extends Schema.Component {
+export interface ComponentPageTitle extends Struct.ComponentSchema {
   collectionName: 'components_component_page_titles';
   info: {
     displayName: 'pageTitle';
     icon: 'arrowRight';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface ComponentSearch extends Schema.Component {
-  collectionName: 'components_component_searches';
-  info: {
-    displayName: 'search';
-    icon: 'arrowRight';
-  };
-  attributes: {
-    test: Attribute.String;
-  };
-}
-
-export interface ComponentShareJob extends Schema.Component {
-  collectionName: 'components_component_share_jobs';
-  info: {
-    displayName: 'ShareJob';
-  };
-  attributes: {
-    facebook: Attribute.String;
-    twitter: Attribute.String;
-    instagram: Attribute.String;
-    linkedin: Attribute.String;
-    link: Attribute.String;
-  };
-}
-
-export interface ComponentSocialLink extends Schema.Component {
+export interface ComponentSocialLink extends Struct.ComponentSchema {
   collectionName: 'components_component_social_links';
   info: {
+    description: '';
     displayName: 'SocialLink';
     icon: 'arrowRight';
-    description: '';
   };
   attributes: {
-    title: Attribute.String;
-    link: Attribute.String;
-    icon: Attribute.String & Attribute.CustomField<'plugin::react-icons.icon'>;
+    link: Schema.Attribute.String;
+    title: Schema.Attribute.String;
   };
 }
 
-export interface ComponentStyleSection extends Schema.Component {
+export interface ComponentStyleSection extends Struct.ComponentSchema {
   collectionName: 'components_component_style_sections';
   info: {
+    description: '';
     displayName: 'styleSection';
     icon: 'arrowUp';
-    description: '';
   };
   attributes: {
-    color: Attribute.String;
-    backgroundColor: Attribute.String;
-    mobile: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<12>;
-    tab: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-      }> &
-      Attribute.DefaultTo<12>;
-    desktop: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<12>;
+    backgroundColor: Schema.Attribute.String;
+    color: Schema.Attribute.String;
+    desktop: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
+    mobile: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
+    tab: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
   };
 }
 
-export interface ComponentTextField extends Schema.Component {
+export interface ComponentTextField extends Struct.ComponentSchema {
   collectionName: 'components_component_text_fields';
   info: {
+    description: '';
     displayName: 'Text Field';
     icon: 'bulletList';
-    description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface ComponentTitles extends Schema.Component {
+export interface ComponentTitles extends Struct.ComponentSchema {
   collectionName: 'components_component_titles';
   info: {
+    description: '';
     displayName: 'Titles';
     icon: 'arrowRight';
-    description: '';
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    button: Attribute.Component<'component.link'>;
+    button: Schema.Attribute.Component<'component.link', false>;
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
   };
 }
 
-export interface ConfigHeaderConfig extends Schema.Component {
+export interface ConfigCarouselCard extends Struct.ComponentSchema {
+  collectionName: 'components_carousel_cards';
+  info: {
+    description: 'Card with title, paragraph, and image for use in carousel components.';
+    displayName: 'Carousel Card';
+    icon: 'image';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images'>;
+    paragraph: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface ConfigHeaderConfig extends Struct.ComponentSchema {
   collectionName: 'components_config_header_configs';
   info: {
+    description: '';
     displayName: 'headerConfig';
     icon: 'arrowRight';
-    description: '';
   };
   attributes: {
-    enableEdit: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-    enableDelete: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-    tableHeader: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'title',
-          'type',
-          'status',
-          'action',
-          'description',
-          'salary',
-          'createdAt',
-          'updatedAt',
-          'publishedAt',
-          'tags',
-          'vacancy',
-          'slug',
-          'startDate',
-          'endDate'
-        ]
-      >;
+    enableDelete: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    enableEdit: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
   };
 }
 
-export interface ConfigHeaderField extends Schema.Component {
+export interface ConfigHeaderField extends Struct.ComponentSchema {
   collectionName: 'components_config_header_fields';
   info: {
+    description: '';
     displayName: 'headerField';
-    description: '';
   };
   attributes: {
-    label: Attribute.String & Attribute.Required & Attribute.DefaultTo<'Name'>;
-    sort: Attribute.Boolean & Attribute.DefaultTo<false>;
-    align: Attribute.Enumeration<['left', 'right', 'center']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'left'>;
+    align: Schema.Attribute.Enumeration<['left', 'right', 'center']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'left'>;
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Name'>;
+    sort: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
 
-export interface ConfigJobList extends Schema.Component {
-  collectionName: 'components_config_job_lists';
+export interface ConfigMenu extends Struct.ComponentSchema {
+  collectionName: 'components_config_menus';
   info: {
-    displayName: 'relations';
-    icon: 'apps';
     description: '';
+    displayName: 'Menu';
+    icon: 'bulletList';
   };
   attributes: {
-    relationId: Attribute.Integer;
+    child: Schema.Attribute.Component<'component.link', true>;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    icon: Schema.Attribute.String & Schema.Attribute.DefaultTo<'bx:smile'>;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    link: Schema.Attribute.String & Schema.Attribute.Required;
+    target: Schema.Attribute.Enumeration<['_blank', '_self']>;
+    type: Schema.Attribute.Enumeration<['External', 'Internal']>;
   };
 }
 
-export interface ConfigMessage extends Schema.Component {
-  collectionName: 'components_config_messages';
+export interface ConfigMetaData extends Struct.ComponentSchema {
+  collectionName: 'components_component_meta_datas';
   info: {
-    displayName: 'Message';
-    icon: 'arrowRight';
     description: '';
+    displayName: 'Meta Data';
+    icon: 'chartBubble';
   };
   attributes: {
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Messages'>;
-    enableSearch: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-    empty_messages: Attribute.Component<'shared.empty'> & Attribute.Required;
-    empty_chat: Attribute.Component<'shared.empty'> & Attribute.Required;
-    saveButtonText: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Save'>;
-    editActionText: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Edit'>;
-    copyActionText: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Copy'>;
-    searchPlaceholder: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Search'>;
-    sendMessagePlaceholder: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Type Something'>;
-    cancelButtonText: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Cancel'>;
+    key: Schema.Attribute.String;
+    value: Schema.Attribute.String;
   };
 }
 
-export interface ConfigRecentJobsHeader extends Schema.Component {
-  collectionName: 'components_config_recent_jobs_headers';
+export interface ConfigReviewCard extends Struct.ComponentSchema {
+  collectionName: 'components_review_cards';
   info: {
-    displayName: 'RecentJobsHeader';
-    icon: 'arrowRight';
     description: '';
+    displayName: 'Review Card';
+    icon: 'star';
   };
   attributes: {
-    title: Attribute.String;
-    subtitle: Attribute.String;
-    fields: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['title', 'datePosted', 'dateEnded']
-      >;
-    style: Attribute.Component<'component.style-section'>;
+    avatar: Schema.Attribute.Media;
+    date: Schema.Attribute.Date;
+    rating: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<5>;
+    review: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'This is a review text.'>;
+    reviewer: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'John Doe'>;
   };
 }
 
-export interface ConfigRole extends Schema.Component {
+export interface ConfigRole extends Struct.ComponentSchema {
   collectionName: 'components_config_roles';
   info: {
     displayName: 'role';
     icon: 'user';
   };
   attributes: {
-    role: Attribute.Enumeration<['employer', 'candidate', 'authenticated']>;
+    role: Schema.Attribute.Enumeration<
+      ['employer', 'candidate', 'authenticated']
+    >;
   };
 }
 
-export interface ConfigSinglePage extends Schema.Component {
+export interface ConfigSinglePage extends Struct.ComponentSchema {
   collectionName: 'components_config_single_pages';
   info: {
+    description: '';
     displayName: 'singlePage';
     icon: 'arrowRight';
-    description: '';
   };
   attributes: {
-    slug: Attribute.String;
-    collectionModel: Attribute.String & Attribute.DefaultTo<'api/posts'>;
-    singelModel: Attribute.String;
+    collectionModel: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'api/posts'>;
+    singelModel: Schema.Attribute.String;
+    slug: Schema.Attribute.String;
   };
 }
 
-export interface ConfigTableHead extends Schema.Component {
+export interface ConfigTableHead extends Struct.ComponentSchema {
   collectionName: 'components_config_table_heads';
   info: {
     displayName: 'tableHead';
     icon: 'bulletList';
   };
   attributes: {
-    fields: Attribute.Component<'config.header-field', true>;
+    fields: Schema.Attribute.Component<'config.header-field', true>;
   };
 }
 
-export interface FormsCandidateFilter extends Schema.Component {
-  collectionName: 'components_forms_candidate_filters';
-  info: {
-    displayName: 'CandidateFilter';
-    description: '';
-  };
-  attributes: {
-    showFilter: Attribute.Boolean;
-    search: Attribute.Component<'forms.seaech-form'>;
-    rate: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['Rate', '10k', '20k', '30k', '40k', '50k']
-      >;
-    button: Attribute.Component<'component.link'>;
-    categories: Attribute.Component<'config.job-list'>;
-  };
-}
-
-export interface FormsCompanyFilter extends Schema.Component {
-  collectionName: 'components_forms_company_filters';
-  info: {
-    displayName: 'CompanyFilter';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    search: Attribute.String;
-    industry: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'Accounting/Finance',
-          'Design/Creative',
-          'Automotive Jobs',
-          'Bank/Non-Bank Finance',
-          'Commercial/Supply',
-          'Construction/Facilities',
-          'Education/Training',
-          'Electrician/Repair',
-          'Engineer/Architects',
-          'Hospitality/Travel',
-          'IT/Telecommunication',
-          'Marketing/Sales'
-        ]
-      >;
-    company_size: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['1-24', '25-49', '50-99', '100-199', '200-500']
-      >;
-    average_salary: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['10k-20k', '21k-30k', '31k-50k', '51k-100k']
-      >;
-    revenue: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['0-50,000', '50,001-100,000']
-      >;
-    showFilter: Attribute.Boolean;
-    button: Attribute.Component<'component.link'>;
-  };
-}
-
-export interface FormsFileInput extends Schema.Component {
-  collectionName: 'components_forms_file_inputs';
-  info: {
-    displayName: 'File Input';
-    icon: 'landscape';
-    description: '';
-  };
-  attributes: {
-    label: Attribute.String;
-    name: Attribute.String & Attribute.Required;
-    required: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    fullWidth: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    errorText: Attribute.String;
-    noteText: Attribute.String;
-    accept: Attribute.JSON &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          '.jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg',
-          '.doc, .docx, .pdf, .txt, .odt, .rtf',
-          '.xls, .xlsx, .csv, .ppt, .pptx',
-          '.mp3, .wav, .mp4, .mov, .avi, .mkv',
-          '.zip, .rar, .7z, .tar, .gz, ',
-          '.json, .xml, .html, .css, .js'
-        ]
-      >;
-    multiple: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    mobileGrid: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<12>;
-    tabGrid: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<6>;
-    desktopGrid: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<6>;
-    inputStep: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 5;
-      }> &
-      Attribute.DefaultTo<1>;
-  };
-}
-
-export interface FormsFilter extends Schema.Component {
-  collectionName: 'components_forms_filters';
-  info: {
-    displayName: 'Filter';
-    icon: 'collapse';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    categories: Attribute.Relation<
-      'forms.filter',
-      'oneToMany',
-      'api::category.category'
-    >;
-    sort: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'Hight to Low:price-desc',
-          'Low to High:price-asc',
-          'A to Z:title-desc',
-          'Z to A:title-asc',
-          'New to Old:date-desc',
-          'Old to New:date-asc'
-        ]
-      >;
-    jobType: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'Full Time:Full Time',
-          'Part Time:Part Time',
-          'Freelance:Freelance',
-          'Internship:Internship',
-          'Contract Based:Contract Based'
-        ]
-      >;
-    company_size: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['1-24', '25-49', '50-99', '100-199', '200-500']
-      >;
-    avarage_salary: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['10k-20k', '21k-30k', '31k-50k', '51k-100k']
-      >;
-    revenue: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['0-50,000', '50,001-100,000']
-      >;
-    rate: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['10k', '20k', '30k', '40k']
-      >;
-  };
-}
-
-export interface FormsFormButtons extends Schema.Component {
+export interface FormsFormButtons extends Struct.ComponentSchema {
   collectionName: 'components_forms_form_buttons';
   info: {
     displayName: 'formButtons';
     icon: 'server';
   };
   attributes: {
-    cancel: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Cancel'>;
-    back: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Previous'>;
-    next: Attribute.String & Attribute.Required & Attribute.DefaultTo<'Next'>;
-    submit: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Submit'>;
-    skip: Attribute.String & Attribute.Required & Attribute.DefaultTo<'Skip'>;
+    back: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Previous'>;
+    cancel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Cancel'>;
+    next: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Next'>;
+    skip: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Skip'>;
+    submit: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Submit'>;
   };
 }
 
-export interface FormsGoogleMap extends Schema.Component {
+export interface FormsGoogleMap extends Struct.ComponentSchema {
   collectionName: 'components_forms_google_maps';
   info: {
     displayName: 'Google Map';
     icon: 'pinMap';
   };
   attributes: {
-    label: Attribute.String;
-    name: Attribute.String & Attribute.Required;
-    required: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    inputStep: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 5;
-      }> &
-      Attribute.DefaultTo<1>;
-    noteText: Attribute.String;
-    errorText: Attribute.String;
+    errorText: Schema.Attribute.String;
+    inputStep: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
+    label: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    noteText: Schema.Attribute.String;
+    required: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
   };
 }
 
-export interface FormsInput extends Schema.Component {
+export interface FormsInput extends Struct.ComponentSchema {
   collectionName: 'components_forms_inputs';
   info: {
+    description: '';
     displayName: 'Input';
     icon: 'puzzle';
-    description: '';
   };
   attributes: {
-    label: Attribute.String;
-    placeholder: Attribute.String;
-    required: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    fullWidth: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    errorText: Attribute.String;
-    name: Attribute.String & Attribute.Required;
-    type: Attribute.Enumeration<
+    defaultValue: Schema.Attribute.String;
+    desktopGrid: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
+    errorText: Schema.Attribute.String;
+    fullWidth: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    inputStep: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
+    label: Schema.Attribute.String;
+    mobileGrid: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    noteText: Schema.Attribute.String;
+    placeholder: Schema.Attribute.String;
+    required: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    tabGrid: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
+    type: Schema.Attribute.Enumeration<
       ['text', 'date', 'email', 'number', 'password', 'textarea', 'tel', 'url']
     > &
-      Attribute.Required &
-      Attribute.DefaultTo<'text'>;
-    mobileGrid: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<12>;
-    tabGrid: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<12>;
-    desktopGrid: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<12>;
-    inputStep: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 5;
-      }> &
-      Attribute.DefaultTo<1>;
-    noteText: Attribute.String;
-    defaultValue: Attribute.String;
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'text'>;
   };
 }
 
-export interface FormsJobFilter extends Schema.Component {
-  collectionName: 'components_forms_job_filters';
-  info: {
-    displayName: 'JobFilter';
-    description: '';
-  };
-  attributes: {
-    job_type: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'Full Time:Full Time',
-          'Part Time:Part Time',
-          'Freelance:Freelance',
-          'Internship:Internship',
-          'Contract Based:Contract Based'
-        ]
-      >;
-    sort: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'Hight to Low:price-desc',
-          'Low to High:price-asc',
-          'A to Z:title-desc',
-          'Z to A:title-asc',
-          'New to Old:date-desc',
-          'Old to New:date-asc'
-        ]
-      >;
-    title: Attribute.String;
-    description: Attribute.Text;
-    button: Attribute.Component<'component.link'>;
-    search: Attribute.Component<'forms.seaech-form'>;
-    categories: Attribute.Component<'config.job-list'>;
-  };
-}
-
-export interface FormsMarkdown extends Schema.Component {
+export interface FormsMarkdown extends Struct.ComponentSchema {
   collectionName: 'components_component_markdowns';
   info: {
+    description: '';
     displayName: 'markdown';
     icon: 'italic';
-    description: '';
   };
   attributes: {
-    inputStep: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 5;
-      }> &
-      Attribute.DefaultTo<1>;
-    noteText: Attribute.String;
-    label: Attribute.String;
-    name: Attribute.String;
-    required: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    errorText: Attribute.String;
+    errorText: Schema.Attribute.String;
+    inputStep: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
+    label: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    noteText: Schema.Attribute.String;
+    required: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
   };
 }
 
-export interface FormsSeaechForm extends Schema.Component {
-  collectionName: 'components_forms_seaech_forms';
+export interface FormsSearchForm extends Struct.ComponentSchema {
+  collectionName: 'components_forms_search_forms';
   info: {
+    description: '';
     displayName: 'Search';
-    description: '';
   };
   attributes: {
-    title: Attribute.String;
-    searchByWords: Attribute.String;
-    searchByLocation: Attribute.String;
-    button: Attribute.String;
-    link: Attribute.String;
-    searchByCategory: Attribute.String;
+    button: Schema.Attribute.String;
+    link: Schema.Attribute.String;
+    searchByCategory: Schema.Attribute.String;
+    searchByLocation: Schema.Attribute.String;
+    searchByWords: Schema.Attribute.String;
+    title: Schema.Attribute.String;
   };
 }
 
-export interface FormsSearchFilter extends Schema.Component {
-  collectionName: 'components_forms_search_filters';
+export interface FormsSelect extends Struct.ComponentSchema {
+  collectionName: 'components_forms_selects';
   info: {
-    displayName: 'SearchFilter';
-    icon: 'collapse';
     description: '';
+    displayName: 'select';
+    icon: 'bulletList';
   };
   attributes: {
-    title: Attribute.String;
-    search: Attribute.Component<'forms.seaech-form'>;
-    filter: Attribute.Component<'forms.filter'>;
-    description: Attribute.Text;
+    desktopGrid: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<6>;
+    errorText: Schema.Attribute.String;
+    fullWidth: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    inputStep: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
+    label: Schema.Attribute.String;
+    mobileGrid: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
+    model: Schema.Attribute.String;
+    multiple: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    name: Schema.Attribute.String;
+    noteText: Schema.Attribute.String;
+    options: Schema.Attribute.Component<'forms.select-item', true>;
+    placeholder: Schema.Attribute.String;
+    required: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    tabGrid: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<6>;
   };
 }
 
-export interface FormsSelectItem extends Schema.Component {
+export interface FormsSelectItem extends Struct.ComponentSchema {
   collectionName: 'components_forms_select_items';
   info: {
     displayName: 'selectItem';
     icon: 'check';
   };
   attributes: {
-    label: Attribute.String;
-    value: Attribute.String;
+    label: Schema.Attribute.String;
+    value: Schema.Attribute.String;
   };
 }
 
-export interface FormsSelect extends Schema.Component {
-  collectionName: 'components_forms_selects';
-  info: {
-    displayName: 'select';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    name: Attribute.String;
-    label: Attribute.String;
-    placeholder: Attribute.String;
-    required: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    fullWidth: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    errorText: Attribute.String;
-    mobileGrid: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<12>;
-    tabGrid: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<6>;
-    desktopGrid: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 12;
-      }> &
-      Attribute.DefaultTo<6>;
-    inputStep: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 5;
-      }> &
-      Attribute.DefaultTo<1>;
-    noteText: Attribute.String;
-    options: Attribute.Component<'forms.select-item', true>;
-    model: Attribute.String;
-    multiple: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-  };
-}
-
-export interface HeaderBreadcrumbs extends Schema.Component {
-  collectionName: 'components_header_breadcrumbs';
-  info: {
-    displayName: 'Breadcrumbs';
-    icon: 'manyWays';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    showBreadcrumb: Attribute.Boolean;
-    style: Attribute.JSON;
-    background_image: Attribute.Media;
-  };
-}
-
-export interface HeaderLogo extends Schema.Component {
+export interface HeaderLogo extends Struct.ComponentSchema {
   collectionName: 'components_header_logos';
   info: {
+    description: '';
     displayName: 'Logo';
     icon: 'chartBubble';
-    description: '';
   };
   attributes: {
-    logo: Attribute.Media;
-    link: Attribute.String;
-    xs_width: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 0;
-      }> &
-      Attribute.DefaultTo<150>;
-    sm_width: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 0;
-      }> &
-      Attribute.DefaultTo<160>;
-    md_width: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 0;
-      }> &
-      Attribute.DefaultTo<175>;
+    link: Schema.Attribute.String;
+    logo: Schema.Attribute.Media<'images'>;
+    md_width: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<175>;
+    sm_width: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<160>;
+    xs_width: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<150>;
   };
 }
 
-export interface HeaderTopbar extends Schema.Component {
+export interface HeaderTopbar extends Struct.ComponentSchema {
   collectionName: 'components_header_topbars';
   info: {
+    description: '';
     displayName: 'Topbar';
     icon: 'paperPlane';
-    description: '';
   };
   attributes: {
-    announcement: Attribute.String;
-    menu: Attribute.Component<'component.link', true>;
+    announcement: Schema.Attribute.String;
+    menu: Schema.Attribute.Component<'component.link', true>;
   };
 }
 
-export interface LayoutColumns extends Schema.Component {
+export interface LayoutColumns extends Struct.ComponentSchema {
   collectionName: 'components_layout_columns';
   info: {
     displayName: 'Columns';
@@ -1307,101 +853,121 @@ export interface LayoutColumns extends Schema.Component {
   attributes: {};
 }
 
-export interface SharedEmpty extends Schema.Component {
+export interface SharedEmpty extends Struct.ComponentSchema {
   collectionName: 'components_shared_empties';
   info: {
+    description: '';
     displayName: 'empty';
     icon: 'archive';
-    description: '';
   };
   attributes: {
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'No Data Founds'>;
-    description: Attribute.Text &
-      Attribute.Required &
-      Attribute.DefaultTo<'Try to refresh the page or check back later'>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Try to refresh the page or check back later'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'No Data Founds'>;
   };
 }
 
-export interface SharedMetaSocial extends Schema.Component {
+export interface SharedMetaSocial extends Struct.ComponentSchema {
   collectionName: 'components_shared_meta_socials';
   info: {
     displayName: 'metaSocial';
     icon: 'project-diagram';
   };
   attributes: {
-    socialNetwork: Attribute.Enumeration<['Facebook', 'Twitter']> &
-      Attribute.Required;
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60;
-      }>;
-    description: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    description: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         maxLength: 65;
       }>;
-    image: Attribute.Media;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    socialNetwork: Schema.Attribute.Enumeration<['Facebook', 'Twitter']> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
   };
 }
 
-export interface SharedSeo extends Schema.Component {
+export interface SharedSeo extends Struct.ComponentSchema {
   collectionName: 'components_shared_seos';
   info: {
     displayName: 'seo';
     icon: 'search';
   };
   attributes: {
-    metaTitle: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    canonicalURL: Schema.Attribute.String;
+    keywords: Schema.Attribute.Text;
+    metaDescription: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+        minLength: 50;
+      }>;
+    metaImage: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    metaRobots: Schema.Attribute.String;
+    metaSocial: Schema.Attribute.Component<'shared.meta-social', true>;
+    metaTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         maxLength: 60;
       }>;
-    metaDescription: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 50;
-        maxLength: 160;
-      }>;
-    metaImage: Attribute.Media;
-    metaSocial: Attribute.Component<'shared.meta-social', true>;
-    keywords: Attribute.Text;
-    metaRobots: Attribute.String;
-    structuredData: Attribute.JSON;
-    metaViewport: Attribute.String;
-    canonicalURL: Attribute.String;
+    metaViewport: Schema.Attribute.String;
+    structuredData: Schema.Attribute.JSON;
   };
 }
 
-export interface SharedShareMenu extends Schema.Component {
+export interface SharedShareMenu extends Struct.ComponentSchema {
   collectionName: 'components_shared_share_menus';
   info: {
     displayName: 'Share Menu';
     icon: 'server';
   };
   attributes: {
-    role: Attribute.Enumeration<['candidate', 'employer']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'candidate'>;
-    menus: Attribute.Component<'component.menu', true> &
-      Attribute.SetPluginOptions<{
+    menus: Schema.Attribute.Component<'config.menu', true> &
+      Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
+    role: Schema.Attribute.Enumeration<['candidate', 'employer']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'candidate'>;
   };
 }
 
-export interface SharedSocialMedias extends Schema.Component {
+export interface SharedSharedMenu extends Struct.ComponentSchema {
+  collectionName: 'components_shared_menus';
+  info: {
+    displayName: 'Menu';
+    icon: 'server';
+  };
+  attributes: {
+    menus: Schema.Attribute.Component<'config.menu', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    role: Schema.Attribute.Enumeration<['candidate', 'employer']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'candidate'>;
+  };
+}
+
+export interface SharedSocialMedias extends Struct.ComponentSchema {
   collectionName: 'components_shared_social_medias';
   info: {
     displayName: 'Social Medias';
     icon: 'earth';
   };
   attributes: {
-    type: Attribute.Enumeration<
+    link: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<
       [
         'facebook',
         'instagram',
@@ -1420,426 +986,128 @@ export interface SharedSocialMedias extends Schema.Component {
         'viber',
         'line',
         'kik',
-        'clubhouse'
+        'clubhouse',
       ]
     > &
-      Attribute.Required;
-    link: Attribute.String & Attribute.Required;
+      Schema.Attribute.Required;
   };
 }
 
-export interface SharedSpacing extends Schema.Component {
+export interface SharedSpacing extends Struct.ComponentSchema {
   collectionName: 'components_shared_spacings';
   info: {
     displayName: 'spacing';
     icon: 'oneToOne';
   };
   attributes: {
-    gap: Attribute.Integer &
-      Attribute.SetMinMax<{
-        min: 0;
-      }>;
+    gap: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
   };
 }
 
-export interface SingleTypeBlogDetails extends Schema.Component {
+export interface SingleTypeBlogDetails extends Struct.ComponentSchema {
   collectionName: 'components_single_type_blog_details';
   info: {
+    description: '';
     displayName: 'Blog Details';
     icon: 'arrowRight';
-    description: '';
   };
   attributes: {
-    title: Attribute.String;
-    style: Attribute.Component<'component.style-section'>;
-    sidebar: Attribute.Enumeration<
+    sidebar: Schema.Attribute.Enumeration<
       ['Left Sidebar', 'Right Sidebar', 'Both Sidebar', 'No Sidebar']
     >;
+    style: Schema.Attribute.Component<'component.style-section', false>;
+    title: Schema.Attribute.String;
   };
 }
 
-export interface SingleTypeCompanyDeatils extends Schema.Component {
-  collectionName: 'components_single_type_company_deatils';
+export interface TextTypography extends Struct.ComponentSchema {
+  collectionName: 'components_content_typography';
   info: {
-    displayName: 'companyDeatils';
-    icon: 'arrowRight';
+    displayName: 'Typography';
   };
   attributes: {
-    title: Attribute.String;
-    styles: Attribute.Component<'component.style-section'>;
+    text: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'Your text here'>;
+    type: Schema.Attribute.Enumeration<
+      ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Body1', 'Body2', 'Caption']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'H2'>;
   };
 }
 
-export interface SingleTypeJobDetails extends Schema.Component {
-  collectionName: 'components_single_type_job_details';
+export interface UiAuthorInfo extends Struct.ComponentSchema {
+  collectionName: 'ui_author-info';
   info: {
-    displayName: 'job Details';
-    icon: 'arrowRight';
-    description: '';
+    description: 'Author details for the article';
+    displayName: 'Author Info';
+    icon: 'user';
   };
   attributes: {
-    title: Attribute.String;
-    styles: Attribute.Component<'component.style-section'>;
+    bio: Schema.Attribute.Text;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    profilePicture: Schema.Attribute.Media<'images'>;
   };
 }
 
-export interface SingleTypeResumeDetails extends Schema.Component {
-  collectionName: 'components_single_type_resume_details';
+export interface UiContentSection extends Struct.ComponentSchema {
+  collectionName: 'ui_content_section';
   info: {
-    displayName: 'Resume Details';
-    icon: 'arrowRight';
-    description: '';
+    description: 'Content section for the article';
+    displayName: 'Content Section';
+    icon: 'file';
   };
   attributes: {
-    title: Attribute.String;
-    styles: Attribute.Component<'component.style-section'>;
+    body: Schema.Attribute.RichText;
+    demo: Schema.Attribute.Component<'ui.author-info', false>;
+    heading: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'>;
   };
 }
 
-export interface TableAppliedJobs extends Schema.Component {
-  collectionName: 'components_table_applied_jobs';
-  info: {
-    displayName: 'Applied Jobs';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    tableConfig: Attribute.Component<'config.header-config'>;
-    empty: Attribute.Component<'shared.empty'>;
-    tableHead: Attribute.Component<'config.header-field', true>;
-    style: Attribute.Component<'component.style-section'>;
-  };
-}
-
-export interface TableBookmark extends Schema.Component {
-  collectionName: 'components_table_bookmarks';
-  info: {
-    displayName: 'bookmark';
-    icon: 'bell';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.String;
-    enableSearch: Attribute.Boolean;
-    style: Attribute.Component<'component.style-section'>;
-    tableConfig: Attribute.Component<'config.header-config'>;
-  };
-}
-
-export interface TableMeta extends Schema.Component {
-  collectionName: 'components_table_metas';
-  info: {
-    displayName: 'meta';
-    icon: 'arrowRight';
-  };
-  attributes: {
-    key: Attribute.String;
-    value: Attribute.String;
-  };
-}
-
-export interface TablePricing extends Schema.Component {
-  collectionName: 'components_table_pricings';
-  info: {
-    displayName: 'Pricing';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    button: Attribute.Component<'component.link'>;
-    price: Attribute.String;
-    title: Attribute.String;
-    description: Attribute.Text;
-    table: Attribute.Component<'component.meta-data', true>;
-  };
-}
-
-export interface WidgetAppliedLists extends Schema.Component {
-  collectionName: 'components_widget_applied_lists';
-  info: {
-    displayName: 'Applied Lists';
-    icon: 'oneToOne';
-  };
-  attributes: {
-    details: Attribute.Component<'widget.count-card'>;
-    style: Attribute.Component<'component.style-section'>;
-  };
-}
-
-export interface WidgetBookmarkList extends Schema.Component {
-  collectionName: 'components_widget_bookmark_lists';
-  info: {
-    displayName: 'bookmarkList';
-  };
-  attributes: {
-    details: Attribute.Component<'widget.count-card'>;
-  };
-}
-
-export interface WidgetChat extends Schema.Component {
-  collectionName: 'components_widget_chats';
-  info: {
-    displayName: 'Chat';
-    icon: 'message';
-    description: '';
-  };
-  attributes: {
-    message: Attribute.RichText;
-    timestamp: Attribute.DateTime;
-    read: Attribute.Boolean;
-    role: Attribute.Enumeration<['employer', 'candidate']>;
-  };
-}
-
-export interface WidgetClosedList extends Schema.Component {
-  collectionName: 'components_widget_closed_lists';
-  info: {
-    displayName: 'closed List';
-    icon: 'arrowRight';
-    description: '';
-  };
-  attributes: {
-    details: Attribute.Component<'widget.count-card'>;
-    style: Attribute.Component<'component.style-section'>;
-  };
-}
-
-export interface WidgetContactForm extends Schema.Component {
-  collectionName: 'components_widget_contact_forms';
-  info: {
-    displayName: 'ContactForm';
-    icon: 'envelop';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-  };
-}
-
-export interface WidgetCountCard extends Schema.Component {
-  collectionName: 'components_widget_count_cards';
-  info: {
-    displayName: 'countCard';
-    icon: 'apps';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    count: Attribute.BigInteger;
-    dynamicCount: Attribute.Boolean;
-    subTitle: Attribute.String;
-    enableStats: Attribute.Boolean;
-    model: Attribute.String;
-    isLink: Attribute.Boolean & Attribute.DefaultTo<false>;
-    link: Attribute.String;
-    target: Attribute.Enumeration<['_self', '_blank', '_parent', '_top']> &
-      Attribute.DefaultTo<'_self'>;
-  };
-}
-
-export interface WidgetFavoriteLists extends Schema.Component {
-  collectionName: 'components_widget_favorite_lists';
-  info: {
-    displayName: 'Favorite Lists';
-    icon: 'arrowRight';
-  };
-  attributes: {
-    details: Attribute.Component<'widget.count-card'>;
-    style: Attribute.Component<'component.style-section'>;
-  };
-}
-
-export interface WidgetFooterBottom extends Schema.Component {
-  collectionName: 'components_widget_footer_bottoms';
-  info: {
-    displayName: 'FooterBottom';
-    description: '';
-  };
-  attributes: {
-    social_link: Attribute.Component<'component.link', true>;
-    brand_name: Attribute.String;
-  };
-}
-
-export interface WidgetFooterOne extends Schema.Component {
-  collectionName: 'components_widget_footer_ones';
-  info: {
-    displayName: 'FooterOne';
-    icon: 'arrowRight';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    location: Attribute.Component<'component.icon-with-label'>;
-    phone: Attribute.Component<'component.icon-with-label'>;
-    email: Attribute.Component<'component.icon-with-label'>;
-    style: Attribute.Component<'component.style-section'> &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-      }>;
-  };
-}
-
-export interface WidgetFooterSearch extends Schema.Component {
-  collectionName: 'components_widget_footer_searches';
-  info: {
-    displayName: 'Footer Search';
-    description: '';
-  };
-  attributes: {
-    logo: Attribute.Media;
-    title: Attribute.String;
-    search: Attribute.Component<'forms.seaech-form'>;
-  };
-}
-
-export interface WidgetFooterTop extends Schema.Component {
-  collectionName: 'components_widget_footer_tops';
-  info: {
-    displayName: 'FooterTop';
-    icon: 'server';
-  };
-  attributes: {
-    light_logo: Attribute.Media;
-    dark_logo: Attribute.Media;
-    title: Attribute.String;
-    search: Attribute.Component<'forms.seaech-form'>;
-  };
-}
-
-export interface WidgetFooterTwo extends Schema.Component {
-  collectionName: 'components_widget_footer_twos';
-  info: {
-    displayName: 'FooterTwo';
-    icon: 'arrowRight';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    FooterMenu: Attribute.Component<'component.link', true>;
-    style: Attribute.Component<'component.style-section'> &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-      }>;
-  };
-}
-
-export interface WidgetMatchedLists extends Schema.Component {
-  collectionName: 'components_widget_matched_lists';
-  info: {
-    displayName: 'Matched Lists';
-    icon: 'arrowRight';
-  };
-  attributes: {
-    details: Attribute.Component<'widget.count-card'>;
-    style: Attribute.Component<'component.style-section'>;
-  };
-}
-
-export interface WidgetOpenList extends Schema.Component {
-  collectionName: 'components_widget_open_lists';
-  info: {
-    displayName: 'OpenList';
-    icon: 'arrowRight';
-    description: '';
-  };
-  attributes: {
-    details: Attribute.Component<'widget.count-card'>;
-    style: Attribute.Component<'component.style-section'>;
-  };
-}
-
-export interface WidgetSafetyTips extends Schema.Component {
-  collectionName: 'components_widget_safety_tips';
-  info: {
-    displayName: 'SafetyTips';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    lists: Attribute.Component<'component.text-field', true>;
-  };
-}
-
-export interface WidgetTotalList extends Schema.Component {
-  collectionName: 'components_widget_total_lists';
-  info: {
-    displayName: 'totalList';
-    icon: 'arrowRight';
-    description: '';
-  };
-  attributes: {
-    details: Attribute.Component<'widget.count-card'>;
-    style: Attribute.Component<'component.style-section'>;
-  };
-}
-
-declare module '@strapi/types' {
-  export module Shared {
-    export interface Components {
-      'banner.banner-one': BannerBannerOne;
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
+      'block.banner': BlockBanner;
       'block.blog-card': BlockBlogCard;
-      'block.bookmark-list': BlockBookmarkList;
+      'block.breadcrumbs': BlockBreadcrumbs;
       'block.category-card': BlockCategoryCard;
-      'block.category-list': BlockCategoryList;
-      'block.contact': BlockContact;
-      'block.footer': BlockFooter;
-      'block.job-card': BlockJobCard;
-      'block.latest-applied': BlockLatestApplied;
-      'block.location-card': BlockLocationCard;
-      'block.manage-companies': BlockManageCompanies;
-      'block.manage-lists': BlockManageLists;
-      'block.manage-resume': BlockManageResume;
-      'block.portfolio': BlockPortfolio;
+      'block.content-box': BlockContentBox;
+      'block.image-carousel': BlockImageCarousel;
+      'block.image-gallery': BlockImageGallery;
       'block.private-header': BlockPrivateHeader;
-      'block.profile': BlockProfile;
       'block.public-header': BlockPublicHeader;
-      'block.recent-activities': BlockRecentActivities;
-      'block.review-card': BlockReviewCard;
-      'component.experience': ComponentExperience;
-      'component.gird-container': ComponentGirdContainer;
+      'block.review-block': BlockReviewBlock;
+      'component.grid-container': ComponentGridContainer;
       'component.icon-box': ComponentIconBox;
-      'component.icon-with-label': ComponentIconWithLabel;
-      'component.image': ComponentImage;
       'component.link': ComponentLink;
       'component.menu': ComponentMenu;
-      'component.meta-data': ComponentMetaData;
       'component.page-title': ComponentPageTitle;
-      'component.search': ComponentSearch;
-      'component.share-job': ComponentShareJob;
       'component.social-link': ComponentSocialLink;
       'component.style-section': ComponentStyleSection;
       'component.text-field': ComponentTextField;
       'component.titles': ComponentTitles;
+      'config.carousel-card': ConfigCarouselCard;
       'config.header-config': ConfigHeaderConfig;
       'config.header-field': ConfigHeaderField;
-      'config.job-list': ConfigJobList;
-      'config.message': ConfigMessage;
-      'config.recent-jobs-header': ConfigRecentJobsHeader;
+      'config.menu': ConfigMenu;
+      'config.meta-data': ConfigMetaData;
+      'config.review-card': ConfigReviewCard;
       'config.role': ConfigRole;
       'config.single-page': ConfigSinglePage;
       'config.table-head': ConfigTableHead;
-      'forms.candidate-filter': FormsCandidateFilter;
-      'forms.company-filter': FormsCompanyFilter;
-      'forms.file-input': FormsFileInput;
-      'forms.filter': FormsFilter;
       'forms.form-buttons': FormsFormButtons;
       'forms.google-map': FormsGoogleMap;
       'forms.input': FormsInput;
-      'forms.job-filter': FormsJobFilter;
       'forms.markdown': FormsMarkdown;
-      'forms.seaech-form': FormsSeaechForm;
-      'forms.search-filter': FormsSearchFilter;
-      'forms.select-item': FormsSelectItem;
+      'forms.search-form': FormsSearchForm;
       'forms.select': FormsSelect;
-      'header.breadcrumbs': HeaderBreadcrumbs;
+      'forms.select-item': FormsSelectItem;
       'header.logo': HeaderLogo;
       'header.topbar': HeaderTopbar;
       'layout.columns': LayoutColumns;
@@ -1847,32 +1115,13 @@ declare module '@strapi/types' {
       'shared.meta-social': SharedMetaSocial;
       'shared.seo': SharedSeo;
       'shared.share-menu': SharedShareMenu;
+      'shared.shared-menu': SharedSharedMenu;
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
       'single-type.blog-details': SingleTypeBlogDetails;
-      'single-type.company-deatils': SingleTypeCompanyDeatils;
-      'single-type.job-details': SingleTypeJobDetails;
-      'single-type.resume-details': SingleTypeResumeDetails;
-      'table.applied-jobs': TableAppliedJobs;
-      'table.bookmark': TableBookmark;
-      'table.meta': TableMeta;
-      'table.pricing': TablePricing;
-      'widget.applied-lists': WidgetAppliedLists;
-      'widget.bookmark-list': WidgetBookmarkList;
-      'widget.chat': WidgetChat;
-      'widget.closed-list': WidgetClosedList;
-      'widget.contact-form': WidgetContactForm;
-      'widget.count-card': WidgetCountCard;
-      'widget.favorite-lists': WidgetFavoriteLists;
-      'widget.footer-bottom': WidgetFooterBottom;
-      'widget.footer-one': WidgetFooterOne;
-      'widget.footer-search': WidgetFooterSearch;
-      'widget.footer-top': WidgetFooterTop;
-      'widget.footer-two': WidgetFooterTwo;
-      'widget.matched-lists': WidgetMatchedLists;
-      'widget.open-list': WidgetOpenList;
-      'widget.safety-tips': WidgetSafetyTips;
-      'widget.total-list': WidgetTotalList;
+      'text.typography': TextTypography;
+      'ui.author-info': UiAuthorInfo;
+      'ui.content-section': UiContentSection;
     }
   }
 }

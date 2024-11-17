@@ -1,47 +1,48 @@
 
-## **Getting Started:**
+# 🚀 Getting Started Padma backend 
 
-### Step 1: Fork the Repository
-Click the "Fork" button at the top right of this GitHub repository to copy it to your account.
+### `Run Padma`
 
-### Step 2: Set Up Environment Variables
-For both the `apps/backend` folders, create an `.env` file and add the required environment variables. The `.env.example` files will guide you on what’s needed.
+To create a new Strapi application using Padma CLI, run this command:
 
-### Step 3: Run the Backend
-To start the backend (Strapi CMS), navigate to the `apps/backend` directory and run the following commands:
-
-**Install Packgaes**
 ```bash
-pnpm install
+npx padma backend my-project
 ```
 
-**Start development Server**
+This command will scaffold a new Strapi application named `my-project` using the custom Padma template. It ensures you start with the latest configurations tailored for your needs.
+
+---
+
+## ⚙️ Development Commands
+
+### `develop`
+
+Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop).
+
 ```bash
-pnpm dev
+npm run develop
+# or
+yarn develop
 ```
 
-Step 5: Explore and Customize
-Once everything is up and running, you can begin exploring the code, customizing themes, and adding your own content through the Strapi admin panel at http://localhost:1337/admin
+### `start`
 
+Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start).
 
+```bash
+npm run start
+# or
+yarn start
+```
 
+### `build`
 
+Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build).
 
+```bash
+npm run build
+# or
+yarn build
+```
 
-<!-- #### Frontend Repository [Here](https://github.com/js-template/autolist)
-
-## One Click Deploy
-
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/strapi?referralCode=milo)
-
-## ✨ Features
-
-- Strapi
-- Postgres
-
-## 💁‍♀️ How to use
-
-- Click the Railway button 👆
-- Add the environment variables
-  - If you choose not to add the Cloudinary related environment variables, your media will not be persisted between deploys. -->
-
+---

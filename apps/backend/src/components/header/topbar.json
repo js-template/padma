@@ -5,7 +5,13 @@
     "icon": "paperPlane",
     "description": ""
   },
+  "category": "header",
+  "modelName": "topbar",
+  "globalId": "ComponentsHeaderTopbars",
+  "uid": "header.topbar",
+  "modelType": "component",
   "options": {},
+  "pluginOptions": {},
   "attributes": {
     "announcement": {
       "type": "string"

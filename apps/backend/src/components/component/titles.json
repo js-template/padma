@@ -5,7 +5,13 @@
     "icon": "arrowRight",
     "description": ""
   },
+  "category": "component",
+  "modelName": "titles",
+  "globalId": "ComponentsComponentTitles",
+  "uid": "component.titles",
+  "modelType": "component",
   "options": {},
+  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string"
