@@ -1,6 +1,6 @@
 {
-  "name": "backend-v5",
-  "version": "0.1.0",
+  "name": "@padma/backend",
+  "version": "1.0.0",
   "private": true,
   "description": "A Strapi application",
   "scripts": {
