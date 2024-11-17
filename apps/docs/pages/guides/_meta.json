@@ -1,0 +1,26 @@
+{
+  "connect-strapi": {
+    "title": "Installation Guide",
+    "theme": {
+      "toc": true
+    }
+  },
+  "frontend-env": {
+    "title": "Creating a Custom Theme",
+    "theme": {
+      "toc": true
+    }
+  },
+  "customization": {
+    "title": "Content Customization",
+    "theme": {
+      "toc": true
+    }
+  },
+  "styles": {
+    "title": "Style Customization",
+    "theme": {
+      "toc": true
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "intro": {
+    "title": "Getting started",
+    "theme": {
+      "toc": true
+    }
+  },
+  "installation": {
+    "title": "Quick Start Guide",
+
+    "theme": {
+      "toc": true
+    }
+  }
+}
