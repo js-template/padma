@@ -4,7 +4,6 @@ import type { AppProps } from "next/app";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 
 import "../style.css";
-import { Auth0Client } from "@auth0/auth0-spa-js";
 
 export default function Nextra({
   Component,
