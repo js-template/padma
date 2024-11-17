@@ -1,0 +1,14 @@
+{
+  "concept": {
+    "title": "Core Structure",
+    "theme": {
+      "toc": true
+    }
+  },
+  "architechture": {
+    "title": "Architecture",
+    "theme": {
+      "toc": true
+    }
+  }
+}

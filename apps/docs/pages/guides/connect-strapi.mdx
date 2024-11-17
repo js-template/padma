@@ -1,0 +1,48 @@
+import Image from "next/image";
+
+import { Callout } from "nextra-theme-docs";
+
+## Connect Strapi with Frontend
+
+### Step-by-Step Guide
+
+#### Step 1. Run Backend
+
+- First run the backend strapi project.
+
+#### Step 2. Login the strapi admin dashboard
+
+- You can login from strapi admin and if no account, need to signup first.
+
+#### Step 3. Navigate to API Tokens settings
+
+- First go to `Settings` from left nav, then go to `API Tokens`
+
+<Image
+  src="/products/padma/1_connect-strapi.png"
+  alt="connect-strapi"
+  width="471"
+  height="539"
+  className="rounded-lg, mt-6"
+/>
+
+#### Step 4. Create API Token:
+
+- Here create an API token and save for later use
+
+#### Step 5. Add frontend environment variables:
+
+- Add the following environment variables
+
+```sh
+STRAPI_ENDPOINT="Your_Strapi_Endpoint"
+STRAPI_AUTH_TOKEN="Your_Strapi_API_Token"
+```
+
+<Callout type="info" emoji="ℹ️">
+  <strong>NOTE:</strong> If you have any questions, encounter issues, or need
+  assistance, feel free to reach out to us. We’re here to help and ensure you
+  have a smooth experience. You can direct contact us or through our
+  [community](https://community.jstemplate.net/) forum for any immediate
+  support. Thanks!
+</Callout>

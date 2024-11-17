@@ -1,0 +1,35 @@
+{
+  "index": {
+    "title": "Welcome to Padma",
+    "theme": {
+      "toc": true
+    }
+  },
+  "get-started": {
+    "title": "Get Started"
+  },
+  "core-concepts": {
+    "title": "Core Concepts",
+    "theme": {
+      "toc": true
+    }
+  },
+  "guides": {
+    "title": "User Guides",
+    "theme": {
+      "toc": true
+    }
+  },
+  "deployment": {
+    "title": "Deployment",
+    "theme": {
+      "toc": true
+    }
+  },
+  "contribution-guide": {
+    "title": "Contribution Guide",
+    "theme": {
+      "toc": true
+    }
+  }
+}
