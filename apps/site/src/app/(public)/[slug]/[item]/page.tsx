@@ -26,10 +26,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
    const pageItem = params?.item // e.g., "fullstack" or "designer"
 
    // ?? Fetch the permalink structure from Strapi
-   const { data } = await find("api/permalink", {
-      populate: "*",
-      publicationState: "live",
-      locale: ["en"]
+   const { data } = await find("api/padma-backend/permalink", {
+      populate: "*"
+      // publicationState: "live",
+      // locale: ["en"]
    })
 
    // ?? Get the singlePages from the permalink data
@@ -55,23 +55,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                $eq: pageItem
             }
          },
-         populate: {
-            seo: {
-               fields: [
-                  "metaTitle",
-                  "metaDescription",
-                  "metaImage",
-                  "metaSocial",
-                  "keywords",
-                  "metaRobots",
-                  "structuredData",
-                  "metaViewport",
-                  "canonicalURL"
-               ]
-            }
-         },
-         publicationState: "live",
-         locale: ["en"]
+         populate: "*"
+         // publicationState: "live",
+         // locale: ["en"]
       },
       "no-cache"
    )

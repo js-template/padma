@@ -27,11 +27,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
    // get the layout data from the server
    const { data } = await find(
-      "api/layout",
+      "api/padma-backend/layout",
       {
-         populate: "deep",
-         publicationState: "live",
-         locale: [language]
+         populate: "*"
+         // publicationState: "live",
+         // locale: [language]
       },
       "no-store"
    )

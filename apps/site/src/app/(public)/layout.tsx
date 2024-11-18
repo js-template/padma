@@ -10,11 +10,11 @@ export default async function PublicLayout(props: { children: React.ReactNode })
 
    // get the layout data from the server
    const { data } = await find(
-      "api/layout",
+      "api/padma-backend/layout",
       {
-         populate: "deep",
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
+         populate: "*"
+         // publicationState: "live",
+         // locale: language ? [language] : ["en"]
       },
       "no-store"
    )

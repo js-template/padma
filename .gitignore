@@ -11,6 +11,7 @@ packages/metajob-theme
 .yarn
 scripts
 templates
+apps/site/packages/*
 # testing
 bin
 .bin

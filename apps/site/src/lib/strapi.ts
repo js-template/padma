@@ -68,55 +68,6 @@ export const create = async (model: string, data: any, revalidatePath?: string, 
  * @returns {data, error, message}
  * @example
  */
-
-export const getStats = async (
-   model: string,
-   data: any,
-   revalidatePath?: string,
-   revalidateType?: "page" | "layout"
-) => {
-   const session = await auth()
-
-   if (!session?.user?.jwtToken) {
-      return {
-         data: null,
-         error: "You are not authenticated"
-      }
-   }
-
-   try {
-      const response = await fetch(`${apiUrl}/metajob-strapi/${model}`, {
-         method: "POST",
-         body: JSON.stringify(data),
-         headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${session?.user?.jwtToken}`
-         },
-         cache: "no-cache"
-      })
-
-      const resData = await response?.json()
-
-      if (!response.ok) {
-         return {
-            data: null,
-            error: resData?.error?.details?.errors
-               ? `${resData?.error?.details?.errors?.[0]?.path?.[0]}: ${resData?.error?.details?.errors?.[0]?.message}`
-               : "Failed to create"
-         }
-      }
-      if (revalidatePath && revalidateType) {
-         userRevalidate(revalidatePath, revalidateType)
-      }
-
-      return { message: "Successfully get data", data: resData?.data, error: null }
-   } catch (error: any) {
-      return {
-         data: null,
-         error: error?.message || "Failed to create"
-      }
-   }
-}
 /**
  * Function to get data by id
  * @param model  model name as like strapi model name `pages`, `messages`...

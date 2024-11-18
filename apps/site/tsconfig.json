@@ -23,6 +23,7 @@
       "paths": {
          "@/*": ["./src/*"],
          "auth": ["./src/context/auth"],
+         "@padmadev/*": ["packages/*"]
       }
    },
    "include": [
