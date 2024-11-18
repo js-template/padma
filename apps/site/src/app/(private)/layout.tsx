@@ -10,7 +10,7 @@ export default async function PrivateLayout(props: { children: React.ReactNode }
 
    // get the layout data from the server
    const { data } = await find(
-      "api/padma-backend/layout",
+      "api/padma-backend/private-layout",
       {
          populate: "*"
          // publicationState: "live",

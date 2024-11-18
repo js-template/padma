@@ -22,21 +22,19 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
    const language = getLanguageFromCookie()
    // fetch data
    const product = await find(
-      "api/private-pages",
+      "api/padma-backend/private-pages",
       {
          filters: {
             slug: {
                $eq: pageSlug
             }
          },
-         populate: "deep",
-         publicationState: "live",
-         locale: [language]
+         populate: "*"
       },
       "no-store"
    )
    // FIXME: Format is not looking good
-   if (!product?.data?.data[0]?.attributes?.seo) {
+   if (!product?.data?.data[0]?.seo) {
       return {
          title: product?.data?.data[0]?.attributes?.title || "Title not found",
          description: product?.data?.data[0]?.attributes?.description || "Description not found"
@@ -62,17 +60,14 @@ export default async function DynamicPrivatePages({
    const language = getLanguageFromCookie()
 
    const { data, error } = await find(
-      "api/private-pages",
+      "api/padma-backend/private-pages",
       {
          filters: {
             slug: {
                $eq: pageSlug
             }
          },
-         //  FIXME: must need filter by role
-         populate: "deep",
-         publicationState: "live"
-         //locale: ["en"]
+         populate: "*"
       },
       "no-store"
    )

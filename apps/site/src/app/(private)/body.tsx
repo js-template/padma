@@ -16,12 +16,10 @@ export default function DashboardLayoutBody({
 }) {
    const { changeLang, changeDirection } = useGlobalContext()
    // ?? get the private-header from the layout data
-   const headerBlock = data?.data?.attributes?.header?.find(
-      (block: any) => block.__component === "block.private-header"
-   )
+   const headerBlock = data?.data?.header?.find((block: any) => block.__component === "block.private-header")
 
    // ?? get the private_sidebar_menus from the layout data
-   const privateSidebarMenus = data?.data?.attributes?.private_sidebar_menus
+   const privateSidebarMenus = data?.data?.private_sidebar_menus
 
    return (
       <>

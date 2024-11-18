@@ -51,7 +51,7 @@ export default async function DashboardPage({
    const language = getLanguageFromCookie()
 
    const { data, error } = await find(
-      "api/padma-backend/dashboard-home",
+      "api/padma-backend/private-frontpage",
       {
          populate: "*"
       },
@@ -61,7 +61,7 @@ export default async function DashboardPage({
    // Get the role from session and determine the correct block to render
    const userRole = session?.user?.role?.type?.toLowerCase()
 
-   const blocksData = _.get(data, "data.attributes", {})
+   const blocksData = _.get(data, "data", {})
    const role1 = blocksData?.role1
    const role2 = blocksData?.role2
 
