@@ -8,8 +8,12 @@ import Permalink from './permalink/schema.json';
 import Post from './post/schema.json';
 import PrivatePage from './private-page/schema.json';
 import PublicPage from './public-page/schema.json';
+import PrivateLayout from './private-layout/schema.json';
 
 export default {
+  layout: {
+    schema: Layout,
+  },
   'public-page': {
     schema: PublicPage,
   },
@@ -22,9 +26,10 @@ export default {
   'public-frontpage': {
     schema: PublicFrontpage,
   },
-  layout: {
-    schema: Layout,
+  'private-layout': {
+    schema: PrivateLayout,
   },
+
   post: {
     schema: Post,
   },
