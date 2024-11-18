@@ -56,8 +56,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
          },
          populate: "*"
-         // publicationState: "live",
-         // locale: ["en"]
       },
       "no-cache"
    )

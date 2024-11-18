@@ -16,11 +16,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
    // fetch data
    const product = await find(
-      "api/dashboard-home",
+      "api/padma-backend/dashboard-home",
       {
-         populate: "deep",
-         publicationState: "live",
-         locale: [language]
+         populate: "*"
+         // publicationState: "live",
+         // locale: [language]
       },
       "no-store"
    )
@@ -51,9 +51,9 @@ export default async function DashboardPage({
    const language = getLanguageFromCookie()
 
    const { data, error } = await find(
-      "api/dashboard-home",
+      "api/padma-backend/dashboard-home",
       {
-         populate: "deep"
+         populate: "*"
       },
       "no-store"
    )

@@ -23,7 +23,7 @@
       "@mui/lab": "^5.0.0-alpha.165",
       "@mui/material": "^5.15.10",
       "@mui/material-nextjs": "latest",
-      "@padmadev/blank-theme": "0.0.1-alpha.0",
+      "@padmadev/blank-theme": "workspace:*",
       "@strapi/blocks-react-renderer": "^1.0.1",
       "@types/lodash": "^4.14.202",
       "cookies-next": "^4.2.1",

@@ -27,15 +27,15 @@ export default async function DynamicPages({
             slug: {
                $eq: pageSlug
             }
-         }
-         // populate: "deep",
-         // publicationState: "live",
-         // locale: language ? [language] : ["en"]
+         },
+         populate: "*"
       },
       "no-store"
    )
 
-   const blocks = data?.data[0]?.attributes?.blocks || []
+   // console.log("data", data, "error", error)
+
+   const blocks = data?.data[0]?.blocks || []
 
    // *** if blocks is empty, return 404 ***
    if (!blocks || blocks?.length === 0) {
@@ -72,12 +72,10 @@ export async function generateStaticParams() {
             $ne: null
          }
       }
-      // publicationState: "live",
-      // locale: ["en"]
    })
 
    return data?.data?.map((post: any) => ({
-      slug: post?.attributes?.slug || ""
+      slug: post?.slug || ""
    }))
 }
 
@@ -101,13 +99,7 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
                $eq: pageSlug
             }
          },
-         populate: {
-            seo: {
-               populate: "*"
-            }
-         }
-         // publicationState: "live",
-         // locale: language ? [language] : ["en"]
+         populate: "*"
       },
       "no-store"
    )

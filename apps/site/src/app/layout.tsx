@@ -40,7 +40,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <html lang={language} dir={direction}>
          <body dir={direction}>
             <StyledEngineProvider injectFirst>
-               <GlobalProvider layout={data?.data?.attributes || null}>
+               <GlobalProvider layout={data?.data || null}>
                   <NextAuthSessionProvider session={session}>
                      <AppRouterCacheProvider options={{ enableCssLayer: true }}>
                         <NextThemesProvider>

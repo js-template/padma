@@ -5,7 +5,7 @@ let activeThemeComponents: Record<string, any> = {} // Use 'any' for React compo
 // Load the active theme components
 export const loadActiveTheme = async () => {
    // @ts-ignore
-   const { getPublicComponents, getPrivateComponents } = await import("@padmadev/blank-theme") // Use the activeTheme variable
+   const { getPublicComponents, getPrivateComponents } = await import("@padmadev/blank-theme")
 
    return { getPrivateComponents, getPublicComponents }
 }
