@@ -22,7 +22,7 @@
       "baseUrl": "./",
       "paths": {
          "@/*": ["./src/*"],
-         "auth": ["./src/context/auth"],
+         "auth": ["./src/context/auth"]
       }
    },
    "include": [

@@ -4,19 +4,21 @@ import PrivateFrontPage from './private-frontpage';
 
 import PublicFrontPage from './public-frontpage';
 import Layout from './layout';
+import PrivateLayout from './private-layout';
 import Permalink from './permalink';
 import Post from './post';
 import PrivatePage from './private-page';
 import PostSetting from './post-setting';
 
 export default {
+  layout: Layout,
+  'private-layout': PrivateLayout,
   'public-page': PublicRoute,
   'private-page': PrivatePage,
   'public-frontpage': PublicFrontPage,
   'post-setting': PostSetting,
   category: Catgegory,
   'private-home': PrivateFrontPage,
-  layout: Layout,
   permalink: Permalink,
   post: Post,
 };

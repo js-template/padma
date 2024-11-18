@@ -26,27 +26,26 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
    // *** get blog-details data from strapi ***
    const { data: detailsData, error } = await find(
-      "api/posts",
+      "api/padma-backend/posts",
       {
          filters: {
             slug: {
                $eq: pageSlug
             }
-         },
-         populate: "deep",
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
+         }
+         // populate: "deep",
+         // publicationState: "live",
+         // locale: language ? [language] : ["en"]
       },
-      "force-cache"
+      "no-store"
    )
    const pageDetailsData = detailsData?.data?.[0]
 
    // *** get  blogs-details-page data from strapi ***
    const { data: blogPageData, error: blogPageError } = await find(
-      "api/blog-detail",
+      "api/padma-backend/post-setting",
       {
-         populate: "deep",
-         locale: language ? [language] : ["en"]
+         populate: "*"
       },
       "no-store"
    )
@@ -54,7 +53,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
    // if (error) {
    //    return <div>Something went wrong</div>
    // }
-   const blocks = blogPageData?.data?.attributes?.blocks || []
+   const blocks = blogPageData?.data?.blocks || []
 
    return (
       <Fragment>

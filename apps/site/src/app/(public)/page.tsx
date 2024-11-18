@@ -9,20 +9,17 @@ export default async function Home() {
    const language = getLanguageFromCookie()
 
    const { data, error } = await find(
-      "api/home-page",
+      "api/padma-backend/public-frontpage",
       {
-         populate: "deep",
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
+         populate: "*"
       },
       "no-store"
    )
    const { getPublicComponents } = await loadActiveTheme()
-
    // if (error) {
    //    throw error;
    // }
-   const blocks = data?.data?.attributes?.blocks || []
+   const blocks = data?.data?.blocks || []
 
    return (
       <Fragment>
@@ -43,22 +40,16 @@ export default async function Home() {
 
 // *** generate metadata for the page
 export async function generateMetadata(): Promise<Metadata> {
-   const language = getLanguageFromCookie()
+   // const language = getLanguageFromCookie()
    // *** fetch seo data
 
    const product = await find(
-      "api/home-page",
+      "api/padma-backend/public-frontpage",
       {
-         populate: {
-            seo: {
-               populate: "*"
-            }
-         },
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
+         populate: "*"
       },
       "force-cache"
    )
 
-   return StrapiSeoFormate(product?.data?.data?.attributes?.seo)
+   return StrapiSeoFormate(product?.data?.data?.seo)
 }

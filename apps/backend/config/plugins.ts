@@ -1,6 +1,6 @@
 export default () => ({
   "padma-backend": {
     enabled: true,
-    // resolve: "./src/plugins/padma-backend",
+    resolve: "./src/plugins/padma-backend",
   },
 });

@@ -27,11 +27,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
    // get the layout data from the server
    const { data } = await find(
-      "api/layout",
+      "api/padma-backend/layout",
       {
-         populate: "deep",
-         publicationState: "live",
-         locale: [language]
+         populate: "*"
+         // publicationState: "live",
+         // locale: [language]
       },
       "no-store"
    )
@@ -40,7 +40,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <html lang={language} dir={direction}>
          <body dir={direction}>
             <StyledEngineProvider injectFirst>
-               <GlobalProvider layout={data?.data?.attributes || null}>
+               <GlobalProvider layout={data?.data || null}>
                   <NextAuthSessionProvider session={session}>
                      <AppRouterCacheProvider options={{ enableCssLayer: true }}>
                         <NextThemesProvider>

@@ -21,21 +21,21 @@ export default async function DynamicPages({
    const language = getLanguageFromCookie()
 
    const { data, error } = await find(
-      "api/pages",
+      "api/padma-backend/public-pages",
       {
          filters: {
             slug: {
                $eq: pageSlug
             }
          },
-         populate: "deep",
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
+         populate: "*"
       },
       "no-store"
    )
 
-   const blocks = data?.data[0]?.attributes?.blocks || []
+   // console.log("data", data, "error", error)
+
+   const blocks = data?.data[0]?.blocks || []
 
    // *** if blocks is empty, return 404 ***
    if (!blocks || blocks?.length === 0) {
@@ -65,19 +65,17 @@ export default async function DynamicPages({
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-   const { data, error } = await find("api/pages", {
+   const { data, error } = await find("api/padma-backend/public-pages", {
       fields: ["slug"],
       filters: {
          slug: {
             $ne: null
          }
-      },
-      publicationState: "live",
-      locale: ["en"]
+      }
    })
 
    return data?.data?.map((post: any) => ({
-      slug: post?.attributes?.slug || ""
+      slug: post?.slug || ""
    }))
 }
 
@@ -94,20 +92,14 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
 
    // ***fetch seo data
    const product = await find(
-      "api/pages",
+      "api/padma-backend/public-pages",
       {
          filters: {
             slug: {
                $eq: pageSlug
             }
          },
-         populate: {
-            seo: {
-               populate: "*"
-            }
-         },
-         publicationState: "live",
-         locale: language ? [language] : ["en"]
+         populate: "*"
       },
       "no-store"
    )

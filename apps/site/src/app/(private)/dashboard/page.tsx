@@ -16,11 +16,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
    // fetch data
    const product = await find(
-      "api/dashboard-home",
+      "api/padma-backend/dashboard-home",
       {
-         populate: "deep",
-         publicationState: "live",
-         locale: [language]
+         populate: "*"
+         // publicationState: "live",
+         // locale: [language]
       },
       "no-store"
    )
@@ -51,9 +51,9 @@ export default async function DashboardPage({
    const language = getLanguageFromCookie()
 
    const { data, error } = await find(
-      "api/dashboard-home",
+      "api/padma-backend/private-frontpage",
       {
-         populate: "deep"
+         populate: "*"
       },
       "no-store"
    )
@@ -61,7 +61,7 @@ export default async function DashboardPage({
    // Get the role from session and determine the correct block to render
    const userRole = session?.user?.role?.type?.toLowerCase()
 
-   const blocksData = _.get(data, "data.attributes", {})
+   const blocksData = _.get(data, "data", {})
    const role1 = blocksData?.role1
    const role2 = blocksData?.role2
 
