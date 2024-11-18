@@ -1,6 +1,6 @@
 {
   "kind": "singleType",
-  "collectionName": "layouts",
+  "collectionName": "private-layouts",
   "info": {
     "singularName": "private-layout",
     "pluralName": "private-layouts",

@@ -807,6 +807,46 @@ export interface PluginPadmaBackendPrivateFrontpage
   };
 }
 
+export interface PluginPadmaBackendPrivateLayout
+  extends Struct.SingleTypeSchema {
+  collectionName: 'private-layouts';
+  info: {
+    description: 'Private Layout for the website';
+    displayName: 'Private Layout';
+    pluralName: 'private-layouts';
+    singularName: 'private-layout';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    header: Schema.Attribute.DynamicZone<['block.private-header']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::padma-backend.private-layout'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginPadmaBackendPrivatePage
   extends Struct.CollectionTypeSchema {
   collectionName: 'private_pages';
@@ -1365,6 +1405,7 @@ declare module '@strapi/strapi' {
       'plugin::padma-backend.post': PluginPadmaBackendPost;
       'plugin::padma-backend.post-setting': PluginPadmaBackendPostSetting;
       'plugin::padma-backend.private-frontpage': PluginPadmaBackendPrivateFrontpage;
+      'plugin::padma-backend.private-layout': PluginPadmaBackendPrivateLayout;
       'plugin::padma-backend.private-page': PluginPadmaBackendPrivatePage;
       'plugin::padma-backend.public-frontpage': PluginPadmaBackendPublicFrontpage;
       'plugin::padma-backend.public-page': PluginPadmaBackendPublicPage;
