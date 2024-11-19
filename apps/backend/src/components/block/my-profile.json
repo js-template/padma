@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_my_profile",
+  "info": {
+    "displayName": "My Profile",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "category": "Blocks",
+  "modelName": "my-profile",
+  "globalId": "ComponentsMyProfile",
+  "uid": "block.my-profile",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "profile_details": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.profile-details"
+    },
+    "security_settings": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.security-settings"
+    },
+    "content": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text.typography"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
+    }
+  }
+}

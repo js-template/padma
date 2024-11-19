@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_profile_details",
+  "info": {
+    "displayName": "Profile Details",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "category": "Blocks",
+  "modelName": "profile-details",
+  "globalId": "ComponentsProfileDetails",
+  "uid": "block.profile-details",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "edit_button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    },
+    "cancel_button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    }
+  }
+}

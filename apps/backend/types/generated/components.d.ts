@@ -131,6 +131,25 @@ export interface BlockImageGallery extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockMyProfile extends Struct.ComponentSchema {
+  collectionName: 'components_my_profile';
+  info: {
+    description: '';
+    displayName: 'My Profile';
+    icon: 'arrowRight';
+  };
+  attributes: {
+    content: Schema.Attribute.Component<'text.typography', true>;
+    empty: Schema.Attribute.Component<'shared.empty', false>;
+    profile_details: Schema.Attribute.Component<'block.profile-details', false>;
+    security_settings: Schema.Attribute.Component<
+      'block.security-settings',
+      false
+    >;
+    style: Schema.Attribute.Component<'component.style-section', false>;
+  };
+}
+
 export interface BlockPrivateHeader extends Struct.ComponentSchema {
   collectionName: 'components_block_private_headers';
   info: {
@@ -149,6 +168,20 @@ export interface BlockPrivateHeader extends Struct.ComponentSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<true>;
     userMenu: Schema.Attribute.Component<'component.link', true>;
+  };
+}
+
+export interface BlockProfileDetails extends Struct.ComponentSchema {
+  collectionName: 'components_profile_details';
+  info: {
+    description: '';
+    displayName: 'Profile Details';
+    icon: 'arrowRight';
+  };
+  attributes: {
+    cancel_button: Schema.Attribute.Component<'component.link', false>;
+    edit_button: Schema.Attribute.Component<'component.link', false>;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -207,6 +240,19 @@ export interface BlockReviewBlock extends Struct.ComponentSchema {
       ['default', 'compact', 'detailed']
     > &
       Schema.Attribute.DefaultTo<'default'>;
+  };
+}
+
+export interface BlockSecuritySettings extends Struct.ComponentSchema {
+  collectionName: 'components_security_settings';
+  info: {
+    description: '';
+    displayName: 'Security Settings';
+    icon: 'arrowRight';
+  };
+  attributes: {
+    button: Schema.Attribute.Component<'component.link', false>;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -1080,9 +1126,12 @@ declare module '@strapi/strapi' {
       'block.content-box': BlockContentBox;
       'block.image-carousel': BlockImageCarousel;
       'block.image-gallery': BlockImageGallery;
+      'block.my-profile': BlockMyProfile;
       'block.private-header': BlockPrivateHeader;
+      'block.profile-details': BlockProfileDetails;
       'block.public-header': BlockPublicHeader;
       'block.review-block': BlockReviewBlock;
+      'block.security-settings': BlockSecuritySettings;
       'component.grid-container': ComponentGridContainer;
       'component.icon-box': ComponentIconBox;
       'component.link': ComponentLink;
