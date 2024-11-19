@@ -9,6 +9,7 @@ import PrivateLayout from './private-layout';
 import PermalinkController from './permalink';
 import PostController from './post';
 import PrivatePageController from './private-page';
+import MyProfileController from './my-profile';
 
 export default {
   layout: LayoutController,
@@ -22,4 +23,5 @@ export default {
 
   'private-page': PrivatePageController,
   'private-layout': PrivateLayout,
+  'my-profile': MyProfileController,
 };

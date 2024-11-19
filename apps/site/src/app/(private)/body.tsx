@@ -40,6 +40,7 @@ export default function DashboardLayoutBody({
                   : null}
             </>
          )}
+         {children}
       </>
    )
 }

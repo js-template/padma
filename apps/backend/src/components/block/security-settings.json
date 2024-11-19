@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_security_settings",
+  "info": {
+    "displayName": "Security Settings",
+    "icon": "arrowRight",
+    "description": ""
+  },
+  "category": "Blocks",
+  "modelName": "security-settings",
+  "globalId": "ComponentsSecuritySettings",
+  "uid": "block.security-settings",
+  "modelType": "component",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.link"
+    }
+  }
+}

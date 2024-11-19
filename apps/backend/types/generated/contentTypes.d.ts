@@ -621,6 +621,45 @@ export interface PluginPadmaBackendLayout extends Struct.SingleTypeSchema {
   };
 }
 
+export interface PluginPadmaBackendMyProfile extends Struct.SingleTypeSchema {
+  collectionName: 'my-profiles';
+  info: {
+    description: 'My profile for the website';
+    displayName: 'My Profile';
+    pluralName: 'my-profiles';
+    singularName: 'my-profile';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    block: Schema.Attribute.DynamicZone<['block.my-profile']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::padma-backend.my-profile'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginPadmaBackendPermalink extends Struct.SingleTypeSchema {
   collectionName: 'permalinks';
   info: {
@@ -1401,6 +1440,7 @@ declare module '@strapi/strapi' {
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::padma-backend.category': PluginPadmaBackendCategory;
       'plugin::padma-backend.layout': PluginPadmaBackendLayout;
+      'plugin::padma-backend.my-profile': PluginPadmaBackendMyProfile;
       'plugin::padma-backend.permalink': PluginPadmaBackendPermalink;
       'plugin::padma-backend.post': PluginPadmaBackendPost;
       'plugin::padma-backend.post-setting': PluginPadmaBackendPostSetting;

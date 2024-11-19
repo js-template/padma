@@ -9,6 +9,7 @@ import Permalink from './permalink';
 import Post from './post';
 import PrivatePage from './private-page';
 import PostSetting from './post-setting';
+import MyProfileService from './my-profile';
 
 export default {
   layout: Layout,
@@ -21,4 +22,5 @@ export default {
   'private-layout': PrivateLayout,
   permalink: Permalink,
   post: Post,
+  'my-profile': MyProfileService,
 };

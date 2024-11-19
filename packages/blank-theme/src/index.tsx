@@ -14,7 +14,8 @@ export const getPublicComponents = {
 } as any
 
 export const getPrivateComponents = {
-   "block.private-header": { component: PlaceholderComponent }
+   "block.private-header": { component: PlaceholderComponent },
+   "block.my-profile": { component: PlaceholderComponent }
    // Add other components as needed...
 } as any
 

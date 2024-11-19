@@ -9,6 +9,7 @@ import Post from './post/schema.json';
 import PrivatePage from './private-page/schema.json';
 import PublicPage from './public-page/schema.json';
 import PrivateLayout from './private-layout/schema.json';
+import MyProfile from './my-profile/schema.json';
 
 export default {
   layout: {
@@ -41,5 +42,8 @@ export default {
   },
   permalink: {
     schema: Permalink,
+  },
+  'my-profile': {
+    schema: MyProfile,
   },
 };
