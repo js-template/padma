@@ -9,9 +9,9 @@ packages/metajob-theme
 .npmrc
 .strapi
 .yarn
+.nx
 scripts
 templates
-apps/site/packages/*
 # testing
 bin
 .bin
@@ -53,3 +53,6 @@ yarn.lock*
 apps/backend/src/plugins/metajob-backend/
 .npmrc
 tsconfig.tsbuildinfo
+
+.nx/cache
+.nx/workspace-data

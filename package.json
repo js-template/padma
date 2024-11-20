@@ -3,15 +3,19 @@
   "description": "Padma - The Next.js Framework for Strapi",
   "version": "0.0.2",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "apps/*"
+    ],
+    "nohoist": [
+      "@padmadev/core",
+      "@padmadev/core/**"
+    ]
+  },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
-    "dev": "lerna run dev",
-    "lint": "turbo run lint",
+    "dev:core": "lerna run dev --scope @padmadev/core",
+    "build:core": "lerna run build --scope @padmadev/core",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
@@ -20,6 +24,5 @@
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "packageManager": "pnpm@9.11.0"
+  }
 }
