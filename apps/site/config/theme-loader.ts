@@ -1,5 +1,3 @@
-//const activeTheme = "@padma/metajob-ui"
-
 let activeThemeComponents: Record<string, any> = {} // Use 'any' for React components
 
 // Load the active theme components

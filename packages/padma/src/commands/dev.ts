@@ -25,7 +25,7 @@ export default class Dev extends Command {
     const corePath = path.resolve(process.cwd(), 'node_modules/@padmadev/frontend')
 
     console.log('corePath', corePath)
-    execSync('npm run dev', {cwd: corePath, stdio: 'inherit'})
+    //execSync('yarn dev', {cwd: corePath, stdio: 'inherit'})
 
     // this.log(`hello ${name} from /Users/zelalhossain/Desktop/products/padma/packages/padma/src/commands/dev.ts`)
     if (args.file && flags.force) {

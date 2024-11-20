@@ -8,19 +8,18 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "dev": "lerna run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "eslint-config-custom": "workspace:*",
-    "prettier": "latest",
-    "turbo": "latest"
+    "lerna": "^8.1.9",
+    "prettier": "latest"
   },
   "engines": {
     "node": ">=20.0.0"
   },
-  "dependencies": {},
   "packageManager": "pnpm@9.11.0"
 }
