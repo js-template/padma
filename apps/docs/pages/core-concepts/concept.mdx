@@ -1,8 +1,31 @@
+
+
+
 ## Overview
 
 This documentation covers the core concept of a Next.js application that dynamically fetches content from a Strapi backend and renders different components based on that data. The application is designed to load components dynamically depending on the content structure and theme configuration.
 
-## Key Components
+import Image from 'next/image'
+
+
+## Decoupled Mode  
+   <br />
+
+    <Image
+      src="/padma.png"
+      width={1000}
+      height={320}
+      alt="Padma Concept"
+    /> 
+
+Decoupled mode consists of two parts:  
+
+1. **Padma Frontend:**  
+   The primary domain points to the Node.js server hosting Padma. It is built using Next.js and styled with MUI. The frontend is responsible for fetching content and rendering the site for visitors.  
+
+2. **Strapi Backend:**  
+   The Strapi backend requires the installation of the Padma plugin, which provides all necessary APIs. You need to host your own Strapi instance and configure it with the appropriate endpoints to connect with the Padma frontend.  
+
 
 ### 1. **Strapi Integration**
 The project integrates with Strapi as the headless CMS, which provides dynamic content for the application. Strapi allows you to create flexible content models, such as home pages, blocks, and components, which are fetched and displayed in the Next.js app.

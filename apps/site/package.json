@@ -1,6 +1,6 @@
 {
-   "name": "@padmadev/frontend",
-   "version": "0.0.2",
+   "name": "@padmadev/core",
+   "version": "0.0.3-alpha.0",
    "private": true,
    "description": "Padma- Nextjs frontend",
    "license": "MIT",
@@ -23,7 +23,6 @@
       "@mui/lab": "^5.0.0-alpha.165",
       "@mui/material": "^5.15.10",
       "@mui/material-nextjs": "latest",
-      "@padmadev/blank-theme": "workspace:*",
       "@strapi/blocks-react-renderer": "^1.0.1",
       "cookies-next": "^4.2.1",
       "eslint": "8.36.0",
