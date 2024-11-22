@@ -1,0 +1,99 @@
+
+
+
+## Overview
+
+This documentation covers the core concept of a Next.js application that dynamically fetches content from a Strapi backend and renders different components based on that data. The application is designed to load components dynamically depending on the content structure and theme configuration.
+
+import Image from 'next/image'
+
+
+## Decoupled Mode  
+   <br />
+
+    <Image
+      src="/padma.png"
+      width={1000}
+      height={320}
+      alt="Padma Concept"
+    /> 
+
+Decoupled mode consists of two parts:  
+
+1. **Padma Frontend:**  
+   The primary domain points to the Node.js server hosting Padma. It is built using Next.js and styled with MUI. The frontend is responsible for fetching content and rendering the site for visitors.  
+
+2. **Strapi Backend:**  
+   The Strapi backend requires the installation of the Padma plugin, which provides all necessary APIs. You need to host your own Strapi instance and configure it with the appropriate endpoints to connect with the Padma frontend.  
+
+
+### 1. **Strapi Integration**
+The project integrates with Strapi as the headless CMS, which provides dynamic content for the application. Strapi allows you to create flexible content models, such as home pages, blocks, and components, which are fetched and displayed in the Next.js app.
+
+### 2. **Dynamic Component Mapping**
+Components are dynamically rendered based on the data fetched from Strapi. Each component is mapped to a specific "block" from the Strapi content. The blocks are defined in Strapi and contain information about which component should be rendered.
+
+- **Strapi Model Structure**:
+  Strapi models can be configured to have fields like `blocks`, where each block has a `__component` field that maps to a specific component in the theme.
+  
+### 3. **Data Fetching (SWR & Asynchronous API Calls)**
+Data fetching is performed using the **`find`** function, which queries the Strapi API for the required content (e.g., home page data, blocks). This data is fetched dynamically and asynchronously when rendering the page.
+
+#### Fetching Logic:
+- **Asynchronous Fetch**: The `find` function performs an asynchronous fetch to retrieve data from the Strapi API.
+- **Error Handling**: Error handling ensures that issues with fetching data are gracefully managed.
+
+### 4. **Dynamic Rendering Based on Content**
+Each block fetched from Strapi has an associated `__component` field that tells the application which component to render. The `block` data is passed to the component for rendering.
+
+#### Example of Dynamic Component Mapping:
+The component is dynamically mapped by checking the `__component` field in each block object:
+```javascript
+const blocks = data?.data?.attributes?.blocks || []
+
+return (
+   <Fragment>
+      {blocks?.map((block: { __component: keyof typeof getPublicComponents }, index: number) => {
+         const BlockConfig = getPublicComponents[block.__component]
+
+         if (BlockConfig) {
+            const { component: ComponentToRender } = BlockConfig
+            return <ComponentToRender key={index} language={language} block={block} />
+         }
+         return null
+      })}
+   </Fragment>
+)
+```
+
+### 5. **Themes & Dynamic Component Loading**
+The system loads components dynamically from the active theme. The `loadActiveTheme` function fetches the theme configuration, which includes the component mappings for each block. This allows the system to render different layouts or components based on the current theme.
+
+### 6. **Internationalization (i18n)**
+The system uses a language cookie to determine the language and fetch the correct content for that language. The locale is passed to the Strapi API to ensure the content is fetched in the user's preferred language.
+
+{/* ### 7. **Error Handling**
+Error handling is implemented to gracefully manage issues such as missing components or failed data fetches. You can easily extend the error handling to manage various edge cases. */}
+
+---
+
+## Folder Structure
+
+### 1. `apps/site`
+This is the main Next.js application where all the pages and components reside.
+
+- **`src/`**: Contains the source code for your site.
+  - **`pages/`**: Contains the Next.js page components. Pages here are dynamic and rely on the data fetched from Strapi.
+  - **`lib/`**: Contains utility functions like `strapi.js` for interacting with the Strapi API.
+  - **`utils/`**: Helper functions, such as language detection (`getLanguageFromCookie`) and theme loading (`loadActiveTheme`).
+  - **`components/`**: Contains reusable React components that will be dynamically loaded.
+  - **`public/`**: Contains public assets like images and static files.
+
+### 2. `@padma/blank-theme`
+This is a theme package that contains the default theme components. These components are rendered dynamically based on the blocks defined in the Strapi content model.
+
+- **`getPublicComponents`**: A mapping of components that are available to be dynamically rendered. Each block fetched from Strapi is mapped to one of these components.
+- **Component Files**: Each component corresponds to a Strapi block and is located in the theme package.
+
+---
+
