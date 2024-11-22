@@ -1,20 +1,14 @@
 {
   "name": "padma-monorepo",
   "description": "Padma - The Next.js Framework for Strapi",
-  "version": "0.0.2",
+  "version": "1.0.0-alpha.0",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*",
-      "apps/*"
-    ],
-    "nohoist": [
-      "@padmadev/core",
-      "@padmadev/core/**"
-    ]
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev:core": "lerna run dev --scope @padmadev/core",
+    "dev:backend": "lerna run dev --scope @padmadev/backend",
     "build:core": "lerna run build --scope @padmadev/core",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

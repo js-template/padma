@@ -16,18 +16,5 @@ module.exports = {
          }
       ]
    },
-   reactStrictMode: true,
-   compiler: {
-      // *** To remove console
-      // removeConsole: {
-      //   exclude: ["error"],
-      // },
-   },
-   typescript: {
-      // !! WARN !!
-      // Dangerously allow production builds to successfully complete even if
-      // your project has type errors.
-      // !! WARN !!
-      ignoreBuildErrors: true
-   }
+   reactStrictMode: true
 }
