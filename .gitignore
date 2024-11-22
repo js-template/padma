@@ -2,7 +2,9 @@
 
 # dependencies
 node_modules
+out
 .pnp
+.vercel
 .pnp.js
 .tmp
 packages/metajob-theme
