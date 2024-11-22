@@ -65,8 +65,8 @@
       "@oclif/plugin-plugins"
     ],
     "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
+      "create": {
+        "description": " Create a new Padma project"
       }
     }
   },

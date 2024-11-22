@@ -4,12 +4,13 @@
   "version": "1.0.0-alpha.0",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "docs/*",
+    "projects/*"
   ],
   "scripts": {
-    "dev:core": "lerna run dev --scope @padmadev/core",
-    "dev:backend": "lerna run dev --scope @padmadev/backend",
-    "build:core": "lerna run build --scope @padmadev/core",
+    "dev": "lerna run dev --scope @padmadev/core",
+    "build": "lerna run build --scope @padmadev/core",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
