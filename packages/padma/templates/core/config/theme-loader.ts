@@ -23,9 +23,7 @@ export const loadActiveTheme = async () => {
       const activeTheme = settings.activeTheme
 
       // @ts-ignore
-      const { getPublicComponents, getPrivateComponents } = await import(
-         "../../../../../projects/blank-theme/dist/types"
-      )
+      const { getPublicComponents, getPrivateComponents } = await import("@padmadev/blank-theme")
 
       return { getPrivateComponents, getPublicComponents }
    } catch (error: any) {

@@ -92,10 +92,8 @@ export default async function DynamicPages({ params }: Props) {
    const { getPublicComponents } = await loadActiveTheme()
 
    // ?? Fetch the permalink structure from Strapi
-   const { data: permalinkData } = await find("api/permalink", {
-      populate: "*",
-      publicationState: "live",
-      locale: language ? [language] : ["en"]
+   const { data: permalinkData } = await find("api/padma-backend/permalink", {
+      populate: "*"
    })
 
    const singlePages = permalinkData?.data?.attributes?.singlePage
@@ -174,10 +172,8 @@ export default async function DynamicPages({ params }: Props) {
 // *** Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
    // ?? Fetch the permalink structure from Strapi
-   const { data } = await find("api/permalink", {
-      populate: "*",
-      publicationState: "live",
-      locale: ["en"]
+   const { data } = await find("api/padma-backend/permalink", {
+      populate: "*"
    })
 
    // ?? Get the singlePages from the permalink data
