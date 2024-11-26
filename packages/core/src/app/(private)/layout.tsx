@@ -22,10 +22,19 @@ export default async function PrivateLayout({ children }: { children: React.Reac
 
    console.log("data", data)
 
-   const blocka = data?.data[0]?.blocks || []
+   const activeTheme = await loadActiveTheme()
 
-   // Load the active theme and get public components
-   const { getPrivateComponents } = await loadActiveTheme()
+   // Define as an empty object by default
+   let getPublicComponents: Record<string, any> = {}
+
+   if (activeTheme) {
+      getPublicComponents = activeTheme.getPublicComponents
+      // console.log(getPublicComponents)
+   } else {
+      console.error("Active theme could not be loaded!")
+   }
+
+   const blocks = data?.data[0]?.blocks || []
 
    return (
       <>

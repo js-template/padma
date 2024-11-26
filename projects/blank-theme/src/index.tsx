@@ -1,6 +1,9 @@
 import PlaceholderComponent from "./blocks/placeholder"
 
 export const getPublicComponents = {
+   "header.top-bar": { component: PlaceholderComponent },
+   "header.main-menu": { component: PlaceholderComponent },
+   "header.header-bottom": { component: PlaceholderComponent },
    "block.public-header": { component: PlaceholderComponent },
    "block.breadcrumbs": { component: PlaceholderComponent },
    "block.blog-card": { component: PlaceholderComponent },

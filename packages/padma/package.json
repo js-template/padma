@@ -15,7 +15,10 @@
     "chokidar": "^4.0.1",
     "eslint-config-next": "^15.0.3",
     "fs-extra": "^11.2.0",
-    "inquirer": "^12.0.1"
+    "i": "^0.3.7",
+    "inquirer": "^12.0.1",
+    "minimatch": "5.1.0",
+    "npm": "^10.9.1"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
