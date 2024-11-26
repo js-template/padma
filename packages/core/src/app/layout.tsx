@@ -11,7 +11,7 @@ import "/public/icon/icon.css"
 import "react-perfect-scrollbar/dist/css/styles.css"
 import { GlobalProvider } from "@/context/store"
 import { cookies } from "next/headers"
-import NextTopLoader from "nextjs-toploader"
+
 import { find } from "@/lib/strapi"
 import { StyledEngineProvider } from "@mui/material/styles"
 
@@ -26,7 +26,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
    const direction = dir ? dir.value : "ltr"
 
    // get the layout data from the server
-   const { data } = await find(
+   const { data, error } = await find(
       "api/padma-backend/layout",
       {
          populate: "*"
@@ -35,6 +35,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       },
       "no-store"
    )
+
+   //console.log("Public Layout Loaded", data, error)
 
    return (
       <html lang={language} dir={direction}>
@@ -47,19 +49,6 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                            <NextThemeConfigProvider direction={direction}>
                               {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
                               <CssBaseline />
-                              <NextTopLoader
-                                 // FIXME: Change color to primary color not static color
-                                 color='#1CAF57'
-                                 zIndex={9999}
-                                 initialPosition={0.8}
-                                 crawlSpeed={200}
-                                 height={3}
-                                 crawl={true}
-                                 showSpinner={true}
-                                 easing='ease'
-                                 speed={200}
-                                 showAtBottom={false}
-                              />
 
                               {props.children}
                               <Toaster />

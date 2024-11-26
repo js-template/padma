@@ -11,10 +11,18 @@ export default async function PrivateLayoutFooter() {
       },
       "no-store"
    )
-   const { getPublicComponents } = await loadActiveTheme()
-   // if (error) {
-   //    throw error;
-   // }
+
+   const activeTheme = await loadActiveTheme()
+
+   // Define as an empty object by default
+   let getPublicComponents: Record<string, any> = {}
+
+   if (activeTheme) {
+      getPublicComponents = activeTheme.getPublicComponents
+      // console.log(getPublicComponents)
+   } else {
+      console.error("Active theme could not be loaded!")
+   }
    const blocks = data?.data?.blocks || []
 
    return (

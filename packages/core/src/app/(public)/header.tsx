@@ -2,15 +2,17 @@ import { useGlobalContext } from "@/context/store"
 import { find } from "@/lib/strapi"
 import { loadActiveTheme } from "config/theme-loader"
 
-export default async function PrivateLayoutHeader() {
+export default async function PublicLayoutHeader() {
    const { data, error } = await find(
       // : API call need to Fix. It will be private Header
-      "api/padma-backend/public-frontpage",
+      "api/padma-backend/layout",
       {
          populate: "*"
       },
       "no-store"
    )
+
+   console.log("Public Layout Loaded")
    const activeTheme = await loadActiveTheme()
 
    // Define as an empty object by default
@@ -22,7 +24,9 @@ export default async function PrivateLayoutHeader() {
    } else {
       console.error("Active theme could not be loaded!")
    }
-   const blocks = data?.data?.blocks || []
+   const blocks = data?.data?.header || []
+
+   console.log("Header blocks Loaded", blocks)
 
    return (
       <>
