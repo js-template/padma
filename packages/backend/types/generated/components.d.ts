@@ -531,7 +531,7 @@ export interface ConfigSinglePage extends Struct.ComponentSchema {
   };
   attributes: {
     collectionModel: Schema.Attribute.String &
-      Schema.Attribute.DefaultTo<'api/posts'>;
+      Schema.Attribute.DefaultTo<'api/padma-backend/posts'>;
     singelModel: Schema.Attribute.String;
     slug: Schema.Attribute.String;
   };
@@ -545,6 +545,40 @@ export interface ConfigTableHead extends Struct.ComponentSchema {
   };
   attributes: {
     fields: Schema.Attribute.Component<'config.header-field', true>;
+  };
+}
+
+export interface FooterContactWidget extends Struct.ComponentSchema {
+  collectionName: 'components_footer_contact_widgets';
+  info: {
+    displayName: 'Contact Widget';
+    icon: 'envelop';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface FooterCopyrightBar extends Struct.ComponentSchema {
+  collectionName: 'components_footer_copyright_bars';
+  info: {
+    description: 'Bottom-most section for copyright text';
+    displayName: 'Copyright Bar';
+    icon: 'copyright';
+  };
+  attributes: {
+    content: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface FooterMenuWidget extends Struct.ComponentSchema {
+  collectionName: 'components_footer_menu_widgets';
+  info: {
+    displayName: 'Menu Widget';
+    icon: 'arrowDown';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
   };
 }
 
@@ -791,6 +825,17 @@ export interface FormsSelectItem extends Struct.ComponentSchema {
   };
 }
 
+export interface HeaderHeaderBottom extends Struct.ComponentSchema {
+  collectionName: 'components_header_header_bottoms';
+  info: {
+    displayName: 'Header bottom';
+    icon: 'bulletList';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface HeaderLogo extends Struct.ComponentSchema {
   collectionName: 'components_header_logos';
   info: {
@@ -831,16 +876,35 @@ export interface HeaderLogo extends Struct.ComponentSchema {
   };
 }
 
-export interface HeaderTopbar extends Struct.ComponentSchema {
-  collectionName: 'components_header_topbars';
+export interface HeaderMainMenu extends Struct.ComponentSchema {
+  collectionName: 'components_header_main_menus';
   info: {
-    description: '';
-    displayName: 'Topbar';
-    icon: 'paperPlane';
+    displayName: 'Main Menu';
+    icon: 'arrowRight';
   };
   attributes: {
-    announcement: Schema.Attribute.String;
-    menu: Schema.Attribute.Component<'component.link', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface HeaderTopBar extends Struct.ComponentSchema {
+  collectionName: 'components_header_top_bars';
+  info: {
+    description: 'Top bar for additional information and links';
+    displayName: 'Top Bar';
+    icon: 'bars';
+  };
+  attributes: {
+    background_color: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#ffffff'>;
+    left_content: Schema.Attribute.Text;
+    padding: Schema.Attribute.JSON &
+      Schema.Attribute.DefaultTo<{
+        bottom: 10;
+        top: 10;
+      }>;
+    right_content: Schema.Attribute.Component<'component.link', true>;
+    text_color: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#000000'>;
   };
 }
 
@@ -1101,6 +1165,9 @@ declare module '@strapi/strapi' {
       'config.role': ConfigRole;
       'config.single-page': ConfigSinglePage;
       'config.table-head': ConfigTableHead;
+      'footer.contact-widget': FooterContactWidget;
+      'footer.copyright-bar': FooterCopyrightBar;
+      'footer.menu-widget': FooterMenuWidget;
       'forms.form-buttons': FormsFormButtons;
       'forms.google-map': FormsGoogleMap;
       'forms.input': FormsInput;
@@ -1108,8 +1175,10 @@ declare module '@strapi/strapi' {
       'forms.search-form': FormsSearchForm;
       'forms.select': FormsSelect;
       'forms.select-item': FormsSelectItem;
+      'header.header-bottom': HeaderHeaderBottom;
       'header.logo': HeaderLogo;
-      'header.topbar': HeaderTopbar;
+      'header.main-menu': HeaderMainMenu;
+      'header.top-bar': HeaderTopBar;
       'layout.columns': LayoutColumns;
       'shared.empty': SharedEmpty;
       'shared.meta-social': SharedMetaSocial;
