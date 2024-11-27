@@ -1,8 +1,8 @@
 {
-  "collectionName": "components_content_typography",
+  "collectionName": "components_config_section_titles",
   "info": {
-    "displayName": "Typography",
-    "description": ""
+    "displayName": "Section Title",
+    "icon": "arrowRight"
   },
   "options": {},
   "attributes": {
@@ -15,9 +15,8 @@
     "variation": {
       "type": "enumeration",
       "enum": [
-        "Simple",
         "Variation One",
-        "Variation Two "
+        "Variation Two"
       ]
     }
   }

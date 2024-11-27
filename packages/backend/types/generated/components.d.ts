@@ -8,7 +8,7 @@ export interface BlockBanner extends Struct.ComponentSchema {
     icon: 'image';
   };
   attributes: {
-    content: Schema.Attribute.Component<'text.typography', true>;
+    content: Schema.Attribute.Component<'text.typography', false>;
     style: Schema.Attribute.Component<'component.style-section', false>;
     variation: Schema.Attribute.Enumeration<
       [
@@ -519,6 +519,19 @@ export interface ConfigRole extends Struct.ComponentSchema {
     role: Schema.Attribute.Enumeration<
       ['employer', 'candidate', 'authenticated']
     >;
+  };
+}
+
+export interface ConfigSectionTitle extends Struct.ComponentSchema {
+  collectionName: 'components_config_section_titles';
+  info: {
+    displayName: 'Section Title';
+    icon: 'arrowRight';
+  };
+  attributes: {
+    sub_title: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    variation: Schema.Attribute.Enumeration<['Variation One', 'Variation Two']>;
   };
 }
 
@@ -1093,15 +1106,15 @@ export interface SingleTypeBlogDetails extends Struct.ComponentSchema {
 export interface TextTypography extends Struct.ComponentSchema {
   collectionName: 'components_content_typography';
   info: {
+    description: '';
     displayName: 'Typography';
   };
   attributes: {
-    text: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'Your text here'>;
-    type: Schema.Attribute.Enumeration<
-      ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Body1', 'Body2', 'Caption']
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'H2'>;
+    sub_title: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    variation: Schema.Attribute.Enumeration<
+      ['Simple', 'Variation One', 'Variation Two ']
+    >;
   };
 }
 
@@ -1163,6 +1176,7 @@ declare module '@strapi/strapi' {
       'config.meta-data': ConfigMetaData;
       'config.review-card': ConfigReviewCard;
       'config.role': ConfigRole;
+      'config.section-title': ConfigSectionTitle;
       'config.single-page': ConfigSinglePage;
       'config.table-head': ConfigTableHead;
       'footer.contact-widget': FooterContactWidget;
