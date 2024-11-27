@@ -25,8 +25,6 @@ export default async function PublicLayoutFooter() {
    }
    const blocks = data?.data?.footer || []
 
-   console.log("Footer blocks Loaded", data)
-
    return (
       <>
          {blocks?.map((block: { __component: keyof typeof getPublicComponents }, index: number) => {

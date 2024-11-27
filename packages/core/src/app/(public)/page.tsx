@@ -30,7 +30,7 @@ export default async function Home() {
 
    const blocks = data?.data?.blocks || []
 
-   console.log("Home Page Blocks Loaded", blocks)
+   // console.log("Home Page Blocks Loaded", blocks)
 
    return (
       <Fragment>
