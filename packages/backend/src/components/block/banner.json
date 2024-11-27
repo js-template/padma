@@ -9,7 +9,7 @@
     "content": {
       "type": "component",
       "repeatable": false,
-      "component": "text.typography"
+      "component": "config.section-title"
     },
     "style": {
       "type": "component",

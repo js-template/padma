@@ -15,7 +15,7 @@
     "content": {
       "type": "component",
       "repeatable": true,
-      "component": "text.typography"
+      "component": "config.section-title"
     },
     "posts": {
       "type": "relation",

@@ -8,7 +8,7 @@ export interface BlockBanner extends Struct.ComponentSchema {
     icon: 'image';
   };
   attributes: {
-    content: Schema.Attribute.Component<'text.typography', false>;
+    content: Schema.Attribute.Component<'config.section-title', false>;
     style: Schema.Attribute.Component<'component.style-section', false>;
     variation: Schema.Attribute.Enumeration<
       [
@@ -34,7 +34,7 @@ export interface BlockBlogCard extends Struct.ComponentSchema {
   };
   attributes: {
     button: Schema.Attribute.Component<'component.link', false>;
-    content: Schema.Attribute.Component<'text.typography', true>;
+    content: Schema.Attribute.Component<'config.section-title', true>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     posts: Schema.Attribute.Relation<'oneToMany', 'plugin::padma-backend.post'>;
     style: Schema.Attribute.Component<'component.style-section', false>;
@@ -71,7 +71,7 @@ export interface BlockCategoryCard extends Struct.ComponentSchema {
       'oneToMany',
       'plugin::padma-backend.category'
     >;
-    content: Schema.Attribute.Component<'text.typography', true>;
+    content: Schema.Attribute.Component<'config.section-title', true>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     style: Schema.Attribute.Component<'component.style-section', false>;
   };
@@ -85,7 +85,7 @@ export interface BlockContentBox extends Struct.ComponentSchema {
     icon: 'box';
   };
   attributes: {
-    content: Schema.Attribute.Component<'text.typography', true>;
+    content: Schema.Attribute.Component<'config.section-title', true>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     icon_box: Schema.Attribute.Component<'component.icon-box', true>;
     style: Schema.Attribute.Component<'component.style-section', false>;
@@ -120,7 +120,7 @@ export interface BlockImageGallery extends Struct.ComponentSchema {
     icon: 'gallery';
   };
   attributes: {
-    content: Schema.Attribute.Component<'text.typography', false>;
+    content: Schema.Attribute.Component<'config.section-title', false>;
     images: Schema.Attribute.Media<undefined, true> & Schema.Attribute.Required;
     style: Schema.Attribute.Component<'component.style-section', false>;
     variation: Schema.Attribute.Enumeration<
@@ -199,7 +199,7 @@ export interface BlockReviewBlock extends Struct.ComponentSchema {
   };
   attributes: {
     button: Schema.Attribute.Component<'component.link', false>;
-    content: Schema.Attribute.Component<'text.typography', true>;
+    content: Schema.Attribute.Component<'config.section-title', true>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     reviews: Schema.Attribute.Component<'config.review-card', true>;
     style: Schema.Attribute.Component<'component.style-section', false>;
@@ -1103,21 +1103,6 @@ export interface SingleTypeBlogDetails extends Struct.ComponentSchema {
   };
 }
 
-export interface TextTypography extends Struct.ComponentSchema {
-  collectionName: 'components_content_typography';
-  info: {
-    description: '';
-    displayName: 'Typography';
-  };
-  attributes: {
-    sub_title: Schema.Attribute.Text;
-    title: Schema.Attribute.String;
-    variation: Schema.Attribute.Enumeration<
-      ['Simple', 'Variation One', 'Variation Two ']
-    >;
-  };
-}
-
 export interface UiAuthorInfo extends Struct.ComponentSchema {
   collectionName: 'ui_author-info';
   info: {
@@ -1202,7 +1187,6 @@ declare module '@strapi/strapi' {
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
       'single-type.blog-details': SingleTypeBlogDetails;
-      'text.typography': TextTypography;
       'ui.author-info': UiAuthorInfo;
       'ui.content-section': UiContentSection;
     }
