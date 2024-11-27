@@ -13,7 +13,10 @@ export const getPublicComponents = {
    "block.content-box": { component: PlaceholderComponent },
    "block.image-carousel": { component: PlaceholderComponent },
    "block.image-gallery": { component: PlaceholderComponent },
-   "shared.spacing": { component: PlaceholderComponent }
+   "shared.spacing": { component: PlaceholderComponent },
+   "footer.menu-widget": { component: PlaceholderComponent },
+   "footer.copyright-bar": { component: PlaceholderComponent },
+   "footer.contact-widget": { component: PlaceholderComponent }
 } as any
 
 export const getPrivateComponents = {

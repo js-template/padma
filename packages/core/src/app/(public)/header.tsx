@@ -12,7 +12,6 @@ export default async function PublicLayoutHeader() {
       "no-store"
    )
 
-   console.log("Public Layout Loaded")
    const activeTheme = await loadActiveTheme()
 
    // Define as an empty object by default
@@ -25,8 +24,6 @@ export default async function PublicLayoutHeader() {
       console.error("Active theme could not be loaded!")
    }
    const blocks = data?.data?.header || []
-
-   console.log("Header blocks Loaded", blocks)
 
    return (
       <>
