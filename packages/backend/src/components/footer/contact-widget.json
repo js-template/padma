@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_footer_contact_widgets",
+  "info": {
+    "displayName": "Contact Widget",
+    "icon": "envelop"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

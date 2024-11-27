@@ -6,11 +6,9 @@ The application fetches data from the Strapi backend using an asynchronous API c
 
 ```javascript
 const { data, error } = await find(
-   "api/home-page",
+   "api/padma-backend/home-page",
    {
-      populate: "deep",
-      publicationState: "live",
-      locale: language ? [language] : ["en"]
+      populate: "*",
    },
    "no-store"
 )

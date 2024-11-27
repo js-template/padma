@@ -5,16 +5,11 @@
     "icon": "image",
     "description": "Banner component with advanced text, style, and layout options"
   },
-  "category": "Blocks",
-  "modelName": "banner",
-  "globalId": "ComponentsBlockBanners",
-  "uid": "block.banner",
-  "modelType": "component",
   "attributes": {
     "content": {
       "type": "component",
-      "repeatable": true,
-      "component": "text.typography"
+      "repeatable": false,
+      "component": "config.section-title"
     },
     "style": {
       "type": "component",
@@ -23,7 +18,15 @@
     },
     "variation": {
       "type": "enumeration",
-      "enum": ["simple", "center", "bottom right", "left right", "box left", "box right", "circle"],
+      "enum": [
+        "simple",
+        "center",
+        "bottom right",
+        "left right",
+        "box left",
+        "box right",
+        "circle"
+      ],
       "default": "simple"
     }
   }

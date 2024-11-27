@@ -8,7 +8,7 @@ export interface BlockBanner extends Struct.ComponentSchema {
     icon: 'image';
   };
   attributes: {
-    content: Schema.Attribute.Component<'text.typography', true>;
+    content: Schema.Attribute.Component<'config.section-title', false>;
     style: Schema.Attribute.Component<'component.style-section', false>;
     variation: Schema.Attribute.Enumeration<
       [
@@ -34,7 +34,7 @@ export interface BlockBlogCard extends Struct.ComponentSchema {
   };
   attributes: {
     button: Schema.Attribute.Component<'component.link', false>;
-    content: Schema.Attribute.Component<'text.typography', true>;
+    content: Schema.Attribute.Component<'config.section-title', true>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     posts: Schema.Attribute.Relation<'oneToMany', 'plugin::padma-backend.post'>;
     style: Schema.Attribute.Component<'component.style-section', false>;
@@ -71,7 +71,7 @@ export interface BlockCategoryCard extends Struct.ComponentSchema {
       'oneToMany',
       'plugin::padma-backend.category'
     >;
-    content: Schema.Attribute.Component<'text.typography', true>;
+    content: Schema.Attribute.Component<'config.section-title', true>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     style: Schema.Attribute.Component<'component.style-section', false>;
   };
@@ -85,7 +85,7 @@ export interface BlockContentBox extends Struct.ComponentSchema {
     icon: 'box';
   };
   attributes: {
-    content: Schema.Attribute.Component<'text.typography', true>;
+    content: Schema.Attribute.Component<'config.section-title', true>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     icon_box: Schema.Attribute.Component<'component.icon-box', true>;
     style: Schema.Attribute.Component<'component.style-section', false>;
@@ -120,7 +120,7 @@ export interface BlockImageGallery extends Struct.ComponentSchema {
     icon: 'gallery';
   };
   attributes: {
-    content: Schema.Attribute.Component<'text.typography', false>;
+    content: Schema.Attribute.Component<'config.section-title', false>;
     images: Schema.Attribute.Media<undefined, true> & Schema.Attribute.Required;
     style: Schema.Attribute.Component<'component.style-section', false>;
     variation: Schema.Attribute.Enumeration<
@@ -199,7 +199,7 @@ export interface BlockReviewBlock extends Struct.ComponentSchema {
   };
   attributes: {
     button: Schema.Attribute.Component<'component.link', false>;
-    content: Schema.Attribute.Component<'text.typography', true>;
+    content: Schema.Attribute.Component<'config.section-title', true>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     reviews: Schema.Attribute.Component<'config.review-card', true>;
     style: Schema.Attribute.Component<'component.style-section', false>;
@@ -522,6 +522,19 @@ export interface ConfigRole extends Struct.ComponentSchema {
   };
 }
 
+export interface ConfigSectionTitle extends Struct.ComponentSchema {
+  collectionName: 'components_config_section_titles';
+  info: {
+    displayName: 'Section Title';
+    icon: 'arrowRight';
+  };
+  attributes: {
+    sub_title: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    variation: Schema.Attribute.Enumeration<['Variation One', 'Variation Two']>;
+  };
+}
+
 export interface ConfigSinglePage extends Struct.ComponentSchema {
   collectionName: 'components_config_single_pages';
   info: {
@@ -531,7 +544,7 @@ export interface ConfigSinglePage extends Struct.ComponentSchema {
   };
   attributes: {
     collectionModel: Schema.Attribute.String &
-      Schema.Attribute.DefaultTo<'api/posts'>;
+      Schema.Attribute.DefaultTo<'api/padma-backend/posts'>;
     singelModel: Schema.Attribute.String;
     slug: Schema.Attribute.String;
   };
@@ -545,6 +558,40 @@ export interface ConfigTableHead extends Struct.ComponentSchema {
   };
   attributes: {
     fields: Schema.Attribute.Component<'config.header-field', true>;
+  };
+}
+
+export interface FooterContactWidget extends Struct.ComponentSchema {
+  collectionName: 'components_footer_contact_widgets';
+  info: {
+    displayName: 'Contact Widget';
+    icon: 'envelop';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface FooterCopyrightBar extends Struct.ComponentSchema {
+  collectionName: 'components_footer_copyright_bars';
+  info: {
+    description: 'Bottom-most section for copyright text';
+    displayName: 'Copyright Bar';
+    icon: 'copyright';
+  };
+  attributes: {
+    content: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface FooterMenuWidget extends Struct.ComponentSchema {
+  collectionName: 'components_footer_menu_widgets';
+  info: {
+    displayName: 'Menu Widget';
+    icon: 'arrowDown';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
   };
 }
 
@@ -791,6 +838,17 @@ export interface FormsSelectItem extends Struct.ComponentSchema {
   };
 }
 
+export interface HeaderHeaderBottom extends Struct.ComponentSchema {
+  collectionName: 'components_header_header_bottoms';
+  info: {
+    displayName: 'Header bottom';
+    icon: 'bulletList';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface HeaderLogo extends Struct.ComponentSchema {
   collectionName: 'components_header_logos';
   info: {
@@ -831,16 +889,35 @@ export interface HeaderLogo extends Struct.ComponentSchema {
   };
 }
 
-export interface HeaderTopbar extends Struct.ComponentSchema {
-  collectionName: 'components_header_topbars';
+export interface HeaderMainMenu extends Struct.ComponentSchema {
+  collectionName: 'components_header_main_menus';
   info: {
-    description: '';
-    displayName: 'Topbar';
-    icon: 'paperPlane';
+    displayName: 'Main Menu';
+    icon: 'arrowRight';
   };
   attributes: {
-    announcement: Schema.Attribute.String;
-    menu: Schema.Attribute.Component<'component.link', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface HeaderTopBar extends Struct.ComponentSchema {
+  collectionName: 'components_header_top_bars';
+  info: {
+    description: 'Top bar for additional information and links';
+    displayName: 'Top Bar';
+    icon: 'bars';
+  };
+  attributes: {
+    background_color: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'#ffffff'>;
+    left_content: Schema.Attribute.Text;
+    padding: Schema.Attribute.JSON &
+      Schema.Attribute.DefaultTo<{
+        bottom: 10;
+        top: 10;
+      }>;
+    right_content: Schema.Attribute.Component<'component.link', true>;
+    text_color: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#000000'>;
   };
 }
 
@@ -1026,21 +1103,6 @@ export interface SingleTypeBlogDetails extends Struct.ComponentSchema {
   };
 }
 
-export interface TextTypography extends Struct.ComponentSchema {
-  collectionName: 'components_content_typography';
-  info: {
-    displayName: 'Typography';
-  };
-  attributes: {
-    text: Schema.Attribute.Text & Schema.Attribute.DefaultTo<'Your text here'>;
-    type: Schema.Attribute.Enumeration<
-      ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Body1', 'Body2', 'Caption']
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'H2'>;
-  };
-}
-
 export interface UiAuthorInfo extends Struct.ComponentSchema {
   collectionName: 'ui_author-info';
   info: {
@@ -1099,8 +1161,12 @@ declare module '@strapi/strapi' {
       'config.meta-data': ConfigMetaData;
       'config.review-card': ConfigReviewCard;
       'config.role': ConfigRole;
+      'config.section-title': ConfigSectionTitle;
       'config.single-page': ConfigSinglePage;
       'config.table-head': ConfigTableHead;
+      'footer.contact-widget': FooterContactWidget;
+      'footer.copyright-bar': FooterCopyrightBar;
+      'footer.menu-widget': FooterMenuWidget;
       'forms.form-buttons': FormsFormButtons;
       'forms.google-map': FormsGoogleMap;
       'forms.input': FormsInput;
@@ -1108,8 +1174,10 @@ declare module '@strapi/strapi' {
       'forms.search-form': FormsSearchForm;
       'forms.select': FormsSelect;
       'forms.select-item': FormsSelectItem;
+      'header.header-bottom': HeaderHeaderBottom;
       'header.logo': HeaderLogo;
-      'header.topbar': HeaderTopbar;
+      'header.main-menu': HeaderMainMenu;
+      'header.top-bar': HeaderTopBar;
       'layout.columns': LayoutColumns;
       'shared.empty': SharedEmpty;
       'shared.meta-social': SharedMetaSocial;
@@ -1119,7 +1187,6 @@ declare module '@strapi/strapi' {
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
       'single-type.blog-details': SingleTypeBlogDetails;
-      'text.typography': TextTypography;
       'ui.author-info': UiAuthorInfo;
       'ui.content-section': UiContentSection;
     }

@@ -13,11 +13,12 @@
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.7",
     "chokidar": "^4.0.1",
+    "eslint-config-next": "^15.0.3",
     "fs-extra": "^11.2.0",
-    "inquirer": "^12.0.1"
-  },
-  "peerDependencies": {
-    "@padmadev/core": "*"
+    "i": "^0.3.7",
+    "inquirer": "^12.0.1",
+    "minimatch": "5.1.0",
+    "npm": "^10.9.1"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
@@ -25,8 +26,9 @@
     "@types/chai": "^4",
     "@types/mocha": "^10",
     "@types/node": "^18",
+    "ajv": "^8.17.1",
     "chai": "^4",
-    "eslint": "^8",
+    "eslint": "^9.15.0",
     "eslint-config-oclif": "^5",
     "eslint-config-oclif-typescript": "^3",
     "eslint-config-prettier": "^9",

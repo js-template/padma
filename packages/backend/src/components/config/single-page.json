@@ -18,7 +18,7 @@
     },
     "collectionModel": {
       "type": "string",
-      "default": "api/posts"
+      "default": "api/padma-backend/posts"
     },
     "singelModel": {
       "type": "string"

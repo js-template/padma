@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_header_header_bottoms",
+  "info": {
+    "displayName": "Header bottom",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}
