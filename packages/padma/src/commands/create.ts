@@ -1,17 +1,18 @@
-// src/commands/create.ts
 import {Command, Args, Flags} from '@oclif/core'
 import fs from 'fs-extra'
 import path from 'path'
 import {fileURLToPath} from 'url'
 import {dirname} from 'path'
 import {execSync} from 'child_process'
+import inquirer from 'inquirer'
+import chalk from 'chalk'
 
 export default class Create extends Command {
   static description = 'Create a new Padma Project'
 
   static examples = [
-    `<%= config.bin %> create padma my-project
-    // Creates a new project folder named "my-project" and adds a core folder inside it.`,
+    'npx padma create my-project',
+    // Creates a new project folder named "my-project" and adds a core folder inside it.,
   ]
 
   static args = {
@@ -23,18 +24,41 @@ export default class Create extends Command {
     theme: Flags.string({char: 't', description: 'Specify a theme to install'}),
   }
 
-  detectPackageManager(): string {
+  async detectPackageManager(): Promise<string> {
+    const availableManagers: string[] = []
+
     try {
       execSync('yarn --version', {stdio: 'ignore'})
-      return 'yarn'
+      availableManagers.push('yarn')
     } catch {
-      try {
-        execSync('pnpm --version', {stdio: 'ignore'})
-        return 'pnpm'
-      } catch {
-        return 'npm'
-      }
+      // yarn not available
     }
+
+    try {
+      execSync('pnpm --version', {stdio: 'ignore'})
+      availableManagers.push('pnpm')
+    } catch {
+      // pnpm not available
+    }
+
+    availableManagers.push('npm') // npm is the fallback
+
+    if (availableManagers.length === 1) {
+      return availableManagers[0]
+    }
+
+    console.log('Detected package managers:', availableManagers)
+
+    const {selectedManager} = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'selectedManager',
+        message: 'Which package manager would you like to use?',
+        choices: availableManagers,
+      },
+    ])
+
+    return selectedManager
   }
 
   async run() {
@@ -43,19 +67,13 @@ export default class Create extends Command {
     const force = flags.force
 
     const projectPath = path.resolve(process.cwd(), projectName)
-    const corePath = path.join(projectPath, 'core') // The core folder inside the user project
-    this.log(`Project path: ${projectPath}`)
-    this.log(`Core path: ${corePath}`)
+    const corePath = path.join(projectPath, 'core')
 
     const __filename = fileURLToPath(import.meta.url)
     const __dirname = dirname(__filename)
 
-    // Paths to template folders
     const templateProjectFolder = path.resolve(__dirname, '../../templates/project')
     const templateCoreFolder = path.resolve(__dirname, '../../templates/core')
-
-    this.log(`Template project path: ${templateProjectFolder}`)
-    this.log(`Template core path: ${templateCoreFolder}`)
 
     const projectFolderExists = await fs.pathExists(projectPath)
 
@@ -64,8 +82,16 @@ export default class Create extends Command {
       return
     }
 
-    const packageManager = this.detectPackageManager()
-    this.log(`Detected package manager: ${packageManager}`)
+    // Consolidated prompts
+    const packageManager = await this.detectPackageManager()
+    const {initializeGit} = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'initializeGit',
+        message: 'Would you like to initialize a Git repository?',
+        default: true,
+      },
+    ])
 
     try {
       // Create the project folder
@@ -81,49 +107,79 @@ export default class Create extends Command {
         return
       }
 
-      // Copy the core folder to the new project's `core` folder
+      // Copy the core folder
       if (await fs.pathExists(templateCoreFolder)) {
         await fs.ensureDir(corePath)
         fs.copySync(templateCoreFolder, corePath)
-        this.log('Successfully copied core template files to the project/core folder.')
+        this.log('Successfully copied core template files.')
       } else {
         this.log('Error: The core template folder does not exist.')
         return
       }
 
-      // Modify package.json to set the name field
+      // Update package.json with project name and package manager-specific settings
       const packageJsonPath = path.join(projectPath, 'package.json')
       if (await fs.pathExists(packageJsonPath)) {
         const packageJson = await fs.readJson(packageJsonPath)
+
         packageJson.name = projectName
+
+        // Update scripts based on the package manager
+        if (packageManager === 'pnpm') {
+          packageJson.scripts.dev = 'npx padma dev' // Only change here
+          packageJson.scripts.build = 'pnpm --filter @padmadev/core build'
+          packageJson.scripts.start = 'pnpm --filter @padmadev/core start'
+
+          // Create a pnpm-workspace.yaml file
+          const pnpmWorkspacePath = path.join(projectPath, 'pnpm-workspace.yaml')
+          const pnpmWorkspaceContent = `packages:\n  - 'packages/*'\n  - 'core'\n`
+          await fs.writeFile(pnpmWorkspacePath, pnpmWorkspaceContent, 'utf8')
+          this.log('Created pnpm-workspace.yaml for pnpm compatibility.')
+        } else if (packageManager === 'npm') {
+          packageJson.scripts.dev = 'npx padma dev' // Only change here
+          packageJson.scripts.build = 'cd core && npm run build'
+          packageJson.scripts.start = 'cd core && npm run start'
+
+          // Remove "workspaces" key (optional, depending on npm's workspace support)
+          delete packageJson.workspaces
+          this.log('Updated scripts for npm compatibility.')
+        } else {
+          // For yarn, keep the default scripts
+          packageJson.scripts.dev = 'npx padma dev' // Only change here
+          this.log('No changes needed for yarn.')
+        }
+
         await fs.writeJson(packageJsonPath, packageJson, {spaces: 2})
-        this.log('Updated package.json with the project name.')
+        this.log('Updated package.json with appropriate scripts and configurations.')
       }
 
-      // Install dependencies with the detected package manager
-      this.log('Installing dependencies...')
-
+      // Create a blank yarn.lock if yarn is selected
       if (packageManager === 'yarn') {
-        execSync('yarn install', {cwd: projectPath, stdio: 'inherit'})
-      } else if (packageManager === 'pnpm') {
-        execSync('pnpm install', {cwd: projectPath, stdio: 'inherit'})
-      } else {
-        execSync('npm install', {cwd: projectPath, stdio: 'inherit'})
+        const yarnLockPath = path.join(projectPath, 'yarn.lock')
+        await fs.ensureFile(yarnLockPath)
+        this.log('Created a blank yarn.lock file.')
       }
 
-      this.log('Dependencies installed successfully.')
+      // Install dependencies
+      this.log(chalk.green('Installing dependencies...'))
+      execSync(`${packageManager} install`, {cwd: projectPath, stdio: 'inherit'})
+      this.log(chalk.green('Dependencies installed successfully.'))
 
-      // Run the development server
+      // Initialize Git if selected
+      if (initializeGit) {
+        this.log('Initializing Git repository...')
+        execSync('git init', {cwd: projectPath, stdio: 'inherit'})
+        execSync('git add .', {cwd: projectPath, stdio: 'inherit'})
+        execSync('git commit -m "Initial commit"', {cwd: projectPath, stdio: 'inherit'})
+        this.log('Git repository initialized successfully.')
+      }
+
+      // Start development server
       this.log('Starting the development server...')
-      if (packageManager === 'yarn') {
-        execSync('yarn dev', {cwd: projectPath, stdio: 'inherit'})
-      } else if (packageManager === 'pnpm') {
-        execSync('pnpm dev', {cwd: projectPath, stdio: 'inherit'})
-      } else {
-        execSync('npm run dev', {cwd: projectPath, stdio: 'inherit'})
-      }
+      const devCommand = packageManager === 'yarn' ? 'yarn dev' : `${packageManager} run dev`
+      execSync(devCommand, {cwd: projectPath, stdio: 'inherit'})
     } catch (error) {
-      this.log('Error setting up the project. Please check the template folder or the permissions.')
+      this.log('Error setting up the project. Please check the template folder or permissions.')
       this.log(String(error))
     }
   }

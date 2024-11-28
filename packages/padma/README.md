@@ -2,75 +2,108 @@
 
 ### 1. Create a New Padma Project
 
-Enter the following command in your terminal to create a new Padma project:
+Run the following command to create a new Padma project:
 
 ```bash
 npx padma create my-project
 ```
 
-### 2. Select a Starter Theme
+### 2. Select a Package Manager
 
-If it's your first time using Padma, we recommend that you select `@padma/blank-theme` to start with.
+During project setup, you'll be prompted to choose your preferred package manager. If you're not sure, you can go with the default one.
 
 ```
-? Pick a starter theme to clone: @padma/blank-theme (recommended)
+? Which package manager would you like to use? (npm, yarn, pnpm)
 ```
 
-A directory with the same name as the project you used will be created. It will have a structure similar to this:
+### 3. Initialize Git (Optional)
+
+You will also be asked if you want to initialize a Git repository for your project. If you choose yes, it will automatically create a Git repository for you.
+
+```
+? Would you like to initialize a Git repository? (y/n)
+```
+
+### 4. Project Structure
+
+Once the project is created, the directory will be structured as follows:
+
+Sure! Here's the updated section that includes information on creating a custom theme within the `packages` folder:
+
+---
+
+### Project Structure
+
+Once the project is created, the directory will be structured as follows:
 
 ```
 my-project/
 |__ node_modules/
-|__ src/app   
+|__ packages/
+|   |__ blank-theme
 |__ package.json
-|__ padma.settings.js
+|__ padma.settings.ts
 |__ favicon.ico
 ```
 
-### 3. Run the Project Locally
+The `blank-theme` will be inside the `packages/` folder as the default theme. You can also create your own custom themes within the `packages/` folder, just like the `blank-theme`. To do so, create a new folder under `packages/` and add your theme files. Then, update the `padma.settings.ts` file to point to your custom theme.
 
-Execute this command from the terminal to run the project locally:
+For example, you could create a new theme called `custom-theme`:
+
+```
+my-project/
+|__ packages/
+|   |__ blank-theme
+|   |__ custom-theme
+```
+
+Afterward, update the `padma.settings.ts` to use `custom-theme`:
+
+```ts
+// In padma.settings.ts
+{
+  "activeTheme": "@padmadev/custom-theme'",
+}
+```
+
+### 5. Run the Project Locally
+
+To run the project locally, use the following command:
 
 ```bash
 cd my-project && npx padma dev
 ```
 
-A development server will be started. This server will be listening on [http://localhost:3000](http://localhost:3000) and will watch for any changes inside the packages directory.
+This starts the development server at [http://localhost:3000](http://localhost:3000), and it will automatically reload whenever you make changes in the `packages/` directory.
 
-### 4. Make Changes to Your Site
+### 6. Make Changes to Your Site
 
-Now you're ready to make changes to your site:
+Now, open the project in your code editor and make edits to the `packages/blank-theme` folder. The browser will auto-refresh to reflect the changes.
 
-Open the project directory in your preferred code editor/IDE and try editing some of the files under `packages/river-theme`. Each time you save a change, the browser will automatically reload and display the new version, as these changes are detected by the development server.
+## Set Up Your Own Strapi Installation
 
-## Set Your Own `Strapi` Installation
-
-A good next step is to set your own Strapi installation as the data source.
-
-You can connect your own Strapi site to your Padma project by updating `config/theme.settings.ts`:
+You can connect your own Strapi instance to Padma by editing the `config/theme.settings.ts` file.
 
 ```bash
-// Example connection setup
+// Example connection setup for Strapi
 ```
 
-Your site at [http://localhost:3000](http://localhost:3000) won't auto-update with this change, as auto-updates only occur with changes to files in the packages directory. So, you will need to manually refresh the page in your browser.
-
-You should now see your own posts in the Padma project displayed in the browser.
+Note: Changes to Strapi data won't automatically update on the site unless they are made within the `packages/` directory. You’ll need to manually refresh the browser to see new data.
 
 ## What's Next?
 
 ### Follow the Step-by-Step Tutorial
 
-Padma's primary learning resource is the Step-by-Step Tutorial. This is the perfect place to start if you're new to Padma or even if you've previously used Padma but feel that your knowledge is incomplete or fragmented.
+Start with Padma's Step-by-Step Tutorial to learn how to use Padma effectively.
 
 ### Check Padma's Guides
 
-There are several Guides that will help you understand working with Padma and assist you in solving some of the common challenges that come up when working with Dynamic SSR (Server-Side Rendering) in React apps connected to Strapi.
+Explore various guides to help you work with Padma, including troubleshooting and common challenges.
 
 ### Check the API Reference
 
-The main reference resource is the API Reference. This is where you'll find detailed information about the Padma CLI, packages, plugins, and themes. Once you've mastered the basics of working with Padma, this is where you're likely to spend most of your time when working on projects.
+Once you're comfortable with the basics, refer to the API Reference for detailed information about Padma CLI, packages, plugins, and themes.
 
 ### Deploy Your Site
 
-When you're done developing and are ready to launch your new site, follow the instructions in the Deployment section to learn how to deploy your finished Padma site. We recommend that you start by deploying your site to Vercel.
+When you're ready to deploy your site, follow the instructions in the Deployment section. We recommend using Vercel for an easy deployment process.

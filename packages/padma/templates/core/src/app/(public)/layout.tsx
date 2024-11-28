@@ -1,26 +1,13 @@
 import React from "react"
-import { find } from "@/lib/strapi"
-import { loadActiveTheme } from "../../../config/theme-loader"
-import LayoutBody from "./body"
-import { getLanguageFromCookie } from "@/utils/language"
+import PublicLayoutFooter from "./footer"
+import PublicLayoutHeader from "./header"
 
-export default async function PublicLayout(props: { children: React.ReactNode }) {
-   // fetch the language from cookies or session
-   const language = getLanguageFromCookie()
-
-   // get the layout data from the server
-   const { data } = await find(
-      "api/padma-backend/layout",
-      {
-         populate: "*"
-         // publicationState: "live",
-         // locale: language ? [language] : ["en"]
-      },
-      "no-store"
+export default async function PublicLayout({ children }: { children: React.ReactNode }) {
+   return (
+      <>
+         <PublicLayoutHeader />
+         <main>{children}</main>
+         <PublicLayoutFooter />
+      </>
    )
-
-   // Load the active theme and get public components
-   const { getPublicComponents } = await loadActiveTheme()
-
-   return <LayoutBody data={data} language={language} currentThemeComponents={getPublicComponents} {...props} />
 }

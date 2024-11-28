@@ -79,7 +79,7 @@ export async function generateMetadata({ params, searchParams }: Props, parent: 
    const language = getLanguageFromCookie()
    // *** fetch seo data
    const { data } = await find(
-      "api/posts",
+      "api/padma-backend/posts",
       {
          filters: {
             slug: {

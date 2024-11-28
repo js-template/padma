@@ -1,16 +1,16 @@
 {
-  "name": "padma-monorepo",
+  "name": "my-project",
   "description": "Padma - The Next.js Framework for Strapi",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "private": true,
   "workspaces": [
     "packages/*",
     "core"
   ],
   "scripts": {
-    "dev": "yarn workspace core dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "yarn workspace @padmadev/core dev",
+    "build": "yarn workspace @padmadev/core build",
+    "start": "yarn workspace @padmadev/core start"
   },
   "devDependencies": {
     "prettier": "latest"
@@ -20,6 +20,6 @@
   },
   "dependencies": {
     "@next/env": "^15.0.3",
-    "@padmadev/blank-theme": "file:packages/blank-theme"
+    "@padmadev/blank-theme": "^0.0.1-alpha.3"
   }
 }
