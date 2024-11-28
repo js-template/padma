@@ -12,11 +12,9 @@ export default class Dev extends Command {
     // Define the settings path relative to the current working directory
     const settingsPath = path.resolve(process.cwd(), 'padma.settings.json')
 
-    //console.log(`Settings path: ${settingsPath}`)
-
     // Check if the settings file exists
     if (!fs.existsSync(settingsPath)) {
-      throw new Error(`Settings file not found at ${settingsPath}`)
+      this.error(`Settings file not found at ${settingsPath}`)
     }
 
     // Read and parse the settings file
@@ -24,17 +22,16 @@ export default class Dev extends Command {
 
     // Check if activeTheme is defined in the settings file
     if (!settings.activeTheme) {
-      throw new Error('Active theme is not defined in the settings file.')
+      this.error('Active theme is not defined in the settings file.')
     }
 
-    // Use the activeTheme setting from the settings file
-    //  const activeTheme = settings.activeTheme
+    // Path to the core directory
     const corePath = path.resolve(process.cwd(), './core')
     const rootPath = process.cwd() // Root directory is the current working directory
 
     // Check if the core folder exists
     if (!fs.existsSync(corePath)) {
-      this.error(`The core folder does not exist. Please run "npx padma generate core" to initialize it.\n`)
+      this.error(`The core folder does not exist. Please run "npx padma generate core" to initialize it.`)
     }
 
     // Detect the package manager by checking for lock files in the root
@@ -59,6 +56,7 @@ export default class Dev extends Command {
     }
   }
 
+  // Detects the package manager based on the lock file in the root directory
   private detectPackageManager(rootPath: string): 'npm' | 'yarn' | 'pnpm' | null {
     if (fs.existsSync(path.join(rootPath, 'yarn.lock'))) {
       return 'yarn'

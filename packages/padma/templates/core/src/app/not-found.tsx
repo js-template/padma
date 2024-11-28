@@ -10,8 +10,8 @@ import { loadActiveTheme } from "config/theme-loader"
 // will be dynamic page and filtered by slug
 // slug- 404-page
 export const metadata: Metadata = {
-   title: "Page Not Found | MUI Next.js Boilerplate",
-   description: "Page not found for MUI Next.js Boilerplate"
+   title: "Page Not Found",
+   description: "Page not found on the website"
 }
 
 export default async function NotFound(props: { children: React.ReactNode }) {
@@ -29,8 +29,19 @@ export default async function NotFound(props: { children: React.ReactNode }) {
       "no-store"
    )
 
-   // Load the active theme and get public components
-   const { getPublicComponents } = await loadActiveTheme()
+   const activeTheme = await loadActiveTheme()
+
+   // Define as an empty object by default
+   let getPublicComponents: Record<string, any> = {}
+
+   if (activeTheme) {
+      getPublicComponents = activeTheme.getPublicComponents
+      // console.log(getPublicComponents)
+   } else {
+      console.error("Active theme could not be loaded!")
+   }
+
+   //console.log("Not Found Page Loaded")
 
    return <NotFoundBody data={data} language={language} currentThemeComponents={getPublicComponents} {...props} />
 }

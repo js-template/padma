@@ -1,38 +1,37 @@
 import fs from "fs"
 import path from "path"
 
-let activeThemeComponents: Record<string, any> = {} // Use 'any' for React components
+type ThemeComponents = {
+   getPublicComponents: Record<string, any>
+   getPrivateComponents: Record<string, any>
+}
 
-// Load the active theme components dynamically
-export const loadActiveTheme = async () => {
+export const loadActiveTheme = async (): Promise<ThemeComponents | null> => {
    try {
       // Locate the settings file
       const settingsPath = path.resolve(process.cwd(), "./../padma.settings.json")
 
-      if (!fs.existsSync(settingsPath)) {
-         throw new Error(`Settings file not found at ${settingsPath}`)
-      }
+      // if (!fs.existsSync(settingsPath)) {
+      //    throw new Error(`Settings file not found at ${settingsPath}`)
+      // }
 
-      // Read and parse the settings file
-      const settings = JSON.parse(fs.readFileSync(settingsPath, "utf-8"))
+      // // Read and parse the settings file
+      // const settings = JSON.parse(fs.readFileSync(settingsPath, "utf-8"))
 
-      if (!settings.activeTheme) {
-         throw new Error("Active theme is not defined in the settings file.")
-      }
+      // if (!settings.activeTheme) {
+      //    throw new Error("Active theme is not defined in the settings file.")
+      // }
 
-      const activeTheme = settings.activeTheme
-
-      // @ts-ignore
       const { getPublicComponents, getPrivateComponents } = await import("@padmadev/blank-theme")
 
       return { getPrivateComponents, getPublicComponents }
    } catch (error: any) {
-      console.error("Error loading active theme:", error.message)
-      return null
+      console.error("Error loading active theme:")
+      return null // Return null on error
    }
 }
 
 // Get a specific theme component by its key
-export const getThemeComponent = (componentKey: string): any | null => {
-   return activeThemeComponents[componentKey] || null // Access the outer scoped variable
-}
+// export const getThemeComponent = (componentKey: string): any | null => {
+//    return activeThemeComponents[componentKey] || null // Access the outer scoped variable
+// }
