@@ -1,7 +1,7 @@
 {
   "name": "@padmadev/padma",
   "description": "Padma- Nextjs Framework for Strapi",
-  "version": "0.0.3-alpha.2",
+  "version": "0.0.3-alpha.8",
   "author": "Zelal Hossain",
   "bin": "./bin/run.js",
   "bugs": "https://github.com/js-template/padma",
@@ -19,7 +19,8 @@
     "i": "^0.3.7",
     "inquirer": "^12.0.1",
     "minimatch": "5.1.0",
-    "npm": "^10.9.1"
+    "npm": "^10.9.1",
+    "ora": "^8.1.1"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
