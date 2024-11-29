@@ -2,13 +2,17 @@
 
 # dependencies
 node_modules
+out
 .pnp
+.vercel
 .pnp.js
+.tmp
 packages/metajob-theme
 .npmrc
 .strapi
+.yarn
+.nx
 scripts
-templates
 # testing
 bin
 .bin
@@ -47,6 +51,8 @@ yarn.lock*
 .vercel
 /packages/metajob-ui
 .npmrc
-apps/backend/src/plugins/metajob-backend/
 .npmrc
 tsconfig.tsbuildinfo
+
+.nx/cache
+.nx/workspace-data

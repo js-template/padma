@@ -1,0 +1,27 @@
+import Image from "next/image";
+
+import { Callout } from "nextra-theme-docs";
+
+## Frontend Environment Variables Configuration
+
+- Add the following environment variables:
+
+```sh
+NEXTAUTH_URL="Your_site_url"
+NEXTAUTH_SECRET="Your_Next-auth_Secret "
+STRAPI_ENDPOINT="Your_Strapi_Endpoint"
+STRAPI_AUTH_TOKEN="Your_Strapi_API_Token"
+```
+
+- Here `NEXTAUTH_URL` and `NEXTAUTH_SECRET` are the minimum required variables keys.
+
+<Callout type="info" emoji="ℹ️">
+  <strong>NOTE:</strong> you can generate <strong>NEXTAUTH_SECRET</strong> key
+  using the following command support.
+</Callout>
+
+```sh
+openssl rand -base64 32
+```
+
+- And the `STRAPI_ENDPOINT`, `STRAPI_AUTH_TOKEN` keys are required to [Connect Strapi with Frontend](/padma/padma-framework/guides/connect-strapi/).

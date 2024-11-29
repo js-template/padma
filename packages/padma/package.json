@@ -1,11 +1,9 @@
 {
   "name": "@padmadev/padma",
   "description": "Padma- Nextjs Framework for Strapi",
-  "version": "0.0.1",
+  "version": "0.0.3-alpha.8",
   "author": "Zelal Hossain",
-  "bin": {
-    "padma": "./bin/run.js"
-  },
+  "bin": "./bin/run.js",
   "bugs": "https://github.com/js-template/padma",
   "dependencies": {
     "@inquirer/prompts": "^7.0.1",
@@ -14,8 +12,15 @@
     "@oclif/plugin-plugins": "^5",
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.7",
+    "chalk": "^5.3.0",
+    "chokidar": "^4.0.1",
+    "eslint-config-next": "^15.0.3",
     "fs-extra": "^11.2.0",
-    "inquirer": "^12.0.1"
+    "i": "^0.3.7",
+    "inquirer": "^12.0.1",
+    "minimatch": "5.1.0",
+    "npm": "^10.9.1",
+    "ora": "^8.1.1"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
@@ -23,8 +28,9 @@
     "@types/chai": "^4",
     "@types/mocha": "^10",
     "@types/node": "^18",
+    "ajv": "^8.17.1",
     "chai": "^4",
-    "eslint": "^8",
+    "eslint": "^9.15.0",
     "eslint-config-oclif": "^5",
     "eslint-config-oclif-typescript": "^3",
     "eslint-config-prettier": "^9",
@@ -33,9 +39,6 @@
     "shx": "^0.3.3",
     "ts-node": "^10",
     "typescript": "^5"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -58,16 +61,16 @@
   "main": "dist/index.js",
   "oclif": {
     "bin": "padma",
-    "dirname": "padma",
     "commands": "./dist/commands",
+    "dirname": "padma",
+    "topicSeparator": " ",
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins"
     ],
-    "topicSeparator": " ",
     "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
+      "create": {
+        "description": " Create a new Padma project"
       }
     }
   },

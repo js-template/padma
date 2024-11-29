@@ -1,26 +1,23 @@
 {
   "name": "padma-monorepo",
   "description": "Padma - The Next.js Framework for Strapi",
-  "version": "0.0.2",
+  "version": "1.0.0-alpha.0",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "packages/*",
+    "docs/*",
+    "projects/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
+    "dev": "lerna run dev --scope @padmadev/core",
+    "build": "lerna run build --scope @padmadev/core",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "eslint-config-custom": "workspace:*",
-    "prettier": "latest",
-    "turbo": "latest"
+    "lerna": "^8.1.9",
+    "prettier": "latest"
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "dependencies": {},
-  "packageManager": "pnpm@9.11.0"
+  }
 }

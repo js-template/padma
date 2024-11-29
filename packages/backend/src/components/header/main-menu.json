@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_header_main_menus",
+  "info": {
+    "displayName": "Main Menu",
+    "icon": "arrowRight"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

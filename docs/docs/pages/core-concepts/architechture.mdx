@@ -1,0 +1,48 @@
+
+
+### 1. **Fetching Data from Strapi**
+
+The application fetches data from the Strapi backend using an asynchronous API call. This data can include various content types such as pages, blocks, and components. For example:
+
+```javascript
+const { data, error } = await find(
+   "api/padma-backend/home-page",
+   {
+      populate: "*",
+   },
+   "no-store"
+)
+```
+
+- The `find` function is used to fetch the `home-page` content.
+- The `locale` is dynamically set based on the user's language preference.
+
+### 2. **Loading the Active Theme**
+
+Once the data is fetched, the active theme is loaded dynamically:
+
+```javascript
+const { getPublicComponents } = await loadActiveTheme()
+```
+
+- The `getPublicComponents` function returns a mapping of components to be rendered based on the block data from Strapi.
+
+### 3. **Rendering Components Dynamically**
+
+After fetching the data, the blocks are rendered by mapping each block’s `__component` field to a corresponding component in the active theme:
+
+```javascript
+{blocks?.map((block: { __component: keyof typeof getPublicComponents }, index: number) => {
+   const BlockConfig = getPublicComponents[block.__component]
+   if (BlockConfig) {
+      const { component: ComponentToRender } = BlockConfig
+      return <ComponentToRender key={index} language={language} block={block} />
+   }
+   return null
+})}
+```
+
+- For each block, the corresponding component is identified and rendered.
+
+---
+
