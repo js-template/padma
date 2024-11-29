@@ -1,12 +1,26 @@
-# Welcome to Padma
+import Image from 'next/image'
+import { Card, Cards } from 'nextra-theme-docs'
 
-👋 Hi! Welcome to the Padma documentation.
 
-The Padma documentation is distributed across three separate sites:
 
-- **docs.padma.dev** - Introduction, concepts, and guides  
-- **api.padma.dev** - API Reference  
+{<h1 className="mt-10 mb-4 text-center text-[2.5rem] font-bold tracking-tight">Padma Documentation</h1>}
 
-If you're new to Padma, check out the step-by-step tutorial. It's the quickest way to get up to speed with Padma.
 
-Let's kick things off by providing you with a roadmap so that you can find your way around the documentation and zero in on the information you need right now.
+<Cards>
+	{[
+		{
+			name: 'Main Docs',
+			url: '/user-docs/get-started/intro/',
+	
+		},
+		{
+			name: 'CLI Docs',
+			url: '/cli-docs/intro/',
+			//image: HTMLCoverImg,
+		},
+	].map(({ name, url, image }) => (
+		<Card key={name} image arrow title={name} href={url}>
+			
+		</Card>
+	))}
+</Cards>

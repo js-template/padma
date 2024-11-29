@@ -1,0 +1,26 @@
+{
+  "index": {
+    "title": "Create",
+    "theme": {
+      "toc": true
+    }
+  },
+  "generate": {
+    "title": "Generate",
+    "theme": {
+      "toc": true
+    }
+  },
+  "dev": {
+    "title": "Dev",
+    "theme": {
+      "toc": true
+    }
+  },
+  "build": {
+    "title": "Build",
+    "theme": {
+      "toc": true
+    }
+  }
+}
