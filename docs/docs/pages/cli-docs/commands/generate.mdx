@@ -1,0 +1,72 @@
+
+# Generate Command
+
+## Overview
+The `generate` command in the Padma CLI allows you to quickly create predefined folders and templates to streamline project setup and development. Two main subcommands are available: `core` and `theme`.
+
+| Subcommand | Description                    | Flags                     |
+|------------|--------------------------------|---------------------------|
+| `core`     | Generates the core folder.    | None                      |
+| `theme`    | Generates a theme folder.     | `--name` / `-n`           |
+
+
+
+### **Generate Core**
+The `core` command generates the core folder in the current project. It copies the necessary files and templates from the predefined core template directory.
+
+#### **Usage**
+Run the following command:
+
+```bash
+npx padma generate core
+```
+
+#### **Description**
+- This command will:
+  - Copy the core template files into a folder named `core` in the current directory.
+  - Ensure that the core folder doesn’t already exist to prevent overwriting files.
+  - Log success or error messages for user feedback.
+
+#### **Example Output**
+```plaintext
+Generating "core"...
+Template folder: /path/to/templates/core
+Target folder: /path/to/current-project/core
+Successfully generated "core".
+```
+
+
+### **Generate Theme**
+The `theme` command generates a customizable theme folder inside the `packages` directory of your project.
+
+#### **Usage**
+Run the following command:
+
+```bash
+npx padma generate theme --name custom-theme
+```
+
+#### **Flags**
+- **`--name` | `-n`**: Specifies the name of the theme.  
+  Default: `custom-theme`
+
+#### **Description**
+- This command will:
+  - Copy the theme template files into a folder named after the specified theme.
+  - Place the theme folder inside the `packages` directory.
+  - Log success or error messages for user feedback.
+
+#### **Example**
+```bash
+npx padma generate theme --name awesome-theme
+```
+
+#### **Example Output**
+```plaintext
+Generating theme "awesome-theme"...
+Template folder: /path/to/templates/theme
+Target folder: /path/to/current-project/packages/awesome-theme
+Theme generation successful! Run your theme from "packages/awesome-theme".
+```
+
+---

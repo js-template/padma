@@ -1,0 +1,45 @@
+
+# Development Command
+
+## Overview
+The `dev` command starts the development server for the `@padmadev/core` package. It validates the project setup and uses the appropriate package manager to run the development server in the `core` folder.
+
+## **Usage**
+Run the following command:
+
+```bash
+npx padma dev
+```
+
+
+## **Command Behavior**
+1. **Verify Settings File**  
+   - Ensures `padma.settings.json` exists in the project root.
+   - Validates that the file defines an `activeTheme`.
+
+2. **Validate Core Directory**  
+   - Confirms the `core` folder exists.
+   - Suggests running `npx padma generate core` if the folder is missing.
+
+3. **Detect Package Manager**  
+   - Detects the package manager based on the presence of lock files:
+     - `yarn.lock` → Yarn
+     - `pnpm-lock.yaml` → pnpm
+     - `package-lock.json` → npm
+
+4. **Run the Dev Command**  
+   - Executes the corresponding `dev` script:
+     - `yarn dev`, `pnpm dev`, or `npm run dev`.
+
+---
+
+## **Example Output**
+
+### Successful Start
+```plaintext
+Running "npm run dev" in /path/to/project/core
+> core@0.1.0 dev /path/to/project/core
+> nodemon index.js
+Development server running at http://localhost:3000
+```
+---

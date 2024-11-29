@@ -8,7 +8,7 @@
     "build": "next build",
     "export": "next export"
   },
-  "author": "Shu Ding",
+  "author": "Zelal",
   "license": "MIT",
   "dependencies": {
     "clsx": "^1.2.1",
