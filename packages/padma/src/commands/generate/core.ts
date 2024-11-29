@@ -16,6 +16,7 @@ export default class Core extends Command {
     const __dirname = dirname(__filename)
 
     const templateFolder = path.resolve(__dirname, '../../../templates/core')
+
     const targetFolder = path.join(rootFolder, 'core')
 
     this.log(`Generating "core"...`)

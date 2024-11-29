@@ -95,13 +95,14 @@ export default class Create extends Command {
 
     try {
       // Create the project folder
+      this.log(chalk.green('Creating project...'))
       await fs.ensureDir(projectPath)
-      this.log('Project folder created successfully.')
+      // this.log('Project folder created successfully.')
 
       // Copy the project template files
       if (await fs.pathExists(templateProjectFolder)) {
         fs.copySync(templateProjectFolder, projectPath)
-        this.log('Successfully copied project template files.')
+        //this.log('Successfully copied project template files.')
       } else {
         this.log('Error: The project template folder does not exist.')
         return
@@ -111,10 +112,30 @@ export default class Create extends Command {
       if (await fs.pathExists(templateCoreFolder)) {
         await fs.ensureDir(corePath)
         fs.copySync(templateCoreFolder, corePath)
-        this.log('Successfully copied core template files.')
+        // this.log('Successfully copied core template files.')
       } else {
         this.log('Error: The core template folder does not exist.')
         return
+      }
+
+      // Path to the .env.example file in the project template
+      const envExamplePath = path.join(projectPath, 'env.example')
+      // Path to the .env file in the project
+      const envFilePath = path.join(projectPath, '.env')
+
+      if (await fs.pathExists(envExamplePath)) {
+        // Rename .env.example to .env
+        await fs.rename(envExamplePath, envFilePath)
+      } else {
+        // If env.example doesn't exist, create a default .env file
+        const defaultEnvContent = `NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="qKWJzKxvne1W33Ky1jX//bAmPwBHZ74+g2iu4TIqa5Q="
+STRAPI_ENDPOINT="https://padma-production.up.railway.app"
+STRAPI_AUTH_TOKEN=""
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+`
+        await fs.writeFile(envFilePath, defaultEnvContent, 'utf8')
+        this.log(chalk.green('Default .env file created.'))
       }
 
       // Update package.json with project name and package manager-specific settings
@@ -134,7 +155,7 @@ export default class Create extends Command {
           const pnpmWorkspacePath = path.join(projectPath, 'pnpm-workspace.yaml')
           const pnpmWorkspaceContent = `packages:\n  - 'packages/*'\n  - 'core'\n`
           await fs.writeFile(pnpmWorkspacePath, pnpmWorkspaceContent, 'utf8')
-          this.log('Created pnpm-workspace.yaml for pnpm compatibility.')
+          //this.log('Created pnpm-workspace.yaml for pnpm compatibility.')
         } else if (packageManager === 'npm') {
           packageJson.scripts.dev = 'npx padma dev' // Only change here
           packageJson.scripts.build = 'cd core && npm run build'
@@ -142,23 +163,25 @@ export default class Create extends Command {
 
           // Remove "workspaces" key (optional, depending on npm's workspace support)
           delete packageJson.workspaces
-          this.log('Updated scripts for npm compatibility.')
+          // this.log('Updated scripts for npm compatibility.')
         } else {
           // For yarn, keep the default scripts
           packageJson.scripts.dev = 'npx padma dev' // Only change here
-          this.log('No changes needed for yarn.')
+          //this.log('No changes needed for yarn.')
         }
 
         await fs.writeJson(packageJsonPath, packageJson, {spaces: 2})
-        this.log('Updated package.json with appropriate scripts and configurations.')
+        //this.log('Updated package.json with appropriate scripts and configurations.')
       }
 
       // Create a blank yarn.lock if yarn is selected
       if (packageManager === 'yarn') {
         const yarnLockPath = path.join(projectPath, 'yarn.lock')
         await fs.ensureFile(yarnLockPath)
-        this.log('Created a blank yarn.lock file.')
+        //this.log('Created a blank yarn.lock file.')
       }
+
+      this.log(chalk.green('Project created successfully.'))
 
       // Install dependencies
       this.log(chalk.green('Installing dependencies...'))
