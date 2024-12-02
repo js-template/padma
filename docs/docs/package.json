@@ -1,9 +1,9 @@
 {
-  "name": "docs",
+  "name": "@padmadev/docs",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
     "start": "next start",
     "build": "next build",
     "export": "next export"

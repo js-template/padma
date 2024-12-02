@@ -25,7 +25,7 @@ export default async function Home() {
       getPublicComponents = activeTheme.getPublicComponents
       // console.log(getPublicComponents)
    } else {
-      console.error("Active theme could not be loaded!", error)
+      console.error("Active theme could not be loaded!")
    }
 
    const blocks = data?.data?.blocks || []

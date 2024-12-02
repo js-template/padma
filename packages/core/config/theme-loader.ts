@@ -1,5 +1,5 @@
-import fs from "fs"
-import path from "path"
+import settings from "../padma.settings"
+import { themeMap } from "../theme-map" // Import the theme map
 
 type ThemeComponents = {
    getPublicComponents: Record<string, any>
@@ -7,31 +7,25 @@ type ThemeComponents = {
 }
 
 export const loadActiveTheme = async (): Promise<ThemeComponents | null> => {
+   const activeTheme = settings.activeTheme
+
+   console.log("activeTheme", activeTheme)
+
    try {
-      // Locate the settings file
-      const settingsPath = path.resolve(process.cwd(), "./../padma.settings.json")
+      // Use the map to get the correct theme import
+      const loadTheme = themeMap[activeTheme]
 
-      // if (!fs.existsSync(settingsPath)) {
-      //    throw new Error(`Settings file not found at ${settingsPath}`)
-      // }
+      if (!loadTheme) {
+         throw new Error(`Theme not found: ${activeTheme}`)
+      }
 
-      // // Read and parse the settings file
-      // const settings = JSON.parse(fs.readFileSync(settingsPath, "utf-8"))
+      // Dynamically import the theme
+      const theme = await loadTheme()
+      const { getPublicComponents, getPrivateComponents } = theme
 
-      // if (!settings.activeTheme) {
-      //    throw new Error("Active theme is not defined in the settings file.")
-      // }
-
-      const { getPublicComponents, getPrivateComponents } = await import("@padmadev/blank-theme")
-
-      return { getPrivateComponents, getPublicComponents }
-   } catch (error: any) {
-      console.error("Error loading active theme:")
+      return { getPublicComponents, getPrivateComponents }
+   } catch (error) {
+      console.error("Error loading active theme:", error)
       return null // Return null on error
    }
 }
-
-// Get a specific theme component by its key
-// export const getThemeComponent = (componentKey: string): any | null => {
-//    return activeThemeComponents[componentKey] || null // Access the outer scoped variable
-// }
