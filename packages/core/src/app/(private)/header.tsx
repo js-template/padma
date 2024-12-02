@@ -5,7 +5,7 @@ import { loadActiveTheme } from "config/theme-loader"
 export default async function PrivateLayoutHeader() {
    const { data, error } = await find(
       // : API call need to Fix. It will be private Header
-      "api/padma-backend/public-frontpage",
+      "api/padma-backend/private-layout",
       {
          populate: "*"
       },
@@ -14,20 +14,22 @@ export default async function PrivateLayoutHeader() {
    const activeTheme = await loadActiveTheme()
 
    // Define as an empty object by default
-   let getPublicComponents: Record<string, any> = {}
+   let getPrivateComponents: Record<string, any> = {}
 
    if (activeTheme) {
-      getPublicComponents = activeTheme.getPublicComponents
-      // console.log(getPublicComponents)
+      getPrivateComponents = activeTheme.getPrivateComponents
+      // console.log(getPrivateComponents)
    } else {
       console.error("Active theme could not be loaded!")
    }
-   const blocks = data?.data?.blocks || []
+   const blocks = data?.data?.header || []
+
+   // console.log("Header Blocks Loaded", blocks)
 
    return (
       <>
-         {blocks?.map((block: { __component: keyof typeof getPublicComponents }, index: number) => {
-            const BlockConfig = getPublicComponents[block.__component]
+         {blocks?.map((block: { __component: keyof typeof getPrivateComponents }, index: number) => {
+            const BlockConfig = getPrivateComponents[block.__component]
 
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig

@@ -836,6 +836,14 @@ export interface PluginPadmaBackendPrivateLayout
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    footer: Schema.Attribute.DynamicZone<
+      ['footer.menu-widget', 'footer.copyright-bar', 'footer.contact-widget']
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     header: Schema.Attribute.DynamicZone<['block.private-header']> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
@@ -890,6 +898,10 @@ export interface PluginPadmaBackendPrivatePage
       'plugin::padma-backend.private-page'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::users-permissions.role'
+    >;
     seo: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

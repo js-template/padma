@@ -19,11 +19,5 @@
     "theme": {
       "toc": true
     }
-  },
-  "contribution-guide": {
-    "title": "Contribution Guide",
-    "theme": {
-      "toc": true
-    }
   }
 }
