@@ -139,15 +139,15 @@ const config: DocsThemeConfig = {
       </div>
     ),
   },
-  // banner: {
-  //   key: "2.0-release",
-  //   text: (
-  //     <a href="https://jstemplate.net/js-temlate/padma" target="_blank">
-  //       🚀 Need installation and Setup support? Order now!
-  //     </a>
-  //   ),
-  //   dismissible: false,
-  // },
+  banner: {
+    key: "2.0-release",
+    text: (
+      <a href="#" target="_blank">
+        Documentation is under construction
+      </a>
+    ),
+    dismissible: false,
+  },
 };
 
 export default config;

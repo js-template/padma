@@ -1,0 +1,31 @@
+# Using Padma APIs  
+
+## Accessing APIs  
+1. **Base URL**:  
+   Use the base URL of your Strapi project, e.g., `https://your-domain.com/api`.  
+
+2. **Endpoints**:  
+   - Single Type APIs: Manage unique content like settings or layouts.  
+   - Collection Type APIs: Manage multiple entries like articles or templates.  
+
+3. **Testing APIs**:  
+   Test live APIs in our [API Playground](https://your-live-api-link.com) to explore their functionality.  
+
+---
+
+## Example Request  
+Here’s an example of how to call the `GET /api/single-page` endpoint using `curl`:  
+
+```bash
+curl -X GET https://your-domain.com/api/single-page
+```  
+
+**Response Example**:  
+```json
+{
+  "id": 1,
+  "title": "Homepage",
+  "description": "Welcome to our site",
+  "heroImage": "https://your-cdn.com/image.jpg"
+}
+```  
