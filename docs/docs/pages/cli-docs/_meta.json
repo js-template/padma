@@ -1,0 +1,26 @@
+{
+  "intro": {
+    "title": "Introduction",
+    "theme": {
+      "toc": true
+    }
+  },
+  "commands": {
+    "title": "CLI Commands",
+    "theme": {
+      "toc": true
+    }
+  },
+  "packages": {
+    "title": "Packages",
+    "theme": {
+      "toc": true
+    }
+  },
+  "strapi plugin": {
+    "title": "Strapi Plugin",
+    "theme": {
+      "toc": true
+    }
+  }
+}

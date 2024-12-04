@@ -1,0 +1,62 @@
+
+# Create Command
+
+## Description
+The `create` command in the Padma CLI is used to set up a new Padma project with minimal effort. It includes prompts for selecting configuration options and initializes a project with all necessary files.
+
+
+## Usage
+
+Run the following command to create a new Padma project:
+
+```bash
+npx padma create <project-name>
+```
+
+For example:
+
+```bash
+npx padma create my-project
+```
+
+---
+
+## Flags
+
+- **`--force` | `-f`**:  
+  Forces the creation of the project even if the target folder already exists.  
+  Example:  
+  ```bash
+  npx padma create my-project
+  ```
+
+- **`--theme` | `-t`**:  
+  Installs a specific theme during project setup.  
+  Example:  
+  ```bash
+  npx padma create my-project --theme blank-theme
+  ```
+
+---
+
+## Step-by-Step Guide
+
+### 1. Select a Package Manager  
+During the setup process, you will be prompted to select your preferred package manager. Available options include `npm`, `yarn`, and `pnpm`. If you're unsure, you can select the default one.
+
+**Example Prompt**:  
+```plaintext
+? Which package manager would you like to use? (npm, yarn, pnpm)
+```
+
+### 2. Initialize Git (Optional)  
+You will be asked if you'd like to initialize a Git repository for your project. If you select "Yes," the CLI will automatically set up a Git repository, add all files, and make the initial commit.
+
+**Example Prompt**:  
+```plaintext
+? Would you like to initialize a Git repository? (y/n)
+```
+
+---
+
+

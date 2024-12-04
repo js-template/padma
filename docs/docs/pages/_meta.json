@@ -1,35 +1,32 @@
 {
   "index": {
     "title": "Welcome to Padma",
+    "display": "hidden",
+    "type": "page",
     "theme": {
-      "toc": true
+      "layout": "full"
     }
   },
-  "get-started": {
-    "title": "Get Started"
-  },
-  "core-concepts": {
-    "title": "Core Concepts",
+  "user-docs": {
+    "title": "Documentation",
+    "type": "page",
     "theme": {
-      "toc": true
+      "layout": "full"
     }
   },
-  "guides": {
-    "title": "User Guides",
+
+  "cli-docs": {
+    "title": "Padma CLI Docs",
+    "type": "page",
     "theme": {
-      "toc": true
+      "layout": "full"
     }
   },
-  "deployment": {
-    "title": "Deployment",
+  "plugins": {
+    "title": "Plugins",
+    "type": "page",
     "theme": {
-      "toc": true
-    }
-  },
-  "contribution-guide": {
-    "title": "Contribution Guide",
-    "theme": {
-      "toc": true
+      "layout": "full"
     }
   }
 }

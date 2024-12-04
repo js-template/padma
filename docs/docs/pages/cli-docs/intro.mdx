@@ -1,0 +1,54 @@
+
+# CLI Commands
+API reference of Padma CLI commands.
+
+The Padma command-line tool (CLI) is the main entry point for creating and managing Padma projects. It provides functionality such as running a development server, generating templates, or building your application for deployment.
+
+## How to Use Padma CLI
+The Padma CLI commands are available via npm. You can run any Padma command by using:
+
+```bash
+npx padma <padma-command>
+```
+
+Run `npx padma --help` for full help and a list of available commands.
+
+---
+
+## Commands
+
+### [Create Commands](/cli-docs/commands/)
+These commands allow you to create Padma projects or packages:
+
+- **create**  
+  Initializes a new Padma project.
+
+---
+
+### [Generate Commands](/cli-docs/commands/generate/)
+These commands allow you to create Padma projects or packages:
+
+- **generate core**  
+  Generates the core folder structure in your project.
+
+- **generate theme [theme-name]**  
+  Generates a theme folder inside the `packages` directory. If no theme name is provided, it defaults to `custom-theme`.
+
+---
+
+### [Dev Commands](cli-docs/commands/dev)
+These commands allow you to run a Padma project in development or production mode:
+
+- **dev**  
+  Starts a development server for your Padma application.
+
+- **serve**  
+  Serves a built Padma application in production mode.
+
+---
+
+### [Build Commands](build-commands)
+These commands allow you to build or analyze your Padma project:
+
+- **build**  
+  Generates production-ready code for deployment.

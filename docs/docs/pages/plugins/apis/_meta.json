@@ -1,0 +1,20 @@
+{
+  "intro": {
+    "title": "Uses",
+    "theme": {
+      "toc": true
+    }
+  },
+  "collection-type": {
+    "title": "Collection Type",
+    "theme": {
+      "toc": true
+    }
+  },
+  "single-type": {
+    "title": "Single Type",
+    "theme": {
+      "toc": true
+    }
+  }
+}

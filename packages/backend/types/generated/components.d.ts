@@ -908,16 +908,9 @@ export interface HeaderTopBar extends Struct.ComponentSchema {
     icon: 'bars';
   };
   attributes: {
-    background_color: Schema.Attribute.String &
-      Schema.Attribute.DefaultTo<'#ffffff'>;
     left_content: Schema.Attribute.Text;
-    padding: Schema.Attribute.JSON &
-      Schema.Attribute.DefaultTo<{
-        bottom: 10;
-        top: 10;
-      }>;
     right_content: Schema.Attribute.Component<'component.link', true>;
-    text_color: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#000000'>;
+    style: Schema.Attribute.Component<'component.style-section', false>;
   };
 }
 
@@ -999,28 +992,9 @@ export interface SharedSeo extends Struct.ComponentSchema {
 }
 
 export interface SharedShareMenu extends Struct.ComponentSchema {
-  collectionName: 'components_shared_share_menus';
+  collectionName: 'components_shared_shared_menus';
   info: {
     displayName: 'Share Menu';
-    icon: 'server';
-  };
-  attributes: {
-    menus: Schema.Attribute.Component<'config.menu', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    role: Schema.Attribute.Enumeration<['candidate', 'employer']> &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'candidate'>;
-  };
-}
-
-export interface SharedSharedMenu extends Struct.ComponentSchema {
-  collectionName: 'components_shared_menus';
-  info: {
-    displayName: 'Menu';
     icon: 'server';
   };
   attributes: {
@@ -1183,7 +1157,6 @@ declare module '@strapi/strapi' {
       'shared.meta-social': SharedMetaSocial;
       'shared.seo': SharedSeo;
       'shared.share-menu': SharedShareMenu;
-      'shared.shared-menu': SharedSharedMenu;
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
       'single-type.blog-details': SingleTypeBlogDetails;
