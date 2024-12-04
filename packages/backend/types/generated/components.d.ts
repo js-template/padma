@@ -841,11 +841,24 @@ export interface FormsSelectItem extends Struct.ComponentSchema {
 export interface HeaderHeaderBottom extends Struct.ComponentSchema {
   collectionName: 'components_header_header_bottoms';
   info: {
+    description: '';
     displayName: 'Header bottom';
     icon: 'bulletList';
   };
   attributes: {
-    title: Schema.Attribute.String;
+    button: Schema.Attribute.Component<'component.link', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    menu: Schema.Attribute.Component<'config.menu', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    style: Schema.Attribute.Component<'component.style-section', false>;
   };
 }
 
@@ -904,9 +917,7 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
         };
       }>;
     dark_logo: Schema.Attribute.Component<'header.logo', false>;
-    dark_mode: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
+    dark_mode: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     langague: Schema.Attribute.Component<'component.link', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -920,9 +931,8 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
           localized: true;
         };
       }>;
-    notification: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
+    notification: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    style: Schema.Attribute.Component<'component.style-section', false>;
   };
 }
 
