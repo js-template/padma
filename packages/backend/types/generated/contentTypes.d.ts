@@ -836,15 +836,9 @@ export interface PluginPadmaBackendPrivateLayout
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    footer: Schema.Attribute.DynamicZone<
-      ['footer.menu-widget', 'footer.copyright-bar', 'footer.contact-widget']
+    header: Schema.Attribute.DynamicZone<
+      ['header.top-bar', 'header.main-menu', 'header.header-bottom']
     > &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    header: Schema.Attribute.DynamicZone<['block.private-header']> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -860,6 +854,14 @@ export interface PluginPadmaBackendPrivateLayout
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    widget: Schema.Attribute.DynamicZone<
+      ['widget.menu-widget', 'widget.copyright-bar', 'widget.contact-widget']
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 

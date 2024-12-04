@@ -476,15 +476,6 @@ export interface HeaderTopBar extends Struct.ComponentSchema {
   };
 }
 
-export interface LayoutColumns extends Struct.ComponentSchema {
-  collectionName: 'components_layout_columns';
-  info: {
-    displayName: 'Columns';
-    icon: 'arrowRight';
-  };
-  attributes: {};
-}
-
 export interface SharedEmpty extends Struct.ComponentSchema {
   collectionName: 'components_shared_empties';
   info: {
@@ -697,7 +688,6 @@ declare module '@strapi/strapi' {
       'header.header-bottom': HeaderHeaderBottom;
       'header.main-menu': HeaderMainMenu;
       'header.top-bar': HeaderTopBar;
-      'layout.columns': LayoutColumns;
       'shared.empty': SharedEmpty;
       'shared.meta-social': SharedMetaSocial;
       'shared.seo': SharedSeo;
