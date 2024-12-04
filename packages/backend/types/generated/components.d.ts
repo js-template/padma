@@ -34,7 +34,7 @@ export interface BlockBlogCard extends Struct.ComponentSchema {
   };
   attributes: {
     button: Schema.Attribute.Component<'component.link', false>;
-    content: Schema.Attribute.Component<'config.section-title', true>;
+    content: Schema.Attribute.Component<'config.section-title', false>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     posts: Schema.Attribute.Relation<'oneToMany', 'plugin::padma-backend.post'>;
     style: Schema.Attribute.Component<'component.style-section', false>;
@@ -71,7 +71,7 @@ export interface BlockCategoryCard extends Struct.ComponentSchema {
       'oneToMany',
       'plugin::padma-backend.category'
     >;
-    content: Schema.Attribute.Component<'config.section-title', true>;
+    content: Schema.Attribute.Component<'config.section-title', false>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     style: Schema.Attribute.Component<'component.style-section', false>;
   };
@@ -199,7 +199,7 @@ export interface BlockReviewBlock extends Struct.ComponentSchema {
   };
   attributes: {
     button: Schema.Attribute.Component<'component.link', false>;
-    content: Schema.Attribute.Component<'config.section-title', true>;
+    content: Schema.Attribute.Component<'config.section-title', false>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     reviews: Schema.Attribute.Component<'config.review-card', true>;
     style: Schema.Attribute.Component<'component.style-section', false>;
@@ -892,11 +892,37 @@ export interface HeaderLogo extends Struct.ComponentSchema {
 export interface HeaderMainMenu extends Struct.ComponentSchema {
   collectionName: 'components_header_main_menus';
   info: {
+    description: 'Main Menu';
     displayName: 'Main Menu';
-    icon: 'arrowRight';
+    icon: 'layout';
   };
   attributes: {
-    title: Schema.Attribute.String;
+    button: Schema.Attribute.Component<'component.link', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    dark_logo: Schema.Attribute.Component<'header.logo', false>;
+    dark_mode: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    langague: Schema.Attribute.Component<'component.link', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    light_logo: Schema.Attribute.Component<'header.logo', false>;
+    main_menu: Schema.Attribute.Component<'config.menu', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    notification: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
   };
 }
 
