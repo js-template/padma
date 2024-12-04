@@ -9,7 +9,7 @@ export interface BlockBanner extends Struct.ComponentSchema {
   };
   attributes: {
     content: Schema.Attribute.Component<'config.section-title', false>;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
     variation: Schema.Attribute.Enumeration<
       [
         'simple',
@@ -37,7 +37,7 @@ export interface BlockBlogCard extends Struct.ComponentSchema {
     content: Schema.Attribute.Component<'config.section-title', false>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     posts: Schema.Attribute.Relation<'oneToMany', 'plugin::padma-backend.post'>;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
   };
 }
 
@@ -53,7 +53,7 @@ export interface BlockBreadcrumbs extends Struct.ComponentSchema {
     separator: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'/'>;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
     variation: Schema.Attribute.Enumeration<['default', 'simple', 'minimal']> &
       Schema.Attribute.DefaultTo<'default'>;
   };
@@ -74,7 +74,7 @@ export interface BlockCategoryCard extends Struct.ComponentSchema {
     >;
     content: Schema.Attribute.Component<'config.section-title', false>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
   };
 }
 
@@ -89,7 +89,7 @@ export interface BlockContentBox extends Struct.ComponentSchema {
     content: Schema.Attribute.Component<'config.section-title', true>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     icon_box: Schema.Attribute.Component<'component.icon-box', true>;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
   };
 }
 
@@ -105,7 +105,7 @@ export interface BlockImageCarousel extends Struct.ComponentSchema {
     cards: Schema.Attribute.Component<'config.carousel-card', true> &
       Schema.Attribute.Required;
     interval: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<3000>;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
     variation: Schema.Attribute.Enumeration<
       ['default', 'fade', 'slide', 'zoom']
     > &
@@ -123,7 +123,7 @@ export interface BlockImageGallery extends Struct.ComponentSchema {
   attributes: {
     content: Schema.Attribute.Component<'config.section-title', false>;
     images: Schema.Attribute.Media<undefined, true> & Schema.Attribute.Required;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
     variation: Schema.Attribute.Enumeration<
       ['grid', 'masonry', 'carousel', 'grid-with-title']
     > &
@@ -144,7 +144,7 @@ export interface BlockReviewBlock extends Struct.ComponentSchema {
     content: Schema.Attribute.Component<'config.section-title', false>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     reviews: Schema.Attribute.Component<'config.review-card', true>;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
     variation: Schema.Attribute.Enumeration<
       ['default', 'compact', 'detailed']
     > &
@@ -213,48 +213,6 @@ export interface ComponentIconBox extends Struct.ComponentSchema {
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Your Title Here'>;
-  };
-}
-
-export interface ComponentStyleSection extends Struct.ComponentSchema {
-  collectionName: 'components_component_style_sections';
-  info: {
-    description: '';
-    displayName: 'style Section';
-    icon: 'arrowUp';
-  };
-  attributes: {
-    backgroundColor: Schema.Attribute.String;
-    color: Schema.Attribute.String;
-    desktop: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 12;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<12>;
-    mobile: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 12;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<12>;
-    tab: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<12>;
   };
 }
 
@@ -361,6 +319,48 @@ export interface ConfigSinglePage extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<'api/padma-backend/posts'>;
     singelModel: Schema.Attribute.String;
     slug: Schema.Attribute.String;
+  };
+}
+
+export interface ConfigStyleSection extends Struct.ComponentSchema {
+  collectionName: 'components_component_style_sections';
+  info: {
+    description: '';
+    displayName: 'style Section';
+    icon: 'arrowUp';
+  };
+  attributes: {
+    backgroundColor: Schema.Attribute.String;
+    color: Schema.Attribute.String;
+    desktop: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
+    mobile: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
+    tab: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
   };
 }
 
@@ -661,7 +661,7 @@ export interface HeaderHeaderBottom extends Struct.ComponentSchema {
           localized: true;
         };
       }>;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
   };
 }
 
@@ -735,7 +735,7 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
         };
       }>;
     notification: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
   };
 }
 
@@ -749,7 +749,7 @@ export interface HeaderTopBar extends Struct.ComponentSchema {
   attributes: {
     left_content: Schema.Attribute.Text;
     right_content: Schema.Attribute.Component<'config.link', true>;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
   };
 }
 
@@ -911,7 +911,7 @@ export interface SingleTypeBlogDetails extends Struct.ComponentSchema {
     sidebar: Schema.Attribute.Enumeration<
       ['Left Sidebar', 'Right Sidebar', 'Both Sidebar', 'No Sidebar']
     >;
-    style: Schema.Attribute.Component<'component.style-section', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
     title: Schema.Attribute.String;
   };
 }
@@ -958,13 +958,13 @@ declare module '@strapi/strapi' {
       'block.review-block': BlockReviewBlock;
       'component.grid-container': ComponentGridContainer;
       'component.icon-box': ComponentIconBox;
-      'component.style-section': ComponentStyleSection;
       'config.carousel-card': ConfigCarouselCard;
       'config.link': ConfigLink;
       'config.menu': ConfigMenu;
       'config.review-card': ConfigReviewCard;
       'config.section-title': ConfigSectionTitle;
       'config.single-page': ConfigSinglePage;
+      'config.style-section': ConfigStyleSection;
       'footer.contact-widget': FooterContactWidget;
       'footer.copyright-bar': FooterCopyrightBar;
       'footer.menu-widget': FooterMenuWidget;

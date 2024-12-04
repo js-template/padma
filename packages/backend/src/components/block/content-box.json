@@ -31,7 +31,7 @@
     "style": {
       "type": "component",
       "repeatable": false,
-      "component": "component.style-section"
+      "component": "config.style-section"
     }
   }
 }
