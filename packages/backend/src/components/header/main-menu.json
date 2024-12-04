@@ -2,12 +2,66 @@
   "collectionName": "components_header_main_menus",
   "info": {
     "displayName": "Main Menu",
-    "icon": "arrowRight"
+    "icon": "layout",
+    "description": "Main Menu"
   },
+  "category": "header",
+  "modelName": "main-menu",
+  "globalId": "ComponentsHeaderMainMenus",
+  "uid": "header.main-menu",
+  "modelType": "component",
   "options": {},
+  "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
+    "light_logo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "header.logo"
+    },
+    "dark_logo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "header.logo"
+    },
+    "dark_mode": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "notification": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "main_menu": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "config.menu"
+    },
+    "langague": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "component": "component.link"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "component.link"
     }
   }
 }
