@@ -25,6 +25,15 @@
       "type": "dynamiczone",
       "components": ["block.private-header"],
       "required": true
+    },
+    "footer": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": ["footer.menu-widget", "footer.copyright-bar", "footer.contact-widget"]
     }
   }
 }
