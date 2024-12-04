@@ -49,7 +49,7 @@
           "localized": false
         }
       },
-      "component": "component.link"
+      "component": "config.link"
     },
     "button": {
       "type": "component",
@@ -59,7 +59,7 @@
           "localized": true
         }
       },
-      "component": "component.link"
+      "component": "config.link"
     },
     "style": {
       "type": "component",

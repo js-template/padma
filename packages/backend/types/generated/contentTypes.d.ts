@@ -541,7 +541,7 @@ export interface PluginPadmaBackendCategory
           localized: true;
         };
       }>;
-    link: Schema.Attribute.Component<'component.link', false> &
+    link: Schema.Attribute.Component<'config.link', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

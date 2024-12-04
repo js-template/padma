@@ -33,7 +33,7 @@ export interface BlockBlogCard extends Struct.ComponentSchema {
     icon: 'collapse';
   };
   attributes: {
-    button: Schema.Attribute.Component<'component.link', false>;
+    button: Schema.Attribute.Component<'config.link', false>;
     content: Schema.Attribute.Component<'config.section-title', false>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     posts: Schema.Attribute.Relation<'oneToMany', 'plugin::padma-backend.post'>;
@@ -67,7 +67,7 @@ export interface BlockCategoryCard extends Struct.ComponentSchema {
     icon: 'arrowRight';
   };
   attributes: {
-    button: Schema.Attribute.Component<'component.link', false>;
+    button: Schema.Attribute.Component<'config.link', false>;
     category: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::padma-backend.category'
@@ -140,7 +140,7 @@ export interface BlockReviewBlock extends Struct.ComponentSchema {
     icon: 'star';
   };
   attributes: {
-    button: Schema.Attribute.Component<'component.link', false>;
+    button: Schema.Attribute.Component<'config.link', false>;
     content: Schema.Attribute.Component<'config.section-title', false>;
     empty: Schema.Attribute.Component<'shared.empty', false>;
     reviews: Schema.Attribute.Component<'config.review-card', true>;
@@ -156,7 +156,7 @@ export interface ComponentGridContainer extends Struct.ComponentSchema {
   collectionName: 'components_component_grid_containers';
   info: {
     description: '';
-    displayName: 'GridContainer';
+    displayName: 'Grid Container';
     icon: 'brush';
   };
   attributes: {
@@ -216,23 +216,6 @@ export interface ComponentIconBox extends Struct.ComponentSchema {
   };
 }
 
-export interface ComponentLink extends Struct.ComponentSchema {
-  collectionName: 'components_component_links';
-  info: {
-    description: '';
-    displayName: 'Link';
-    icon: 'cursor';
-  };
-  attributes: {
-    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    icon: Schema.Attribute.String & Schema.Attribute.DefaultTo<'bx:smile'>;
-    label: Schema.Attribute.String;
-    link: Schema.Attribute.String;
-    target: Schema.Attribute.Enumeration<['_blank', '_self']>;
-    type: Schema.Attribute.Enumeration<['External', 'Internal']>;
-  };
-}
-
 export interface ComponentMenu extends Struct.ComponentSchema {
   collectionName: 'components_component_menus';
   info: {
@@ -241,7 +224,7 @@ export interface ComponentMenu extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    child: Schema.Attribute.Component<'component.link', true>;
+    child: Schema.Attribute.Component<'config.link', true>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     icon: Schema.Attribute.String & Schema.Attribute.DefaultTo<'bx:smile'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
@@ -337,7 +320,7 @@ export interface ComponentTitles extends Struct.ComponentSchema {
     icon: 'arrowRight';
   };
   attributes: {
-    button: Schema.Attribute.Component<'component.link', false>;
+    button: Schema.Attribute.Component<'config.link', false>;
     description: Schema.Attribute.Text;
     title: Schema.Attribute.String;
   };
@@ -357,37 +340,20 @@ export interface ConfigCarouselCard extends Struct.ComponentSchema {
   };
 }
 
-export interface ConfigHeaderConfig extends Struct.ComponentSchema {
-  collectionName: 'components_config_header_configs';
+export interface ConfigLink extends Struct.ComponentSchema {
+  collectionName: 'components_config_links';
   info: {
     description: '';
-    displayName: 'headerConfig';
-    icon: 'arrowRight';
+    displayName: 'Link';
+    icon: 'cursor';
   };
   attributes: {
-    enableDelete: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    enableEdit: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-  };
-}
-
-export interface ConfigHeaderField extends Struct.ComponentSchema {
-  collectionName: 'components_config_header_fields';
-  info: {
-    description: '';
-    displayName: 'headerField';
-  };
-  attributes: {
-    align: Schema.Attribute.Enumeration<['left', 'right', 'center']> &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'left'>;
-    label: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Name'>;
-    sort: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    icon: Schema.Attribute.String & Schema.Attribute.DefaultTo<'bx:smile'>;
+    label: Schema.Attribute.String;
+    link: Schema.Attribute.String;
+    target: Schema.Attribute.Enumeration<['_blank', '_self']>;
+    type: Schema.Attribute.Enumeration<['External', 'Internal']>;
   };
 }
 
@@ -399,26 +365,13 @@ export interface ConfigMenu extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    child: Schema.Attribute.Component<'component.link', true>;
+    child: Schema.Attribute.Component<'config.link', true>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     icon: Schema.Attribute.String & Schema.Attribute.DefaultTo<'bx:smile'>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     link: Schema.Attribute.String & Schema.Attribute.Required;
     target: Schema.Attribute.Enumeration<['_blank', '_self']>;
     type: Schema.Attribute.Enumeration<['External', 'Internal']>;
-  };
-}
-
-export interface ConfigMetaData extends Struct.ComponentSchema {
-  collectionName: 'components_component_meta_datas';
-  info: {
-    description: '';
-    displayName: 'Meta Data';
-    icon: 'chartBubble';
-  };
-  attributes: {
-    key: Schema.Attribute.String;
-    value: Schema.Attribute.String;
   };
 }
 
@@ -451,19 +404,6 @@ export interface ConfigReviewCard extends Struct.ComponentSchema {
   };
 }
 
-export interface ConfigRole extends Struct.ComponentSchema {
-  collectionName: 'components_config_roles';
-  info: {
-    displayName: 'role';
-    icon: 'user';
-  };
-  attributes: {
-    role: Schema.Attribute.Enumeration<
-      ['employer', 'candidate', 'authenticated']
-    >;
-  };
-}
-
 export interface ConfigSectionTitle extends Struct.ComponentSchema {
   collectionName: 'components_config_section_titles';
   info: {
@@ -489,17 +429,6 @@ export interface ConfigSinglePage extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<'api/padma-backend/posts'>;
     singelModel: Schema.Attribute.String;
     slug: Schema.Attribute.String;
-  };
-}
-
-export interface ConfigTableHead extends Struct.ComponentSchema {
-  collectionName: 'components_config_table_heads';
-  info: {
-    displayName: 'tableHead';
-    icon: 'bulletList';
-  };
-  attributes: {
-    fields: Schema.Attribute.Component<'config.header-field', true>;
   };
 }
 
@@ -788,7 +717,7 @@ export interface HeaderHeaderBottom extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    button: Schema.Attribute.Component<'component.link', true> &
+    button: Schema.Attribute.Component<'config.link', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -852,7 +781,7 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
     icon: 'layout';
   };
   attributes: {
-    button: Schema.Attribute.Component<'component.link', true> &
+    button: Schema.Attribute.Component<'config.link', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -860,7 +789,7 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
       }>;
     dark_logo: Schema.Attribute.Component<'header.logo', false>;
     dark_mode: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    langague: Schema.Attribute.Component<'component.link', true> &
+    langague: Schema.Attribute.Component<'config.link', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
@@ -887,7 +816,7 @@ export interface HeaderTopBar extends Struct.ComponentSchema {
   };
   attributes: {
     left_content: Schema.Attribute.Text;
-    right_content: Schema.Attribute.Component<'component.link', true>;
+    right_content: Schema.Attribute.Component<'config.link', true>;
     style: Schema.Attribute.Component<'component.style-section', false>;
   };
 }
@@ -1097,7 +1026,6 @@ declare module '@strapi/strapi' {
       'block.review-block': BlockReviewBlock;
       'component.grid-container': ComponentGridContainer;
       'component.icon-box': ComponentIconBox;
-      'component.link': ComponentLink;
       'component.menu': ComponentMenu;
       'component.page-title': ComponentPageTitle;
       'component.social-link': ComponentSocialLink;
@@ -1105,15 +1033,11 @@ declare module '@strapi/strapi' {
       'component.text-field': ComponentTextField;
       'component.titles': ComponentTitles;
       'config.carousel-card': ConfigCarouselCard;
-      'config.header-config': ConfigHeaderConfig;
-      'config.header-field': ConfigHeaderField;
+      'config.link': ConfigLink;
       'config.menu': ConfigMenu;
-      'config.meta-data': ConfigMetaData;
       'config.review-card': ConfigReviewCard;
-      'config.role': ConfigRole;
       'config.section-title': ConfigSectionTitle;
       'config.single-page': ConfigSinglePage;
-      'config.table-head': ConfigTableHead;
       'footer.contact-widget': FooterContactWidget;
       'footer.copyright-bar': FooterCopyrightBar;
       'footer.menu-widget': FooterMenuWidget;
