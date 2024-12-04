@@ -10,25 +10,15 @@
       "type": "text",
       "required": false
     },
-    "background_color": {
-      "type": "string",
-      "default": "#ffffff"
-    },
-    "text_color": {
-      "type": "string",
-      "default": "#000000"
-    },
-    "padding": {
-      "type": "json",
-      "default": {
-        "top": 10,
-        "bottom": 10
-      }
-    },
     "right_content": {
       "type": "component",
       "repeatable": true,
       "component": "component.link"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
     }
   }
 }
