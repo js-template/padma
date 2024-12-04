@@ -25,13 +25,11 @@
     },
     "dark_mode": {
       "type": "boolean",
-      "default": true,
-      "required": true
+      "default": true
     },
     "notification": {
       "type": "boolean",
-      "default": true,
-      "required": true
+      "default": true
     },
     "main_menu": {
       "type": "component",
@@ -62,6 +60,11 @@
         }
       },
       "component": "component.link"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.style-section"
     }
   }
 }
