@@ -16,12 +16,12 @@
     "light_logo": {
       "type": "component",
       "repeatable": false,
-      "component": "header.logo"
+      "component": "config.logo"
     },
     "dark_logo": {
       "type": "component",
       "repeatable": false,
-      "component": "header.logo"
+      "component": "config.logo"
     },
     "dark_mode": {
       "type": "boolean",
