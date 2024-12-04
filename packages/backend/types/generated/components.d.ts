@@ -247,6 +247,46 @@ export interface ConfigLink extends Struct.ComponentSchema {
   };
 }
 
+export interface ConfigLogo extends Struct.ComponentSchema {
+  collectionName: 'components_config_logos';
+  info: {
+    description: '';
+    displayName: 'Logo';
+    icon: 'chartBubble';
+  };
+  attributes: {
+    link: Schema.Attribute.String;
+    logo: Schema.Attribute.Media<'images'>;
+    md_width: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<175>;
+    sm_width: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<160>;
+    xs_width: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<150>;
+  };
+}
+
 export interface ConfigMenu extends Struct.ComponentSchema {
   collectionName: 'components_config_menus';
   info: {
@@ -364,283 +404,6 @@ export interface ConfigStyleSection extends Struct.ComponentSchema {
   };
 }
 
-export interface FooterContactWidget extends Struct.ComponentSchema {
-  collectionName: 'components_footer_contact_widgets';
-  info: {
-    displayName: 'Contact Widget';
-    icon: 'envelop';
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-  };
-}
-
-export interface FooterCopyrightBar extends Struct.ComponentSchema {
-  collectionName: 'components_footer_copyright_bars';
-  info: {
-    description: 'Bottom-most section for copyright text';
-    displayName: 'Copyright Bar';
-    icon: 'copyright';
-  };
-  attributes: {
-    content: Schema.Attribute.Text & Schema.Attribute.Required;
-  };
-}
-
-export interface FooterMenuWidget extends Struct.ComponentSchema {
-  collectionName: 'components_footer_menu_widgets';
-  info: {
-    displayName: 'Menu Widget';
-    icon: 'arrowDown';
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-  };
-}
-
-export interface FormsFormButtons extends Struct.ComponentSchema {
-  collectionName: 'components_forms_form_buttons';
-  info: {
-    displayName: 'formButtons';
-    icon: 'server';
-  };
-  attributes: {
-    back: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Previous'>;
-    cancel: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Cancel'>;
-    next: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Next'>;
-    skip: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Skip'>;
-    submit: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Submit'>;
-  };
-}
-
-export interface FormsGoogleMap extends Struct.ComponentSchema {
-  collectionName: 'components_forms_google_maps';
-  info: {
-    displayName: 'Google Map';
-    icon: 'pinMap';
-  };
-  attributes: {
-    errorText: Schema.Attribute.String;
-    inputStep: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 5;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<1>;
-    label: Schema.Attribute.String;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    noteText: Schema.Attribute.String;
-    required: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-  };
-}
-
-export interface FormsInput extends Struct.ComponentSchema {
-  collectionName: 'components_forms_inputs';
-  info: {
-    description: '';
-    displayName: 'Input';
-    icon: 'puzzle';
-  };
-  attributes: {
-    defaultValue: Schema.Attribute.String;
-    desktopGrid: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 12;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<12>;
-    errorText: Schema.Attribute.String;
-    fullWidth: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-    inputStep: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 5;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<1>;
-    label: Schema.Attribute.String;
-    mobileGrid: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 12;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<12>;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    noteText: Schema.Attribute.String;
-    placeholder: Schema.Attribute.String;
-    required: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-    tabGrid: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 12;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<12>;
-    type: Schema.Attribute.Enumeration<
-      ['text', 'date', 'email', 'number', 'password', 'textarea', 'tel', 'url']
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'text'>;
-  };
-}
-
-export interface FormsMarkdown extends Struct.ComponentSchema {
-  collectionName: 'components_component_markdowns';
-  info: {
-    description: '';
-    displayName: 'markdown';
-    icon: 'italic';
-  };
-  attributes: {
-    errorText: Schema.Attribute.String;
-    inputStep: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 5;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<1>;
-    label: Schema.Attribute.String;
-    name: Schema.Attribute.String;
-    noteText: Schema.Attribute.String;
-    required: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-  };
-}
-
-export interface FormsSearchForm extends Struct.ComponentSchema {
-  collectionName: 'components_forms_search_forms';
-  info: {
-    description: '';
-    displayName: 'Search';
-  };
-  attributes: {
-    button: Schema.Attribute.String;
-    link: Schema.Attribute.String;
-    searchByCategory: Schema.Attribute.String;
-    searchByLocation: Schema.Attribute.String;
-    searchByWords: Schema.Attribute.String;
-    title: Schema.Attribute.String;
-  };
-}
-
-export interface FormsSelect extends Struct.ComponentSchema {
-  collectionName: 'components_forms_selects';
-  info: {
-    description: '';
-    displayName: 'select';
-    icon: 'bulletList';
-  };
-  attributes: {
-    desktopGrid: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 12;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<6>;
-    errorText: Schema.Attribute.String;
-    fullWidth: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-    inputStep: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 5;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<1>;
-    label: Schema.Attribute.String;
-    mobileGrid: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 12;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<12>;
-    model: Schema.Attribute.String;
-    multiple: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-    name: Schema.Attribute.String;
-    noteText: Schema.Attribute.String;
-    options: Schema.Attribute.Component<'forms.select-item', true>;
-    placeholder: Schema.Attribute.String;
-    required: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-    tabGrid: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 12;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<6>;
-  };
-}
-
-export interface FormsSelectItem extends Struct.ComponentSchema {
-  collectionName: 'components_forms_select_items';
-  info: {
-    displayName: 'selectItem';
-    icon: 'check';
-  };
-  attributes: {
-    label: Schema.Attribute.String;
-    value: Schema.Attribute.String;
-  };
-}
-
 export interface HeaderHeaderBottom extends Struct.ComponentSchema {
   collectionName: 'components_header_header_bottoms';
   info: {
@@ -665,46 +428,6 @@ export interface HeaderHeaderBottom extends Struct.ComponentSchema {
   };
 }
 
-export interface HeaderLogo extends Struct.ComponentSchema {
-  collectionName: 'components_header_logos';
-  info: {
-    description: '';
-    displayName: 'Logo';
-    icon: 'chartBubble';
-  };
-  attributes: {
-    link: Schema.Attribute.String;
-    logo: Schema.Attribute.Media<'images'>;
-    md_width: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<175>;
-    sm_width: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<160>;
-    xs_width: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<150>;
-  };
-}
-
 export interface HeaderMainMenu extends Struct.ComponentSchema {
   collectionName: 'components_header_main_menus';
   info: {
@@ -719,7 +442,7 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
           localized: true;
         };
       }>;
-    dark_logo: Schema.Attribute.Component<'header.logo', false>;
+    dark_logo: Schema.Attribute.Component<'config.logo', false>;
     dark_mode: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     langague: Schema.Attribute.Component<'config.link', true> &
       Schema.Attribute.SetPluginOptions<{
@@ -727,7 +450,7 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
           localized: false;
         };
       }>;
-    light_logo: Schema.Attribute.Component<'header.logo', false>;
+    light_logo: Schema.Attribute.Component<'config.logo', false>;
     main_menu: Schema.Attribute.Component<'config.menu', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -916,32 +639,37 @@ export interface SingleTypeBlogDetails extends Struct.ComponentSchema {
   };
 }
 
-export interface UiAuthorInfo extends Struct.ComponentSchema {
-  collectionName: 'ui_author-info';
+export interface WidgetContactWidget extends Struct.ComponentSchema {
+  collectionName: 'components_footer_contact_widgets';
   info: {
-    description: 'Author details for the article';
-    displayName: 'Author Info';
-    icon: 'user';
+    displayName: 'Contact Widget';
+    icon: 'envelop';
   };
   attributes: {
-    bio: Schema.Attribute.Text;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    profilePicture: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
   };
 }
 
-export interface UiContentSection extends Struct.ComponentSchema {
-  collectionName: 'ui_content_section';
+export interface WidgetCopyrightBar extends Struct.ComponentSchema {
+  collectionName: 'components_widget_copyright_bars';
   info: {
-    description: 'Content section for the article';
-    displayName: 'Content Section';
-    icon: 'file';
+    description: 'Bottom-most section for copyright text';
+    displayName: 'Copyright Bar';
+    icon: 'copyright';
   };
   attributes: {
-    body: Schema.Attribute.RichText;
-    demo: Schema.Attribute.Component<'ui.author-info', false>;
-    heading: Schema.Attribute.String;
-    image: Schema.Attribute.Media<'images'>;
+    content: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface WidgetMenuWidget extends Struct.ComponentSchema {
+  collectionName: 'components_footer_menu_widgets';
+  info: {
+    displayName: 'Menu Widget';
+    icon: 'arrowDown';
+  };
+  attributes: {
+    title: Schema.Attribute.String;
   };
 }
 
@@ -960,23 +688,13 @@ declare module '@strapi/strapi' {
       'component.icon-box': ComponentIconBox;
       'config.carousel-card': ConfigCarouselCard;
       'config.link': ConfigLink;
+      'config.logo': ConfigLogo;
       'config.menu': ConfigMenu;
       'config.review-card': ConfigReviewCard;
       'config.section-title': ConfigSectionTitle;
       'config.single-page': ConfigSinglePage;
       'config.style-section': ConfigStyleSection;
-      'footer.contact-widget': FooterContactWidget;
-      'footer.copyright-bar': FooterCopyrightBar;
-      'footer.menu-widget': FooterMenuWidget;
-      'forms.form-buttons': FormsFormButtons;
-      'forms.google-map': FormsGoogleMap;
-      'forms.input': FormsInput;
-      'forms.markdown': FormsMarkdown;
-      'forms.search-form': FormsSearchForm;
-      'forms.select': FormsSelect;
-      'forms.select-item': FormsSelectItem;
       'header.header-bottom': HeaderHeaderBottom;
-      'header.logo': HeaderLogo;
       'header.main-menu': HeaderMainMenu;
       'header.top-bar': HeaderTopBar;
       'layout.columns': LayoutColumns;
@@ -987,8 +705,9 @@ declare module '@strapi/strapi' {
       'shared.social-medias': SharedSocialMedias;
       'shared.spacing': SharedSpacing;
       'single-type.blog-details': SingleTypeBlogDetails;
-      'ui.author-info': UiAuthorInfo;
-      'ui.content-section': UiContentSection;
+      'widget.contact-widget': WidgetContactWidget;
+      'widget.copyright-bar': WidgetCopyrightBar;
+      'widget.menu-widget': WidgetMenuWidget;
     }
   }
 }
