@@ -132,65 +132,6 @@ export interface BlockImageGallery extends Struct.ComponentSchema {
   };
 }
 
-export interface BlockPrivateHeader extends Struct.ComponentSchema {
-  collectionName: 'components_block_private_headers';
-  info: {
-    description: '';
-    displayName: 'Private Header';
-    icon: 'server';
-  };
-  attributes: {
-    dark_logo: Schema.Attribute.Component<'header.logo', false>;
-    dark_mode: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    langMenu: Schema.Attribute.Component<'component.link', true>;
-    light_logo: Schema.Attribute.Component<'header.logo', false>;
-    notification: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    userMenu: Schema.Attribute.Component<'component.link', true>;
-  };
-}
-
-export interface BlockPublicHeader extends Struct.ComponentSchema {
-  collectionName: 'components_block_headers';
-  info: {
-    description: 'The header block is used to display the header of the website.';
-    displayName: 'Public Header';
-    icon: 'layout';
-  };
-  attributes: {
-    Button: Schema.Attribute.Component<'component.link', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    dark_logo: Schema.Attribute.Component<'header.logo', false>;
-    dark_mode: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    langMenu: Schema.Attribute.Component<'component.link', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
-    light_logo: Schema.Attribute.Component<'header.logo', false>;
-    MainMenu: Schema.Attribute.Component<'config.menu', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    notification: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    userMenu: Schema.Attribute.Component<'component.link', true>;
-  };
-}
-
 export interface BlockReviewBlock extends Struct.ComponentSchema {
   collectionName: 'components_block_reviews';
   info: {
@@ -1153,8 +1094,6 @@ declare module '@strapi/strapi' {
       'block.content-box': BlockContentBox;
       'block.image-carousel': BlockImageCarousel;
       'block.image-gallery': BlockImageGallery;
-      'block.private-header': BlockPrivateHeader;
-      'block.public-header': BlockPublicHeader;
       'block.review-block': BlockReviewBlock;
       'component.grid-container': ComponentGridContainer;
       'component.icon-box': ComponentIconBox;
