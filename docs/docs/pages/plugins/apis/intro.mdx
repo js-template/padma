@@ -1,0 +1,71 @@
+# Using Padma APIs  
+
+## Accessing APIs  
+1. **Base URL**:  
+   Use the base URL of your Strapi project, e.g., `https://your-domain.com`.  
+
+2. **Endpoints**:  
+   - Single Type APIs: Manage unique content like settings or layouts.  
+   - Collection Type APIs: Manage multiple entries like articles or templates.  
+
+3. **Testing APIs**:  
+   Test live APIs in our [API Playground](https://api-padma.readme.io/reference/) to explore their functionality.  
+
+---
+
+## Example Request  
+Here’s an example of how to call the `GET /api/padma-backend/public-pages` endpoint using `curl`:  
+
+```bash
+curl -X GET https://your-domain.com/api/padma-backend/public-pages
+```  
+
+**Response Example**:  
+```json
+{
+    "data": [
+        {
+            "id": 3,
+            "documentId": "v5zjnru9umt453cjm6fsofrr",
+            "title": "Home Page",
+            "slug": "home-page",
+            "createdAt": "2024-12-04T06:17:01.340Z",
+            "updatedAt": "2024-12-04T06:18:12.783Z",
+            "publishedAt": "2024-12-04T06:18:12.804Z",
+            "blocks": [
+                {
+                    "__component": "block.banner",
+                    "id": 4,
+                    "variation": "simple"
+                },
+                {
+                    "__component": "block.content-box",
+                    "id": 2
+                },
+                {
+                    "__component": "block.category-card",
+                    "id": 2
+                },
+                {
+                    "__component": "block.review-block",
+                    "id": 2,
+                    "variation": "default"
+                },
+                {
+                    "__component": "block.blog-card",
+                    "id": 7
+                }
+            ],
+            "seo": null
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "page": 1,
+            "pageSize": 25,
+            "pageCount": 1,
+            "total": 1
+        }
+    }
+}
+```  

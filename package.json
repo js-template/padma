@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "dev": "lerna run dev --scope @padmadev/core",
+    "dev:backend": "lerna run dev --scope @padmadev/padma-backend",
     "build": "lerna run build --scope @padmadev/core",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

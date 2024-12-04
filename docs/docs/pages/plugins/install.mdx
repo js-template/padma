@@ -1,0 +1,51 @@
+
+# Installation and Setup  
+
+## Step 1: Start from Scratch  
+
+If you want to create a new Strapi project with the Padma plugin pre-installed, follow these steps:  
+
+1. Run the following command to generate a fresh Strapi backend with the Padma plugin:  
+   ```bash
+   npx padma-backend my-project-backend
+   ```  
+
+2. Navigate into your newly created project directory:  
+   ```bash
+   cd my-project-backend
+   ```  
+
+3. Start the development server:  
+   ```bash
+   yarn develop
+   ```  
+
+Your backend will be up and running, complete with the Padma plugin!  
+
+---
+
+## Step 2: Use Padma with an Existing Strapi Setup  
+
+If you already have a Strapi project and want to integrate the Padma plugin:  
+
+1. Install the Padma backend plugin:  
+   ```bash
+   yarn add padma-backend-plugin
+   ```  
+
+2. Add the necessary components and configurations to your Strapi setup.  
+   - Navigate to the **Components** and **Content-Type Builder** sections in the Strapi Admin UI.  
+   - Add the components and content types required by Padma based on its documentation.  
+
+3. Restart your Strapi server:  
+   ```bash
+   yarn develop
+   ```  
+
+The Padma plugin is now installed and ready to use in your existing Strapi setup.  
+
+---
+
+### Tips:  
+- For detailed customization, refer to the **Customization** section of the documentation.  
+- Ensure you have the latest version of Strapi to avoid compatibility issues.  

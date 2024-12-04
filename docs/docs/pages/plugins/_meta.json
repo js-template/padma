@@ -1,0 +1,32 @@
+{
+  "intro": {
+    "title": "Introduction",
+    "theme": {
+      "toc": true
+    }
+  },
+  "install": {
+    "title": "Quick Start Guide",
+    "theme": {
+      "toc": true
+    }
+  },
+  "apis": {
+    "title": "APIs",
+    "theme": {
+      "toc": true
+    }
+  },
+  "packages": {
+    "title": "Components",
+    "theme": {
+      "toc": true
+    }
+  },
+  "strapi plugin": {
+    "title": "Deployment",
+    "theme": {
+      "toc": true
+    }
+  }
+}
