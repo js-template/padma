@@ -1,45 +1,30 @@
 
-# Collection Type APIs  
+# Single Type APIs  
 ---
 ## Overview  
 Collection type APIs manage lists of content, such as articles, products, or layouts.  
 
+Test live APIs in our [API Playground](https://api-padma.readme.io/reference/) to explore their functionality.  
 
-## API Endpoints  
+## List of Single Type API Endpoints  
 
-### `GET /api/layouts`  
-- **Description**: Fetches a list of layouts from the collection type.  
-- **Example Use Case**: Displaying available templates for users to choose from.  
-
-**Playground Link**:  
-[Try `GET /api/layouts`](https://your-live-api-link.com/layouts)  
-
----
-
-### `POST /api/layouts`  
-- **Description**: Creates a new layout entry in the collection.  
-- **Example Use Case**: Adding a new layout option in the admin panel.  
-
-**Playground Link**:  
-[Try `POST /api/layouts`](https://your-live-api-link.com/layouts-post)  
-
----
-
-### `PUT /api/layouts/:id`  
-- **Description**: Updates an existing layout entry by ID.  
-- **Example Use Case**: Modifying layout details, like changing the name or sections.  
-
-**Playground Link**:  
-[Try `PUT /api/layouts/:id`](https://your-live-api-link.com/layouts-put)  
-
----
-
-### `DELETE /api/layouts/:id`  
-- **Description**: Deletes a layout entry by ID.  
-- **Example Use Case**: Removing outdated or unused layouts.  
-
-**Playground Link**:  
-[Try `DELETE /api/layouts/:id`](https://your-live-api-link.com/layouts-delete)  
+### `GET /api/padma-backend/public-frontpage`  
+- **Description**: Fetches the public frontpage 
+- **Example Use Case**: Displaying the public frontpage with available public blocks
 
 
----
+### `GET /api/padma-backend/layout`  
+- **Description**:  Fetches a list of private pages from the collection type.
+- **Example Use Case**: Displaying private pages with available private blocks  
+
+### `GET /api/padma-backend/private-layout`  
+- **Description**: Fetches a list of posts from the collection type. 
+- **Example Use Case**:     Displaying posts with available post blocks 
+
+### `GET /api/padma-backend/post-settings`  
+- **Description**: Fetches a list of categories from the collection type.
+- **Example Use Case**:   Displaying categories with available category blocks
+
+### `GET /api/padma-backend/permalinks`  
+- **Description**: Fetches a list of categories from the collection type.
+- **Example Use Case**:   Displaying categories with available category blocks
