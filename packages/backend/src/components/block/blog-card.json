@@ -14,7 +14,7 @@
   "attributes": {
     "content": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "config.section-title"
     },
     "posts": {
