@@ -216,53 +216,11 @@ export interface ComponentIconBox extends Struct.ComponentSchema {
   };
 }
 
-export interface ComponentMenu extends Struct.ComponentSchema {
-  collectionName: 'components_component_menus';
-  info: {
-    description: '';
-    displayName: 'Menu';
-    icon: 'bulletList';
-  };
-  attributes: {
-    child: Schema.Attribute.Component<'config.link', true>;
-    disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    icon: Schema.Attribute.String & Schema.Attribute.DefaultTo<'bx:smile'>;
-    label: Schema.Attribute.String & Schema.Attribute.Required;
-    link: Schema.Attribute.String & Schema.Attribute.Required;
-    target: Schema.Attribute.Enumeration<['_blank', '_self']>;
-    type: Schema.Attribute.Enumeration<['External', 'Internal']>;
-  };
-}
-
-export interface ComponentPageTitle extends Struct.ComponentSchema {
-  collectionName: 'components_component_page_titles';
-  info: {
-    displayName: 'pageTitle';
-    icon: 'arrowRight';
-  };
-  attributes: {
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface ComponentSocialLink extends Struct.ComponentSchema {
-  collectionName: 'components_component_social_links';
-  info: {
-    description: '';
-    displayName: 'SocialLink';
-    icon: 'arrowRight';
-  };
-  attributes: {
-    link: Schema.Attribute.String;
-    title: Schema.Attribute.String;
-  };
-}
-
 export interface ComponentStyleSection extends Struct.ComponentSchema {
   collectionName: 'components_component_style_sections';
   info: {
     description: '';
-    displayName: 'styleSection';
+    displayName: 'style Section';
     icon: 'arrowUp';
   };
   attributes: {
@@ -297,32 +255,6 @@ export interface ComponentStyleSection extends Struct.ComponentSchema {
         number
       > &
       Schema.Attribute.DefaultTo<12>;
-  };
-}
-
-export interface ComponentTextField extends Struct.ComponentSchema {
-  collectionName: 'components_component_text_fields';
-  info: {
-    description: '';
-    displayName: 'Text Field';
-    icon: 'bulletList';
-  };
-  attributes: {
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface ComponentTitles extends Struct.ComponentSchema {
-  collectionName: 'components_component_titles';
-  info: {
-    description: '';
-    displayName: 'Titles';
-    icon: 'arrowRight';
-  };
-  attributes: {
-    button: Schema.Attribute.Component<'config.link', false>;
-    description: Schema.Attribute.Text;
-    title: Schema.Attribute.String;
   };
 }
 
@@ -1026,12 +958,7 @@ declare module '@strapi/strapi' {
       'block.review-block': BlockReviewBlock;
       'component.grid-container': ComponentGridContainer;
       'component.icon-box': ComponentIconBox;
-      'component.menu': ComponentMenu;
-      'component.page-title': ComponentPageTitle;
-      'component.social-link': ComponentSocialLink;
       'component.style-section': ComponentStyleSection;
-      'component.text-field': ComponentTextField;
-      'component.titles': ComponentTitles;
       'config.carousel-card': ConfigCarouselCard;
       'config.link': ConfigLink;
       'config.menu': ConfigMenu;
