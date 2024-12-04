@@ -58,6 +58,13 @@
         }
       },
       "component": "shared.seo"
+    },
+    "role": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.role",
+      "inversedBy": "users",
+      "configurable": false
     }
   }
 }
