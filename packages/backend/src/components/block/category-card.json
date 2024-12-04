@@ -31,7 +31,7 @@
     "button": {
       "type": "component",
       "repeatable": false,
-      "component": "component.link"
+      "component": "config.link"
     },
     "style": {
       "type": "component",
