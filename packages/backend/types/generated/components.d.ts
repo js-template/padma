@@ -49,6 +49,7 @@ export interface BlockBreadcrumbs extends Struct.ComponentSchema {
     icon: 'manyWays';
   };
   attributes: {
+    items: Schema.Attribute.JSON;
     separator: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'/'>;
