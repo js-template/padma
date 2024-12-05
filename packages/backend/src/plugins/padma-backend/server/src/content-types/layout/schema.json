@@ -26,14 +26,14 @@
       "components": ["header.top-bar", "header.main-menu", "header.header-bottom"],
       "required": false
     },
-    "footer": {
+    "widget": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
       "type": "dynamiczone",
-      "components": ["footer.menu-widget", "footer.copyright-bar", "footer.contact-widget"],
+      "components": ["widget.menu-widget", "widget.copyright-bar", "widget.contact-widget"],
       "required": false
     }
   }

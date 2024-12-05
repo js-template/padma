@@ -51,7 +51,7 @@
           "localized": true
         }
       },
-      "component": "component.link"
+      "component": "config.link"
     },
     "slug": {
       "pluginOptions": {

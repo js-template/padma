@@ -1,5 +1,5 @@
 {
-  "collectionName": "components_component_links",
+  "collectionName": "components_config_links",
   "info": {
     "displayName": "Link",
     "icon": "cursor",
@@ -7,8 +7,8 @@
   },
   "category": "component",
   "modelName": "link",
-  "globalId": "ComponentsComponentLinks",
-  "uid": "component.link",
+  "globalId": "ComponentsConfigLinks",
+  "uid": "config.link",
   "modelType": "component",
   "options": {},
   "pluginOptions": {},

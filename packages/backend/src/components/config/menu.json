@@ -40,7 +40,7 @@
     "child": {
       "type": "component",
       "repeatable": true,
-      "component": "component.link"
+      "component": "config.link"
     }
   }
 }

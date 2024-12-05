@@ -1,5 +1,5 @@
 {
-  "collectionName": "components_header_logos",
+  "collectionName": "components_config_logos",
   "info": {
     "displayName": "Logo",
     "icon": "chartBubble",
@@ -8,7 +8,7 @@
   "category": "header",
   "modelName": "logo",
   "globalId": "ComponentsHeaderLogos",
-  "uid": "header.logo",
+  "uid": "config.logo",
   "modelType": "component",
   "options": {},
   "pluginOptions": {},
