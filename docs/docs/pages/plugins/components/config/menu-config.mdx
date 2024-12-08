@@ -1,0 +1,51 @@
+
+import { Callout } from 'nextra/components'
+
+# Menu
+Version- `1.0.0`
+
+## Uses
+The `Menu` component is used within another component. Config can be added form dynamic pages.
+
+
+## Attributes
+
+```json
+{
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["External", "Internal"]
+    },
+    "target": {
+      "type": "enumeration",
+      "enum": ["_blank", "_self"]
+    },
+    "icon": {
+      "type": "string",
+      "default": "bx:smile"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "child": {
+      "type": "component",
+      "repeatable": true,
+      "component": "config.link"
+    }
+  }
+}
+```
+
+{/* ## API Documentation
+
+- **Request**: [Banner Component Request API Documentation](#) */}

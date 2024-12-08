@@ -1,0 +1,51 @@
+
+import { Callout } from 'nextra/components'
+
+# Blog Post
+Version- `1.0.0`
+
+## Uses
+The `Blog Post` component is used within dynamic collections of `public-page`.
+
+
+## Attributes
+
+```json
+{
+ "attributes": {
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.section-title"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::padma-backend.post"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.link"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
+    }
+  }
+}
+```
+
+{/* ## API Documentation
+
+- **Request**: [Banner Component Request API Documentation](#) */}
+
+
+
+

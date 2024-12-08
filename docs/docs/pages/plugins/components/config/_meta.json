@@ -1,0 +1,38 @@
+{
+  "carousel-card": {
+    "title": "Carousel Card",
+    "theme": {
+      "toc": true
+    }
+  },
+  "link-config": {
+    "title": "Link Config",
+    "theme": {
+      "toc": true
+    }
+  },
+  "menu-config": {
+    "title": "Menu Config",
+    "theme": {
+      "toc": true
+    }
+  },
+  "single-page": {
+    "title": "Single Page",
+    "theme": {
+      "toc": true
+    }
+  },
+  "style-config": {
+    "title": "Style Config",
+    "theme": {
+      "toc": true
+    }
+  },
+  "title-config": {
+    "title": "Title Config",
+    "theme": {
+      "toc": true
+    }
+  }
+}

@@ -1,0 +1,53 @@
+
+import { Callout } from 'nextra/components'
+
+# Image Carousel
+Version- `1.0.0`
+
+## Uses
+The `Image Carousel` component is used within dynamic collections of `public-page`.
+
+
+## Attributes
+
+```json
+{
+  "attributes": {
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "config.carousel-card",
+      "required": true
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": true,
+      "required": false
+    },
+    "interval": {
+      "type": "integer",
+      "default": 3000,
+      "required": false,
+      "description": "Time in milliseconds for slide interval when autoplay is enabled."
+    },
+    "variation": {
+      "type": "enumeration",
+      "enum": ["default", "fade", "slide", "zoom"],
+      "default": "default"
+    }
+  }
+}
+```
+
+{/* ## API Documentation
+
+- **Request**: [Banner Component Request API Documentation](#) */}
+
+
+
+
