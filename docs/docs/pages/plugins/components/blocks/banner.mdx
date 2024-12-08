@@ -1,0 +1,49 @@
+
+import { Callout } from 'nextra/components'
+
+# Banner Component
+Version- `1.0.0`
+
+## Uses
+The `Banner` component is used within dynamic collections of `public-page`.
+
+
+## Attributes
+
+```json
+{
+  "attributes": {
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.section-title"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
+    },
+    "variation": {
+      "type": "enumeration",
+      "enum": [
+        "simple",
+        "center",
+        "bottom right",
+        "left right",
+        "box left",
+        "box right",
+        "circle"
+      ],
+      "default": "simple"
+    }
+  }
+}
+```
+
+{/* ## API Documentation
+
+- **Request**: [Banner Component Request API Documentation](#) */}
+
+
+
+

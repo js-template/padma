@@ -1,0 +1,46 @@
+
+import { Callout } from 'nextra/components'
+
+# Link
+Version- `1.0.0`
+
+## Uses
+The `Link` component is used within another component. Config can be added form dynamic pages.
+
+
+## Attributes
+
+```json
+{
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["External", "Internal"]
+    },
+    "target": {
+      "type": "enumeration",
+      "enum": ["_blank", "_self"]
+    },
+    "icon": {
+      "type": "string",
+      "unique": false,
+      "required": false,
+      "default": "bx:smile"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
+```
+
+{/* ## API Documentation
+
+- **Request**: [Banner Component Request API Documentation](#) */}

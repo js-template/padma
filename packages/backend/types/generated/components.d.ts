@@ -351,7 +351,7 @@ export interface ConfigSinglePage extends Struct.ComponentSchema {
   collectionName: 'components_config_single_pages';
   info: {
     description: '';
-    displayName: 'singlePage';
+    displayName: 'Single Page';
     icon: 'arrowRight';
   };
   attributes: {
@@ -366,7 +366,7 @@ export interface ConfigStyleSection extends Struct.ComponentSchema {
   collectionName: 'components_component_style_sections';
   info: {
     description: '';
-    displayName: 'style Section';
+    displayName: 'Style Section';
     icon: 'arrowUp';
   };
   attributes: {
@@ -480,7 +480,7 @@ export interface SharedEmpty extends Struct.ComponentSchema {
   collectionName: 'components_shared_empties';
   info: {
     description: '';
-    displayName: 'empty';
+    displayName: 'Empty State';
     icon: 'archive';
   };
   attributes: {
@@ -633,7 +633,7 @@ export interface SingleTypeBlogDetails extends Struct.ComponentSchema {
 export interface WidgetContactWidget extends Struct.ComponentSchema {
   collectionName: 'components_footer_contact_widgets';
   info: {
-    displayName: 'Contact Widget';
+    displayName: 'Contact Info';
     icon: 'envelop';
   };
   attributes: {

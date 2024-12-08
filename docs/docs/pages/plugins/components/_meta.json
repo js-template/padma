@@ -1,0 +1,26 @@
+{
+  "header": {
+    "title": "Headers",
+    "theme": {
+      "toc": true
+    }
+  },
+  "blocks": {
+    "title": "Blocks",
+    "theme": {
+      "toc": true
+    }
+  },
+  "widgets": {
+    "title": "Widgets",
+    "theme": {
+      "toc": true
+    }
+  },
+  "configs": {
+    "title": "Config",
+    "theme": {
+      "toc": true
+    }
+  }
+}
