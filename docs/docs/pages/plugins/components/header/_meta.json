@@ -1,0 +1,20 @@
+{
+  "topbar": {
+    "title": "Top Bar",
+    "theme": {
+      "toc": true
+    }
+  },
+  "main-menu": {
+    "title": "Main Menu",
+    "theme": {
+      "toc": true
+    }
+  },
+  "bottom-menu": {
+    "title": "Bottom Menu",
+    "theme": {
+      "toc": true
+    }
+  }
+}

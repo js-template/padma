@@ -23,8 +23,17 @@
         }
       },
       "type": "dynamiczone",
-      "components": ["block.private-header"],
+      "components": ["header.top-bar", "header.main-menu", "header.header-bottom"],
       "required": true
+    },
+    "widget": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": ["widget.menu-widget", "widget.copyright-bar", "widget.contact-widget"]
     }
   }
 }

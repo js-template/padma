@@ -1,25 +1,23 @@
 {
-  "collectionName": "components_config_menus",
+  "collectionName": "components_config_links",
   "info": {
-    "displayName": "Menu",
-    "icon": "bulletList",
+    "displayName": "Link",
+    "icon": "cursor",
     "description": ""
   },
-  "category": "Public Config",
-  "modelName": "menu",
-  "globalId": "ComponentsConfigMenus",
-  "uid": "config.menu",
+  "category": "component",
+  "modelName": "link",
+  "globalId": "ComponentsConfigLinks",
+  "uid": "config.link",
   "modelType": "component",
   "options": {},
   "pluginOptions": {},
   "attributes": {
     "label": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "link": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "type": {
       "type": "enumeration",
@@ -31,16 +29,13 @@
     },
     "icon": {
       "type": "string",
+      "unique": false,
+      "required": false,
       "default": "bx:smile"
     },
     "disabled": {
       "type": "boolean",
       "default": false
-    },
-    "child": {
-      "type": "component",
-      "repeatable": true,
-      "component": "config.link"
     }
   }
 }

@@ -1,0 +1,44 @@
+{
+  "banner": {
+    "title": "Banner",
+    "theme": {
+      "toc": true
+    }
+  },
+  "breadcrumbs": {
+    "title": "Breadcrumbs",
+    "theme": {
+      "toc": true
+    }
+  },
+  "category-card": {
+    "title": "Category Card",
+    "theme": {
+      "toc": true
+    }
+  },
+  "content-box": {
+    "title": "Content Box",
+    "theme": {
+      "toc": true
+    }
+  },
+  "image-carousel": {
+    "title": "Image Carousel",
+    "theme": {
+      "toc": true
+    }
+  },
+  "image-gallary": {
+    "title": "Image Gallary",
+    "theme": {
+      "toc": true
+    }
+  },
+  "review-block": {
+    "title": "Review Block",
+    "theme": {
+      "toc": true
+    }
+  }
+}
