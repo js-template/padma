@@ -473,7 +473,6 @@ export interface HeaderTopBar extends Struct.ComponentSchema {
     left_content: Schema.Attribute.Text;
     right_content: Schema.Attribute.Component<'config.link', true>;
     style: Schema.Attribute.Component<'config.style-section', false>;
-
   };
 }
 
