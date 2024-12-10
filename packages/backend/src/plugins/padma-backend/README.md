@@ -11,7 +11,11 @@ To integrate Padma’s custom Strapi plugin, follow these steps:
    If you already have Strapi installed, add the Padma plugin by running the following command:
 
    ```bash
-   npm install padma-plugin
+   npm install @padmadev/padma-backend
+   ```
+
+   ```bash
+   yarn add @padmadev/padma-backend
    ```
 
 2. **Configure the Plugin**  
