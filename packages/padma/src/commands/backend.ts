@@ -21,11 +21,11 @@ export default class Backend extends Command {
     }),
     branch: Flags.string({
       description: 'Template branch',
-      default: 'components-create-strapi5',
+      default: 'main',
     }),
     templatePath: Flags.string({
       description: 'Template path',
-      default: 'apps/backend-v5',
+      default: 'packages/backend',
     }),
     noInteractive: Flags.boolean({
       char: 'i',
@@ -55,7 +55,7 @@ export default class Backend extends Command {
       const output = execSync(fullCommand, {stdio: 'inherit'})
       this.log(output.toString())
     } catch (error) {
-      this.error(`Failed to execute command: ${error instanceof Error ? error.message : error}`)
+      //this.error(`Failed to execute command: ${error instanceof Error ? error.message : error}`)
     }
   }
 }
