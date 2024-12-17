@@ -58,3 +58,22 @@ export const getLanguageValue = (ln: "ar" | "en" | "es" | "") => {
    const lanValue = languageList[ln]
    return lanValue
 }
+
+/**
+ * Function to separate an array of objects based on a specific component value.
+ * @param {Array} data - Array of objects containing a '__component' key.
+ * @param {string} targetComponent - The component value to filter out.
+ * @returns {Object} An object containing two arrays: 'targetData' and 'restData'.
+ */
+export const separateBlocks = (data: { __component: string }[], targetComponent: string) => {
+   // Check if data is a valid array
+   if (!data || !Array.isArray(data) || data?.length === 0) {
+      return { targetData: [], restData: [] }
+   }
+
+   // Separate arrays
+   const targetData = data?.filter((item) => item?.__component === targetComponent)
+   const restData = data?.filter((item) => item?.__component !== targetComponent)
+
+   return { targetData, restData }
+}
