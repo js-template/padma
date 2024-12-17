@@ -41,7 +41,7 @@
       },
       "component": "config.menu"
     },
-    "langague": {
+    "language": {
       "type": "component",
       "repeatable": true,
       "pluginOptions": {
@@ -50,6 +50,16 @@
         }
       },
       "component": "config.link"
+    },
+    "user_menu": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "config.menu"
     },
     "button": {
       "type": "component",
