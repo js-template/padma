@@ -1,13 +1,18 @@
-import { useGlobalContext } from "@/context/store"
 import { find } from "@/lib/strapi"
+import { getLanguageFromCookie } from "@/utils/language"
 import { loadActiveTheme } from "config/theme-loader"
 
 export default async function PublicLayoutHeader() {
+   // fetch the language from cookies or session
+   const language = getLanguageFromCookie()
+
    const { data, error } = await find(
-      // : API call need to Fix. It will be private Header
+      // fetch public header data
       "api/padma-backend/layout",
       {
-         populate: "*"
+         populate: {
+            header: { populate: "*" }
+         }
       },
       "no-store"
    )
@@ -19,7 +24,6 @@ export default async function PublicLayoutHeader() {
 
    if (activeTheme) {
       getPublicComponents = activeTheme.getPublicComponents
-      // console.log(getPublicComponents)
    } else {
       console.error("Active theme could not be loaded!")
    }
@@ -33,7 +37,7 @@ export default async function PublicLayoutHeader() {
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
                //@ts-ignore
-               return <ComponentToRender key={index} block={block} />
+               return <ComponentToRender key={index} block={block} language={language} />
             }
             return null // Handle case where component mapping is missing
          })}

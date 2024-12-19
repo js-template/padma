@@ -8,6 +8,16 @@
   "attributes": {
     "title": {
       "type": "string"
+    },
+    "menu_items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "config.link"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
     }
   }
 }

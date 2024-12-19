@@ -89,14 +89,12 @@ export default async function DynamicPages({ params }: Props) {
    // ?? Fetch the language or use a default
    const language = "en"
 
-   const { getPublicComponents } = await loadActiveTheme()
-
    // ?? Fetch the permalink structure from Strapi
    const { data: permalinkData } = await find("api/padma-backend/permalink", {
       populate: "*"
    })
 
-   const singlePages = permalinkData?.data?.attributes?.singlePage
+   const singlePages = permalinkData?.data?.singlePage
    const singlePageData = singlePages?.find((page: any) => page.slug === pageSlug)
 
    // ?? If no matching page is found, return 404
@@ -109,25 +107,30 @@ export default async function DynamicPages({ params }: Props) {
    const singleModel = singlePageData?.singelModel
 
    // ?? Fetch the content data based on the collection model (e.g., jobs, resumes)
-   const { data: singleData, error: singleError } = await find(singleModel, {
-      populate: "deep",
-      publicationState: "live",
-      locale: language ? [language] : ["en"]
-   })
+   const { data: singleData, error: singleError } = await find(
+      singleModel,
+      {
+         populate: "*"
+         // publicationState: "live",
+         // locale: language ? [language] : ["en"]
+      },
+      "no-store"
+   )
 
    if (!singleData) {
       return notFound()
    }
 
    // ?? Fetch additional page details (if needed)
-   const { data: pageDetails, error: pageDeatilsError } = await find(collectionModel, {
+   const { data: pageDetails, error: pageDetailsError } = await find(collectionModel, {
       filters: {
          slug: {
             $eq: singleType
          }
       },
-      populate: "deep",
-      locale: language ? [language] : ["en"]
+      populate: "*"
+      // populate: "deep",
+      // locale: language ? [language] : ["en"]
    })
 
    const pageDetailsData = pageDetails?.data?.[0]
@@ -136,7 +139,18 @@ export default async function DynamicPages({ params }: Props) {
       return notFound()
    }
 
-   const blocks = singleData?.data?.attributes?.blocks || []
+   const activeTheme = await loadActiveTheme()
+
+   // Define as an empty object by default
+   let getPublicComponents: Record<string, any> = {}
+
+   if (activeTheme) {
+      getPublicComponents = activeTheme.getPublicComponents
+   } else {
+      console.error("Active theme could not be loaded!", pageDetailsError)
+   }
+
+   const blocks = singleData?.data?.blocks || []
 
    // ?? If no blocks are found, return 404
    if (!blocks) {

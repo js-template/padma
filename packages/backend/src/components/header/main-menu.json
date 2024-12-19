@@ -5,11 +5,6 @@
     "icon": "layout",
     "description": "Main Menu"
   },
-  "category": "header",
-  "modelName": "main-menu",
-  "globalId": "ComponentsHeaderMainMenus",
-  "uid": "header.main-menu",
-  "modelType": "component",
   "options": {},
   "pluginOptions": {},
   "attributes": {
@@ -41,7 +36,7 @@
       },
       "component": "config.menu"
     },
-    "langague": {
+    "language": {
       "type": "component",
       "repeatable": true,
       "pluginOptions": {
@@ -50,6 +45,16 @@
         }
       },
       "component": "config.link"
+    },
+    "profile_menu": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "config.menu"
     },
     "button": {
       "type": "component",

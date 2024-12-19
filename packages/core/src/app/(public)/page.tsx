@@ -11,7 +11,11 @@ export default async function Home() {
    const { data, error } = await find(
       "api/padma-backend/public-frontpage",
       {
-         populate: "*"
+         populate: {
+            blocks: {
+               populate: "*"
+            }
+         }
       },
       "no-store"
    )
