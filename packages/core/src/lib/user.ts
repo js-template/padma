@@ -47,7 +47,6 @@ export const SignIn = async (formData: FormData) => {
       if (response.ok) {
          // Parse the response JSON
          const data = await response.json()
-         console.log("Login data==>", data)
 
          // Assuming your API returns a JWT token in the response
          const jwtToken = data?.jwt
