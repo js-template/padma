@@ -31,7 +31,7 @@ export const SignIn = async (formData: FormData) => {
       // setLoading(true);
 
       // Make an API call to your authentication endpoint (replace with your actual API endpoint)
-      const response = await fetch(`${process.env.STRAPI_ENDPOINT}/api/auth/local?populate=deep`, {
+      const response = await fetch(`${process.env.STRAPI_ENDPOINT}/api/auth/local?populate=*`, {
          method: "POST",
          headers: {
             "Content-Type": "application/json",
@@ -43,11 +43,11 @@ export const SignIn = async (formData: FormData) => {
             password: password
          })
       })
-
       // Check if the API call was successful
       if (response.ok) {
          // Parse the response JSON
          const data = await response.json()
+         console.log("Login data==>", data)
 
          // Assuming your API returns a JWT token in the response
          const jwtToken = data?.jwt
