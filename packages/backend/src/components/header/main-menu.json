@@ -5,11 +5,6 @@
     "icon": "layout",
     "description": "Main Menu"
   },
-  "category": "header",
-  "modelName": "main-menu",
-  "globalId": "ComponentsHeaderMainMenus",
-  "uid": "header.main-menu",
-  "modelType": "component",
   "options": {},
   "pluginOptions": {},
   "attributes": {
@@ -51,7 +46,7 @@
       },
       "component": "config.link"
     },
-    "user_menu": {
+    "profile_menu": {
       "type": "component",
       "repeatable": true,
       "pluginOptions": {
