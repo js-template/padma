@@ -1,17 +1,10 @@
 {
-  "collectionName": "components_carousel_cards",
+  "collectionName": "components_config_carousel_cards",
   "info": {
     "displayName": "Carousel Card",
-    "icon": "image",
-    "description": "Card with title, paragraph, and image for use in carousel components."
+    "icon": "image"
   },
-  "category": "Public Config",
-  "modelName": "carousel-card",
-  "globalId": "ComponentsCarouselCards",
-  "uid": "config.carousel-card",
-  "modelType": "component",
   "options": {},
-  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string",
@@ -23,7 +16,9 @@
     },
     "image": {
       "type": "media",
-      "allowedTypes": ["images"],
+      "allowedTypes": [
+        "images"
+      ],
       "multiple": false,
       "required": false
     }

@@ -2,9 +2,9 @@
   "collectionName": "components_header_top_bars",
   "info": {
     "displayName": "Top Bar",
-    "icon": "bars",
-    "description": "Top bar for additional information and links"
+    "icon": "bars"
   },
+  "options": {},
   "attributes": {
     "left_content": {
       "type": "text",

@@ -1,17 +1,10 @@
 {
-  "collectionName": "components_category_cards",
+  "collectionName": "components_block_category_cards",
   "info": {
     "displayName": "Category Card",
-    "icon": "arrowRight",
-    "description": ""
+    "icon": "arrowRight"
   },
-  "category": "Blocks",
-  "modelName": "category-card",
-  "globalId": "ComponentsCategoryCards",
-  "uid": "block.category-card",
-  "modelType": "component",
   "options": {},
-  "pluginOptions": {},
   "attributes": {
     "content": {
       "type": "component",

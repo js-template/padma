@@ -2,16 +2,9 @@
   "collectionName": "components_config_menus",
   "info": {
     "displayName": "Menu",
-    "icon": "bulletList",
-    "description": ""
+    "icon": "bulletList"
   },
-  "category": "Public Config",
-  "modelName": "menu",
-  "globalId": "ComponentsConfigMenus",
-  "uid": "config.menu",
-  "modelType": "component",
   "options": {},
-  "pluginOptions": {},
   "attributes": {
     "label": {
       "type": "string",
@@ -23,11 +16,17 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": ["External", "Internal"]
+      "enum": [
+        "External",
+        "Internal"
+      ]
     },
     "target": {
       "type": "enumeration",
-      "enum": ["_blank", "_self"]
+      "enum": [
+        "_blank",
+        "_self"
+      ]
     },
     "icon": {
       "type": "string",

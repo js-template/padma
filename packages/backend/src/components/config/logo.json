@@ -2,22 +2,17 @@
   "collectionName": "components_config_logos",
   "info": {
     "displayName": "Logo",
-    "icon": "chartBubble",
-    "description": ""
+    "icon": "chartBubble"
   },
-  "category": "header",
-  "modelName": "logo",
-  "globalId": "ComponentsHeaderLogos",
-  "uid": "config.logo",
-  "modelType": "component",
   "options": {},
-  "pluginOptions": {},
   "attributes": {
     "logo": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "link": {
       "type": "string"

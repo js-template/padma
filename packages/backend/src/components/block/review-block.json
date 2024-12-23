@@ -1,17 +1,10 @@
 {
-  "collectionName": "components_block_reviews",
+  "collectionName": "components_block_review_blocks",
   "info": {
     "displayName": "Review Block",
-    "icon": "star",
-    "description": "A block for displaying multiple reviews with customizable options."
+    "icon": "star"
   },
-  "category": "Blocks",
-  "modelName": "review-block",
-  "globalId": "ComponentsBlockReviews",
-  "uid": "block.review-block",
-  "modelType": "component",
   "options": {},
-  "pluginOptions": {},
   "attributes": {
     "content": {
       "type": "component",
@@ -40,7 +33,11 @@
     },
     "variation": {
       "type": "enumeration",
-      "enum": ["default", "compact", "detailed"],
+      "enum": [
+        "default",
+        "compact",
+        "detailed"
+      ],
       "default": "default"
     }
   }

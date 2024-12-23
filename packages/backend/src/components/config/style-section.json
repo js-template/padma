@@ -1,17 +1,10 @@
 {
-  "collectionName": "components_component_style_sections",
+  "collectionName": "components_config_style_sections",
   "info": {
     "displayName": "Style Section",
-    "icon": "arrowUp",
-    "description": ""
+    "icon": "arrowUp"
   },
-  "category": "component",
-  "modelName": "style-section",
-  "globalId": "ComponentsComponentStyleSections",
-  "uid": "config.style-section",
-  "modelType": "component",
   "options": {},
-  "pluginOptions": {},
   "attributes": {
     "color": {
       "type": "string"
