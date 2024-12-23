@@ -98,46 +98,51 @@ export const registerComponents = async ({ strapi }: { strapi: Core.Strapi }) =>
         strapi.log.error(`Error registering component ${key}: ${error.message}`);
         // // remove the key from newComponentsDiff
         newComponentsDiff = await newComponentsDiff.filter((item) => item !== key);
-        // add the key to errorComparisons
-        errorComparisons = await [...errorComparisons, key];
-        // remove duplicate errorComparisons
-        errorComparisons = [...new Set(errorComparisons)];
-        // get the existing component in the newComponentsDiff attributes and register it
-        const existingComponent = newComponents[key].attributes;
 
-        // collect the attributes type === component to component
-
-        // get the attributes type === component to component
-        const existingComponentAttributes = Object.keys(existingComponent)
-          .filter((key) => existingComponent[key].type === 'component') // Filter by type 'component'
-          .map((key) => existingComponent[key].component);
-
-        for (const attr of existingComponentAttributes) {
-          try {
-            await strapi.plugin('content-type-builder').services.components.createComponent({
-              component: {
-                category: newComponents[attr].category,
-                uid: newComponents[attr].uid,
-                modelName: newComponents[attr].modelName,
-                displayName: newComponents[attr].info.displayName,
-                icon: newComponents[attr].info.icon,
-                attributes: newComponents[attr].attributes,
-              },
-            });
-
-            // remove the key from newComponentsDiff
-            newComponentsDiff = await newComponentsDiff.filter((item) => item !== attr);
-            strapi.log.info(`Component ${attr} registered successfully`);
-          } catch (error) {
-            strapi.log.error(`Error registering component ${attr}: ${error}`);
-            // remove the key from newComponentsDiff
-            newComponentsDiff = await newComponentsDiff.filter((item) => item !== attr);
-            // add the key to errorComparisons
-            errorComparisons = await [...errorComparisons, attr];
-            // remove duplicate errorComparisons
-            errorComparisons = [...new Set(errorComparisons)];
-          }
+        // if the error.message === component.alreadyExists then don't add this component to errorComparisons
+        if (error.message !== 'component.alreadyExists') {
+          // add the key to errorComparisons
+          errorComparisons = await [...errorComparisons, key];
+          // remove duplicate errorComparisons
+          errorComparisons = [...new Set(errorComparisons)];
         }
+
+        // // get the existing component in the newComponentsDiff attributes and register it
+        // const existingComponent = newComponents[key].attributes;
+
+        // // collect the attributes type === component to component
+
+        // // get the attributes type === component to component
+        // const existingComponentAttributes = Object.keys(existingComponent)
+        //   .filter((key) => existingComponent[key].type === 'component') // Filter by type 'component'
+        //   .map((key) => existingComponent[key].component);
+
+        // for (const attr of existingComponentAttributes) {
+        //   try {
+        //     await strapi.plugin('content-type-builder').services.components.createComponent({
+        //       component: {
+        //         category: newComponents[attr].category,
+        //         uid: newComponents[attr].uid,
+        //         modelName: newComponents[attr].modelName,
+        //         displayName: newComponents[attr].info.displayName,
+        //         icon: newComponents[attr].info.icon,
+        //         attributes: newComponents[attr].attributes,
+        //       },
+        //     });
+
+        //     // remove the key from newComponentsDiff
+        //     newComponentsDiff = await newComponentsDiff.filter((item) => item !== attr);
+        //     strapi.log.info(`Component ${attr} registered successfully`);
+        //   } catch (error) {
+        //     strapi.log.error(`Error registering component ${attr}: ${error}`);
+        //     // remove the key from newComponentsDiff
+        //     newComponentsDiff = await newComponentsDiff.filter((item) => item !== attr);
+        //     // add the key to errorComparisons
+        //     errorComparisons = await [...errorComparisons, attr];
+        //     // remove duplicate errorComparisons
+        //     errorComparisons = [...new Set(errorComparisons)];
+        //   }
+        // }
       }
 
       // hold for 5 second
