@@ -3,7 +3,6 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface BlockBanner extends Struct.ComponentSchema {
   collectionName: 'components_block_banners';
   info: {
-    description: 'Banner component with advanced text, style, and layout options';
     displayName: 'Banner';
     icon: 'image';
   };
@@ -28,8 +27,7 @@ export interface BlockBanner extends Struct.ComponentSchema {
 export interface BlockBlogCard extends Struct.ComponentSchema {
   collectionName: 'components_block_blog_cards';
   info: {
-    description: '';
-    displayName: 'Blog Post';
+    displayName: 'Blog Card';
     icon: 'collapse';
   };
   attributes: {
@@ -44,7 +42,6 @@ export interface BlockBlogCard extends Struct.ComponentSchema {
 export interface BlockBreadcrumbs extends Struct.ComponentSchema {
   collectionName: 'components_block_breadcrumbs';
   info: {
-    description: '';
     displayName: 'Breadcrumbs';
     icon: 'manyWays';
   };
@@ -60,9 +57,8 @@ export interface BlockBreadcrumbs extends Struct.ComponentSchema {
 }
 
 export interface BlockCategoryCard extends Struct.ComponentSchema {
-  collectionName: 'components_category_cards';
+  collectionName: 'components_block_category_cards';
   info: {
-    description: '';
     displayName: 'Category Card';
     icon: 'arrowRight';
   };
@@ -81,7 +77,6 @@ export interface BlockCategoryCard extends Struct.ComponentSchema {
 export interface BlockContentBox extends Struct.ComponentSchema {
   collectionName: 'components_block_content_boxes';
   info: {
-    description: 'A content box with text, icons, and style options.';
     displayName: 'Content Box';
     icon: 'box';
   };
@@ -96,7 +91,6 @@ export interface BlockContentBox extends Struct.ComponentSchema {
 export interface BlockImageCarousel extends Struct.ComponentSchema {
   collectionName: 'components_block_image_carousels';
   info: {
-    description: 'Carousel component with configurable cards and styling options.';
     displayName: 'Image Carousel';
     icon: 'images';
   };
@@ -114,9 +108,8 @@ export interface BlockImageCarousel extends Struct.ComponentSchema {
 }
 
 export interface BlockImageGallery extends Struct.ComponentSchema {
-  collectionName: 'components_block_image_gallery';
+  collectionName: 'components_block_image_galleries';
   info: {
-    description: 'A component for displaying multiple images in various layouts.';
     displayName: 'Image Gallery';
     icon: 'gallery';
   };
@@ -133,9 +126,8 @@ export interface BlockImageGallery extends Struct.ComponentSchema {
 }
 
 export interface BlockReviewBlock extends Struct.ComponentSchema {
-  collectionName: 'components_block_reviews';
+  collectionName: 'components_block_review_blocks';
   info: {
-    description: 'A block for displaying multiple reviews with customizable options.';
     displayName: 'Review Block';
     icon: 'star';
   };
@@ -155,7 +147,6 @@ export interface BlockReviewBlock extends Struct.ComponentSchema {
 export interface ComponentGridContainer extends Struct.ComponentSchema {
   collectionName: 'components_component_grid_containers';
   info: {
-    description: '';
     displayName: 'Grid Container';
     icon: 'brush';
   };
@@ -199,7 +190,6 @@ export interface ComponentGridContainer extends Struct.ComponentSchema {
 export interface ComponentIconBox extends Struct.ComponentSchema {
   collectionName: 'components_component_icon_boxes';
   info: {
-    description: '';
     displayName: 'Icon Box';
     icon: 'apps';
   };
@@ -217,9 +207,8 @@ export interface ComponentIconBox extends Struct.ComponentSchema {
 }
 
 export interface ConfigCarouselCard extends Struct.ComponentSchema {
-  collectionName: 'components_carousel_cards';
+  collectionName: 'components_config_carousel_cards';
   info: {
-    description: 'Card with title, paragraph, and image for use in carousel components.';
     displayName: 'Carousel Card';
     icon: 'image';
   };
@@ -233,7 +222,6 @@ export interface ConfigCarouselCard extends Struct.ComponentSchema {
 export interface ConfigLink extends Struct.ComponentSchema {
   collectionName: 'components_config_links';
   info: {
-    description: '';
     displayName: 'Link';
     icon: 'cursor';
   };
@@ -250,7 +238,6 @@ export interface ConfigLink extends Struct.ComponentSchema {
 export interface ConfigLogo extends Struct.ComponentSchema {
   collectionName: 'components_config_logos';
   info: {
-    description: '';
     displayName: 'Logo';
     icon: 'chartBubble';
   };
@@ -290,7 +277,6 @@ export interface ConfigLogo extends Struct.ComponentSchema {
 export interface ConfigMenu extends Struct.ComponentSchema {
   collectionName: 'components_config_menus';
   info: {
-    description: '';
     displayName: 'Menu';
     icon: 'bulletList';
   };
@@ -306,9 +292,8 @@ export interface ConfigMenu extends Struct.ComponentSchema {
 }
 
 export interface ConfigReviewCard extends Struct.ComponentSchema {
-  collectionName: 'components_review_cards';
+  collectionName: 'components_config_review_cards';
   info: {
-    description: '';
     displayName: 'Review Card';
     icon: 'star';
   };
@@ -350,7 +335,6 @@ export interface ConfigSectionTitle extends Struct.ComponentSchema {
 export interface ConfigSinglePage extends Struct.ComponentSchema {
   collectionName: 'components_config_single_pages';
   info: {
-    description: '';
     displayName: 'Single Page';
     icon: 'arrowRight';
   };
@@ -363,9 +347,8 @@ export interface ConfigSinglePage extends Struct.ComponentSchema {
 }
 
 export interface ConfigStyleSection extends Struct.ComponentSchema {
-  collectionName: 'components_component_style_sections';
+  collectionName: 'components_config_style_sections';
   info: {
-    description: '';
     displayName: 'Style Section';
     icon: 'arrowUp';
   };
@@ -407,7 +390,6 @@ export interface ConfigStyleSection extends Struct.ComponentSchema {
 export interface HeaderHeaderBottom extends Struct.ComponentSchema {
   collectionName: 'components_header_header_bottoms';
   info: {
-    description: '';
     displayName: 'Header bottom';
     icon: 'bulletList';
   };
@@ -431,7 +413,6 @@ export interface HeaderHeaderBottom extends Struct.ComponentSchema {
 export interface HeaderMainMenu extends Struct.ComponentSchema {
   collectionName: 'components_header_main_menus';
   info: {
-    description: 'Main Menu';
     displayName: 'Main Menu';
     icon: 'layout';
   };
@@ -444,7 +425,7 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
       }>;
     dark_logo: Schema.Attribute.Component<'config.logo', false>;
     dark_mode: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    langague: Schema.Attribute.Component<'config.link', true> &
+    language: Schema.Attribute.Component<'config.link', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
@@ -458,6 +439,12 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
         };
       }>;
     notification: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    profile_menu: Schema.Attribute.Component<'config.menu', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     style: Schema.Attribute.Component<'config.style-section', false>;
   };
 }
@@ -465,7 +452,6 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
 export interface HeaderTopBar extends Struct.ComponentSchema {
   collectionName: 'components_header_top_bars';
   info: {
-    description: 'Top bar for additional information and links';
     displayName: 'Top Bar';
     icon: 'bars';
   };
@@ -473,15 +459,13 @@ export interface HeaderTopBar extends Struct.ComponentSchema {
     left_content: Schema.Attribute.Text;
     right_content: Schema.Attribute.Component<'config.link', true>;
     style: Schema.Attribute.Component<'config.style-section', false>;
-
   };
 }
 
 export interface SharedEmpty extends Struct.ComponentSchema {
   collectionName: 'components_shared_empties';
   info: {
-    description: '';
-    displayName: 'Empty State';
+    displayName: 'Empty';
     icon: 'archive';
   };
   attributes: {
@@ -546,7 +530,7 @@ export interface SharedSeo extends Struct.ComponentSchema {
 }
 
 export interface SharedShareMenu extends Struct.ComponentSchema {
-  collectionName: 'components_shared_shared_menus';
+  collectionName: 'components_shared_share_menus';
   info: {
     displayName: 'Share Menu';
     icon: 'server';
@@ -618,7 +602,6 @@ export interface SharedSpacing extends Struct.ComponentSchema {
 export interface SingleTypeBlogDetails extends Struct.ComponentSchema {
   collectionName: 'components_single_type_blog_details';
   info: {
-    description: '';
     displayName: 'Blog Details';
     icon: 'arrowRight';
   };
@@ -632,12 +615,18 @@ export interface SingleTypeBlogDetails extends Struct.ComponentSchema {
 }
 
 export interface WidgetContactWidget extends Struct.ComponentSchema {
-  collectionName: 'components_footer_contact_widgets';
+  collectionName: 'components_widget_contact_widgets';
   info: {
-    displayName: 'Contact Info';
+    displayName: 'Contact Widget';
     icon: 'envelop';
   };
   attributes: {
+    description: Schema.Attribute.Text;
+    email: Schema.Attribute.String;
+    location: Schema.Attribute.String;
+    logo: Schema.Attribute.Component<'config.logo', false>;
+    phone: Schema.Attribute.String;
+    style: Schema.Attribute.Component<'config.style-section', false>;
     title: Schema.Attribute.String;
   };
 }
@@ -645,22 +634,24 @@ export interface WidgetContactWidget extends Struct.ComponentSchema {
 export interface WidgetCopyrightBar extends Struct.ComponentSchema {
   collectionName: 'components_widget_copyright_bars';
   info: {
-    description: 'Bottom-most section for copyright text';
     displayName: 'Copyright Bar';
     icon: 'copyright';
   };
   attributes: {
     content: Schema.Attribute.Text & Schema.Attribute.Required;
+    social_link: Schema.Attribute.Component<'shared.social-medias', true>;
   };
 }
 
 export interface WidgetMenuWidget extends Struct.ComponentSchema {
-  collectionName: 'components_footer_menu_widgets';
+  collectionName: 'components_widget_menu_widgets';
   info: {
     displayName: 'Menu Widget';
     icon: 'arrowDown';
   };
   attributes: {
+    menu_items: Schema.Attribute.Component<'config.link', true>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
     title: Schema.Attribute.String;
   };
 }

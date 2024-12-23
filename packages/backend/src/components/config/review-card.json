@@ -1,17 +1,10 @@
 {
-  "collectionName": "components_review_cards",
+  "collectionName": "components_config_review_cards",
   "info": {
     "displayName": "Review Card",
-    "icon": "star",
-    "description": ""
+    "icon": "star"
   },
-  "category": "Public Config",
-  "modelName": "review-card",
-  "globalId": "ComponentsReviewCards",
-  "uid": "config.review-card",
-  "modelType": "component",
   "options": {},
-  "pluginOptions": {},
   "attributes": {
     "reviewer": {
       "type": "string",

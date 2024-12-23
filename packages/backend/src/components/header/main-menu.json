@@ -2,11 +2,9 @@
   "collectionName": "components_header_main_menus",
   "info": {
     "displayName": "Main Menu",
-    "icon": "layout",
-    "description": "Main Menu"
+    "icon": "layout"
   },
   "options": {},
-  "pluginOptions": {},
   "attributes": {
     "light_logo": {
       "type": "component",

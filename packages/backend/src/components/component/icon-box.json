@@ -2,16 +2,9 @@
   "collectionName": "components_component_icon_boxes",
   "info": {
     "displayName": "Icon Box",
-    "icon": "apps",
-    "description": ""
+    "icon": "apps"
   },
-  "category": "component",
-  "modelName": "icon-box",
-  "globalId": "ComponentsComponentIconBoxes",
-  "uid": "component.icon-box",
-  "modelType": "component",
   "options": {},
-  "pluginOptions": {},
   "attributes": {
     "icon": {
       "type": "string",

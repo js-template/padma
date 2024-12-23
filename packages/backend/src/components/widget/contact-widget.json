@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_footer_contact_widgets",
+  "collectionName": "components_widget_contact_widgets",
   "info": {
-    "displayName": "Contact Info",
+    "displayName": "Contact Widget",
     "icon": "envelop"
   },
   "options": {},
