@@ -1,5 +1,4 @@
-import fs from "fs"
-import path from "path"
+import { settings, themeResolver } from "../../padma.settings"
 
 type ThemeComponents = {
    getPublicComponents: Record<string, any>
@@ -8,30 +7,30 @@ type ThemeComponents = {
 
 export const loadActiveTheme = async (): Promise<ThemeComponents | null> => {
    try {
-      // Locate the settings file
-      const settingsPath = path.resolve(process.cwd(), "./../padma.settings.json")
+      if (!settings.activeTheme) {
+         throw new Error("Active theme is not defined in the settings.")
+      }
 
-      // if (!fs.existsSync(settingsPath)) {
-      //    throw new Error(`Settings file not found at ${settingsPath}`)
-      // }
+      console.log("Active theme:", settings.activeTheme)
 
-      // // Read and parse the settings file
-      // const settings = JSON.parse(fs.readFileSync(settingsPath, "utf-8"))
+      const themeModuleLoader = themeResolver[settings.activeTheme]
 
-      // if (!settings.activeTheme) {
-      //    throw new Error("Active theme is not defined in the settings file.")
-      // }
+      if (!themeModuleLoader) {
+         throw new Error(`Theme "${settings.activeTheme}" is not supported or not found.`)
+      }
 
-      const { getPublicComponents, getPrivateComponents } = await import("@padmadev/blank-theme")
+      const themeModule = await themeModuleLoader()
 
-      return { getPrivateComponents, getPublicComponents }
+      if (!themeModule.getPublicComponents || !themeModule.getPrivateComponents) {
+         throw new Error("The theme module is missing required exports.")
+      }
+
+      return {
+         getPublicComponents: themeModule.getPublicComponents,
+         getPrivateComponents: themeModule.getPrivateComponents
+      }
    } catch (error: any) {
-      console.error("Error loading active theme:")
-      return null // Return null on error
+      console.error("Error loading active theme:", error.message)
+      return null
    }
 }
-
-// Get a specific theme component by its key
-// export const getThemeComponent = (componentKey: string): any | null => {
-//    return activeThemeComponents[componentKey] || null // Access the outer scoped variable
-// }

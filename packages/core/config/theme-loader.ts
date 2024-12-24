@@ -1,5 +1,4 @@
-import settings from "../padma.settings"
-import { themeMap } from "../theme-map" // Import the theme map
+import { settings, themeResolver } from "../../padma.settings"
 
 type ThemeComponents = {
    getPublicComponents: Record<string, any>
@@ -7,25 +6,31 @@ type ThemeComponents = {
 }
 
 export const loadActiveTheme = async (): Promise<ThemeComponents | null> => {
-   const activeTheme = settings.activeTheme
-
-   console.log("activeTheme", activeTheme)
-
    try {
-      // Use the map to get the correct theme import
-      const loadTheme = themeMap[activeTheme]
-
-      if (!loadTheme) {
-         throw new Error(`Theme not found: ${activeTheme}`)
+      if (!settings.activeTheme) {
+         throw new Error("Active theme is not defined in the settings.")
       }
 
-      // Dynamically import the theme
-      const theme = await loadTheme()
-      const { getPublicComponents, getPrivateComponents } = theme
+      console.log("Active theme:", settings.activeTheme)
 
-      return { getPublicComponents, getPrivateComponents }
-   } catch (error) {
-      console.error("Error loading active theme:", error)
-      return null // Return null on error
+      const themeModuleLoader = themeResolver[settings.activeTheme]
+
+      if (!themeModuleLoader) {
+         throw new Error(`Theme "${settings.activeTheme}" is not supported or not found.`)
+      }
+
+      const themeModule = await themeModuleLoader()
+
+      if (!themeModule.getPublicComponents || !themeModule.getPrivateComponents) {
+         throw new Error("The theme module is missing required exports.")
+      }
+
+      return {
+         getPublicComponents: themeModule.getPublicComponents,
+         getPrivateComponents: themeModule.getPrivateComponents
+      }
+   } catch (error: any) {
+      console.error("Error loading active theme:", error.message)
+      return null
    }
 }
