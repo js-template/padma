@@ -1,13 +1,15 @@
-import { useGlobalContext } from "@/context/store"
+import PublicFooter from "@/components/layouts/public-footer"
 import { find } from "@/lib/strapi"
 import { loadActiveTheme } from "config/theme-loader"
 
 export default async function PublicLayoutFooter() {
+   // fetch footer data
    const { data, error } = await find(
-      // : API call need to Fix. It will be private Header
       "api/padma-backend/layout",
       {
-         populate: "*"
+         populate: {
+            footer: { populate: "*" }
+         }
       },
       "no-store"
    )
@@ -19,7 +21,6 @@ export default async function PublicLayoutFooter() {
 
    if (activeTheme) {
       getPublicComponents = activeTheme.getPublicComponents
-      // console.log(getPublicComponents)
    } else {
       console.error("Active theme could not be loaded!")
    }
@@ -27,16 +28,7 @@ export default async function PublicLayoutFooter() {
 
    return (
       <>
-         {blocks?.map((block: { __component: keyof typeof getPublicComponents }, index: number) => {
-            const BlockConfig = getPublicComponents[block.__component]
-
-            if (BlockConfig) {
-               const { component: ComponentToRender } = BlockConfig
-               //@ts-ignore
-               return <ComponentToRender key={index} block={block} />
-            }
-            return null // Handle case where component mapping is missing
-         })}
+         <PublicFooter blocks={blocks} getPublicComponents={getPublicComponents} />
       </>
    )
 }
