@@ -2,7 +2,7 @@
   "name": "@padmadev/padma-backend",
   "description": "Padma Backend",
   "license": "MIT",
-  "version": "0.0.4-alpha.1",
+  "version": "0.0.6-alpha.2",
   "keywords": [
     "strapi",
     "strapi-plugin",
@@ -32,8 +32,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "strapi-plugin build",
-    "watch": "strapi-plugin watch",
+    "build": "strapi-plugin build && cp -R server/src/components dist/server/src/components",
+    "watch": "strapi-plugin watch && cp -R server/src/components dist/server/src/components",
     "watch:link": "strapi-plugin watch:link",
     "verify": "strapi-plugin verify",
     "test:ts:front": "run -T tsc -p admin/tsconfig.json",

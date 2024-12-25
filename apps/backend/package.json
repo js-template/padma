@@ -12,7 +12,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@padmadev/padma-backend": "^0.0.6",
+    "@padmadev/padma-backend": "^0.0.6-alpha.2",
     "@strapi/plugin-users-permissions": "5.4.0",
     "@strapi/provider-upload-cloudinary": "^5.4.1",
     "@strapi/strapi": "^5.4.0",
