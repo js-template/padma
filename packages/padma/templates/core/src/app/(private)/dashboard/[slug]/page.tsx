@@ -15,10 +15,8 @@ export default async function DynamicPages({
    searchParams: { [key: string]: string | string[] | undefined }
 }) {
    const pageSlug = params?.slug
-   // Load the active theme and get public components
-   const { getPublicComponents } = await loadActiveTheme()
 
-   const language = getLanguageFromCookie()
+   //const language = getLanguageFromCookie()
 
    const { data, error } = await find(
       "api/padma-backend/private-pages",
@@ -33,24 +31,26 @@ export default async function DynamicPages({
       "no-store"
    )
 
-   // console.log("data", data, "error", error)
+   const activeTheme = await loadActiveTheme()
+   const getPrivateComponents = activeTheme?.getPrivateComponents || {}
 
    const blocks = data?.data[0]?.blocks || []
+
+   console.log("Private Page Blocks Loaded", blocks)
 
    // *** if blocks is empty, return 404 ***
    if (!blocks || blocks?.length === 0) {
       return notFound()
    }
-   // *** if error, return error page ***
-   // if (error) {
-   //    throw error;
-   // }
+   //*** if error, return error page ***
+   if (error) {
+      throw error
+   }
 
    return (
       <>
-         <h1>dashboard/slug/dynamic-pages</h1>
          {blocks?.map((block: any, index: number) => {
-            const BlockConfig = getPublicComponents[block.__component as keyof typeof getPublicComponents]
+            const BlockConfig = getPrivateComponents[block.__component as keyof typeof getPrivateComponents]
 
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig

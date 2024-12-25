@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_block_review_blocks",
+  "info": {
+    "displayName": "Review Block",
+    "icon": "star"
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.section-title"
+    },
+    "reviews": {
+      "type": "component",
+      "repeatable": true,
+      "component": "config.review-card"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.link"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
+    },
+    "variation": {
+      "type": "enumeration",
+      "enum": [
+        "default",
+        "compact",
+        "detailed"
+      ],
+      "default": "default"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_block_banners",
+  "info": {
+    "displayName": "Banner",
+    "icon": "image"
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.section-title"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
+    },
+    "variation": {
+      "type": "enumeration",
+      "enum": [
+        "simple",
+        "center",
+        "bottom right",
+        "left right",
+        "box left",
+        "box right",
+        "circle"
+      ],
+      "default": "simple"
+    }
+  }
+}

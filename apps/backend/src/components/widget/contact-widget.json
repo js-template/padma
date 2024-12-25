@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_widget_contact_widgets",
+  "info": {
+    "displayName": "Contact Widget",
+    "icon": "envelop"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "logo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.logo"
+    },
+    "location": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
+    }
+  }
+}

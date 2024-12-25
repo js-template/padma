@@ -15,9 +15,6 @@ export default async function DynamicPages({
    searchParams: { [key: string]: string | string[] | undefined }
 }) {
    const pageSlug = params?.slug
-   // Load the active theme and get public components
-   const { getPublicComponents } = await loadActiveTheme()
-
    const language = getLanguageFromCookie()
 
    const { data, error } = await find(
@@ -28,10 +25,25 @@ export default async function DynamicPages({
                $eq: pageSlug
             }
          },
-         populate: "*"
+         populate: {
+            blocks: {
+               populate: "*"
+            }
+         }
       },
       "no-store"
    )
+
+   const activeTheme = await loadActiveTheme()
+
+   // Define as an empty object by default
+   let getPublicComponents: Record<string, any> = {}
+
+   if (activeTheme) {
+      getPublicComponents = activeTheme.getPublicComponents
+   } else {
+      console.error("Active theme could not be loaded!", error)
+   }
 
    // console.log("data", data, "error", error)
 

@@ -15,8 +15,17 @@ export default async function ProfilePage() {
    }
    const userId = session?.user?.id as unknown as string
 
-   // Load the active theme and get public components
-   const { getPrivateComponents } = await loadActiveTheme()
+   const activeTheme = await loadActiveTheme()
+
+   // Define as an empty object by default
+   let getPrivateComponents: Record<string, any> = {}
+
+   if (activeTheme) {
+      getPrivateComponents = activeTheme.getPrivateComponents
+      // console.log(getPrivateComponents)
+   } else {
+      console.error("Active theme could not be loaded!")
+   }
 
    return (
       <Fragment>
@@ -30,7 +39,7 @@ export default async function ProfilePage() {
 
                return <ComponentToRender key={index} block={block} session={session} language={language} />
             }
-            return null // Handle missing component mapping case
+            return null
          })}
       </Fragment>
    )

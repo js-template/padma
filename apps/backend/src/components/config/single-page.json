@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_config_single_pages",
+  "info": {
+    "displayName": "Single Page",
+    "icon": "arrowRight"
+  },
+  "options": {},
+  "attributes": {
+    "slug": {
+      "type": "string"
+    },
+    "collectionModel": {
+      "type": "string",
+      "default": "api/padma-backend/posts"
+    },
+    "singelModel": {
+      "type": "string"
+    }
+  }
+}

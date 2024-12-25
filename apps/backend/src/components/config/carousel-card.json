@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_config_carousel_cards",
+  "info": {
+    "displayName": "Carousel Card",
+    "icon": "image"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "paragraph": {
+      "type": "text",
+      "required": false
+    },
+    "image": {
+      "type": "media",
+      "allowedTypes": [
+        "images"
+      ],
+      "multiple": false,
+      "required": false
+    }
+  }
+}

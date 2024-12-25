@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_shared_social_medias",
+  "info": {
+    "displayName": "Social Medias",
+    "icon": "earth"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "facebook",
+        "instagram",
+        "twitter",
+        "linkedin",
+        "snapchat",
+        "tiktok",
+        "pinterest",
+        "reddit",
+        "tumblr",
+        "youtube",
+        "whatsapp",
+        "wechat",
+        "discord",
+        "telegram",
+        "viber",
+        "line",
+        "kik",
+        "clubhouse"
+      ],
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

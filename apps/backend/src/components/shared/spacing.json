@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_spacings",
+  "info": {
+    "displayName": "spacing",
+    "icon": "oneToOne"
+  },
+  "options": {},
+  "attributes": {
+    "gap": {
+      "type": "integer",
+      "min": 0
+    }
+  }
+}

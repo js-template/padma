@@ -13,8 +13,6 @@ type Props = {
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-   const { getPublicComponents } = await loadActiveTheme()
-
    const pageSlug = params?.slug
 
    // redirect to 404 page if no pageSlug found
@@ -32,13 +30,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
             slug: {
                $eq: pageSlug
             }
-         }
-         // populate: "deep",
+         },
+         populate: "*"
          // publicationState: "live",
          // locale: language ? [language] : ["en"]
       },
       "no-store"
    )
+
+   // console.log("blog detailsData1", detailsData)
    const pageDetailsData = detailsData?.data?.[0]
 
    // *** get  blogs-details-page data from strapi ***
@@ -49,6 +49,16 @@ export default async function Page({ params }: { params: { slug: string } }) {
       },
       "no-store"
    )
+
+   const activeTheme = await loadActiveTheme()
+   // Define as an empty object by default
+   let getPublicComponents: Record<string, any> = {}
+
+   if (activeTheme) {
+      getPublicComponents = activeTheme.getPublicComponents
+   } else {
+      console.error("Active theme could not be loaded!", blogPageError)
+   }
 
    // if (error) {
    //    return <div>Something went wrong</div>
