@@ -601,6 +601,14 @@ export interface PluginPadmaBackendLayout extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    footer: Schema.Attribute.DynamicZone<
+      ['widget.menu-widget', 'widget.copyright-bar', 'widget.contact-widget']
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     header: Schema.Attribute.DynamicZone<
       ['header.top-bar', 'header.main-menu', 'header.header-bottom']
     > &
@@ -618,14 +626,6 @@ export interface PluginPadmaBackendLayout extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    widget: Schema.Attribute.DynamicZone<
-      ['widget.menu-widget', 'widget.copyright-bar', 'widget.contact-widget']
-    > &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
   };
 }
 
