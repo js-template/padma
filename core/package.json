@@ -22,7 +22,6 @@
       "@mui/lab": "^5.0.0-alpha.165",
       "@mui/material": "^5.15.10",
       "@mui/material-nextjs": "^5.15.3",
-      "@padmadev/blank-theme": "file:../../projects/blank-theme",
       "@strapi/blocks-react-renderer": "^1.0.1",
       "cookies-next": "^4.2.1",
       "eslint": "8.36.0",

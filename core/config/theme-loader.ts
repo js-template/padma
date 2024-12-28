@@ -10,9 +10,7 @@ export const loadActiveTheme = async (): Promise<ThemeComponents | null> => {
       if (!settings.activeTheme) {
          throw new Error("Active theme is not defined in the settings.")
       }
-
-      console.log("Active theme:", settings.activeTheme)
-
+      // @ts-ignore
       const themeModuleLoader = themeResolver[settings.activeTheme]
 
       if (!themeModuleLoader) {
