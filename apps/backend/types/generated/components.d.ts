@@ -449,6 +449,45 @@ export interface HeaderMainMenu extends Struct.ComponentSchema {
   };
 }
 
+export interface HeaderPrivateHeader extends Struct.ComponentSchema {
+  collectionName: 'components_header_private_headers';
+  info: {
+    displayName: 'Private Header';
+    icon: 'layout';
+  };
+  attributes: {
+    dark_logo: Schema.Attribute.Component<'config.logo', false>;
+    dark_mode: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    language: Schema.Attribute.Component<'config.link', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    light_logo: Schema.Attribute.Component<'config.logo', false>;
+    main_menu: Schema.Attribute.Component<'config.menu', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    notification: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    profile_menu: Schema.Attribute.Component<'config.menu', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    side_menu: Schema.Attribute.Component<'config.menu', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
+  };
+}
+
 export interface HeaderTopBar extends Struct.ComponentSchema {
   collectionName: 'components_header_top_bars';
   info: {
@@ -679,6 +718,7 @@ declare module '@strapi/strapi' {
       'config.style-section': ConfigStyleSection;
       'header.header-bottom': HeaderHeaderBottom;
       'header.main-menu': HeaderMainMenu;
+      'header.private-header': HeaderPrivateHeader;
       'header.top-bar': HeaderTopBar;
       'shared.empty': SharedEmpty;
       'shared.meta-social': SharedMetaSocial;

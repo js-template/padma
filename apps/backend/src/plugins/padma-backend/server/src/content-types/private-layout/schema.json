@@ -23,10 +23,10 @@
         }
       },
       "type": "dynamiczone",
-      "components": ["header.top-bar", "header.main-menu", "header.header-bottom"],
+      "components": ["header.private-header"],
       "required": true
     },
-    "widget": {
+    "footer": {
       "pluginOptions": {
         "i18n": {
           "localized": true
