@@ -1,13 +1,18 @@
-import { useGlobalContext } from "@/context/store"
 import { find } from "@/lib/strapi"
+import { getLanguageFromCookie } from "@/utils/language"
 import { loadActiveTheme } from "config/theme-loader"
 
 export default async function PrivateLayoutHeader() {
+   // fetch the language from cookies or session
+   const language = getLanguageFromCookie()
+
+   // fetch private header data
    const { data, error } = await find(
-      // : API call need to Fix. It will be private Header
       "api/padma-backend/private-layout",
       {
-         populate: "*"
+         populate: {
+            header: { populate: "*" }
+         }
       },
       "no-store"
    )
@@ -24,8 +29,6 @@ export default async function PrivateLayoutHeader() {
    }
    const blocks = data?.data?.header || []
 
-   // console.log("Header Blocks Loaded", blocks)
-
    return (
       <>
          {blocks?.map((block: { __component: keyof typeof getPrivateComponents }, index: number) => {
@@ -34,7 +37,7 @@ export default async function PrivateLayoutHeader() {
             if (BlockConfig) {
                const { component: ComponentToRender } = BlockConfig
                //@ts-ignore
-               return <ComponentToRender key={index} block={block} />
+               return <ComponentToRender key={index} block={block} language={language} />
             }
             return null // Handle case where component mapping is missing
          })}
