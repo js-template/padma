@@ -39,6 +39,21 @@ export interface BlockBlogCard extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockBlogFilter extends Struct.ComponentSchema {
+  collectionName: 'components_block_blog_filters';
+  info: {
+    description: '';
+    displayName: 'Blog Filter';
+    icon: 'collapse';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    empty: Schema.Attribute.Component<'shared.empty', false>;
+    style: Schema.Attribute.Component<'config.style-section', false>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface BlockBreadcrumbs extends Struct.ComponentSchema {
   collectionName: 'components_block_breadcrumbs';
   info: {
@@ -700,6 +715,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'block.banner': BlockBanner;
       'block.blog-card': BlockBlogCard;
+      'block.blog-filter': BlockBlogFilter;
       'block.breadcrumbs': BlockBreadcrumbs;
       'block.category-card': BlockCategoryCard;
       'block.content-box': BlockContentBox;

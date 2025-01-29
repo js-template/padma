@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_block_blog_filters",
+  "info": {
+    "displayName": "Blog Filter",
+    "icon": "collapse",
+    "description": ""
+  },
+  "options": {},
+  "category": "block",
+  "modelName": "blog-filter",
+  "uid": "block.blog-filter",
+  "globalId": "ComponentsBlockBlogFilter",
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
+    }
+  }
+}
