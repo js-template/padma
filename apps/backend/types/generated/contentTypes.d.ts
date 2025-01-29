@@ -1013,7 +1013,7 @@ export interface PluginPadmaBackendPublicPage
       [
         'block.banner',
         'block.content-box',
-        'block.blog-card',
+        'block.blog-filter',
         'block.breadcrumbs',
         'shared.empty',
         'block.category-card',
