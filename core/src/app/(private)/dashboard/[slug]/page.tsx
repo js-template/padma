@@ -16,7 +16,7 @@ export default async function DynamicPages({
 }) {
    const pageSlug = params?.slug
 
-   //const language = getLanguageFromCookie()
+   const language = getLanguageFromCookie()
 
    const { data, error } = await find(
       "api/padma-backend/private-pages",
@@ -26,7 +26,11 @@ export default async function DynamicPages({
                $eq: pageSlug
             }
          },
-         populate: "*"
+         populate: {
+            blocks: {
+               populate: "*"
+            }
+         }
       },
       "no-store"
    )
