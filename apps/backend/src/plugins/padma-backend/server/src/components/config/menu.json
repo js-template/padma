@@ -38,6 +38,9 @@
       "type": "component",
       "repeatable": true,
       "component": "config.link"
+    },
+    "identifier": {
+      "type": "string"
     }
   }
 }
