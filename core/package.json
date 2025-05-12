@@ -1,11 +1,11 @@
 {
    "name": "core",
-   "version": "2.0.0",
-   "description": "Metajob Frontend",
-   "license": "EULA",
+   "version": "2.1.0",
+   "description": "Nextjs Padma Frontend",
+   "license": "MIT",
    "author": {
       "name": "JS Template",
-      "email": "support@jstemplate.net"
+      "email": "info@jstemplate.net"
    },
    "scripts": {
       "dev": "next dev",
