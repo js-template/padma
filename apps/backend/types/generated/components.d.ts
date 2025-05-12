@@ -299,6 +299,7 @@ export interface ConfigMenu extends Struct.ComponentSchema {
     child: Schema.Attribute.Component<'config.link', true>;
     disabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     icon: Schema.Attribute.String & Schema.Attribute.DefaultTo<'bx:smile'>;
+    identifier: Schema.Attribute.String;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     link: Schema.Attribute.String & Schema.Attribute.Required;
     target: Schema.Attribute.Enumeration<['_blank', '_self']>;
