@@ -1,7 +1,7 @@
 export default ({ env }) => ({
   "padma-backend": {
     enabled: true,
-    // resolve: "./src/plugins/padma-backend",
+    resolve: "./src/plugins/padma-backend",
   },
   upload: {
     config: {
