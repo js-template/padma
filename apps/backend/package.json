@@ -1,6 +1,6 @@
 {
   "name": "@padmadev/backend",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0",
   "private": true,
   "description": "A Strapi application",
   "scripts": {
@@ -12,7 +12,6 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@padmadev/padma-backend": "^0.0.6-alpha.2",
     "@strapi/plugin-users-permissions": "5.4.0",
     "@strapi/provider-upload-cloudinary": "^5.4.1",
     "@strapi/strapi": "^5.4.0",

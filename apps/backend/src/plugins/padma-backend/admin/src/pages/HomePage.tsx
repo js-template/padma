@@ -8,7 +8,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Layouts.Header title={`Welcome to ${formatMessage({ id: getTranslation('') })}`} />
+      <Layouts.Header title={`Welcome to Padma`} />
       <Layouts.Content>
         <Main>
           <Card
