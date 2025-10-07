@@ -6,7 +6,7 @@
   "scripts": {
     "build": "strapi build",
     "deploy": "strapi deploy",
-    "develop": "strapi develop",
+    "dev": "strapi develop",
     "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
     "strapi": "strapi"
@@ -37,5 +37,6 @@
   },
   "strapi": {
     "uuid": "2008be6c-7a09-45fd-aef3-9291d91884bb"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
