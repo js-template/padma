@@ -1,4 +1,13 @@
 packages:
   - apps/backend
-  - packages/*
-  - core
+  - apps/frontend
+
+onlyBuiltDependencies:
+  - '@swc/core'
+  - better-sqlite3
+  - core-js
+  - core-js-pure
+  - esbuild
+  - sharp
+  - unrs-resolver
+  - yarn
