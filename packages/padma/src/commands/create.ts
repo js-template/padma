@@ -4,7 +4,7 @@ import path from 'path'
 import {fileURLToPath} from 'url'
 import {dirname} from 'path'
 import {execSync} from 'child_process'
-import inquirer from 'inquirer'
+import {select, confirm} from '@inquirer/prompts'
 import chalk from 'chalk'
 
 export default class Create extends Command {
@@ -12,7 +12,7 @@ export default class Create extends Command {
 
   static examples = [
     'npx padma create my-project',
-    // Creates a new project folder named "my-project" and adds a core folder inside it.,
+    // Creates a new project folder named "my-project" with apps/backend and apps/frontend folders.,
   ]
 
   static args = {
@@ -49,14 +49,10 @@ export default class Create extends Command {
 
     console.log('Detected package managers:', availableManagers)
 
-    const {selectedManager} = await inquirer.prompt([
-      {
-        type: 'list',
-        name: 'selectedManager',
-        message: 'Which package manager would you like to use?',
-        choices: availableManagers,
-      },
-    ])
+    const selectedManager = await select({
+      message: 'Which package manager would you like to use?',
+      choices: availableManagers.map((manager) => ({name: manager, value: manager})),
+    })
 
     return selectedManager
   }
@@ -67,13 +63,16 @@ export default class Create extends Command {
     const force = flags.force
 
     const projectPath = path.resolve(process.cwd(), projectName)
-    const corePath = path.join(projectPath, 'core')
+    const appsPath = path.join(projectPath, 'apps')
+    const backendPath = path.join(appsPath, 'backend')
+    const frontendPath = path.join(appsPath, 'frontend')
 
     const __filename = fileURLToPath(import.meta.url)
     const __dirname = dirname(__filename)
 
     const templateProjectFolder = path.resolve(__dirname, '../../templates/project')
-    const templateCoreFolder = path.resolve(__dirname, '../../templates/core')
+    const templateBackendFolder = path.resolve(__dirname, '../../templates/backend')
+    const templateFrontendFolder = path.resolve(__dirname, '../../templates/frontend')
 
     const projectFolderExists = await fs.pathExists(projectPath)
 
@@ -84,14 +83,10 @@ export default class Create extends Command {
 
     // Consolidated prompts
     const packageManager = await this.detectPackageManager()
-    const {initializeGit} = await inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'initializeGit',
-        message: 'Would you like to initialize a Git repository?',
-        default: true,
-      },
-    ])
+    const initializeGit = await confirm({
+      message: 'Would you like to initialize a Git repository?',
+      default: true,
+    })
 
     try {
       // Create the project folder
@@ -108,13 +103,26 @@ export default class Create extends Command {
         return
       }
 
-      // Copy the core folder
-      if (await fs.pathExists(templateCoreFolder)) {
-        await fs.ensureDir(corePath)
-        fs.copySync(templateCoreFolder, corePath)
-        // this.log('Successfully copied core template files.')
+      // Create apps directory
+      await fs.ensureDir(appsPath)
+
+      // Copy backend template
+      if (await fs.pathExists(templateBackendFolder)) {
+        await fs.ensureDir(backendPath)
+        fs.copySync(templateBackendFolder, backendPath)
+        // this.log('Successfully copied backend template files.')
       } else {
-        this.log('Error: The core template folder does not exist.')
+        this.log('Error: The backend template folder does not exist.')
+        return
+      }
+
+      // Copy frontend template
+      if (await fs.pathExists(templateFrontendFolder)) {
+        await fs.ensureDir(frontendPath)
+        fs.copySync(templateFrontendFolder, frontendPath)
+        // this.log('Successfully copied frontend template files.')
+      } else {
+        this.log('Error: The frontend template folder does not exist.')
         return
       }
 
@@ -147,26 +155,37 @@ NEXT_PUBLIC_BASE_URL="http://localhost:3000"
 
         // Update scripts based on the package manager
         if (packageManager === 'pnpm') {
-          packageJson.scripts.dev = 'npx padma dev' // Only change here
-          packageJson.scripts.build = 'pnpm --filter @padmadev/core build'
-          packageJson.scripts.start = 'pnpm --filter @padmadev/core start'
+          packageJson.scripts.dev = 'npx padma dev'
+          packageJson.scripts.build = 'pnpm --filter "./apps/*" build'
+          packageJson.scripts.start = 'pnpm --filter "./apps/frontend" start'
+          packageJson.scripts['backend:dev'] = 'pnpm --filter "./apps/backend" develop'
+          packageJson.scripts['frontend:dev'] = 'pnpm --filter "./apps/frontend" dev'
 
           // Create a pnpm-workspace.yaml file
           const pnpmWorkspacePath = path.join(projectPath, 'pnpm-workspace.yaml')
-          const pnpmWorkspaceContent = `packages:\n  - 'packages/*'\n  - 'core'\n`
+          const pnpmWorkspaceContent = `packages:\n  - 'packages/*'\n  - 'apps/*'\n`
           await fs.writeFile(pnpmWorkspacePath, pnpmWorkspaceContent, 'utf8')
           //this.log('Created pnpm-workspace.yaml for pnpm compatibility.')
         } else if (packageManager === 'npm') {
-          packageJson.scripts.dev = 'npx padma dev' // Only change here
-          packageJson.scripts.build = 'cd core && npm run build'
-          packageJson.scripts.start = 'cd core && npm run start'
+          packageJson.scripts.dev = 'npx padma dev'
+          packageJson.scripts.build = 'npm run build --workspaces'
+          packageJson.scripts.start = 'cd apps/frontend && npm run start'
+          packageJson.scripts['backend:dev'] = 'cd apps/backend && npm run develop'
+          packageJson.scripts['frontend:dev'] = 'cd apps/frontend && npm run dev'
 
-          // Remove "workspaces" key (optional, depending on npm's workspace support)
-          delete packageJson.workspaces
+          // Update workspaces for npm
+          packageJson.workspaces = ['packages/*', 'apps/*']
           // this.log('Updated scripts for npm compatibility.')
         } else {
-          // For yarn, keep the default scripts
-          packageJson.scripts.dev = 'npx padma dev' // Only change here
+          // For yarn
+          packageJson.scripts.dev = 'npx padma dev'
+          packageJson.scripts.build = 'yarn workspaces run build'
+          packageJson.scripts.start = 'yarn workspace frontend start'
+          packageJson.scripts['backend:dev'] = 'yarn workspace backend develop'
+          packageJson.scripts['frontend:dev'] = 'yarn workspace frontend dev'
+
+          // Update workspaces for yarn
+          packageJson.workspaces = ['packages/*', 'apps/*']
           //this.log('No changes needed for yarn.')
         }
 

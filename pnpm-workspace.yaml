@@ -1,13 +1,5 @@
 packages:
-  - apps/backend
   - apps/frontend
-
-onlyBuiltDependencies:
-  - '@swc/core'
-  - better-sqlite3
-  - core-js
-  - core-js-pure
-  - esbuild
-  - sharp
-  - unrs-resolver
-  - yarn
+  - apps/backend
+  - packages/*
+  - apps/backend/src/plugins/padma-backend

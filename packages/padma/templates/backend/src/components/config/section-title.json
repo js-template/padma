@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_config_section_titles",
+  "info": {
+    "displayName": "Section Title",
+    "icon": "arrowRight"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "sub_title": {
+      "type": "text"
+    },
+    "variation": {
+      "type": "enumeration",
+      "enum": [
+        "Variation One",
+        "Variation Two"
+      ]
+    }
+  }
+}

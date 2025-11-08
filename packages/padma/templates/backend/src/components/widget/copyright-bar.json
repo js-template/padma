@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_widget_copyright_bars",
+  "info": {
+    "displayName": "Copyright Bar",
+    "icon": "copyright"
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "text",
+      "required": true
+    },
+    "social_link": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.social-medias"
+    }
+  }
+}

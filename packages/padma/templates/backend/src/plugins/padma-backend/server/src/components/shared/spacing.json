@@ -1,0 +1,17 @@
+{
+  "info": {
+    "displayName": "spacing",
+    "icon": "oneToOne"
+  },
+  "uid": "shared.spacing",
+  "category": "shared",
+  "modelName": "spacing",
+  "options": {},
+  "pluginOptions": {},
+  "attributes": {
+    "gap": {
+      "type": "integer",
+      "min": 0
+    }
+  }
+}

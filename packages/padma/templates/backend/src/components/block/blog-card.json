@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_block_blog_cards",
+  "info": {
+    "displayName": "Blog Card",
+    "icon": "collapse"
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.section-title"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::padma-backend.post"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.link"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_block_breadcrumbs",
+  "info": {
+    "displayName": "Breadcrumbs",
+    "icon": "manyWays"
+  },
+  "options": {},
+  "attributes": {
+    "separator": {
+      "type": "string",
+      "default": "/",
+      "required": true
+    },
+    "variation": {
+      "type": "enumeration",
+      "enum": [
+        "default",
+        "simple",
+        "minimal"
+      ],
+      "default": "default"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
+    },
+    "items": {
+      "type": "json"
+    }
+  }
+}

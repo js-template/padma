@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_block_content_boxes",
+  "info": {
+    "displayName": "Content Box",
+    "icon": "box"
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "component",
+      "repeatable": true,
+      "component": "config.section-title"
+    },
+    "icon_box": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.icon-box"
+    },
+    "empty": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.empty"
+    },
+    "style": {
+      "type": "component",
+      "repeatable": false,
+      "component": "config.style-section"
+    }
+  }
+}
