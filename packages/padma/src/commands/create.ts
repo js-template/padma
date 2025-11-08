@@ -24,6 +24,20 @@ export default class Create extends Command {
     theme: Flags.string({char: 't', description: 'Specify a theme to install'}),
   }
 
+  private async downloadTemplatesFromGitHub(tempDir: string): Promise<void> {
+    this.log(chalk.green('Downloading latest templates from GitHub...'))
+
+    try {
+      // Clone the repository to a temporary directory
+      execSync(`git clone --depth 1 https://github.com/js-template/padma.git ${tempDir}`, {
+        stdio: 'pipe',
+      })
+      this.log(chalk.green('Templates downloaded successfully.'))
+    } catch (error) {
+      throw new Error(`Failed to download templates: ${String(error)}`)
+    }
+  }
+
   async detectPackageManager(): Promise<string> {
     const availableManagers: string[] = []
 
@@ -71,8 +85,9 @@ export default class Create extends Command {
     const __dirname = dirname(__filename)
 
     const templateProjectFolder = path.resolve(__dirname, '../../templates/project')
-    const templateBackendFolder = path.resolve(__dirname, '../../templates/backend')
-    const templateFrontendFolder = path.resolve(__dirname, '../../templates/frontend')
+
+    // Create a temporary directory for downloading templates
+    const tempDir = path.join(process.cwd(), '.temp-padma-templates')
 
     const projectFolderExists = await fs.pathExists(projectPath)
 
@@ -92,39 +107,45 @@ export default class Create extends Command {
       // Create the project folder
       this.log(chalk.green('Creating project...'))
       await fs.ensureDir(projectPath)
-      // this.log('Project folder created successfully.')
 
       // Copy the project template files
       if (await fs.pathExists(templateProjectFolder)) {
         fs.copySync(templateProjectFolder, projectPath)
-        //this.log('Successfully copied project template files.')
       } else {
         this.log('Error: The project template folder does not exist.')
         return
       }
 
+      // Download templates from GitHub
+      await this.downloadTemplatesFromGitHub(tempDir)
+
       // Create apps directory
       await fs.ensureDir(appsPath)
 
-      // Copy backend template
-      if (await fs.pathExists(templateBackendFolder)) {
+      // Copy backend from downloaded templates
+      const downloadedBackendPath = path.join(tempDir, 'apps', 'backend')
+      if (await fs.pathExists(downloadedBackendPath)) {
         await fs.ensureDir(backendPath)
-        fs.copySync(templateBackendFolder, backendPath)
-        // this.log('Successfully copied backend template files.')
+        fs.copySync(downloadedBackendPath, backendPath)
+        this.log(chalk.green('Backend template copied successfully.'))
       } else {
-        this.log('Error: The backend template folder does not exist.')
+        this.log('Error: Backend template not found in downloaded repository.')
         return
       }
 
-      // Copy frontend template
-      if (await fs.pathExists(templateFrontendFolder)) {
+      // Copy frontend from downloaded templates
+      const downloadedFrontendPath = path.join(tempDir, 'apps', 'frontend')
+      if (await fs.pathExists(downloadedFrontendPath)) {
         await fs.ensureDir(frontendPath)
-        fs.copySync(templateFrontendFolder, frontendPath)
-        // this.log('Successfully copied frontend template files.')
+        fs.copySync(downloadedFrontendPath, frontendPath)
+        this.log(chalk.green('Frontend template copied successfully.'))
       } else {
-        this.log('Error: The frontend template folder does not exist.')
+        this.log('Error: Frontend template not found in downloaded repository.')
         return
       }
+
+      // Clean up temporary directory
+      await fs.remove(tempDir)
 
       // Path to the .env.example file in the project template
       const envExamplePath = path.join(projectPath, 'env.example')
@@ -165,7 +186,6 @@ NEXT_PUBLIC_BASE_URL="http://localhost:3000"
           const pnpmWorkspacePath = path.join(projectPath, 'pnpm-workspace.yaml')
           const pnpmWorkspaceContent = `packages:\n  - 'packages/*'\n  - 'apps/*'\n`
           await fs.writeFile(pnpmWorkspacePath, pnpmWorkspaceContent, 'utf8')
-          //this.log('Created pnpm-workspace.yaml for pnpm compatibility.')
         } else if (packageManager === 'npm') {
           packageJson.scripts.dev = 'npx padma dev'
           packageJson.scripts.build = 'npm run build --workspaces'
@@ -175,7 +195,6 @@ NEXT_PUBLIC_BASE_URL="http://localhost:3000"
 
           // Update workspaces for npm
           packageJson.workspaces = ['packages/*', 'apps/*']
-          // this.log('Updated scripts for npm compatibility.')
         } else {
           // For yarn
           packageJson.scripts.dev = 'npx padma dev'
@@ -186,18 +205,15 @@ NEXT_PUBLIC_BASE_URL="http://localhost:3000"
 
           // Update workspaces for yarn
           packageJson.workspaces = ['packages/*', 'apps/*']
-          //this.log('No changes needed for yarn.')
         }
 
         await fs.writeJson(packageJsonPath, packageJson, {spaces: 2})
-        //this.log('Updated package.json with appropriate scripts and configurations.')
       }
 
       // Create a blank yarn.lock if yarn is selected
       if (packageManager === 'yarn') {
         const yarnLockPath = path.join(projectPath, 'yarn.lock')
         await fs.ensureFile(yarnLockPath)
-        //this.log('Created a blank yarn.lock file.')
       }
 
       this.log(chalk.green('Project created successfully.'))
@@ -221,6 +237,10 @@ NEXT_PUBLIC_BASE_URL="http://localhost:3000"
       const devCommand = packageManager === 'yarn' ? 'yarn dev' : `${packageManager} run dev`
       execSync(devCommand, {cwd: projectPath, stdio: 'inherit'})
     } catch (error) {
+      // Clean up temporary directory in case of error
+      if (await fs.pathExists(tempDir)) {
+        await fs.remove(tempDir)
+      }
       this.log('Error setting up the project. Please check the template folder or permissions.')
       this.log(String(error))
     }
