@@ -84,7 +84,7 @@ Enjoy building with Padma! 🚀
 - **`apps/backend:`**  
   └── The backend is built with Strapi, providing APIs to power the frontend.
 
-- **`apps/site:`**  
+- **`apps/frontend:`**  
   └── This is the frontend of the project, built using Next.js and MUI.
 
 - **`apps/packages:`**  
