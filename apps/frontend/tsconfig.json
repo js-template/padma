@@ -21,7 +21,9 @@
       ],
       "paths": {
          "@/*": ["./src/*"],
-         "auth": ["./src/context/auth"]
+         "auth": ["./src/context/auth"],
+         "i18n-config": ["./i18n-config.ts"],
+         "config/theme-loader": ["./config/theme-loader.ts"]
       }
    },
    "include": [

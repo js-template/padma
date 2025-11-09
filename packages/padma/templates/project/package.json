@@ -24,5 +24,6 @@
     "@next/env": "^15.0.3",
     "@padmadev/blank-theme": "^0.0.1-alpha.3",
     "@padmadev/padma": "^0.0.3-alpha.6"
-  }
+  },
+  "packageManager": "pnpm@9.15.1"
 }
