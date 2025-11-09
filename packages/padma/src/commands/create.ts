@@ -4,7 +4,7 @@ import path from 'path'
 import {fileURLToPath} from 'url'
 import {dirname} from 'path'
 import {execSync} from 'child_process'
-import inquirer from 'inquirer'
+import {select, confirm} from '@inquirer/prompts'
 import chalk from 'chalk'
 
 export default class Create extends Command {
@@ -12,7 +12,7 @@ export default class Create extends Command {
 
   static examples = [
     'npx padma create my-project',
-    // Creates a new project folder named "my-project" and adds a core folder inside it.,
+    // Creates a new project folder named "my-project" with apps/backend and apps/frontend folders.,
   ]
 
   static args = {
@@ -22,6 +22,20 @@ export default class Create extends Command {
   static flags = {
     force: Flags.boolean({char: 'f', description: 'Force creation even if the folder exists', default: false}),
     theme: Flags.string({char: 't', description: 'Specify a theme to install'}),
+  }
+
+  private async downloadTemplatesFromGitHub(tempDir: string): Promise<void> {
+    this.log(chalk.green('Downloading latest templates from GitHub...'))
+
+    try {
+      // Clone the repository to a temporary directory
+      execSync(`git clone --depth 1 https://github.com/js-template/padma.git ${tempDir}`, {
+        stdio: 'pipe',
+      })
+      this.log(chalk.green('Templates downloaded successfully.'))
+    } catch (error) {
+      throw new Error(`Failed to download templates: ${String(error)}`)
+    }
   }
 
   async detectPackageManager(): Promise<string> {
@@ -49,14 +63,10 @@ export default class Create extends Command {
 
     console.log('Detected package managers:', availableManagers)
 
-    const {selectedManager} = await inquirer.prompt([
-      {
-        type: 'list',
-        name: 'selectedManager',
-        message: 'Which package manager would you like to use?',
-        choices: availableManagers,
-      },
-    ])
+    const selectedManager = await select({
+      message: 'Which package manager would you like to use?',
+      choices: availableManagers.map((manager) => ({name: manager, value: manager})),
+    })
 
     return selectedManager
   }
@@ -67,13 +77,17 @@ export default class Create extends Command {
     const force = flags.force
 
     const projectPath = path.resolve(process.cwd(), projectName)
-    const corePath = path.join(projectPath, 'core')
+    const appsPath = path.join(projectPath, 'apps')
+    const backendPath = path.join(appsPath, 'backend')
+    const frontendPath = path.join(appsPath, 'frontend')
 
     const __filename = fileURLToPath(import.meta.url)
     const __dirname = dirname(__filename)
 
     const templateProjectFolder = path.resolve(__dirname, '../../templates/project')
-    const templateCoreFolder = path.resolve(__dirname, '../../templates/core')
+
+    // Create a temporary directory for downloading templates
+    const tempDir = path.join(process.cwd(), '.temp-padma-templates')
 
     const projectFolderExists = await fs.pathExists(projectPath)
 
@@ -84,39 +98,54 @@ export default class Create extends Command {
 
     // Consolidated prompts
     const packageManager = await this.detectPackageManager()
-    const {initializeGit} = await inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'initializeGit',
-        message: 'Would you like to initialize a Git repository?',
-        default: true,
-      },
-    ])
+    const initializeGit = await confirm({
+      message: 'Would you like to initialize a Git repository?',
+      default: true,
+    })
 
     try {
       // Create the project folder
       this.log(chalk.green('Creating project...'))
       await fs.ensureDir(projectPath)
-      // this.log('Project folder created successfully.')
 
       // Copy the project template files
       if (await fs.pathExists(templateProjectFolder)) {
         fs.copySync(templateProjectFolder, projectPath)
-        //this.log('Successfully copied project template files.')
       } else {
         this.log('Error: The project template folder does not exist.')
         return
       }
 
-      // Copy the core folder
-      if (await fs.pathExists(templateCoreFolder)) {
-        await fs.ensureDir(corePath)
-        fs.copySync(templateCoreFolder, corePath)
-        // this.log('Successfully copied core template files.')
+      // Download templates from GitHub
+      await this.downloadTemplatesFromGitHub(tempDir)
+
+      // Create apps directory
+      await fs.ensureDir(appsPath)
+
+      // Copy backend from downloaded templates
+      const downloadedBackendPath = path.join(tempDir, 'apps', 'backend')
+      if (await fs.pathExists(downloadedBackendPath)) {
+        await fs.ensureDir(backendPath)
+        fs.copySync(downloadedBackendPath, backendPath)
+        this.log(chalk.green('Backend template copied successfully.'))
       } else {
-        this.log('Error: The core template folder does not exist.')
+        this.log('Error: Backend template not found in downloaded repository.')
         return
       }
+
+      // Copy frontend from downloaded templates
+      const downloadedFrontendPath = path.join(tempDir, 'apps', 'frontend')
+      if (await fs.pathExists(downloadedFrontendPath)) {
+        await fs.ensureDir(frontendPath)
+        fs.copySync(downloadedFrontendPath, frontendPath)
+        this.log(chalk.green('Frontend template copied successfully.'))
+      } else {
+        this.log('Error: Frontend template not found in downloaded repository.')
+        return
+      }
+
+      // Clean up temporary directory
+      await fs.remove(tempDir)
 
       // Path to the .env.example file in the project template
       const envExamplePath = path.join(projectPath, 'env.example')
@@ -147,38 +176,44 @@ NEXT_PUBLIC_BASE_URL="http://localhost:3000"
 
         // Update scripts based on the package manager
         if (packageManager === 'pnpm') {
-          packageJson.scripts.dev = 'npx padma dev' // Only change here
-          packageJson.scripts.build = 'pnpm --filter @padmadev/core build'
-          packageJson.scripts.start = 'pnpm --filter @padmadev/core start'
+          packageJson.scripts.dev = 'npx padma dev'
+          packageJson.scripts.build = 'pnpm --filter "./apps/*" build'
+          packageJson.scripts.start = 'pnpm --filter "./apps/frontend" start'
+          packageJson.scripts['backend:dev'] = 'pnpm --filter "./apps/backend" develop'
+          packageJson.scripts['frontend:dev'] = 'pnpm --filter "./apps/frontend" dev'
 
           // Create a pnpm-workspace.yaml file
           const pnpmWorkspacePath = path.join(projectPath, 'pnpm-workspace.yaml')
-          const pnpmWorkspaceContent = `packages:\n  - 'packages/*'\n  - 'core'\n`
+          const pnpmWorkspaceContent = `packages:\n  - 'packages/*'\n  - 'apps/*'\n`
           await fs.writeFile(pnpmWorkspacePath, pnpmWorkspaceContent, 'utf8')
-          //this.log('Created pnpm-workspace.yaml for pnpm compatibility.')
         } else if (packageManager === 'npm') {
-          packageJson.scripts.dev = 'npx padma dev' // Only change here
-          packageJson.scripts.build = 'cd core && npm run build'
-          packageJson.scripts.start = 'cd core && npm run start'
+          packageJson.scripts.dev = 'npx padma dev'
+          packageJson.scripts.build = 'npm run build --workspaces'
+          packageJson.scripts.start = 'cd apps/frontend && npm run start'
+          packageJson.scripts['backend:dev'] = 'cd apps/backend && npm run develop'
+          packageJson.scripts['frontend:dev'] = 'cd apps/frontend && npm run dev'
 
-          // Remove "workspaces" key (optional, depending on npm's workspace support)
-          delete packageJson.workspaces
-          // this.log('Updated scripts for npm compatibility.')
+          // Update workspaces for npm
+          packageJson.workspaces = ['packages/*', 'apps/*']
         } else {
-          // For yarn, keep the default scripts
-          packageJson.scripts.dev = 'npx padma dev' // Only change here
-          //this.log('No changes needed for yarn.')
+          // For yarn
+          packageJson.scripts.dev = 'npx padma dev'
+          packageJson.scripts.build = 'yarn workspaces run build'
+          packageJson.scripts.start = 'yarn workspace frontend start'
+          packageJson.scripts['backend:dev'] = 'yarn workspace backend develop'
+          packageJson.scripts['frontend:dev'] = 'yarn workspace frontend dev'
+
+          // Update workspaces for yarn
+          packageJson.workspaces = ['packages/*', 'apps/*']
         }
 
         await fs.writeJson(packageJsonPath, packageJson, {spaces: 2})
-        //this.log('Updated package.json with appropriate scripts and configurations.')
       }
 
       // Create a blank yarn.lock if yarn is selected
       if (packageManager === 'yarn') {
         const yarnLockPath = path.join(projectPath, 'yarn.lock')
         await fs.ensureFile(yarnLockPath)
-        //this.log('Created a blank yarn.lock file.')
       }
 
       this.log(chalk.green('Project created successfully.'))
@@ -202,6 +237,10 @@ NEXT_PUBLIC_BASE_URL="http://localhost:3000"
       const devCommand = packageManager === 'yarn' ? 'yarn dev' : `${packageManager} run dev`
       execSync(devCommand, {cwd: projectPath, stdio: 'inherit'})
     } catch (error) {
+      // Clean up temporary directory in case of error
+      if (await fs.pathExists(tempDir)) {
+        await fs.remove(tempDir)
+      }
       this.log('Error setting up the project. Please check the template folder or permissions.')
       this.log(String(error))
     }

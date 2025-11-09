@@ -1,4 +1,4 @@
-import { settings, themeResolver } from "../../padma.settings"
+import { settings, themeResolver } from "../padma.settings"
 
 type ThemeComponents = {
    getPublicComponents: Record<string, any>

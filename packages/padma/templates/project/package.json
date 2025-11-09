@@ -5,12 +5,14 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "core"
+    "apps/*"
   ],
   "scripts": {
     "dev": "npx padma dev",
-    "build": "yarn workspace @padmadev/core build",
-    "start": "yarn workspace @padmadev/core start"
+    "build": "yarn workspaces run build",
+    "start": "yarn workspace frontend start",
+    "backend:dev": "yarn workspace backend develop",
+    "frontend:dev": "yarn workspace frontend dev"
   },
   "devDependencies": {
     "prettier": "latest"

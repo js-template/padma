@@ -1,5 +1,5 @@
 {
-  "name": "@padmadev/backend",
+  "name": "backend",
   "version": "1.0.0",
   "private": true,
   "description": "A Strapi application",
@@ -26,7 +26,7 @@
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.17.24",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "typescript": "4.5.5"
@@ -37,6 +37,5 @@
   },
   "strapi": {
     "uuid": "2008be6c-7a09-45fd-aef3-9291d91884bb"
-  },
-  "packageManager": "yarn@1.22.19"
+  }
 }
