@@ -5,6 +5,7 @@ import es from "@/dictionaries/es"
 import { layoutDataTypeProps } from "@/types/layout"
 import { useMediaQuery } from "@mui/material"
 import { getCookie, setCookie } from "cookies-next"
+
 import { Locale, i18n } from "i18n-config"
 import { useRouter } from "next/navigation"
 import { ReactNode, createContext, useContext, useEffect, useState } from "react"

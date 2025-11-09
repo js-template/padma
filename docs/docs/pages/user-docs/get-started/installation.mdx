@@ -1,146 +1,120 @@
 
+# 🚀 Quick Start Guide
 
-{/* ## Getting Started
+Welcome to **Padma** — your full-stack framework for building powerful Strapi + Next.js applications.
+Follow this quick guide to get your project running in just a few steps!
 
-{/* <Callout type="info" emoji="ℹ️">
-  <strong>Prerequisites:</strong> Before you begin, ensure that you have a Code
-  Editor (such as VS Code), the latest version of Node.js, and a package manager
-  (PNPM) installed on your computer. If you do not have these installed, please
-  install them.
-</Callout> */}
+---
 
-{/* ### Prerequisites
+## ⚙️ Prerequisites
 
-Before starting, ensure you have the following installed on your machine:
+Before you begin, make sure you have the following installed:
 
-- Node.js (v20 or higher)
-- PostgreSQL (Ensure PostgreSQL is running and accessible)
-- pnpm (Recommended for managing dependencies)
-- pnpm Installation (Recommended)
+* **Node.js** (v20 or higher)
+* **PostgreSQL** (running and accessible)
+* **pnpm** (recommended package manager)
 
-To install pnpm, you can run the following command:
-
-```sh
-npm install pnpm@latest -g
-```
-
-### Step-by-Step Guide
-
-#### Step 1. Fork the Repository
-
-- Fork the repository to your [GitHub account](https://github.com/js-template/metajob)
-
-- Open the project in your preferred code editor (e.g. [VS Code](https://code.visualstudio.com/))
-
-#### Step 2: Configure Environment Variables
-
-Inside both `apps/backend` and `apps/site`, you will find .env.example files.
-
-Rename these files to .env:
-
-- For backend configuration:
-
-  - `apps/backend/.env.example` → `apps/backend/.env`
-
-- For frontend configuration:
-  - `apps/site/.env.example` → `apps/site/.env` [Learn More](/padma/padma-framework/guides/frontend-env/)
-
-#### Step 3: Connect Padma to Your Backend
-
-Easily connect your backend URL and link it to your Strapi site. [Learn More](/padma/padma-framework/guides/connect-strapi/)
-
-#### Step 4: Set Up Your Free or Premium Theme
-
-- Start with a pre-made theme or create a custom one.
-- Style your site using MUI for a modern design. */}
-
-{/* #### Step 5: Deploy Anywhere
-
-- Deploy your site to any Node.js or serverless provider.
-- Use your favorite Strapi cloud or any Strapi hosting service  */}
-
-
-# Quick Start Guide
-
-Let's get you set up with your very first Padma project! This guide will take you from the very basics to feeling amazed at what you can do with Padma!
-
-Please check that you meet the requirements before following the steps below.
-
-## Getting Started with Padma
-
-### 1. Create a New Padma Project
-
-Enter the following command in your terminal to create a new Padma project:
+To install **pnpm**, run the following command:
 
 ```bash
-npx padma create my-project
+npm install -g pnpm@latest
 ```
 
-### 2. Select a Starter Theme
+---
 
-If it's your first time using Padma, we recommend that you select `@padma/river-theme` to start with.
+## 🪣 Step-by-Step Setup
 
-```
-? Pick a starter theme to clone: @padma/river-theme (recommended)
-```
+### Step 1. Fork the Repository
 
-A directory with the same name as the project you used will be created. It will have a structure similar to this:
+Start by forking the official Padma repository to your own GitHub account:
 
-```
-my-project/
-|__ core/ 
-|__ node_modules/
-|__ package.json
-|__ padma.settings.json
-|__ favicon.ico
-|__ packages/
-    |__blank-theme
-```
+👉 [Fork from GitHub](https://github.com/js-template/padma)
 
-### 3. Run the Project Locally
-
-Execute this command from the terminal to run the project locally:
+Once forked, clone your repository and open it in your favorite code editor (such as [VS Code](https://code.visualstudio.com/)).
 
 ```bash
-cd my-project && npx padma dev
+git clone https://github.com/js-template/padma.git
+cd padma
 ```
 
-A development server will be started. This server will be listening on [http://localhost:3000](http://localhost:3000) and will watch for any changes inside the packages directory.
+---
 
-### 4. Make Changes to Your Site
+### Step 2. Configure Environment Variables
 
-Now you're ready to make changes to your site:
+Inside both the `apps/backend` and `apps/frontend` folders, you’ll find `.env.example` files.
+Rename each to `.env` and update the values accordingly.
 
-Open the project directory in your preferred code editor/IDE and try editing some of the files under `packages/river-theme`. Each time you save a change, the browser will automatically reload and display the new version, as these changes are detected by the development server.
+* **Backend configuration:**
+  `apps/backend/.env.example` → `apps/backend/.env`
 
-## Set Your Own `Strapi` Installation
+* **Frontend configuration:**
+  `apps/frontend/.env.example` → `apps/frontend/.env`
+  [Learn More →](/padma/padma-framework/guides/frontend-env/)
 
-A good next step is to set your own Strapi installation as the data source.
+---
 
-You can connect your own Strapi site to your Padma project by updating `config/theme.settings.ts`:
+### Step 3. Connect Padma to Your Backend
+
+Set your backend URL in the Padma configuration to connect your frontend and Strapi backend.
+[Learn More →](/padma/padma-framework/guides/connect-strapi/)
+
+---
+
+### Step 4. Choose or Customize Your Theme
+
+You can:
+
+* Start with a **free** or **premium** theme
+* Or design your own using **MUI** for a modern, responsive look
+
+---
+
+### Step 5. Run the Backend
+
+From the root directory, start the backend server:
 
 ```bash
-// Example connection setup
+pnpm -F backend dev
 ```
 
-Your site at [http://localhost:3000](http://localhost:3000) won't auto-update with this change, as auto-updates only occur with changes to files in the packages directory. So, you will need to manually refresh the page in your browser.
+You should see output confirming the Strapi backend is running at
+👉 **[http://localhost:1337](http://localhost:1337)**
 
-You should now see your own posts in the Padma project displayed in the browser.
+---
 
-## What's Next?
+### Step 6. Run the Frontend
 
-### Follow the Step-by-Step Tutorial
+Before running the frontend, ensure you’ve set your Strapi auth token in:
 
-Padma's primary learning resource is the Step-by-Step Tutorial. This is the perfect place to start if you're new to Padma or even if you've previously used Padma but feel that your knowledge is incomplete or fragmented.
+`apps/frontend/.env`
 
-### Check Padma's Guides
+```env
+NEXT_PUBLIC_STRAPI_AUTH_TOKEN=your_token_here
+```
 
-There are several Guides that will help you understand working with Padma and assist you in solving some of the common challenges that come up when working with Dynamic SSR (Server-Side Rendering) in React apps connected to Strapi.
+Then start the frontend server:
 
-### Check the API Reference
+```bash
+pnpm -F frontend dev
+```
 
-The main reference resource is the API Reference. This is where you'll find detailed information about the Padma CLI, packages, plugins, and themes. Once you've mastered the basics of working with Padma, this is where you're likely to spend most of your time when working on projects.
+Your site will be available at 👉 [http://localhost:3000](http://localhost:3000)
 
-### Deploy Your Site
+> 💡 **Note:** Your frontend won’t auto-refresh for changes made outside the `packages` directory.
+> You’ll need to manually refresh your browser after such changes.
 
-When you're done developing and are ready to launch your new site, follow the instructions in the Deployment section to learn how to deploy your finished Padma site. We recommend that you start by deploying your site to Vercel.
+---
+
+## 🎓 What’s Next?
+
+### 📘 Follow the Step-by-Step Tutorial
+
+If you’re new to Padma, start with the **Step-by-Step Tutorial** — it walks you through everything from setup to customization.
+
+### 📚 Explore Padma Guides
+
+Browse the **Guides** section to learn more about:
+
+* Integrating with Strapi
+* Managing Dynamic SSR in React
+* Deploying your Padma apps to different environments
