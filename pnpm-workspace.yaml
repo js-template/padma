@@ -1,5 +1,6 @@
 packages:
   - apps/frontend
   - apps/backend
+  - docs/docs
   - packages/*
   - apps/backend/src/plugins/padma-backend
