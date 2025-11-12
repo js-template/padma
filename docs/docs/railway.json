@@ -1,10 +1,24 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "RAILPACK",
-    "buildCommand": "pnpm install && pnpm -F docs build",
-    "deploy": {
-      "startCommand": "pnpm -F docs start"
+    "builder": "NIXPACKS",
+    "nixpacksPlan": {
+      "phases": {
+        "setup": {
+          "nixPkgs": ["nodejs", "pnpm"]
+        },
+        "install": {
+          "cmds": ["pnpm install --no-frozen-lockfile"]
+        },
+        "build": {
+          "dependsOn": ["install"],
+          "cmds": ["pnpm -F docs build"]
+        }
+      },
+      "start": {
+        "dependsOn": ["build"],
+        "cmd": "pnpm -F docs start"
+      }
     }
   }
 }
